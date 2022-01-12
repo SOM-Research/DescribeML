@@ -1,0 +1,78 @@
+General information: HealthDataset
+    Title: "Health Care Experimental Dataset" Version: V231 
+    Description  
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+        industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+        remaining essentially unchanged."
+    Citation: "In Proceedings of the 12th International Conference on Natural Language Generation, pages 563–574, Tokyo, Japan. Association for Computational Linguistics."
+    Auhors:
+        Name: JohnSmith email: "john.smith@mail.com"
+        Name: GeraltTheRivia email:"geralt.derivia@mail.com"
+    Founders:
+        Name UOC type: public grantor:"EU Comission" grantId: R234023EU
+        Name Google type: private 
+    License Information: "MIT IT 3.023" 
+    Maintenance: 
+        Maintainers 
+            Name: TheMaintiner email: "giner.joan@gmail.com" 
+        Erratum? "There is no public erratum"
+        Data Retention: "Data related to people are free of retention policies"
+        Version support: "The data will be updated regularly, supported version marked with LTS will be suported"
+        Contribution guides: "To see the contribution guides, please visit www.mycontributionguides.com"
+
+Composition: IdentifierOfDataset
+    General description: "This dataset is composed by a patient instance and a medical record instance"
+    Number of instances: 2354
+    composedBy:
+        Instance: Patient 
+            description: "This instance corresponds to the patients of the Hospital XXX"
+            type: people
+            total number: 234
+            withAttributes:
+                attribute id ofType int description: "Id of the patient"
+                attribute name ofType string description: "Name of the patients"
+                attribute age ofType int description: "Age of the patients" 
+            Instance belongs to people: 
+                Have sensitive attributes? attribute: age attribute: name 
+                Are there protecte groups? "No protecte groups" 
+            Might be offensive "There is no issues that can be offensive"
+
+        Instance: MedicalRecord 
+        description: "The medical record of the patient"
+        type: features
+        withAttributes:
+            attribute ident ofType int description: "The id of the patient"
+            attribute healthScore ofType bool description: "The health score of a patient"
+            
+    Instances Relation
+        Relation userScore attribute: ident  is related to: Patient and attribute: ident
+    
+    Privacy:
+        Legal Issues: 'Here comes the explanation of legal issues'
+        Individual indetification: yes
+    
+    Dependencies:
+        Links:
+            Complete archival version: "Yes, you can acces here www.completearhcival.com"
+            Restriction: "There is no known restrictions"
+            Rate Limit Usage: "no limits usage"
+    
+    Data Splits: "Use 80% for trainig, 20% for validation"
+
+        
+Requeriments: 
+
+    Requeriment: rq4 reportedby: JohnSmith Accuracy Requeriment of Range: 
+        where attribute: Patient.age is from 18 to 70 
+
+    Requeriment: re3 reportedby: GeraltTheRivia Accuracy Requeriment of Range:
+        where attribute: Patient.name is from 0 to 20
+
+    Requeriment: rq5 reportedby: GeraltTheRivia Consisntecy Requeriment of Semantic:
+        where attribute Patient.age need to have a distribution: of "PE:0.96 + 120" 
+
+    Requeriment: rq6 reportedby: JohnSmith Completness Requeriments of Overall Completness 
+    
+    Requeriment: rq7 reportedby: GeraltTheRivia Accuracy Requeriment of Data Type: 
+        where attribute: Patient.id  is from type: String

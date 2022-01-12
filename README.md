@@ -19,6 +19,14 @@ As Langium is not stable, there are few action we need to do manually.
 
 ## Test and Debug 
 
-This repo comes with and already built-in config to debug. Just go to Debug in VSCode, launch the Extension config. Then Launch the Attach config to enable the debugger. 
+This repo comes with and already built-in config to debug. Just go to Debug in VSCode, launch the Extension config. 
 
-Please check your port 6009 are free .
+Please refer to the folder /examples to have an example to follow. Copy and paste it in your new Extension Host of VSCode to see the language in action.
+
+Remember: by default VSCode gives you help by hittin CTRL + Space (or equivalent in MAC)
+
+
+
+Then Launch the Attach config to enable the debugger. 
+
+Please check your port 6009 are free
