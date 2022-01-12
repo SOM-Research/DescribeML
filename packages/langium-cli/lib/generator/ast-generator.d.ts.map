@@ -1,0 +1,1 @@
+{"version":3,"file":"ast-generator.d.ts","sourceRoot":"","sources":["../../src/generator/ast-generator.ts"],"names":[],"mappings":"AAAA;;;;gFAIgF;AAEhF,OAAO,EACY,OAAO,EAEM,eAAe,EAC9C,MAAM,SAAS,CAAC;AACjB,OAAO,EAAE,aAAa,EAAE,MAAM,YAAY,CAAC;AAI3C,wBAAgB,WAAW,CAAC,QAAQ,EAAE,eAAe,EAAE,QAAQ,EAAE,OAAO,EAAE,EAAE,MAAM,EAAE,aAAa,GAAG,MAAM,CA4BzG"}

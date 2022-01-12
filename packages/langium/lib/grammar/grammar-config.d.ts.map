@@ -1,0 +1,1 @@
+{"version":3,"file":"grammar-config.d.ts","sourceRoot":"","sources":["../../src/grammar/grammar-config.ts"],"names":[],"mappings":"AAAA;;;;gFAIgF;AAEhF,OAAO,EAAE,eAAe,EAAE,MAAM,aAAa,CAAC;AAK9C,MAAM,WAAW,aAAa;IAC1B,qBAAqB,EAAE,MAAM,EAAE,CAAA;CAClC;AAED,wBAAgB,mBAAmB,CAAC,QAAQ,EAAE,eAAe,GAAG,aAAa,CAS5E"}

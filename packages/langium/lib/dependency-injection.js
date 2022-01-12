@@ -1,0 +1,102 @@
+"use strict";
+/******************************************************************************
+ * Copyright 2021 TypeFox GmbH
+ * This program and the accompanying materials are made available under the
+ * terms of the MIT License, which is available in the project root.
+ ******************************************************************************/
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.inject = void 0;
+/**
+ * Given a set of modules, the inject function returns a lazily evaluted injector
+ * that injects dependencies into the requested service when it is requested the
+ * first time. Subsequent requests will return the same service.
+ *
+ * In the case of cyclic dependencies, an Error will be thrown. This can be fixed
+ * by injecting a provider `() => T` instead of a `T`.
+ *
+ * Please note that the arguments may be objects or arrays. However, the result will
+ * be an object. Using it with for..of will have no effect.
+ *
+ * @param module1 first Module
+ * @param module2 (optional) second Module
+ * @param module3 (optional) third Module
+ * @param module4 (optional) fourth Module
+ * @returns a new object of type I
+ */
+function inject(module1, module2, module3, module4) {
+    const module = [module1, module2, module3, module4].reduce(_merge, {});
+    return _inject(module);
+}
+exports.inject = inject;
+/**
+ * Helper function that returns an injector by creating a proxy.
+ * Invariant: injector is of type I. If injector is undefined, then T = I.
+ */
+function _inject(module, injector) {
+    const proxy = new Proxy({}, {
+        deleteProperty: () => false,
+        get: (obj, prop) => _resolve(obj, prop, module, injector || proxy),
+        getOwnPropertyDescriptor: (obj, prop) => (_resolve(obj, prop, module, injector || proxy), Object.getOwnPropertyDescriptor(obj, prop)),
+        has: (_, prop) => prop in module,
+        ownKeys: () => Reflect.ownKeys(module) // used by for..in
+    });
+    return proxy;
+}
+/**
+ * Internally used to tag a requested dependency, directly before calling the factory.
+ * This allows us to find cycles during instance creation.
+ */
+const __requested__ = Symbol();
+/**
+ * Returns the value `obj[prop]`. If the value does not exist, yet, it is resolved from
+ * the module description. The result of service factories is cached. Groups are
+ * recursively proxied.
+ *
+ * @param obj an object holding all group proxies and services
+ * @param prop the key of a value within obj
+ * @param module an object containing groups and service factories
+ * @param injector the first level proxy that provides access to all values
+ * @returns the requested value `obj[prop]`
+ * @throws Error if a dependency cycle is detected
+ */
+function _resolve(obj, prop, module, injector) {
+    if (prop in obj) {
+        if (obj[prop] === __requested__) {
+            throw new Error('Cycle detected. Please make "' + String(prop) + '" lazy. See https://langium.org/docs/di/cyclic-dependencies');
+        }
+        return obj[prop];
+    }
+    else if (prop in module) {
+        const value = module[prop];
+        obj[prop] = __requested__;
+        obj[prop] = (typeof value === 'function') ? value(injector) : _inject(value, injector);
+        return obj[prop];
+    }
+    else {
+        return undefined;
+    }
+}
+/**
+ * Performs a deep-merge of two modules by writing source entries into the target module.
+ *
+ * @param target the module which is written
+ * @param source the module which is read
+ * @returns the target module
+ */
+function _merge(target, source) {
+    if (source) {
+        for (const [key, value2] of Object.entries(source)) {
+            if (value2 !== undefined) {
+                const value1 = target[key];
+                if (value1 !== null && value2 !== null && typeof value1 === 'object' && typeof value2 === 'object') {
+                    target[key] = _merge(value1, value2);
+                }
+                else {
+                    target[key] = value2;
+                }
+            }
+        }
+    }
+    return target;
+}
+//# sourceMappingURL=dependency-injection.js.map

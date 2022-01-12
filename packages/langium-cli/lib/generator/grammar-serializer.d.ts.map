@@ -1,0 +1,1 @@
+{"version":3,"file":"grammar-serializer.d.ts","sourceRoot":"","sources":["../../src/generator/grammar-serializer.ts"],"names":[],"mappings":"AAAA;;;;gFAIgF;AAEhF,OAAO,EAA0B,OAAO,EAAE,eAAe,EAA4B,MAAM,SAAS,CAAC;AAErG,OAAO,EAAE,aAAa,EAAE,MAAM,YAAY,CAAC;AAG3C,wBAAgB,gBAAgB,CAAC,QAAQ,EAAE,eAAe,EAAE,QAAQ,EAAE,OAAO,EAAE,EAAE,MAAM,EAAE,aAAa,GAAG,MAAM,CA2B9G"}

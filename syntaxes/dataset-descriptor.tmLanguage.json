@@ -1,0 +1,57 @@
+{
+  "name": "datasetdescriptor",
+  "scopeName": "source.datasetdescriptor",
+  "fileTypes": [
+    ".datadesc"
+  ],
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "name": "keyword.control.datasetdescriptor",
+      "match": "\\b(Accuracy Requeriment of|attribute|bool|Boolean|Column Completness|Completness Requeriments of|Consisntecy Requeriment of|Description|features|images|Instances Relation|int|Integer|is from|Maintainers|Might be offensive|mixed|Name|need to have a distribution: of|no|ofType|other|Other|Overall Completness|people|Population Completness|private|public|raw|Relation|string|String|to|Tuple Completness|Type|where attribute|yes)\\b|\\b(and attribute:|Are there protecte groups\\?|attribute:|Auhors:|Citation:|Complete archival version:|composedBy:|Composition:|Contribution guides:|Data Retention:|Data Splits:|Data Type:|Dependencies:|description:|email:|Erratum\\?|Founders:|General description:|General information:|grantId:|grantor:|Have sensitive attributes\\?|Individual indetification:|Instance belongs to people:|Instance:|is from type:|is related to:|Legal Issues:|License Information:|Links:|Maintenance:|Mandatory:|Name:|need to:|needs to be:|Number of instances:|Privacy:|Range:|Rate Limit Usage:|reportedby:|Requeriment:|Requeriments:|Restriction:|Semantic:|Sintactic:|than attribute:|Title:|total number:|type:|Version support:|Version:|where attribute:|withAttributes:)\\B"
+    },
+    {
+      "name": "string.quoted.double.datasetdescriptor",
+      "begin": "\"",
+      "end": "\""
+    },
+    {
+      "name": "string.quoted.single.datasetdescriptor",
+      "begin": "'",
+      "end": "'"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.block.datasetdescriptor",
+          "begin": "/\\*",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.datasetdescriptor"
+            }
+          },
+          "end": "\\*/",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.datasetdescriptor"
+            }
+          }
+        },
+        {
+          "begin": "//",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.whitespace.comment.leading.datasetdescriptor"
+            }
+          },
+          "end": "(?=$)",
+          "name": "comment.line.datasetdescriptor"
+        }
+      ]
+    }
+  }
+}
