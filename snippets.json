@@ -39,5 +39,18 @@
             "\t\t\t\t\t\t attribute attribute1Id ofType string description: \"Describre the attribute \" ",
 		],
 		"description": "Dataset's general information scaffold"
-	}
+	},
+    "Instance": {
+        "prefix": "Instance:",
+        "body":[
+            "Instance: $1InstanceId",
+            "\tdescription \"$2Instance Description\"",
+            "\ttype ${3|images,raw,features,people|}",
+            "\ttotal number 000",
+            "\twithAttributes:",
+            "\t\t attribute  attribute1Id $5 ofType  ${6|string,int,bool|}  description: \"$7Describre the attribute \"",
+            "\t\t attribute attribute2Id ofType ${6|string,int,bool|} description: \"Describre the attribute\""
+        ],
+        "description":"Instance scaffold"
+    }
 }
