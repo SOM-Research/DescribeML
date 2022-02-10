@@ -1,0 +1,10 @@
+{
+  "iconDefinitions": {
+    "_datadesc": {
+        "iconPath": "./icon-notepad.svg",
+    }
+  },
+  "languageIds":{
+    "dataset-descriptor":"_datadesc"
+  }
+}

@@ -11,11 +11,10 @@ class DatasetDescriptorValidationRegistry extends langium_1.ValidationRegistry {
         const validator = services.validation.DatasetDescriptorValidator;
         const checks = {
             GeneralInfo: validator.hintsOfDescription,
-            Authoring: validator.hintsOfAuthoring,
             Author: validator.authorValidator,
             Founder: validator.hintsOfFounder,
-            Maintenance: validator.hintsOfMaintainer,
-            DatasetDefinition: validator.hintOfDatasetDefinition
+            DatasetDefinition: validator.hintOfDatasetDefinition,
+            Maintenance: validator.hintsofMaintenance
         };
         this.register(checks, validator);
     }
@@ -28,14 +27,12 @@ class DatasetDescriptorValidator {
     hintsOfDescription(type, accept) {
         //  accept('warning', 'Version should have the following form: V000', { node: type, property: 'version' });
         accept('hint', '1 - For what propose was the dataser created? \n2 - Was there a specific task in mind?\n3 - Was there specific gap that needed to be filled?\nPlease provide a description', { node: type, property: 'description' });
-    }
-    hintsOfAuthoring(type, accept) {
-        accept('hint', '1 - Who created the dataset for example, which team or research group?', { node: type, property: 'authors' });
-        accept('hint', '1 - Who founded the creation of the dataset?\n2 - If is there any associated grant, please provide the number and the name of the grantor and the gran name and number', { node: type, property: 'founders' });
+        //     accept('hint', '1 - Who created the dataset for example, which team or research group?', { node: type, property:'authors'})
+        //     accept('hint', '1 - Who founded the creation of the dataset?\n2 - If is there any associated grant, please provide the number and the name of the grantor and the gran name and number', { node: type, property: 'founders' });
     }
     hintsOfFounder(type, accept) {
     }
-    hintsOfMaintainer(type, accept) {
+    hintsofMaintenance(type, accept) {
         accept('hint', 'Who maintan the dataset? How can be contacted?', { node: type, property: 'maintainers' });
         accept('hint', 'Is there an erratum? If so, please provide a link or other access point?', { node: type, property: 'erratum' });
         accept('hint', 'If the dataset belongs to people, are there applicable limits on the retention of the data associated with them? If so, please describre how. If not, please describre how its obsolescence will be communicated to the dataset', { node: type, property: 'dataRetention' });

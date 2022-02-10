@@ -12,7 +12,7 @@ As Langium is not stable, there are few action we need to do manually.
 
 3 - Copy the folder "langium" and "langium-cli" from folder /packages to /node_modules
 
-4 - Get the folder /packages/langium-vscode and paste it inside your VSCode extension folder (tipically ~/.vscode/extensions)
+4 - Get the folder /packages/langium-vscode and paste it inside your VSCode extension folder (tipically `<user home>/.vscode/extensions`)
 
 5 - Install de Langium plugin thourgh the UI of VSCode
 

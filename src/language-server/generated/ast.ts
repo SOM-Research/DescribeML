@@ -32,7 +32,7 @@ export function isAttribute(item: unknown): item is Attribute {
 }
 
 export interface Author extends AstNode {
-    readonly $container: Authoring | Maintenance;
+    readonly $container: Authors;
     email: string
     name: string
 }
@@ -43,18 +43,16 @@ export function isAuthor(item: unknown): item is Author {
     return reflection.isInstance(item, Author);
 }
 
-export interface Authoring extends AstNode {
+export interface Authors extends AstNode {
     readonly $container: GeneralInfo;
     authors: Array<Author>
-    founders: Array<Founder>
-    licence: string
-    maintenance: Maintenance
+    name: 'Authors:'
 }
 
-export const Authoring = 'Authoring';
+export const Authors = 'Authors';
 
-export function isAuthoring(item: unknown): item is Authoring {
-    return reflection.isInstance(item, Authoring);
+export function isAuthors(item: unknown): item is Authors {
+    return reflection.isInstance(item, Authors);
 }
 
 export interface CompletnessRq extends AstNode {
@@ -79,6 +77,24 @@ export function isConsistencyRq(item: unknown): item is ConsistencyRq {
     return reflection.isInstance(item, ConsistencyRq);
 }
 
+export interface DatasetDefinition extends AstNode {
+    readonly $container: Declaration;
+    dependencies: Dependencies
+    description: string
+    instances: Array<Instances | Instance>
+    name: 'Definition:'
+    numberInst: number
+    privacy: Privacy
+    relation: RelationInstances
+    splits: string
+}
+
+export const DatasetDefinition = 'DatasetDefinition';
+
+export function isDatasetDefinition(item: unknown): item is DatasetDefinition {
+    return reflection.isInstance(item, DatasetDefinition);
+}
+
 export interface DataTypeConstraints extends AstNode {
     readonly $container: AccuracyRq;
     att: Reference<Attribute>
@@ -93,6 +109,10 @@ export function isDataTypeConstraints(item: unknown): item is DataTypeConstraint
 
 export interface Declaration extends AstNode {
     readonly $container: DescriptionDataset;
+    definition: DatasetDefinition
+    metainfo: GeneralInfo
+    name: string
+    requeriments: Requeriments
 }
 
 export const Declaration = 'Declaration';
@@ -125,7 +145,7 @@ export function isDescriptionDataset(item: unknown): item is DescriptionDataset 
 }
 
 export interface Founder extends AstNode {
-    readonly $container: Authoring;
+    readonly $container: Founders;
     grantor: string
     name: string
     type: FoundersType
@@ -137,8 +157,37 @@ export function isFounder(item: unknown): item is Founder {
     return reflection.isInstance(item, Founder);
 }
 
+export interface Founders extends AstNode {
+    readonly $container: GeneralInfo;
+    founders: Array<Founder>
+    name: 'Founders:'
+}
+
+export const Founders = 'Founders';
+
+export function isFounders(item: unknown): item is Founders {
+    return reflection.isInstance(item, Founders);
+}
+
+export interface GeneralInfo extends AstNode {
+    readonly $container: Declaration;
+    autohring: Array<Authors>
+    description: string
+    founding: Array<Founders>
+    licence: string
+    maintenance: Array<Maintenance>
+    title: string
+    version: string
+}
+
+export const GeneralInfo = 'GeneralInfo';
+
+export function isGeneralInfo(item: unknown): item is GeneralInfo {
+    return reflection.isInstance(item, GeneralInfo);
+}
+
 export interface Instance extends AstNode {
-    readonly $container: DatasetDefinition;
+    readonly $container: DatasetDefinition | Instances;
     attributes: Array<Attribute>
     descript: string
     name: string
@@ -155,12 +204,37 @@ export function isInstance(item: unknown): item is Instance {
     return reflection.isInstance(item, Instance);
 }
 
+export interface Instances extends AstNode {
+    readonly $container: DatasetDefinition;
+    instances: Array<Instance>
+    name: 'Instances:'
+}
+
+export const Instances = 'Instances';
+
+export function isInstances(item: unknown): item is Instances {
+    return reflection.isInstance(item, Instances);
+}
+
+export interface Maintainer extends AstNode {
+    readonly $container: Maintenance;
+    email: string
+    name: string
+}
+
+export const Maintainer = 'Maintainer';
+
+export function isMaintainer(item: unknown): item is Maintainer {
+    return reflection.isInstance(item, Maintainer);
+}
+
 export interface Maintenance extends AstNode {
-    readonly $container: Authoring;
+    readonly $container: GeneralInfo;
     contribGuides: string
     dataRetention: string
     erratum: string
-    maintainers: Array<Author>
+    maintainers: Array<Maintainer>
+    name: 'Maintenance:'
     support: string
 }
 
@@ -207,12 +281,23 @@ export function isRangeConstraints(item: unknown): item is RangeConstraints {
     return reflection.isInstance(item, RangeConstraints);
 }
 
-export interface RelationInstances extends AstNode {
-    readonly $container: DatasetDefinition;
+export interface Relation extends AstNode {
+    readonly $container: RelationInstances;
     attRel?: Reference<Attribute>
     attRelTarget?: Reference<Attribute>
     insRel?: Reference<Instance>
     name: string
+}
+
+export const Relation = 'Relation';
+
+export function isRelation(item: unknown): item is Relation {
+    return reflection.isInstance(item, Relation);
+}
+
+export interface RelationInstances extends AstNode {
+    readonly $container: DatasetDefinition;
+    relation: Array<Relation>
 }
 
 export const RelationInstances = 'RelationInstances';
@@ -232,6 +317,17 @@ export const Requeriment = 'Requeriment';
 
 export function isRequeriment(item: unknown): item is Requeriment {
     return reflection.isInstance(item, Requeriment);
+}
+
+export interface Requeriments extends AstNode {
+    readonly $container: Declaration;
+    requeriments: Array<Requeriment>
+}
+
+export const Requeriments = 'Requeriments';
+
+export function isRequeriments(item: unknown): item is Requeriments {
+    return reflection.isInstance(item, Requeriments);
 }
 
 export interface Semantic extends AstNode {
@@ -259,47 +355,6 @@ export function isSintactic(item: unknown): item is Sintactic {
     return reflection.isInstance(item, Sintactic);
 }
 
-export interface DatasetDefinition extends Declaration {
-    dependencies: Dependencies
-    description: string
-    instances: Array<Instance>
-    name: string
-    numberInst: number
-    privacy: Privacy
-    relation: RelationInstances
-    splits: string
-}
-
-export const DatasetDefinition = 'DatasetDefinition';
-
-export function isDatasetDefinition(item: unknown): item is DatasetDefinition {
-    return reflection.isInstance(item, DatasetDefinition);
-}
-
-export interface GeneralInfo extends Declaration {
-    authoring: Authoring
-    description: string
-    name: string
-    title: string
-    version: string
-}
-
-export const GeneralInfo = 'GeneralInfo';
-
-export function isGeneralInfo(item: unknown): item is GeneralInfo {
-    return reflection.isInstance(item, GeneralInfo);
-}
-
-export interface Requeriments extends Declaration {
-    requeriments: Array<Requeriment>
-}
-
-export const Requeriments = 'Requeriments';
-
-export function isRequeriments(item: unknown): item is Requeriments {
-    return reflection.isInstance(item, Requeriments);
-}
-
 export type QualifiedName = string
 
 export type DataTypes = 'String' | 'Integer' | 'Boolean' | 'Other'
@@ -312,14 +367,14 @@ export type FoundersType = 'private' | 'public' | 'mixed'
 
 export type Operation = '<' | '>' | '=' | '!=' | '+' | '-'
 
-export type datasetDescriptorAstType = 'AccuracyRq' | 'Attribute' | 'Author' | 'Authoring' | 'CompletnessRq' | 'ConsistencyRq' | 'DataTypeConstraints' | 'Declaration' | 'Dependencies' | 'DescriptionDataset' | 'Founder' | 'Instance' | 'Maintenance' | 'MandatoryConstraints' | 'Privacy' | 'RangeConstraints' | 'RelationInstances' | 'Requeriment' | 'Semantic' | 'Sintactic' | 'DatasetDefinition' | 'GeneralInfo' | 'Requeriments';
+export type datasetDescriptorAstType = 'AccuracyRq' | 'Attribute' | 'Author' | 'Authors' | 'CompletnessRq' | 'ConsistencyRq' | 'DatasetDefinition' | 'DataTypeConstraints' | 'Declaration' | 'Dependencies' | 'DescriptionDataset' | 'Founder' | 'Founders' | 'GeneralInfo' | 'Instance' | 'Instances' | 'Maintainer' | 'Maintenance' | 'MandatoryConstraints' | 'Privacy' | 'RangeConstraints' | 'Relation' | 'RelationInstances' | 'Requeriment' | 'Requeriments' | 'Semantic' | 'Sintactic';
 
-export type datasetDescriptorAstReference = 'DataTypeConstraints:att' | 'Instance:senseAtt' | 'MandatoryConstraints:att' | 'RangeConstraints:att' | 'RelationInstances:attRel' | 'RelationInstances:attRelTarget' | 'RelationInstances:insRel' | 'Requeriment:reporter' | 'Semantic:attObject' | 'Sintactic:attObject' | 'Sintactic:attTarget';
+export type datasetDescriptorAstReference = 'DataTypeConstraints:att' | 'Instance:senseAtt' | 'MandatoryConstraints:att' | 'RangeConstraints:att' | 'Relation:attRel' | 'Relation:attRelTarget' | 'Relation:insRel' | 'Requeriment:reporter' | 'Semantic:attObject' | 'Sintactic:attObject' | 'Sintactic:attTarget';
 
 export class datasetDescriptorAstReflection implements AstReflection {
 
     getAllTypes(): string[] {
-        return ['AccuracyRq', 'Attribute', 'Author', 'Authoring', 'CompletnessRq', 'ConsistencyRq', 'DataTypeConstraints', 'Declaration', 'Dependencies', 'DescriptionDataset', 'Founder', 'Instance', 'Maintenance', 'MandatoryConstraints', 'Privacy', 'RangeConstraints', 'RelationInstances', 'Requeriment', 'Semantic', 'Sintactic', 'DatasetDefinition', 'GeneralInfo', 'Requeriments'];
+        return ['AccuracyRq', 'Attribute', 'Author', 'Authors', 'CompletnessRq', 'ConsistencyRq', 'DatasetDefinition', 'DataTypeConstraints', 'Declaration', 'Dependencies', 'DescriptionDataset', 'Founder', 'Founders', 'GeneralInfo', 'Instance', 'Instances', 'Maintainer', 'Maintenance', 'MandatoryConstraints', 'Privacy', 'RangeConstraints', 'Relation', 'RelationInstances', 'Requeriment', 'Requeriments', 'Semantic', 'Sintactic'];
     }
 
     isInstance(node: unknown, type: string): boolean {
@@ -331,11 +386,6 @@ export class datasetDescriptorAstReflection implements AstReflection {
             return true;
         }
         switch (subtype) {
-            case DatasetDefinition:
-            case GeneralInfo:
-            case Requeriments: {
-                return this.isSubtype(Declaration, supertype);
-            }
             default: {
                 return false;
             }
@@ -356,13 +406,13 @@ export class datasetDescriptorAstReflection implements AstReflection {
             case 'RangeConstraints:att': {
                 return Attribute;
             }
-            case 'RelationInstances:attRel': {
+            case 'Relation:attRel': {
                 return Attribute;
             }
-            case 'RelationInstances:attRelTarget': {
+            case 'Relation:attRelTarget': {
                 return Attribute;
             }
-            case 'RelationInstances:insRel': {
+            case 'Relation:insRel': {
                 return Instance;
             }
             case 'Requeriment:reporter': {

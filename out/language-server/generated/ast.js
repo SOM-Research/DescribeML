@@ -4,7 +4,8 @@
  * DO NOT EDIT MANUALLY!
  ******************************************************************************/
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.reflection = exports.datasetDescriptorAstReflection = exports.isRequeriments = exports.Requeriments = exports.isGeneralInfo = exports.GeneralInfo = exports.isDatasetDefinition = exports.DatasetDefinition = exports.isSintactic = exports.Sintactic = exports.isSemantic = exports.Semantic = exports.isRequeriment = exports.Requeriment = exports.isRelationInstances = exports.RelationInstances = exports.isRangeConstraints = exports.RangeConstraints = exports.isPrivacy = exports.Privacy = exports.isMandatoryConstraints = exports.MandatoryConstraints = exports.isMaintenance = exports.Maintenance = exports.isInstance = exports.Instance = exports.isFounder = exports.Founder = exports.isDescriptionDataset = exports.DescriptionDataset = exports.isDependencies = exports.Dependencies = exports.isDeclaration = exports.Declaration = exports.isDataTypeConstraints = exports.DataTypeConstraints = exports.isConsistencyRq = exports.ConsistencyRq = exports.isCompletnessRq = exports.CompletnessRq = exports.isAuthoring = exports.Authoring = exports.isAuthor = exports.Author = exports.isAttribute = exports.Attribute = exports.isAccuracyRq = exports.AccuracyRq = void 0;
+exports.isRequeriments = exports.Requeriments = exports.isRequeriment = exports.Requeriment = exports.isRelationInstances = exports.RelationInstances = exports.isRelation = exports.Relation = exports.isRangeConstraints = exports.RangeConstraints = exports.isPrivacy = exports.Privacy = exports.isMandatoryConstraints = exports.MandatoryConstraints = exports.isMaintenance = exports.Maintenance = exports.isMaintainer = exports.Maintainer = exports.isInstances = exports.Instances = exports.isInstance = exports.Instance = exports.isGeneralInfo = exports.GeneralInfo = exports.isFounders = exports.Founders = exports.isFounder = exports.Founder = exports.isDescriptionDataset = exports.DescriptionDataset = exports.isDependencies = exports.Dependencies = exports.isDeclaration = exports.Declaration = exports.isDataTypeConstraints = exports.DataTypeConstraints = exports.isDatasetDefinition = exports.DatasetDefinition = exports.isConsistencyRq = exports.ConsistencyRq = exports.isCompletnessRq = exports.CompletnessRq = exports.isAuthors = exports.Authors = exports.isAuthor = exports.Author = exports.isAttribute = exports.Attribute = exports.isAccuracyRq = exports.AccuracyRq = void 0;
+exports.reflection = exports.datasetDescriptorAstReflection = exports.isSintactic = exports.Sintactic = exports.isSemantic = exports.Semantic = void 0;
 /* eslint-disable @typescript-eslint/array-type */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 const langium_1 = require("langium");
@@ -23,11 +24,11 @@ function isAuthor(item) {
     return exports.reflection.isInstance(item, exports.Author);
 }
 exports.isAuthor = isAuthor;
-exports.Authoring = 'Authoring';
-function isAuthoring(item) {
-    return exports.reflection.isInstance(item, exports.Authoring);
+exports.Authors = 'Authors';
+function isAuthors(item) {
+    return exports.reflection.isInstance(item, exports.Authors);
 }
-exports.isAuthoring = isAuthoring;
+exports.isAuthors = isAuthors;
 exports.CompletnessRq = 'CompletnessRq';
 function isCompletnessRq(item) {
     return exports.reflection.isInstance(item, exports.CompletnessRq);
@@ -38,6 +39,11 @@ function isConsistencyRq(item) {
     return exports.reflection.isInstance(item, exports.ConsistencyRq);
 }
 exports.isConsistencyRq = isConsistencyRq;
+exports.DatasetDefinition = 'DatasetDefinition';
+function isDatasetDefinition(item) {
+    return exports.reflection.isInstance(item, exports.DatasetDefinition);
+}
+exports.isDatasetDefinition = isDatasetDefinition;
 exports.DataTypeConstraints = 'DataTypeConstraints';
 function isDataTypeConstraints(item) {
     return exports.reflection.isInstance(item, exports.DataTypeConstraints);
@@ -63,11 +69,31 @@ function isFounder(item) {
     return exports.reflection.isInstance(item, exports.Founder);
 }
 exports.isFounder = isFounder;
+exports.Founders = 'Founders';
+function isFounders(item) {
+    return exports.reflection.isInstance(item, exports.Founders);
+}
+exports.isFounders = isFounders;
+exports.GeneralInfo = 'GeneralInfo';
+function isGeneralInfo(item) {
+    return exports.reflection.isInstance(item, exports.GeneralInfo);
+}
+exports.isGeneralInfo = isGeneralInfo;
 exports.Instance = 'Instance';
 function isInstance(item) {
     return exports.reflection.isInstance(item, exports.Instance);
 }
 exports.isInstance = isInstance;
+exports.Instances = 'Instances';
+function isInstances(item) {
+    return exports.reflection.isInstance(item, exports.Instances);
+}
+exports.isInstances = isInstances;
+exports.Maintainer = 'Maintainer';
+function isMaintainer(item) {
+    return exports.reflection.isInstance(item, exports.Maintainer);
+}
+exports.isMaintainer = isMaintainer;
 exports.Maintenance = 'Maintenance';
 function isMaintenance(item) {
     return exports.reflection.isInstance(item, exports.Maintenance);
@@ -88,6 +114,11 @@ function isRangeConstraints(item) {
     return exports.reflection.isInstance(item, exports.RangeConstraints);
 }
 exports.isRangeConstraints = isRangeConstraints;
+exports.Relation = 'Relation';
+function isRelation(item) {
+    return exports.reflection.isInstance(item, exports.Relation);
+}
+exports.isRelation = isRelation;
 exports.RelationInstances = 'RelationInstances';
 function isRelationInstances(item) {
     return exports.reflection.isInstance(item, exports.RelationInstances);
@@ -98,6 +129,11 @@ function isRequeriment(item) {
     return exports.reflection.isInstance(item, exports.Requeriment);
 }
 exports.isRequeriment = isRequeriment;
+exports.Requeriments = 'Requeriments';
+function isRequeriments(item) {
+    return exports.reflection.isInstance(item, exports.Requeriments);
+}
+exports.isRequeriments = isRequeriments;
 exports.Semantic = 'Semantic';
 function isSemantic(item) {
     return exports.reflection.isInstance(item, exports.Semantic);
@@ -108,24 +144,9 @@ function isSintactic(item) {
     return exports.reflection.isInstance(item, exports.Sintactic);
 }
 exports.isSintactic = isSintactic;
-exports.DatasetDefinition = 'DatasetDefinition';
-function isDatasetDefinition(item) {
-    return exports.reflection.isInstance(item, exports.DatasetDefinition);
-}
-exports.isDatasetDefinition = isDatasetDefinition;
-exports.GeneralInfo = 'GeneralInfo';
-function isGeneralInfo(item) {
-    return exports.reflection.isInstance(item, exports.GeneralInfo);
-}
-exports.isGeneralInfo = isGeneralInfo;
-exports.Requeriments = 'Requeriments';
-function isRequeriments(item) {
-    return exports.reflection.isInstance(item, exports.Requeriments);
-}
-exports.isRequeriments = isRequeriments;
 class datasetDescriptorAstReflection {
     getAllTypes() {
-        return ['AccuracyRq', 'Attribute', 'Author', 'Authoring', 'CompletnessRq', 'ConsistencyRq', 'DataTypeConstraints', 'Declaration', 'Dependencies', 'DescriptionDataset', 'Founder', 'Instance', 'Maintenance', 'MandatoryConstraints', 'Privacy', 'RangeConstraints', 'RelationInstances', 'Requeriment', 'Semantic', 'Sintactic', 'DatasetDefinition', 'GeneralInfo', 'Requeriments'];
+        return ['AccuracyRq', 'Attribute', 'Author', 'Authors', 'CompletnessRq', 'ConsistencyRq', 'DatasetDefinition', 'DataTypeConstraints', 'Declaration', 'Dependencies', 'DescriptionDataset', 'Founder', 'Founders', 'GeneralInfo', 'Instance', 'Instances', 'Maintainer', 'Maintenance', 'MandatoryConstraints', 'Privacy', 'RangeConstraints', 'Relation', 'RelationInstances', 'Requeriment', 'Requeriments', 'Semantic', 'Sintactic'];
     }
     isInstance(node, type) {
         return (0, langium_1.isAstNode)(node) && this.isSubtype(node.$type, type);
@@ -135,11 +156,6 @@ class datasetDescriptorAstReflection {
             return true;
         }
         switch (subtype) {
-            case exports.DatasetDefinition:
-            case exports.GeneralInfo:
-            case exports.Requeriments: {
-                return this.isSubtype(exports.Declaration, supertype);
-            }
             default: {
                 return false;
             }
@@ -159,13 +175,13 @@ class datasetDescriptorAstReflection {
             case 'RangeConstraints:att': {
                 return exports.Attribute;
             }
-            case 'RelationInstances:attRel': {
+            case 'Relation:attRel': {
                 return exports.Attribute;
             }
-            case 'RelationInstances:attRelTarget': {
+            case 'Relation:attRelTarget': {
                 return exports.Attribute;
             }
-            case 'RelationInstances:insRel': {
+            case 'Relation:insRel': {
                 return exports.Instance;
             }
             case 'Requeriment:reporter': {

@@ -26,5 +26,15 @@
         ["(", ")"],
         ["\"", "\""],
         ["'", "'"]
+    ],
+    "indentationRules": {
+        "increaseIndentPattern": "^((?!\\/\\/).)*(\\{[^}\"'`]*|\\([^)\"'`]*|\\[[^\\]\"'`]*)$",
+        "decreaseIndentPattern": "^((?!.*?\\/\\*).*\\*/)?\\s*[\\)\\}\\]].*$"
+    },
+    "onEnterRules": [
+        {
+        "beforeText": "^\\s*(?:Authors:|Founders:|Maintainer).*?\\s*$",
+        "action": { "indent": "indent", "appendText": "Appending:" }
+        },
     ]
 }

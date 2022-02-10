@@ -4,51 +4,70 @@ entry DescriptionDataset:
     (elements+=Declaration)*;
 
 Declaration:
- (GeneralInfo | DatasetDefinition | Requeriments)*;
+ 'Dataset:' name=ID metainfo=GeneralInfo  definition=DatasetDefinition (requeriments=Requeriments)?;
+
 
 //
 // Authoring
 //
 GeneralInfo:
-     'General information:' name=ID 'Title:' title=STRING  'Version:' version=ID 'Description' description=STRING 'Citation:' STRING
-     authoring = Authoring;
+     'General information:'
+     'Title:' title=STRING 
+     'Version:' version=ID 
+     'Description' description=STRING 
+     'Citation:' STRING
+    autohring+=Authors
+    founding+= (Founders)?
+     'License Information:' licence = STRING // Aquí podriem aportar més ajuda sobre llicencies
+     maintenance+=Maintenance;
+   
+       
 
-Authoring:
-    'Auhors:' (authors+=Author)*
-    'Founders:' (founders+=Founder)*
-    'License Information:' licence = STRING // Aquí podriem aportar més ajuda sobre llicencies
-    'Maintenance:' maintenance=Maintenance;
+Authors: 
+    name='Authors:'  (authors+=Author*);
 
 Author:
-    'Name:' name=ID 'email:' email=STRING;
+    'Name' name=ID 'email' email=STRING;
+
+Founders: 
+    name='Founders:'  (founders+=Founder)+;
 
 Founder:
-    'Name' name=ID 'type:' type=FoundersType ('grantor:' grantor= STRING 'grantId:' ID)?;
+    'Name' name=ID 'type' type=FoundersType ('grantor' grantor= STRING 'grantId:' ID)?;
 
-Maintenance:
-    'Maintainers' (maintainers+=Author)*
+Maintenance: 
+    name='Maintenance:'
+    ('Maintainer:' (maintainers+=Maintainer)*)?
     ('Erratum?' erratum=STRING)? 
     ('Data Retention:' dataRetention=STRING)? 
-    ('Version support:' support=STRING)? 
+    ('Version support' support=STRING)? 
     ('Contribution guides:' contribGuides=STRING)?;
+
+Maintainer:
+    'Name' name=ID 'email' email=STRING;
+
 
 //
 // Dataset Composition 
 //
  DatasetDefinition:
-     'Composition:' name=ID
+     name="Definition:"
      'General description:' description=STRING
      ('Number of instances:' numberInst=INT)? 
+     instances += Instances
      'composedBy:' (instances+=Instance)*
-     ('Instances Relation' relation=RelationInstances)?
+     (relation=RelationInstances)?
      ('Privacy:' privacy=Privacy)? 
      ('Dependencies:' dependencies=Dependencies)? 
-     ('Data Splits:' splits=STRING)? ;
+     ('Data Splits:' splits=STRING)?;
 
+
+Instances:
+    name='Instances:' (instances+=Instance)*;
 
 // Instances definition
 Instance: 
-    'Instance:' name=ID 'description:' descript=STRING 'type:'  type=InsType  ('total number:' numIns=INT)?
+    'Instance:' name=ID 'description' descript=STRING 'type'  type=InsType  ('total number' numIns=INT)?
         'withAttributes:' (attributes+=Attribute)*
         
     ('Instance belongs to people:' 
@@ -62,7 +81,10 @@ Attribute:
 
 // Relation between Instances
 RelationInstances:
-    ('Relation' name=ID 'attribute:' attRel=[Attribute] "is related to:" insRel=[Instance] ('and attribute:' attRelTarget=[Attribute])?)*;
+    'Instaces relation:' (relation+=Relation)*;
+
+Relation:
+    ('Relation:' name=ID 'attribute:' attRel=[Attribute] "is related to:" insRel=[Instance] ('and attribute:' attRelTarget=[Attribute]))*;
 
 
 // Privacy

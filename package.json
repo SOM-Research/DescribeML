@@ -7,7 +7,8 @@
         "vscode": "^1.56.0"
     },
     "categories": [
-        "Programming Languages"
+        "Programming Languages",
+        "Snippets"
     ],
     "contributes": {
         "languages": [{
@@ -20,7 +21,20 @@
             "language": "dataset-descriptor",
             "scopeName": "source.datasetdescriptor",
             "path": "./syntaxes/dataset-descriptor.tmLanguage.json"
-        }]
+        }],
+        "snippets": [
+            {
+              "language": "dataset-descriptor",
+              "path": "./snippets.json"
+            }
+        ],
+        "iconThemes": [
+            {
+              "id": "datasetdescriptor",
+              "label": "Dataset Descriptor",
+              "path": "./fileicons/dataset-descriptor.icon-theme.json"
+            }
+        ]
     },
     "activationEvents": [
         "onLanguage:dataset-descriptor"

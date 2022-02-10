@@ -40,34 +40,64 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
       "name": "Declaration",
       "hiddenTokens": [],
       "alternatives": {
-        "$type": "Alternatives",
+        "$type": "Group",
         "elements": [
           {
-            "$type": "RuleCall",
-            "arguments": [],
-            "rule": {
-              "$refText": "GeneralInfo"
-            },
+            "$type": "Keyword",
+            "value": "Dataset:",
             "elements": []
           },
           {
-            "$type": "RuleCall",
-            "arguments": [],
-            "rule": {
-              "$refText": "DatasetDefinition"
-            },
-            "elements": []
+            "$type": "Assignment",
+            "feature": "name",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "ID"
+              }
+            }
           },
           {
-            "$type": "RuleCall",
-            "arguments": [],
-            "rule": {
-              "$refText": "Requeriments"
+            "$type": "Assignment",
+            "feature": "metainfo",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "GeneralInfo"
+              }
+            }
+          },
+          {
+            "$type": "Assignment",
+            "feature": "definition",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "DatasetDefinition"
+              }
+            }
+          },
+          {
+            "$type": "Assignment",
+            "feature": "requeriments",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "Requeriments"
+              }
             },
-            "elements": []
+            "elements": [],
+            "cardinality": "?"
           }
-        ],
-        "cardinality": "*"
+        ]
       }
     },
     {
@@ -82,18 +112,6 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             "$type": "Keyword",
             "value": "General information:",
             "elements": []
-          },
-          {
-            "$type": "Assignment",
-            "feature": "name",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "ID"
-              }
-            }
           },
           {
             "$type": "Keyword",
@@ -156,63 +174,29 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
           },
           {
             "$type": "Assignment",
-            "feature": "authoring",
-            "operator": "=",
+            "feature": "autohring",
+            "operator": "+=",
             "terminal": {
               "$type": "RuleCall",
               "arguments": [],
               "rule": {
-                "$refText": "Authoring"
+                "$refText": "Authors"
               }
             }
-          }
-        ]
-      }
-    },
-    {
-      "$type": "ParserRule",
-      "parameters": [],
-      "name": "Authoring",
-      "hiddenTokens": [],
-      "alternatives": {
-        "$type": "Group",
-        "elements": [
-          {
-            "$type": "Keyword",
-            "value": "Auhors:",
-            "elements": []
           },
           {
             "$type": "Assignment",
-            "feature": "authors",
+            "feature": "founding",
             "operator": "+=",
             "terminal": {
               "$type": "RuleCall",
               "arguments": [],
               "rule": {
-                "$refText": "Author"
-              }
+                "$refText": "Founders"
+              },
+              "elements": []
             },
-            "elements": [],
-            "cardinality": "*"
-          },
-          {
-            "$type": "Keyword",
-            "value": "Founders:"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "founders",
-            "operator": "+=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "Founder"
-              }
-            },
-            "elements": [],
-            "cardinality": "*"
+            "cardinality": "?"
           },
           {
             "$type": "Keyword",
@@ -231,13 +215,9 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             }
           },
           {
-            "$type": "Keyword",
-            "value": "Maintenance:"
-          },
-          {
             "$type": "Assignment",
             "feature": "maintenance",
-            "operator": "=",
+            "operator": "+=",
             "terminal": {
               "$type": "RuleCall",
               "arguments": [],
@@ -252,6 +232,41 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
     {
       "$type": "ParserRule",
       "parameters": [],
+      "name": "Authors",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Assignment",
+            "feature": "name",
+            "operator": "=",
+            "terminal": {
+              "$type": "Keyword",
+              "value": "Authors:"
+            },
+            "elements": []
+          },
+          {
+            "$type": "Assignment",
+            "feature": "authors",
+            "operator": "+=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "Author"
+              }
+            },
+            "cardinality": "*",
+            "elements": []
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
       "name": "Author",
       "hiddenTokens": [],
       "alternatives": {
@@ -259,7 +274,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
         "elements": [
           {
             "$type": "Keyword",
-            "value": "Name:",
+            "value": "Name",
             "elements": []
           },
           {
@@ -276,7 +291,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
           },
           {
             "$type": "Keyword",
-            "value": "email:"
+            "value": "email"
           },
           {
             "$type": "Assignment",
@@ -289,6 +304,41 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                 "$refText": "STRING"
               }
             }
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "Founders",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Assignment",
+            "feature": "name",
+            "operator": "=",
+            "terminal": {
+              "$type": "Keyword",
+              "value": "Founders:"
+            },
+            "elements": []
+          },
+          {
+            "$type": "Assignment",
+            "feature": "founders",
+            "operator": "+=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "Founder"
+              }
+            },
+            "elements": [],
+            "cardinality": "+"
           }
         ]
       }
@@ -320,7 +370,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
           },
           {
             "$type": "Keyword",
-            "value": "type:"
+            "value": "type"
           },
           {
             "$type": "Assignment",
@@ -339,7 +389,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "grantor:",
+                "value": "grantor",
                 "elements": []
               },
               {
@@ -380,23 +430,39 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
         "$type": "Group",
         "elements": [
           {
-            "$type": "Keyword",
-            "value": "Maintainers",
+            "$type": "Assignment",
+            "feature": "name",
+            "operator": "=",
+            "terminal": {
+              "$type": "Keyword",
+              "value": "Maintenance:"
+            },
             "elements": []
           },
           {
-            "$type": "Assignment",
-            "feature": "maintainers",
-            "operator": "+=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "Author"
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Maintainer:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "maintainers",
+                "operator": "+=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "Maintainer"
+                  }
+                },
+                "elements": [],
+                "cardinality": "*"
               }
-            },
-            "elements": [],
-            "cardinality": "*"
+            ],
+            "cardinality": "?"
           },
           {
             "$type": "Group",
@@ -449,7 +515,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Version support:",
+                "value": "Version support",
                 "elements": []
               },
               {
@@ -496,14 +562,14 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
     {
       "$type": "ParserRule",
       "parameters": [],
-      "name": "DatasetDefinition",
+      "name": "Maintainer",
       "hiddenTokens": [],
       "alternatives": {
         "$type": "Group",
         "elements": [
           {
             "$type": "Keyword",
-            "value": "Composition:",
+            "value": "Name",
             "elements": []
           },
           {
@@ -517,6 +583,43 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                 "$refText": "ID"
               }
             }
+          },
+          {
+            "$type": "Keyword",
+            "value": "email"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "email",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "STRING"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "DatasetDefinition",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Assignment",
+            "feature": "name",
+            "operator": "=",
+            "terminal": {
+              "$type": "Keyword",
+              "value": "Definition:"
+            },
+            "elements": []
           },
           {
             "$type": "Keyword",
@@ -558,6 +661,18 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             "cardinality": "?"
           },
           {
+            "$type": "Assignment",
+            "feature": "instances",
+            "operator": "+=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "Instances"
+              }
+            }
+          },
+          {
             "$type": "Keyword",
             "value": "composedBy:"
           },
@@ -576,26 +691,17 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             "cardinality": "*"
           },
           {
-            "$type": "Group",
-            "elements": [
-              {
-                "$type": "Keyword",
-                "value": "Instances Relation",
-                "elements": []
-              },
-              {
-                "$type": "Assignment",
-                "feature": "relation",
-                "operator": "=",
-                "terminal": {
-                  "$type": "RuleCall",
-                  "arguments": [],
-                  "rule": {
-                    "$refText": "RelationInstances"
-                  }
-                }
+            "$type": "Assignment",
+            "feature": "relation",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "RelationInstances"
               }
-            ],
+            },
+            "elements": [],
             "cardinality": "?"
           },
           {
@@ -673,6 +779,41 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
     {
       "$type": "ParserRule",
       "parameters": [],
+      "name": "Instances",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Assignment",
+            "feature": "name",
+            "operator": "=",
+            "terminal": {
+              "$type": "Keyword",
+              "value": "Instances:"
+            },
+            "elements": []
+          },
+          {
+            "$type": "Assignment",
+            "feature": "instances",
+            "operator": "+=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "Instance"
+              }
+            },
+            "elements": [],
+            "cardinality": "*"
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
       "name": "Instance",
       "hiddenTokens": [],
       "alternatives": {
@@ -697,7 +838,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
           },
           {
             "$type": "Keyword",
-            "value": "description:"
+            "value": "description"
           },
           {
             "$type": "Assignment",
@@ -713,7 +854,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
           },
           {
             "$type": "Keyword",
-            "value": "type:"
+            "value": "type"
           },
           {
             "$type": "Assignment",
@@ -732,7 +873,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "total number:",
+                "value": "total number",
                 "elements": []
               },
               {
@@ -910,7 +1051,37 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
         "elements": [
           {
             "$type": "Keyword",
-            "value": "Relation",
+            "value": "Instaces relation:",
+            "elements": []
+          },
+          {
+            "$type": "Assignment",
+            "feature": "relation",
+            "operator": "+=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "Relation"
+              }
+            },
+            "elements": [],
+            "cardinality": "*"
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "Relation",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Keyword",
+            "value": "Relation:",
             "elements": []
           },
           {
@@ -974,8 +1145,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                   }
                 }
               }
-            ],
-            "cardinality": "?"
+            ]
           }
         ],
         "cardinality": "*"
