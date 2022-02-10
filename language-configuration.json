@@ -33,8 +33,28 @@
     },
     "onEnterRules": [
         {
-        "beforeText": "^\\s*(?:Authors:|Founders:|Maintainer).*?\\s*$",
-        "action": { "indent": "indent", "appendText": "Appending:" }
+        "beforeText": "^\\s*(?:Authors:|Founders:|Maintainer:).*?\\s*$",
+        "action": { "indent": "indent", "appendText": "Name " }
+        },
+        {
+        "beforeText": "^\\s*(?:Definition:).*?\\s*$",
+        "action": { "indent": "indent", "appendText": "General description: \"\"" }
+        },
+        {
+        "beforeText": "^\\s*(?:Instances:).*?\\s*$",
+        "action": { "indent": "indent", "appendText": "composedBy: " }
+        },
+        {
+        "beforeText": "^\\s*(?:composedBy:).*?\\s*$",
+        "action": { "indent": "indent", "appendText": "Instance: InstanceId " }
+        },
+        {
+        "beforeText": "^\\s*(?:Instance:).*?\\s*$",
+        "action": { "indent": "indent", "appendText": "description \"\"" }
+        },
+        {
+        "beforeText": "^\\s*(?:withAttributes:).*?\\s*$",
+        "action": { "indent": "indent", "appendText": "attribute attributeId" }
         },
     ]
 }
