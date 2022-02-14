@@ -9,6 +9,13 @@ let client: LanguageClient;
 // This function is called when the extension is activated.
 export function activate(context: vscode.ExtensionContext): void {
     client = startLanguageClient(context);
+
+    context.subscriptions.push(vscode.commands.registerCommand('datadesc.sayHello', async () => {
+       // await vscode.window.showInformationMessage('Hello World!');
+       await initHtmlPreview(context);
+    }));
+
+
 }
 
 // This function is called when the extension is deactivated.
@@ -56,4 +63,38 @@ function startLanguageClient(context: vscode.ExtensionContext): LanguageClient {
     // Start the client. This will also launch the server
     client.start();
     return client;
+}
+
+let previewPanel : vscode.WebviewPanel;
+
+async function initHtmlPreview(context: vscode.ExtensionContext) {
+    if (! previewPanel) {
+        previewPanel = vscode.window.createWebviewPanel(
+            // Webview id
+            'liveHTMLPreviewer',
+            // Webview title
+            'Dataset Documentation Preview',
+            // This will open the second column for preview inside editor
+            2,
+            {
+                // Enable scripts in the webview
+                enableScripts: true,
+                retainContextWhenHidden: true,
+                // And restrict the webview to only loading content from our extension's `assets` directory.
+                localResourceRoots: [vscode.Uri.file(path.join(context.extensionPath, 'assets'))]
+            }
+        );
+    }
+   // const generator = quizServices.generation.QuizGenerator;
+    //const text = vscode.window.activeTextEditor?.document.getText();
+   // if (text) {
+    //    updateHtmlPreview(generator.generate(text));
+    //}
+    updateHtmlPreview("<h1> hello world </h1>")
+}
+
+function updateHtmlPreview(html : string | undefined) {
+    if (previewPanel && html) {
+        previewPanel.webview.html = html;
+    }
 }

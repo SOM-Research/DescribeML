@@ -28,6 +28,26 @@
               "path": "./snippets.json"
             }
         ],
+        "commands": [
+            {
+              "command": "datadesc.sayHello",
+              "title": "Generate documentation",
+              "category": "Dataset",
+              "icon": {
+                "light": "fileicons/Icon-notepad.svg",
+                "dark": "fileicons/Icon-notepad.svg"
+              }
+            }
+          ],
+        "menus": {
+            "editor/title": [
+              {
+                "when": "resourceLangId == dataset-descriptor",
+                "command": "datadesc.sayHello",
+                "group": "navigation"
+              }
+            ]
+          },
         "iconThemes": [
             {
               "id": "datasetdescriptor",
