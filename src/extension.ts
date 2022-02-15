@@ -4,11 +4,17 @@ import {
     LanguageClient, LanguageClientOptions, ServerOptions, TransportKind
 } from 'vscode-languageclient/node';
 
+import { createDatasetDescriptorServices, DatasetDescriptorServices} from './language-server/dataset-descriptor-module';
+
+
 let client: LanguageClient;
+
+let datasetServices : DatasetDescriptorServices;
 
 // This function is called when the extension is activated.
 export function activate(context: vscode.ExtensionContext): void {
     client = startLanguageClient(context);
+    datasetServices = createDatasetDescriptorServices().datasetDescription;
 
     context.subscriptions.push(vscode.commands.registerCommand('datadesc.sayHello', async () => {
        // await vscode.window.showInformationMessage('Hello World!');
@@ -85,12 +91,15 @@ async function initHtmlPreview(context: vscode.ExtensionContext) {
             }
         );
     }
-   // const generator = quizServices.generation.QuizGenerator;
-    //const text = vscode.window.activeTextEditor?.document.getText();
-   // if (text) {
-    //    updateHtmlPreview(generator.generate(text));
-    //}
-    updateHtmlPreview("<h1> hello world </h1>")
+    const generator =  datasetServices.generation.DocumentationGenerator;
+    const text = vscode.window.activeTextEditor?.document.getText();
+    
+    if (text) {
+        const returner = generator.generate(text);
+        console.log(returner);
+        updateHtmlPreview(generator.generate(text));
+    }
+    //updateHtmlPreview("<h1> hello world </h1>")
 }
 
 function updateHtmlPreview(html : string | undefined) {
