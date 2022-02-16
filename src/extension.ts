@@ -6,6 +6,9 @@ import {
 
 import { createDatasetDescriptorServices, DatasetDescriptorServices} from './language-server/dataset-descriptor-module';
 
+import csvParser from 'csv-parser';
+import fs from 'fs';
+
 
 let client: LanguageClient;
 
@@ -16,8 +19,15 @@ export function activate(context: vscode.ExtensionContext): void {
     client = startLanguageClient(context);
     datasetServices = createDatasetDescriptorServices().datasetDescription;
 
-    context.subscriptions.push(vscode.commands.registerCommand('datadesc.sayHello', async () => {
-       // await vscode.window.showInformationMessage('Hello World!');
+    context.subscriptions.push(vscode.commands.registerCommand('datadesc.loadDataset', async () => {
+        //await vscode.window.showInformationMessage('Hello World!');
+       const fileUris = await vscode.window.showOpenDialog({ canSelectFolders: false, canSelectFiles: true, canSelectMany: true, openLabel: 'Select your data files' });
+       if (fileUris){
+         await loadCsv(context, fileUris[0]);
+       }
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand('datadesc.generateDocumentation', async () => {
        await initHtmlPreview(context);
     }));
 
@@ -69,6 +79,30 @@ function startLanguageClient(context: vscode.ExtensionContext): LanguageClient {
     // Start the client. This will also launch the server
     client.start();
     return client;
+}
+
+async function loadCsv(context: vscode.ExtensionContext, filepath: vscode.Uri) {
+    console.log('start');
+    const results:Array<any> = [];
+    fs.createReadStream(filepath.fsPath)
+        .pipe(csvParser())
+        .on('data', (data) => results.push(data))
+        .on('end', () => {
+            console.log(results);
+            // [
+            //   { NAME: 'Daffy Duck', AGE: '24' },
+            //   { NAME: 'Bugs Bunny', AGE: '22' }
+            // ]
+        });
+
+    const editor = vscode.window.activeTextEditor;
+    if (editor) {
+        //const document = editor.document;
+        editor.edit(editBuilder => {
+            editBuilder.insert(new vscode.Position(30,0),"Insterted!");
+        });
+    }
+    await vscode.window.showInformationMessage('File Loaded');
 }
 
 let previewPanel : vscode.WebviewPanel;

@@ -11,48 +11,73 @@
         "Snippets"
     ],
     "contributes": {
-        "languages": [{
-            "id": "dataset-descriptor",
-            "aliases": ["Dataset Descriptor", "dataset-descriptor"],
-            "extensions": [".datadesc"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "dataset-descriptor",
-            "scopeName": "source.datasetdescriptor",
-            "path": "./syntaxes/dataset-descriptor.tmLanguage.json"
-        }],
+        "languages": [
+            {
+                "id": "dataset-descriptor",
+                "aliases": [
+                    "Dataset Descriptor",
+                    "dataset-descriptor"
+                ],
+                "extensions": [
+                    ".datadesc"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "dataset-descriptor",
+                "scopeName": "source.datasetdescriptor",
+                "path": "./syntaxes/dataset-descriptor.tmLanguage.json"
+            }
+        ],
         "snippets": [
             {
-              "language": "dataset-descriptor",
-              "path": "./snippets.json"
+                "language": "dataset-descriptor",
+                "path": "./snippets.json"
             }
         ],
         "commands": [
             {
-              "command": "datadesc.sayHello",
-              "title": "Generate documentation",
-              "category": "Dataset",
-              "icon": {
-                "light": "fileicons/Icon-notepad.svg",
-                "dark": "fileicons/Icon-notepad.svg"
-              }
+                "command": "datadesc.loadDataset",
+                "title": "Load Dataset Files",
+                "shortTitle": "Dataset",
+                "category": "Dataset",
+                "icon": {
+                    "light": "fileicons/uploads.svg",
+                    "dark": "fileicons/uploads.svg"
+                }
+            },
+            {
+                "command": "datadesc.generateDocumentation",
+                "title": "Generate documentation",
+                "shortTitle": "Documentation",
+                "category": "Dataset",
+                "icon": {
+                    "light": "fileicons/docs.svg",
+                    "dark": "fileicons/docs.svg"
+                }
             }
-          ],
+        ],
         "menus": {
             "editor/title": [
-              {
-                "when": "resourceLangId == dataset-descriptor",
-                "command": "datadesc.sayHello",
-                "group": "navigation"
-              }
+                {
+                    "when": "resourceLangId == dataset-descriptor",
+                    "command": "datadesc.loadDataset",
+                    "group": "navigation"
+                },
+                {
+                    "when": "resourceLangId == dataset-descriptor",
+                    "command": "datadesc.generateDocumentation",
+                    "group": "navigation"
+                }
             ]
-          },
+        },
         "iconThemes": [
             {
-              "id": "datasetdescriptor",
-              "label": "Dataset Descriptor",
-              "path": "./fileicons/dataset-descriptor.icon-theme.json"
+                "id": "datasetdescriptor",
+                "label": "Dataset Descriptor",
+                "path": "./fileicons/dataset-descriptor.icon-theme.json"
             }
         ]
     },
@@ -79,6 +104,7 @@
     "dependencies": {
         "colors": "^1.4.0",
         "commander": "^8.0.0",
+        "csv-parser": "^3.0.0",
         "langium": "^0.2.0",
         "vscode-languageclient": "^7.0.0",
         "vscode-languageserver": "^7.0.0"
