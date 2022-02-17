@@ -18,7 +18,7 @@
     },
     {
       "name": "keyword.attributes.dataset",
-      "match": "^\\s*(?:attribute).*?\\s*$"
+      "match": "^\\s*(?:attribute).*?\\s"
     },
     {
       "name": "keyword.sections.datasetdescriptor",

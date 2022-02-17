@@ -2,9 +2,10 @@ import { DatasetDescriptorServices } from './dataset-descriptor-module';
 import { parse } from 'csv-parse/sync';
 import fs from 'fs';
 
+
 export interface Uploader {
     uploadDataset(filepath: string) :   Promise<string> ;
-    buildSnippet(data: Array<any>): string; 
+    buildSnippet(data: Array<any>, filepath: string): string; 
 }
 
 /**
@@ -26,7 +27,7 @@ export class DatasetUploader implements Uploader {
 
         const fileContent = fs.readFileSync(filepath, { encoding: 'utf-8' });
        
-        const parsed = parse(fileContent);
+        let parsed: Array<any> = parse(fileContent) as Array<any>;
         console.log(parsed);
         /*fs.createReadStream(filepath)
             .on('error', (error) => {
@@ -41,22 +42,28 @@ export class DatasetUploader implements Uploader {
                 console.log(results);
             });
         */
-        const snippet = this.buildSnippet(parsed[0]);
+  
+        const snippet = this.buildSnippet(parsed, filepath);
         
         return snippet;
     }
 
-    buildSnippet(data: Array<any>) {
+    buildSnippet(data: Array<any>, filepath: string) {
+
+        let headers: Array<string> = data[0];
+        let numberofResults = data.length - 1
         let body:string= `
-            Instance:  ${filepath.split("/").pop()}
+            Instance:  ${filepath.split("\\").pop()?.split(".")[0]}
             \tdescription \"Instance Description\"
             \ttype raw
-            \ttotal number 000
+            \ttotal number ${numberofResults}
             \twithAttributes:\n`;
 
         
-        data.forEach(attr => {
-           body = body + '\t\t\t\t\t attribute  '+attr+' ofType  string  description: \"Describe the attribute \"\n';
+        headers.forEach(attr => {
+           body = body + `\t\t\t\t\tattribute  ${attr.replaceAll(' ','_')} 
+                        ofType string  
+                        description: \"Describe the attribute \"\n`;
         });
         return body;
     }
