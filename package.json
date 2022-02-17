@@ -104,6 +104,7 @@
     "dependencies": {
         "colors": "^1.4.0",
         "commander": "^8.0.0",
+        "csv-parse": "^5.0.4",
         "csv-parser": "^3.0.0",
         "langium": "^0.2.0",
         "vscode-languageclient": "^7.0.0",

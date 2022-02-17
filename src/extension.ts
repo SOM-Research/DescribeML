@@ -6,8 +6,6 @@ import {
 
 import { createDatasetDescriptorServices, DatasetDescriptorServices} from './language-server/dataset-descriptor-module';
 
-import csvParser from 'csv-parser';
-import fs from 'fs';
 
 
 let client: LanguageClient;
@@ -83,23 +81,19 @@ function startLanguageClient(context: vscode.ExtensionContext): LanguageClient {
 
 async function loadCsv(context: vscode.ExtensionContext, filepath: vscode.Uri) {
     console.log('start');
-    const results:Array<any> = [];
-    fs.createReadStream(filepath.fsPath)
-        .pipe(csvParser())
-        .on('data', (data) => results.push(data))
-        .on('end', () => {
-            console.log(results);
-            // [
-            //   { NAME: 'Daffy Duck', AGE: '24' },
-            //   { NAME: 'Bugs Bunny', AGE: '22' }
-            // ]
-        });
 
+    const text:string = await datasetServices.uploader.DatasetUploader.uploadDataset(filepath.fsPath);
+    let snippet = new vscode.SnippetString();
+    snippet.appendText(text);
+    //createDatasetDescriptorServices().shared.workspace.LangiumDocuments.getOrCreateDocument()
+    
     const editor = vscode.window.activeTextEditor;
+   // editor?.insertSnippet(snippet,editor.revealRange())
     if (editor) {
-        //const document = editor.document;
+        const document = editor.document;
         editor.edit(editBuilder => {
-            editBuilder.insert(new vscode.Position(30,0),"Insterted!");
+            //editBuilder.insert(new vscode.Position(document.lineCount,8),snippet);
+            editor.insertSnippet(snippet, new vscode.Position(document.lineCount, 4));
         });
     }
     await vscode.window.showInformationMessage('File Loaded');
@@ -108,6 +102,7 @@ async function loadCsv(context: vscode.ExtensionContext, filepath: vscode.Uri) {
 let previewPanel : vscode.WebviewPanel;
 
 async function initHtmlPreview(context: vscode.ExtensionContext) {
+   
     if (! previewPanel) {
         previewPanel = vscode.window.createWebviewPanel(
             // Webview id
@@ -122,6 +117,7 @@ async function initHtmlPreview(context: vscode.ExtensionContext) {
                 retainContextWhenHidden: true,
                 // And restrict the webview to only loading content from our extension's `assets` directory.
                 localResourceRoots: [vscode.Uri.file(path.join(context.extensionPath, 'assets'))]
+            
             }
         );
     }

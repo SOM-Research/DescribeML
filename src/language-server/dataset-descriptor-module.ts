@@ -3,6 +3,9 @@ import { LangiumServices, Module, PartialLangiumServices, LangiumSharedServices,
 import { DatasetDescriptorGeneratedModule, datasetDescriptorGeneratedSharedModule } from './generated/module';
 import { DatasetDescriptorValidationRegistry, DatasetDescriptorValidator } from './dataset-descriptor-validator';
 import { DatasetDescriptorDescriptionProvider } from './dataset-descriptor-index';
+import { Generator, DocumentationGenerator } from './dataset-descriptor-documentation';
+import { DatasetUploader, Uploader } from './dataset-descriptor-uploader';
+
 
 /**
  * Declaration of custom services - add your own service classes here.
@@ -10,6 +13,12 @@ import { DatasetDescriptorDescriptionProvider } from './dataset-descriptor-index
 export type DatasetDescriptorAddedServices = {
     validation: {
         DatasetDescriptorValidator: DatasetDescriptorValidator
+    },
+    generation: {
+        DocumentationGenerator: Generator
+    },
+    uploader: {
+        DatasetUploader: Uploader
     }
 }
 
@@ -31,6 +40,12 @@ export const DatasetDescriptorModule: Module<DatasetDescriptorServices, PartialL
     },
     index: {
         AstNodeDescriptionProvider: (services) => new DatasetDescriptorDescriptionProvider(services)
+    },
+    generation: {
+        DocumentationGenerator: (injector) => new DocumentationGenerator(injector)
+    },
+    uploader: {
+        DatasetUploader: (injector) => new DatasetUploader(injector)
     }
 };
 
@@ -42,17 +57,17 @@ export const DatasetDescriptorModule: Module<DatasetDescriptorServices, PartialL
  */
  export function createDatasetDescriptorServices(context?: DefaultSharedModuleContext): {
     shared: LangiumSharedServices,
-    domainmodel: DatasetDescriptorServices
+    datasetDescription: DatasetDescriptorServices
 } {
     const shared = inject(
         createDefaultSharedModule(context),
         datasetDescriptorGeneratedSharedModule
     );
-    const domainmodel = inject(
+    const datasetDescription = inject(
         createDefaultModule({ shared }),
         DatasetDescriptorGeneratedModule,
         DatasetDescriptorModule
     );
-    shared.ServiceRegistry.register(domainmodel);
-    return { shared, domainmodel };
+    shared.ServiceRegistry.register(datasetDescription);
+    return { shared, datasetDescription };
 }
