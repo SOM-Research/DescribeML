@@ -22,7 +22,9 @@ export interface Attribute extends AstNode {
     readonly $container: Instance;
     attdesc: string
     attType: ATtype
+    completnessAtt: number
     name: string
+    unique: number
 }
 
 export const Attribute = 'Attribute';

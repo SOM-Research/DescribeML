@@ -53,7 +53,7 @@ Maintainer:
  DatasetDefinition:
      name="Definition:"
      'General description:' description=STRING
-     ('Number of instances:' numberInst=INT)? 
+     ('Number of instances:' numberInst=NUMBER)? 
      instances += Instances
      'composedBy:' (instances+=Instance)*
      (relation=RelationInstances)?
@@ -67,7 +67,7 @@ Instances:
 
 // Instances definition
 Instance: 
-    'Instance:' name=ID 'description' descript=STRING 'type'  type=InsType  ('total number' numIns=INT)?
+    'Instance:' name=ID 'description' descript=STRING 'type'  type=InsType  ('total number' numIns=NUMBER)?
         'withAttributes:' (attributes+=Attribute)*
         
     ('Instance belongs to people:' 
@@ -77,7 +77,11 @@ Instance:
     )?;
 
 Attribute:
-    'attribute' name=ID 'ofType' attType=ATtype 'description:' attdesc=STRING ;
+    'attribute' name=ID 
+    'description:' attdesc=STRING 
+    'ofType:' attType=ATtype 
+    ('unique:' unique=NUMBER)?
+    ('completness:' completnessAtt=NUMBER)?;
 
 // Relation between Instances
 RelationInstances:
@@ -117,7 +121,7 @@ AccuracyRq:
 
     RangeConstraints:
         'Range:' 
-            'where attribute:' att=[Attribute:QualifiedName] 'is from' lowrange=INT 'to' highrange=INT;
+            'where attribute:' att=[Attribute:QualifiedName] 'is from' lowrange=NUMBER 'to' highrange=NUMBER;
 
     MandatoryConstraints:
         'Mandatory:' 
@@ -152,7 +156,7 @@ Operation returns string: '<'|'>'|'='|'!='|'+'|'-';
 // Terminals
 hidden terminal WS: /\s+/;
 terminal ID: '^'?(/[_a-zA-Z]/|'_')(/[_a-zA-Z]/|'_'|/[0-9]/)*;
-terminal INT returns number: /[0-9]+/;
+terminal NUMBER returns number: /[0-9]+(\.[0-9])?/;
 terminal STRING: /"[^"]*"|'[^']*'/;
 
 hidden terminal ML_COMMENT: /\/\*[\s\S]*?\*\//;

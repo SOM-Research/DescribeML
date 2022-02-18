@@ -652,7 +652,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                   "$type": "RuleCall",
                   "arguments": [],
                   "rule": {
-                    "$refText": "INT"
+                    "$refText": "NUMBER"
                   }
                 }
               }
@@ -883,7 +883,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                   "$type": "RuleCall",
                   "arguments": [],
                   "rule": {
-                    "$refText": "INT"
+                    "$refText": "NUMBER"
                   }
                 }
               }
@@ -1007,7 +1007,23 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
           },
           {
             "$type": "Keyword",
-            "value": "ofType"
+            "value": "description:"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "attdesc",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "STRING"
+              }
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": "ofType:"
           },
           {
             "$type": "Assignment",
@@ -1022,20 +1038,50 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             }
           },
           {
-            "$type": "Keyword",
-            "value": "description:"
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "unique:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "unique",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "NUMBER"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
           },
           {
-            "$type": "Assignment",
-            "feature": "attdesc",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "STRING"
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "completness:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "completnessAtt",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "NUMBER"
+                  }
+                }
               }
-            }
+            ],
+            "cardinality": "?"
           }
         ]
       }
@@ -1519,7 +1565,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
               "$type": "RuleCall",
               "arguments": [],
               "rule": {
-                "$refText": "INT"
+                "$refText": "NUMBER"
               }
             }
           },
@@ -1535,7 +1581,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
               "$type": "RuleCall",
               "arguments": [],
               "rule": {
-                "$refText": "INT"
+                "$refText": "NUMBER"
               }
             }
           }
@@ -2094,11 +2140,11 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
     },
     {
       "$type": "TerminalRule",
-      "name": "INT",
+      "name": "NUMBER",
       "type": "number",
       "terminal": {
         "$type": "RegexToken",
-        "regex": "[0-9]+",
+        "regex": "[0-9]+(\\\\.[0-9])?",
         "elements": []
       }
     },

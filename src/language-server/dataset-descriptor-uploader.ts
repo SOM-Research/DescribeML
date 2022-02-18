@@ -44,7 +44,7 @@ export class DatasetUploader implements Uploader {
         // Can we count the number of empty or NANs values in a attibute column?
         let body:string= `
             Instance:  ${filepath.split("\\").pop()?.split(".")[0]}
-            \tdescription \"Instance Description\"
+            \tdescription \"Describe the instance\"
             \ttype raw
             \ttotal number ${numberofResults}
             \twithAttributes:\n`;
@@ -59,9 +59,11 @@ export class DatasetUploader implements Uploader {
             // If number Mean and Standard Desviation
             // If String word count
             console.log(completness);
-            body = body + `\t\t\t\t\tattribute  ${attr.replaceAll(' ','_')} 
-                        ofType string  
-                        description: \"Describe the attribute with ${unique} unique elements and a completness of ${completness} \"\n`;
+            body = body + `\t\t\t\t\tattribute  ${attr.replaceAll(' ','_')}  
+                        description: \"Describe the attribute\"
+                        ofType: string 
+                        unique: ${unique}
+                        completness: ${completness} \n`;
         });
         return body;
     }
@@ -85,7 +87,7 @@ export class DatasetUploader implements Uploader {
                 validValues = validValues+1;
             }
         });
-        if (validValues != 0) return (validValues/attrData.length).toFixed(2);
+        if (validValues != 0) return ((validValues/attrData.length) * 100).toFixed(0);
         else return 0
     }
 }

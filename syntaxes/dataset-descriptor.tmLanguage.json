@@ -10,23 +10,7 @@
     },
     {
       "name": "keyword.control.datasetdescriptor",
-      "match": "\\b(Accuracy Requeriment of|attribute|bool|Boolean|Column Completness|Completness Requeriments of|Consisntecy Requeriment of|description|Description|email|features|grantor|images|int|Integer|is from|Might be offensive|mixed|Name|need to have a distribution: of|no|ofType|other|Other|Overall Completness|people|Population Completness|private|public|raw|string|String|to|total number|Tuple Completness|type|Type|Version support|where attribute|yes)\\b|\\b(and attribute:|Are there protecte groups\\?|attribute:|Authors:|Citation:|Complete archival version:|composedBy:|Contribution guides:|Data Retention:|Data Splits:|Data Type:|Dataset:|Definition:|Dependencies:|description:|Erratum\\?|Founders:|General description:|General information:|grantId:|Have sensitive attributes\\?|Individual indetification:|Instaces relation:|Instance belongs to people:|Instance:|Instances:|is from type:|is related to:|Legal Issues:|License Information:|Links:|Maintainer:|Maintenance:|Mandatory:|need to:|needs to be:|Number of instances:|Privacy:|Range:|Rate Limit Usage:|Relation:|reportedby:|Requeriment:|Requeriments:|Restriction:|Semantic:|Sintactic:|than attribute:|Title:|Version:|where attribute:|withAttributes:)\\B"
-    },
-    {
-      "name": "keyword.instancer.dataset",
-      "match": "^\\s*(?:Instance).*?\\s*$"
-    },
-    {
-      "name": "keyword.attributes.dataset",
-      "match": "^\\s*(?:attribute).*?\\s"
-    },
-    {
-      "name": "keyword.sections.datasetdescriptor",
-      "match": "^\\s*(?:General information:|Definition:).*?\\s*$"
-    },
-    {
-      "name": "keyword.persons.datasetdescriptor",
-      "match": "^\\s*(?:Authors:|Founders:|Maintainer:).*?\\s*$"
+      "match": "\\b(Accuracy Requeriment of|attribute|bool|Boolean|Column Completness|Completness Requeriments of|Consisntecy Requeriment of|description|Description|email|features|grantor|images|int|Integer|is from|Might be offensive|mixed|Name|need to have a distribution: of|no|other|Other|Overall Completness|people|Population Completness|private|public|raw|string|String|to|total number|Tuple Completness|type|Type|Version support|where attribute|yes)\\b|\\b(and attribute:|Are there protecte groups\\?|attribute:|Authors:|Citation:|Complete archival version:|completness:|composedBy:|Contribution guides:|Data Retention:|Data Splits:|Data Type:|Dataset:|Definition:|Dependencies:|description:|Erratum\\?|Founders:|General description:|General information:|grantId:|Have sensitive attributes\\?|Individual indetification:|Instaces relation:|Instance belongs to people:|Instance:|Instances:|is from type:|is related to:|Legal Issues:|License Information:|Links:|Maintainer:|Maintenance:|Mandatory:|need to:|needs to be:|Number of instances:|ofType:|Privacy:|Range:|Rate Limit Usage:|Relation:|reportedby:|Requeriment:|Requeriments:|Restriction:|Semantic:|Sintactic:|than attribute:|Title:|unique:|Version:|where attribute:|withAttributes:)\\B"
     },
     {
       "name": "string.quoted.double.datasetdescriptor",
