@@ -22,36 +22,23 @@ export class DatasetUploader implements Uploader {
     }
 
     async uploadDataset(filepath: string): Promise<string> {
-        //let results:Array<any> = [];
-        //let headers:Array<string> = [];
 
-        const fileContent = fs.readFileSync(filepath, { encoding: 'utf-8' });
-       
-        let parsed: Array<any> = parse(fileContent) as Array<any>;
-        console.log(parsed);
-        /*fs.createReadStream(filepath)
-            .on('error', (error) => {
-                console.log('error');
-            })
-            .pipe(csvParser())
-            .on('headers', (header) => {
-                headers.push(header)
-             })
-            .on('data', (data) => results.push(data))
-            .on('end', () => {
-                console.log(results);
-            });
-        */
-  
-        const snippet = this.buildSnippet(parsed, filepath);
+        const fileContent = fs.readFileSync(filepath, { encoding: 'utf-8' });  
+        const parsed: Array<any> = parse(fileContent) as Array<any>;
         
+        const snippet = this.buildSnippet(parsed, filepath);
         return snippet;
     }
 
     buildSnippet(data: Array<any>, filepath: string) {
-
+        // Get Headers
         let headers: Array<string> = data[0];
+        // Get number of rows
         let numberofResults = data.length - 1
+        // Can we infer the most probable type?
+        // Can we calculate attribute completeness?
+        // If number, can we calculate ranges?
+        // Can we count the number of empty or NANs values in a attibute column?
         let body:string= `
             Instance:  ${filepath.split("\\").pop()?.split(".")[0]}
             \tdescription \"Instance Description\"
@@ -59,7 +46,6 @@ export class DatasetUploader implements Uploader {
             \ttotal number ${numberofResults}
             \twithAttributes:\n`;
 
-        
         headers.forEach(attr => {
            body = body + `\t\t\t\t\tattribute  ${attr.replaceAll(' ','_')} 
                         ofType string  

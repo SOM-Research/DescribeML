@@ -8,6 +8,7 @@ import { createDatasetDescriptorServices, DatasetDescriptorServices} from './lan
 
 
 
+
 let client: LanguageClient;
 
 let datasetServices : DatasetDescriptorServices;
@@ -93,7 +94,18 @@ async function loadCsv(context: vscode.ExtensionContext, filepath: vscode.Uri) {
         const document = editor.document;
         editor.edit(editBuilder => {
             //editBuilder.insert(new vscode.Position(document.lineCount,8),snippet);
-            editor.insertSnippet(snippet, new vscode.Position(document.lineCount, 4));
+            const regexp = new RegExp('(?:composedBy:)');
+            let snippetPosition = new vscode.Position(document.lineCount, 5);
+            for (let index = 0; index < document.lineCount; index++) {
+                let actualLine = editor.document.lineAt(index);
+                let text = actualLine.text;
+                console.log(text)
+                if(actualLine.text.match(regexp)) {
+                    snippetPosition = new vscode.Position(index+1, 5);
+                }
+                
+            }
+            editor.insertSnippet(snippet, snippetPosition);
         });
     }
     await vscode.window.showInformationMessage('File Loaded');
