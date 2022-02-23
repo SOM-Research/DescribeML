@@ -1,6 +1,7 @@
 import { DatasetDescriptorServices } from './dataset-descriptor-module';
 import { parse } from 'csv-parse/sync';
 import fs from 'fs';
+//import math from 'mathjs';
 
 
 
@@ -52,11 +53,14 @@ export class DatasetUploader implements Uploader {
         headers.forEach((attr, index) => {
             // Can we calculate attribute completeness?
             let attrData = data.map(function(value,index2) { return value[index]; });
+            const dataWithoutHeaders = attrData.shift();
             // Completness
-            const completness = this.attributeCompletness(attrData);
+            const completness = this.attributeCompletness(dataWithoutHeaders);
             // Unique
-            const unique = this.attributeUnique(attrData);
+            const unique = this.attributeUnique(dataWithoutHeaders);
             // If number Mean and Standard Desviation
+            //const std = math.std(dataWithoutHeaders);
+            //const meand = math.mean(dataWithoutHeaders);
             // If String word count
             console.log(completness);
             body = body + `\t\t\t\t\tattribute  ${attr.replaceAll(' ','_')}  
@@ -68,15 +72,11 @@ export class DatasetUploader implements Uploader {
         return body;
     }
     attributeUnique(attrData: Array<any>) {
-         // delete headers
-         attrData.shift();
          let uniques = attrData.filter((v,i,a) => a.indexOf(v) === i);
          return uniques.length;
     }
 
     attributeCompletness(attrData: Array<any>){
-        // delete headers
-        attrData.shift();
         let validValues = 0;
         attrData.forEach(element => {
             if (element){
