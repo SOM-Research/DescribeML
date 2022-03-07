@@ -94,14 +94,14 @@ async function loadCsv(context: vscode.ExtensionContext, filepath: vscode.Uri) {
         const document = editor.document;
         editor.edit(editBuilder => {
             //editBuilder.insert(new vscode.Position(document.lineCount,8),snippet);
-            const regexp = new RegExp('(?:composedBy:)');
+            const regexp = new RegExp('(?:Instances:)');
             let snippetPosition = new vscode.Position(document.lineCount, 5);
             for (let index = 0; index < document.lineCount; index++) {
                 let actualLine = editor.document.lineAt(index);
                 let text = actualLine.text;
                 console.log(text)
                 if(actualLine.text.match(regexp)) {
-                    snippetPosition = new vscode.Position(index+1, 5);
+                    snippetPosition = new vscode.Position(index+1, 4);
                 }
                 
             }
