@@ -44,30 +44,31 @@ export class DatasetUploader implements Uploader {
         // If number, can we calculate ranges?
         // Can we count the number of empty or NANs values in a attibute column?
         let body:string= `
-            Instance:  ${filepath.split("\\").pop()?.split(".")[0]}
-            \tDescription \"Describe the instance\"
-            \tType: Record_Data
-            \tNumber Of attributes: ${numberofResults}
-            \tComposition:\n`;
+        Instance:  ${filepath.split("\\").pop()?.split(".")[0]}
+        \tDescription: \"Describe the instance\"
+        \tType: Record_Data
+        \tNumber of attributes: ${numberofResults}
+        \tComposition:\n`;
 
         headers.forEach((attr, index) => {
             // Can we calculate attribute completeness?
             let attrData = data.map(function(value,index2) { return value[index]; });
-            const dataWithoutHeaders = attrData.shift();
+            const datHeaders = attrData.shift();
             // Completness
-            const completness = this.attributeCompletness(dataWithoutHeaders);
+            const completness = this.attributeCompletness(attrData);
             // Unique
-            const unique = this.attributeUnique(dataWithoutHeaders);
+            const unique = this.attributeUnique(attrData);
             // If number Mean and Standard Desviation
             //const std = math.std(dataWithoutHeaders);
             //const meand = math.mean(dataWithoutHeaders);
             // If String word count
             console.log(completness);
-            body = body + `\t\t\t\t\tattribute  ${attr.replaceAll(' ','_')}  
+            body = body + `\t\t\t\t\tattribute:  ${datHeaders.replaceAll(' ','_')}  
                         description: \"Describe the attribute\"
-                        ofType: string 
                         unique: ${unique}
-                        completness: ${completness} \n`;
+                        completness: ${completness} 
+                        // ofType: Categorical
+                        // E.D.A. Stuff \n`;
         });
         return body;
     }

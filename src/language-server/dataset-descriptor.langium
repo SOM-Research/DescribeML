@@ -16,7 +16,7 @@ Declaration:
 // Authoring
 //
 GeneralInfo:
-     'General information:'
+     name='General information:'
      'Title:' title=STRING 
      'Unique-identifier:' id=ID
      'Version:' version=ID 
@@ -26,11 +26,14 @@ GeneralInfo:
          ('Tasks:' descriptionTasks=STRING)? 
          ('Gaps:' descriptionGaps=STRING)?  
          ('Citation:' citation=STRING)?)) 
-     ('Area:' area+=ID)?
-     ('Tags:' (tags+=ID)*)?
+     (Area)?
+     (Tags)?
      Authoring;
    
-       
+Area:
+    name='Area:' area+=ID;
+Tags:
+    name='Tags:' (tags+=ID)*;
 Authoring:
     name= 'Authoring:' 
      (autohring+=Authors
@@ -87,8 +90,8 @@ Instance:
     ('Sparsity:' sparsity=NUMBER)?
     ('Completness:' complet=NUMBER)?
     ('Number of Records:' records=NUMBER)?
-    ('Associated Labels:' labels=STRING)
-    'Composition:' (attributes+=Attribute)*
+    ('Associated Labels:' labels=STRING)?
+    ('Composition:' (attributes+=Attribute)*)?
     ('Integrity rules:' (rules+=IntegrityRules)*)? 
     ('Instance belongs to people:' 
         'Have sensitive attributes?' ('attribute:' senseAtt=[Attribute])*
@@ -97,12 +100,12 @@ Instance:
     )?;
 
 Attribute:
-    'attribute' name=ID 
+    'attribute:' name=ID 
     'description:' attdesc=STRING 
     ('unique:' unique=NUMBER)?
     ('completness:' completnessAtt=NUMBER)?
     ('count:' completnessAtt=NUMBER)?
-    'ofType:' ((attType=Categor)|(attType=Numeri)) ;
+    ('ofType:' ((attType=Categor)|(attType=Numeri)))? ;
 
 Categor:
     name='Categorical'

@@ -45,6 +45,17 @@ export function isAnnotators(item: unknown): item is Annotators {
     return reflection.isInstance(item, Annotators);
 }
 
+export interface Area extends AstNode {
+    area: Array<string>
+    name: 'Area:'
+}
+
+export const Area = 'Area';
+
+export function isArea(item: unknown): item is Area {
+    return reflection.isInstance(item, Area);
+}
+
 export interface Attribute extends AstNode {
     readonly $container: Instance;
     attdesc: string
@@ -283,14 +294,13 @@ export function isFounders(item: unknown): item is Founders {
 
 export interface GeneralInfo extends AstNode {
     readonly $container: Declaration;
-    area: Array<string>
     citation: string
     description: string
     descriptionGaps: string
     descriptionpurpose: string
     descriptionTasks: string
     id: string
-    tags: Array<string>
+    name: 'General information:'
     title: string
     version: string
 }
@@ -529,6 +539,17 @@ export function isSocialConcerns(item: unknown): item is SocialConcerns {
     return reflection.isInstance(item, SocialConcerns);
 }
 
+export interface Tags extends AstNode {
+    name: 'Tags:'
+    tags: Array<string>
+}
+
+export const Tags = 'Tags';
+
+export function isTags(item: unknown): item is Tags {
+    return reflection.isInstance(item, Tags);
+}
+
 export type QualifiedName = string
 
 export type DataTypes = 'String' | 'Integer' | 'Boolean' | 'Other'
@@ -553,14 +574,14 @@ export type Social = string
 
 export type AnnotationType = 'Bounding boxes' | 'Lines and splines' | 'Semantinc Segmentation' | '3D cuboids' | 'Polygonal segmentation' | 'Landmark and key-point' | 'Image and video annotations' | 'Entity annotation' | 'Content and text categorization'
 
-export type datasetDescriptorAstType = 'AccuracyRq' | 'Annotator' | 'Annotators' | 'Attribute' | 'Author' | 'Authoring' | 'Authors' | 'Binary' | 'Categor' | 'CompletnessRq' | 'Composition' | 'ConsistencyRq' | 'DataProvenance' | 'DataSource' | 'DataSources' | 'DataTypeConstraints' | 'Declaration' | 'Dependencies' | 'DescriptionDataset' | 'Founder' | 'Founders' | 'GeneralInfo' | 'Instance' | 'Instances' | 'IntegrityRules' | 'Labels' | 'Maintainer' | 'Maintenance' | 'MandatoryConstraints' | 'Numeri' | 'Privacy' | 'RangeConstraints' | 'Relation' | 'RelationInstances' | 'Requeriment' | 'Requeriments' | 'Semantic' | 'Sintactic' | 'SocialConcerns';
+export type datasetDescriptorAstType = 'AccuracyRq' | 'Annotator' | 'Annotators' | 'Area' | 'Attribute' | 'Author' | 'Authoring' | 'Authors' | 'Binary' | 'Categor' | 'CompletnessRq' | 'Composition' | 'ConsistencyRq' | 'DataProvenance' | 'DataSource' | 'DataSources' | 'DataTypeConstraints' | 'Declaration' | 'Dependencies' | 'DescriptionDataset' | 'Founder' | 'Founders' | 'GeneralInfo' | 'Instance' | 'Instances' | 'IntegrityRules' | 'Labels' | 'Maintainer' | 'Maintenance' | 'MandatoryConstraints' | 'Numeri' | 'Privacy' | 'RangeConstraints' | 'Relation' | 'RelationInstances' | 'Requeriment' | 'Requeriments' | 'Semantic' | 'Sintactic' | 'SocialConcerns' | 'Tags';
 
 export type datasetDescriptorAstReference = 'DataTypeConstraints:att' | 'Instance:senseAtt' | 'Labels:map' | 'MandatoryConstraints:att' | 'Privacy:priva' | 'RangeConstraints:att' | 'Relation:attRel' | 'Relation:attRelTarget' | 'Relation:insRel' | 'Requeriment:reporter' | 'Semantic:attObject' | 'Sintactic:attObject' | 'Sintactic:attTarget';
 
 export class datasetDescriptorAstReflection implements AstReflection {
 
     getAllTypes(): string[] {
-        return ['AccuracyRq', 'Annotator', 'Annotators', 'Attribute', 'Author', 'Authoring', 'Authors', 'Binary', 'Categor', 'CompletnessRq', 'Composition', 'ConsistencyRq', 'DataProvenance', 'DataSource', 'DataSources', 'DataTypeConstraints', 'Declaration', 'Dependencies', 'DescriptionDataset', 'Founder', 'Founders', 'GeneralInfo', 'Instance', 'Instances', 'IntegrityRules', 'Labels', 'Maintainer', 'Maintenance', 'MandatoryConstraints', 'Numeri', 'Privacy', 'RangeConstraints', 'Relation', 'RelationInstances', 'Requeriment', 'Requeriments', 'Semantic', 'Sintactic', 'SocialConcerns'];
+        return ['AccuracyRq', 'Annotator', 'Annotators', 'Area', 'Attribute', 'Author', 'Authoring', 'Authors', 'Binary', 'Categor', 'CompletnessRq', 'Composition', 'ConsistencyRq', 'DataProvenance', 'DataSource', 'DataSources', 'DataTypeConstraints', 'Declaration', 'Dependencies', 'DescriptionDataset', 'Founder', 'Founders', 'GeneralInfo', 'Instance', 'Instances', 'IntegrityRules', 'Labels', 'Maintainer', 'Maintenance', 'MandatoryConstraints', 'Numeri', 'Privacy', 'RangeConstraints', 'Relation', 'RelationInstances', 'Requeriment', 'Requeriments', 'Semantic', 'Sintactic', 'SocialConcerns', 'Tags'];
     }
 
     isInstance(node: unknown, type: string): boolean {

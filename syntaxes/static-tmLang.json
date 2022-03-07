@@ -1,0 +1,61 @@
+{
+    "name": "datasetdescriptor",
+    "scopeName": "source.datasetdescriptor",
+    "fileTypes": [
+      ".datadesc"
+    ],
+    "patterns": [
+      {
+        "include": "#comments"
+      },
+      {
+        "name": "keyword.control.datasetdescriptor",
+        "match": "\\b(3D cuboids|Accuracy Requeriment of|Asymmetric|Boolean|Bounding boxes|Categorical|Column Completness|Completness Requeriments of|Consisntecy Requeriment of|Content and text categorization|Data_Provenance|email|Entity annotation|grantor|Graph|Image and video annotations|Integer|is from|Landmark and key-point|Lines and splines|Might be offensive|mixed|Name|need to have a distribution: of|Numerical|Ordenred|Other|Overall Completness|Polygonal segmentation|Population Completness|private|Process Requeriments|public|Record_Data|Semantinc Segmentation|Social_Concerns|String|Symmetric|Time-Series|to|Tuple Completness|type|Type|Version support )\\b|\\b(Are there protecte groups\\?|Area:|Associated Labels:|Attribute Sparsity:|attribute:|Attributes affected:|Bias discussion:|Binary attribute:|Categoric Distribution:|Categoric:|Citation:|Complete archival version:|completness:|Completness:|Contribution guides:|count:|Curation Rationale:|Data Retention:|Data Splits:|Data Type:|Dependencies:|description:|Description:|Erratum\\?|Gaps:|grantId:|Have sensitive attributes\\?|How data is collected:|Instaces relation:|Instance belongs to people:|Instances:|Integrity rules:|IQR:|is from type:|is related to:|Label:|Labels:|Legal Issues:|License Information:|Links:|Maintainer:|Mandatory:|Mapping:|Maximmum:|Mean:|Median:|Minimmum:|Mode:|need to:|needs to be:|Noise Sources:|Number of attributes:|Number of Records:|Numeric:|Privacy:|Purpose:|Quartiles:|Range:|Rate Limit Usage:|Relation:|reportedby:|Requeriment:|Requeriments:|Restriction:|Semantic:|Sintactic:|Social Impact:|Sparsity:|Standard Desviation:|Symetry:|Tags:|Tasks:|than attribute:|Title:|Total number of instances:|Type:|Unique-identifier:|unique:|Version:|where attribute:|Who annotates the data:|Who collects the data:)\\B"
+      },
+      {
+        "name": "entity.name.type.class",
+        "match": "\\b(attribute|Dataset:|General information:|Authoring:|Authors:|Founders:|Maintenance:|Composition:|Instance:|ofType:|Social Concerns:|Data Provenance:|Data Sources:|Source:|Annotation Processes:|Annotator process:)\\B"
+      },
+      {
+        "name": "string.quoted.double.datasetdescriptor",
+        "begin": "\"",
+        "end": "\""
+      },
+      {
+        "name": "string.quoted.single.datasetdescriptor",
+        "begin": "'",
+        "end": "'"
+      }
+    ],
+    "repository": {
+      "comments": {
+        "patterns": [
+          {
+            "name": "comment.block.datasetdescriptor",
+            "begin": "/\\*",
+            "beginCaptures": {
+              "0": {
+                "name": "punctuation.definition.comment.datasetdescriptor"
+              }
+            },
+            "end": "\\*/",
+            "endCaptures": {
+              "0": {
+                "name": "punctuation.definition.comment.datasetdescriptor"
+              }
+            }
+          },
+          {
+            "begin": "//",
+            "beginCaptures": {
+              "1": {
+                "name": "punctuation.whitespace.comment.leading.datasetdescriptor"
+              }
+            },
+            "end": "(?=$)",
+            "name": "comment.line.datasetdescriptor"
+          }
+        ]
+      }
+    }
+  }
