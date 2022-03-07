@@ -4,7 +4,12 @@ entry DescriptionDataset:
     (elements+=Declaration)*;
 
 Declaration:
- 'Dataset:' name=ID metainfo=GeneralInfo  definition=DatasetDefinition (requeriments=Requeriments)?;
+ 'Dataset:' name=ID 
+  metainfo=GeneralInfo  
+  composition=Composition 
+  socialConcerns=SocialConcerns
+  provenance=DataProvenance;
+  //req=Requeriments;
 
 
 //
@@ -13,16 +18,25 @@ Declaration:
 GeneralInfo:
      'General information:'
      'Title:' title=STRING 
+     'Unique-identifier:' id=ID
      'Version:' version=ID 
-     'Description' description=STRING 
-     'Citation:' STRING
-    autohring+=Authors
-    founding+= (Founders)?
-     'License Information:' licence = STRING // Aquí podriem aportar més ajuda sobre llicencies
-     maintenance+=Maintenance;
+     'Description:' 
+        (description=STRING | 
+        (('Purpose:' descriptionpurpose=STRING)? 
+         ('Tasks:' descriptionTasks=STRING)? 
+         ('Gaps:' descriptionGaps=STRING)?  
+         ('Citation:' citation=STRING)?)) 
+     ('Area:' area+=ID)?
+     ('Tags:' (tags+=ID)*)?
+     Authoring;
    
        
-
+Authoring:
+    name= 'Authoring:' 
+     (autohring+=Authors
+        founding+= (Founders)?
+        'License Information:' licence = STRING // Aquí podriem aportar més ajuda sobre llicencies
+        maintenance+=Maintenance);
 Authors: 
     name='Authors:'  (authors+=Author*);
 
@@ -50,12 +64,11 @@ Maintainer:
 //
 // Dataset Composition 
 //
- DatasetDefinition:
-     name="Definition:"
-     'General description:' description=STRING
-     ('Number of instances:' numberInst=NUMBER)? 
-     instances += Instances
-     'composedBy:' (instances+=Instance)*
+ Composition:
+     name='Composition:'
+     'Description:' compodesc+=STRING
+     ('Total number of instances:' numberInst=NUMBER)? 
+     (instances += Instances)*
      (relation=RelationInstances)?
      ('Privacy:' privacy=Privacy)? 
      ('Dependencies:' dependencies=Dependencies)? 
@@ -67,9 +80,16 @@ Instances:
 
 // Instances definition
 Instance: 
-    'Instance:' name=ID 'description' descript=STRING 'type'  type=InsType  ('total number' numIns=NUMBER)?
-        'withAttributes:' (attributes+=Attribute)*
-        
+    'Instance:' name=ID 
+    'Description:' descript=STRING 
+    'Type:'  type=InsType  
+    ('Number of attributes:' numIns=NUMBER)?
+    ('Sparsity:' sparsity=NUMBER)?
+    ('Completness:' complet=NUMBER)?
+    ('Number of Records:' records=NUMBER)?
+    ('Associated Labels:' labels=STRING)
+    'Composition:' (attributes+=Attribute)*
+    ('Integrity rules:' (rules+=IntegrityRules)*)? 
     ('Instance belongs to people:' 
         'Have sensitive attributes?' ('attribute:' senseAtt=[Attribute])*
         'Are there protecte groups?' procGroups=STRING
@@ -79,9 +99,34 @@ Instance:
 Attribute:
     'attribute' name=ID 
     'description:' attdesc=STRING 
-    'ofType:' attType=ATtype 
     ('unique:' unique=NUMBER)?
-    ('completness:' completnessAtt=NUMBER)?;
+    ('completness:' completnessAtt=NUMBER)?
+    ('count:' completnessAtt=NUMBER)?
+    'ofType:' ((attType=Categor)|(attType=Numeri)) ;
+
+Categor:
+    name='Categorical'
+    ('Binary attribute:' binary=Binary)?
+    ('Mode:' mode=STRING)?
+    ('Categoric Distribution:' catdist=STRING)?;
+
+Binary:
+    'Symetry:' sym=Symetric
+    'Attribute Sparsity:' attspar=NUMBER;
+   
+Numeri:
+    name='Numerical' 
+    ('Mean:' mean=NUMBER)?
+    ('Median:' median=NUMBER)?
+    ('Standard Desviation:' std=NUMBER)?
+    ('Minimmum:' min=NUMBER)?
+    ('Maximmum:' max=NUMBER)?
+    ('Quartiles:' quartiles=STRING)?
+    ('IQR:' iqr=NUMBER)?
+    ;
+
+IntegrityRules:
+    'Description:' desc=STRING;
 
 // Relation between Instances
 RelationInstances:
@@ -91,10 +136,7 @@ Relation:
     ('Relation:' name=ID 'attribute:' attRel=[Attribute] "is related to:" insRel=[Instance] ('and attribute:' attRelTarget=[Attribute]))*;
 
 
-// Privacy
-Privacy: 
-        'Legal Issues:' legal=STRING
-        'Individual indetification:' indident= 'yes' | 'no';
+
 
 // Dependencies
 Dependencies:
@@ -103,6 +145,53 @@ Dependencies:
             'Restriction:' restriction=STRING
             'Rate Limit Usage:' limit=STRING;
 
+
+SocialConcerns:
+    name='Social Concerns:'
+    ('Privacy:' privacy+=Privacy)?
+    ('Social Impact:' impact=STRING)?
+    ('Bias discussion:' bias=STRING)?
+    ;
+
+// Privacy
+Privacy: 
+        'Legal Issues:' legal=STRING
+        'Attributes affected:' (priva=[Attribute] (',')?)*;
+
+
+// Provenance
+DataProvenance:
+    name='Data Provenance:'
+    'Curation Rationale:' curation=STRING
+    (datasources+=DataSources)?
+    (annotations+=Annotators)?;
+
+DataSources:
+    name='Data Sources:' (datasources+=DataSource)*;
+
+DataSource:
+    'Source:' name=ID
+    'Description:' desc=STRING
+    'How data is collected:' how=STRING
+    'Who collects the data:' who=STRING
+    'Noise Sources:' noise=STRING
+    'Privacy:' priv=STRING;
+
+Annotators: 
+    name='Annotation Processes:' (annotations+=Annotator);
+
+Annotator:
+    'Annotator process:' name=ID
+    'Description:' desc=STRING
+    'Type:' type=AnnotationType
+    ('Labels:' (Labels)*)?
+    'Who annotates the data:' who=STRING
+    'Process Requeriments' req=STRING;
+
+Labels:
+    'Label:' name=ID
+    'Description:' desc=STRING
+    'Mapping:' (map=[Attribute] (',')?)*;
 
 
 // Requeriments
@@ -147,11 +236,16 @@ CompletnessRq:
 // Data Type Rules
 QualifiedName returns string: ID ('.' ID)*;
 DataTypes returns string: 'String' | 'Integer' | 'Boolean' | 'Other';
-ATtype returns string: 'int' | 'string' | 'bool';
-InsType returns string: 'people' | 'images' | 'raw' | 'features' | 'other';
+ATtype returns string: 'type';
+InsType returns string: 'Record_Data' | 'Time-Series' | 'Ordenred' | 'Graph' | 'Other';
 FoundersType returns string: 'private' | 'public' | 'mixed';
 Operation returns string: '<'|'>'|'='|'!='|'+'|'-';
-
+Categoric returns string: 'Categoric:';
+Numeric returns string: 'Numeric:';
+Symetric returns string: 'Symmetric' | 'Asymmetric';
+Proven returns string: 'Data_Provenance';
+Social returns string: 'Social_Concerns';
+AnnotationType returns string: 'Bounding boxes' | 'Lines and splines' | 'Semantinc Segmentation' | '3D cuboids' | 'Polygonal segmentation' | 'Landmark and key-point' | 'Image and video annotations' | 'Entity annotation' | 'Content and text categorization';
 
 // Terminals
 hidden terminal WS: /\s+/;

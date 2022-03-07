@@ -1,5 +1,5 @@
 import { ValidationAcceptor, ValidationCheck, ValidationRegistry } from 'langium';
-import { datasetDescriptorAstType, Maintenance, GeneralInfo, Author, Founder, DatasetDefinition } from './generated/ast';
+import { datasetDescriptorAstType, Maintenance, GeneralInfo, Author, Founder, Composition } from './generated/ast';
 import { DatasetDescriptorServices } from './dataset-descriptor-module';
 
 /**
@@ -18,7 +18,7 @@ export class DatasetDescriptorValidationRegistry extends ValidationRegistry {
             GeneralInfo: validator.hintsOfDescription,
             Author: validator.authorValidator,
             Founder: validator.hintsOfFounder,
-            DatasetDefinition:validator.hintOfDatasetDefinition,
+            Composition:validator.hintOfComposition,
             Maintenance:validator.hintsofMaintenance
         };
         this.register(checks, validator);
@@ -51,8 +51,8 @@ export class DatasetDescriptorValidator {
         accept('hint', 'Please describre the mechanism for contribution here', { node: type, property: 'contribGuides' });
     }
 
-    hintOfDatasetDefinition(type: DatasetDefinition, accept: ValidationAcceptor): void {
-        accept('hint', 'What do the isntances that comprise the dataset represent(for example, documents, photos, people, countries)', { node: type, property: 'description' });
+    hintOfComposition(type: Composition, accept: ValidationAcceptor): void {
+       // accept('hint', 'What do the isntances that comprise the dataset represent(for example, documents, photos, people, countries)', { node: type, property: 'description' });
         accept('hint', 'How many instances are there in total?', { node: type, property: 'numberInst' });
     }
        

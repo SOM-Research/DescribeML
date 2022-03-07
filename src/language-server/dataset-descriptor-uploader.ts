@@ -45,10 +45,10 @@ export class DatasetUploader implements Uploader {
         // Can we count the number of empty or NANs values in a attibute column?
         let body:string= `
             Instance:  ${filepath.split("\\").pop()?.split(".")[0]}
-            \tdescription \"Describe the instance\"
-            \ttype raw
-            \ttotal number ${numberofResults}
-            \twithAttributes:\n`;
+            \tDescription \"Describe the instance\"
+            \tType: Record_Data
+            \tNumber Of attributes: ${numberofResults}
+            \tComposition:\n`;
 
         headers.forEach((attr, index) => {
             // Can we calculate attribute completeness?
