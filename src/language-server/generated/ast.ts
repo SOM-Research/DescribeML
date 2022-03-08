@@ -46,6 +46,7 @@ export function isAnnotators(item: unknown): item is Annotators {
 }
 
 export interface Area extends AstNode {
+    readonly $container: GeneralInfo;
     area: Array<string>
     name: 'Area:'
 }
@@ -84,6 +85,7 @@ export function isAuthor(item: unknown): item is Author {
 }
 
 export interface Authoring extends AstNode {
+    readonly $container: Declaration;
     autohring: Array<Authors>
     founding: Array<Founders>
     licence: string
@@ -231,8 +233,9 @@ export function isDataTypeConstraints(item: unknown): item is DataTypeConstraint
 
 export interface Declaration extends AstNode {
     readonly $container: DescriptionDataset;
+    authoring: Authoring
     composition: Composition
-    metainfo: GeneralInfo
+    generalinfo: GeneralInfo
     name: string
     provenance: DataProvenance
     socialConcerns: SocialConcerns
@@ -294,13 +297,15 @@ export function isFounders(item: unknown): item is Founders {
 
 export interface GeneralInfo extends AstNode {
     readonly $container: Declaration;
+    area: Area
     citation: string
     description: string
     descriptionGaps: string
     descriptionpurpose: string
     descriptionTasks: string
-    id: string
-    name: 'General information:'
+    ident: string
+    name: 'Metadata:'
+    tags: Tags
     title: string
     version: string
 }
@@ -316,7 +321,7 @@ export interface Instance extends AstNode {
     attributes: Array<Attribute>
     complet: number
     descript: string
-    labels: string
+    labels?: Reference<Labels>
     name: string
     numIns: number
     offDiscussion: string
@@ -540,6 +545,7 @@ export function isSocialConcerns(item: unknown): item is SocialConcerns {
 }
 
 export interface Tags extends AstNode {
+    readonly $container: GeneralInfo;
     name: 'Tags:'
     tags: Array<string>
 }
@@ -576,7 +582,7 @@ export type AnnotationType = 'Bounding boxes' | 'Lines and splines' | 'Semantinc
 
 export type datasetDescriptorAstType = 'AccuracyRq' | 'Annotator' | 'Annotators' | 'Area' | 'Attribute' | 'Author' | 'Authoring' | 'Authors' | 'Binary' | 'Categor' | 'CompletnessRq' | 'Composition' | 'ConsistencyRq' | 'DataProvenance' | 'DataSource' | 'DataSources' | 'DataTypeConstraints' | 'Declaration' | 'Dependencies' | 'DescriptionDataset' | 'Founder' | 'Founders' | 'GeneralInfo' | 'Instance' | 'Instances' | 'IntegrityRules' | 'Labels' | 'Maintainer' | 'Maintenance' | 'MandatoryConstraints' | 'Numeri' | 'Privacy' | 'RangeConstraints' | 'Relation' | 'RelationInstances' | 'Requeriment' | 'Requeriments' | 'Semantic' | 'Sintactic' | 'SocialConcerns' | 'Tags';
 
-export type datasetDescriptorAstReference = 'DataTypeConstraints:att' | 'Instance:senseAtt' | 'Labels:map' | 'MandatoryConstraints:att' | 'Privacy:priva' | 'RangeConstraints:att' | 'Relation:attRel' | 'Relation:attRelTarget' | 'Relation:insRel' | 'Requeriment:reporter' | 'Semantic:attObject' | 'Sintactic:attObject' | 'Sintactic:attTarget';
+export type datasetDescriptorAstReference = 'DataTypeConstraints:att' | 'Instance:labels' | 'Instance:senseAtt' | 'Labels:map' | 'MandatoryConstraints:att' | 'Privacy:priva' | 'RangeConstraints:att' | 'Relation:attRel' | 'Relation:attRelTarget' | 'Relation:insRel' | 'Requeriment:reporter' | 'Semantic:attObject' | 'Sintactic:attObject' | 'Sintactic:attTarget';
 
 export class datasetDescriptorAstReflection implements AstReflection {
 
@@ -603,6 +609,9 @@ export class datasetDescriptorAstReflection implements AstReflection {
         switch (referenceId) {
             case 'DataTypeConstraints:att': {
                 return Attribute;
+            }
+            case 'Instance:labels': {
+                return Labels;
             }
             case 'Instance:senseAtt': {
                 return Attribute;

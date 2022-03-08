@@ -60,13 +60,25 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
           },
           {
             "$type": "Assignment",
-            "feature": "metainfo",
+            "feature": "generalinfo",
             "operator": "=",
             "terminal": {
               "$type": "RuleCall",
               "arguments": [],
               "rule": {
                 "$refText": "GeneralInfo"
+              }
+            }
+          },
+          {
+            "$type": "Assignment",
+            "feature": "authoring",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "Authoring"
               }
             }
           },
@@ -123,7 +135,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "operator": "=",
             "terminal": {
               "$type": "Keyword",
-              "value": "General information:"
+              "value": "Metadata:"
             },
             "elements": []
           },
@@ -149,7 +161,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
           },
           {
             "$type": "Assignment",
-            "feature": "id",
+            "feature": "ident",
             "operator": "=",
             "terminal": {
               "$type": "RuleCall",
@@ -295,29 +307,32 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             ]
           },
           {
-            "$type": "RuleCall",
-            "arguments": [],
-            "rule": {
-              "$refText": "Area"
+            "$type": "Assignment",
+            "feature": "area",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "Area"
+              }
             },
             "elements": [],
             "cardinality": "?"
           },
           {
-            "$type": "RuleCall",
-            "arguments": [],
-            "rule": {
-              "$refText": "Tags"
+            "$type": "Assignment",
+            "feature": "tags",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "Tags"
+              }
             },
             "elements": [],
             "cardinality": "?"
-          },
-          {
-            "$type": "RuleCall",
-            "arguments": [],
-            "rule": {
-              "$refText": "Authoring"
-            }
           }
         ]
       }
@@ -1199,10 +1214,9 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                 "feature": "labels",
                 "operator": "=",
                 "terminal": {
-                  "$type": "RuleCall",
-                  "arguments": [],
-                  "rule": {
-                    "$refText": "STRING"
+                  "$type": "CrossReference",
+                  "type": {
+                    "$refText": "Labels"
                   }
                 }
               }
