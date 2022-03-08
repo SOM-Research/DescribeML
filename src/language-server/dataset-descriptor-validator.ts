@@ -44,8 +44,8 @@ export class DatasetDescriptorValidator {
         accept('hint', '1 - Who founded the creation of the dataset?\n2 - If is there any associated grant, please provide the number and the name of the grantor and the gran name and number', { node: type, property:'name' });
     }
     hintsOfAuthoring(type: Authoring, accept: ValidationAcceptor): void {
-        // accept('hint', 'What do the isntances that comprise the dataset represent(for example, documents, photos, people, countries)', { node: type, property: 'description' });
-         accept('hint', 'How many instances are there in total?', { node: type, property:'autohring' });
+        
+         accept('hint', 'Who is the author of the dataset?', { node: type, property:'name' });
      }
     
     hintsofMaintenance(type:Maintenance, accept: ValidationAcceptor): void {
@@ -57,7 +57,7 @@ export class DatasetDescriptorValidator {
     }
 
     hintOfComposition(type: Composition, accept: ValidationAcceptor): void {
-       // accept('hint', 'What do the isntances that comprise the dataset represent(for example, documents, photos, people, countries)', { node: type, property: 'description' });
+        accept('hint', 'What do the instances that comprise the dataset represent(for example, documents, photos, people, countries)', { node: type, property: 'compodesc' });
         accept('hint', 'How many instances are there in total?', { node: type, property: 'numberInst' });
     }
        

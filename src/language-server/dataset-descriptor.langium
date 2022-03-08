@@ -5,20 +5,21 @@ entry DescriptionDataset:
 
 Declaration:
  'Dataset:' name=ID 
-  metainfo=GeneralInfo  
+  generalinfo=GeneralInfo
+  authoring=Authoring  
   composition=Composition 
   socialConcerns=SocialConcerns
   provenance=DataProvenance;
-  //req=Requeriments;
+
 
 
 //
 // Authoring
 //
 GeneralInfo:
-     name='General information:'
+     name= 'Metadata:'
      'Title:' title=STRING 
-     'Unique-identifier:' id=ID
+     'Unique-identifier:' ident=ID
      'Version:' version=ID 
      'Description:' 
         (description=STRING | 
@@ -26,9 +27,8 @@ GeneralInfo:
          ('Tasks:' descriptionTasks=STRING)? 
          ('Gaps:' descriptionGaps=STRING)?  
          ('Citation:' citation=STRING)?)) 
-     (Area)?
-     (Tags)?
-     Authoring;
+     (area=Area)?
+     (tags=Tags)?;
    
 Area:
     name='Area:' area+=ID;
@@ -38,7 +38,7 @@ Authoring:
     name= 'Authoring:' 
      (autohring+=Authors
         founding+= (Founders)?
-        'License Information:' licence = STRING // Aquí podriem aportar més ajuda sobre llicencies
+        'License Information:' licence = STRING 
         maintenance+=Maintenance);
 Authors: 
     name='Authors:'  (authors+=Author*);
@@ -90,7 +90,7 @@ Instance:
     ('Sparsity:' sparsity=NUMBER)?
     ('Completness:' complet=NUMBER)?
     ('Number of Records:' records=NUMBER)?
-    ('Associated Labels:' labels=STRING)?
+    ('Associated Labels:' labels=[Labels])?
     ('Composition:' (attributes+=Attribute)*)?
     ('Integrity rules:' (rules+=IntegrityRules)*)? 
     ('Instance belongs to people:' 
