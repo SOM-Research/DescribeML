@@ -61,12 +61,12 @@ export class DocumentationGenerator implements Generator {
                 <th>email</th>
                 </tr>
                 <tr>
-                <td>${DescriptionDataset.elements[0].authoring.autohring[0].authors[0].name}</td>
-                <td>${DescriptionDataset.elements[0].authoring.autohring[0].authors[0].email}</td>
+                <td>${DescriptionDataset.elements[0].generalinfo.authoring.authors[0].authors[0].name}</td>
+                <td>${DescriptionDataset.elements[0].generalinfo.authoring.authors[0].authors[0].email}</td>
                 </tr>
                 <tr>
-                <td>${DescriptionDataset.elements[0].authoring.autohring[0].authors[1].name}</td>
-                <td>${DescriptionDataset.elements[0].authoring.autohring[0].authors[1].email}</td>
+                <td>${DescriptionDataset.elements[0].generalinfo.authoring.authors[0].authors[1].name}</td>
+                <td>${DescriptionDataset.elements[0].generalinfo.authoring.authors[0].authors[1].email}</td>
                 </tr>
             </table>
         </div>

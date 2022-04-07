@@ -1,0 +1,164 @@
+Dataset: Melanoma_Classification_Dataset 
+    Metadata: 
+        Title: "2020 SIIM-ISIC Melanoma Classification Challenge Dataset " 
+        Unique-identifier: melanoma202
+        Version: v0001  
+        Description:
+            Purpose:
+                "The 2020 SIIM-ISIC Melanoma Classification challenge dataset
+                    was created for the purpose of conducting a machine learning
+                    competition to identify melanoma in lesion images." 
+            Tasks:
+                "Classification"
+            Gaps:    
+                "As the leading healthcare organization for informatics in medical imaging,
+                    the Society for Imaging Informatics in Medicine (SIIM)'s mission is to 
+                    advance medical imaging informatics through education, research, and 
+                    innovation in a multi-disciplinary community. SIIM is joined by the 
+                    International Skin Imaging Collaboration (ISIC), an international effort
+                    to improve melanoma diagnosis. "  
+
+            Citation: 
+                "International Skin Imaging Collaboration. SIIM-ISIC 2020 Challenge Dataset. International Skin Imaging Collaboration https://doi.org/10.34970/2020-ds01 (2020)."
+        Area:
+            HealthCare
+        Tags:
+            Images Melanoma diagnosis Skin Image 
+    
+    Authoring:
+        Authors:
+            Name Anant_Bhardwaj email "email@email.com"
+            Name Souvik_Bhattacherjee	email "email@email.com"
+        Founders:
+            Name International_Skin_Imaging_Collaboration  type mixed grantor "EEUU" grantId: miID
+            License Information: "Non-comercial. The dataset is licensed under CC-BY-NC, which allows non-commercial use with attribution." 
+        Maintenance:
+            Maintainer:
+                Name Mantainer1Name email "email@email.com"
+            Erratum? "There is no erratum" 
+            Contribution guides: "No contribution guidelines provided"
+
+    Composition:
+        Description: "There is one instance that represent images from skin of patatients in coalition with some labels identifyng the patient"
+        Total number of instances: 12023
+        Instances:
+              Instance:  skinImages
+                Description: "Skin images"
+                Type: Record_Data
+                Number of attributes: 10
+                Completness: 100
+                Number of Records: 12023
+                Associated Labels: diagnosis1
+                Composition: 
+                    attribute: ImageId
+                        description: 'ID of the images'
+                        completness: 100
+                        count: 12023
+                        ofType: Categorical   
+
+                    attribute: patientID
+                        description: 'ID of patients'
+                        completness: 100
+                        count: 12023
+                        ofType: Categorical    
+                
+                    attribute: lesionID
+                            description: 'ID of the medical staff'
+                            completness: 100
+                            count: 12023
+                            ofType: Categorical 
+
+                    attribute: sex   
+                        description: 'sex of the patient'
+                        completness: 100
+                        count: 12023
+                        ofType: Categorical
+                                Mode: "Famela"
+                                Categoric Distribution:
+                                    "Male: 40%
+                                    Famela: 55%
+                                    Non-binay: 5%"
+                    
+                    attribute: age  
+                        description: 'age of the patient'
+                        completness: 100
+                        count: 12023
+                        ofType: Numerical
+                                Mean: 34
+                                Median: 32
+                                Standard Desviation: 0.2
+                                Minimmum: 5
+                                Maximmum: 87
+                                Quartiles: '1º: 17 || 2º: 27 ||  3º:30 || 4º: 30'
+                                IQR: 1.2
+          
+                    attribute: anatom_site_general_challenge
+                        description: 'description of body zone of the image'
+                        completness: 99
+                        count: 11893
+                        ofType: Categorical
+                                Mode: "Chest"
+
+                    attribute: diagnosis
+                        description: 'previous diagnosis from medical hisotry'
+                        completness: 1
+                        count: 234
+                        ofType: Categorical
+                                Mode: "uknowm"
+
+                    attribute: beningnant_malignant
+                        description: 'Type of the melanoma'
+                        completness: 99
+                        count: 12002
+                        ofType: Categorical
+                                Categoric Distribution:
+                                    "beningnant: 80%
+                                    malignant: 20%"
+
+        Data Splits:
+            "Trainig Data 20%, ...." 
+
+    Social Concerns: 
+        Privacy:
+            Legal Issues: "attributes age and sex, form instance skinImages have legal concerns in terms of privacy"
+            Attributes affected: diagnosis, beningnant_malignant
+
+        Social Impact:
+            "The unbalanced classes in terms of skin color may be offensive for minority groups"
+
+        Bias discussion:
+            "As the images have en inherent color and etnicity, this can compromise the results of future classificators
+            Color of skin is unbalanced: 
+                white: 70%
+                black: 30%"
+
+    Data Provenance:
+        Curation Rationale: 
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                It has survived not only five centuries, but also the leap into electronic typesetting, 
+                remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing " 
+        
+        Data Sources: 
+                Source: GeneralHospital1
+                Description: "This a description of the source"
+                How data is collected: "Manual Human Curators" 
+                Who collects the data: "Others: Medical staff from the general hospital"
+                Noise Sources: "Picture where taken with a camera that could have Noise"
+                Privacy: "All patients have signed a consent of individuals, and ca be acceses here consent@consent.comercial"
+
+        Annotation Processes: 
+            Annotator process: Annotation1
+            Description: "Medical staff looking at the data and images and annotiating the diagnosis"
+            Type: Image and video annotations
+            Labels: 
+                Label: diagnosis1  
+                    Description: "marked as beningnant or malignant"
+                    Mapping: beningnant_malignant
+            Who annotates the data: "Internals: Medical staff" 
+            Process Requeriments "No specific requeriments."
+
+
+        
+               

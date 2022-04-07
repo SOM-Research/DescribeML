@@ -6,7 +6,6 @@ entry DescriptionDataset:
 Declaration:
  'Dataset:' name=ID 
   generalinfo=GeneralInfo
-  authoring=Authoring  
   composition=Composition 
   socialConcerns=SocialConcerns
   provenance=DataProvenance;
@@ -27,8 +26,11 @@ GeneralInfo:
          ('Tasks:' descriptionTasks=STRING)? 
          ('Gaps:' descriptionGaps=STRING)?  
          ('Citation:' citation=STRING)?)) 
+     (uses=Uses)?
+     (distribution=Distribution)?
      (area=Area)?
-     (tags=Tags)?;
+     (tags=Tags)?
+      authoring=Authoring  ;
    
 Area:
     name='Area:' area+=ID;
@@ -36,7 +38,7 @@ Tags:
     name='Tags:' (tags+=ID)*;
 Authoring:
     name= 'Authoring:' 
-     (autohring+=Authors
+     (authors+=Authors
         founding+= (Founders)?
         'License Information:' licence = STRING 
         maintenance+=Maintenance);
@@ -63,7 +65,17 @@ Maintenance:
 Maintainer:
     'Name' name=ID 'email' email=STRING;
 
-
+Distribution:
+    name="Distribution:"
+    ("Is public?:" public=ID)?
+    ("How is distributed:" past=STRING)?  
+    ("Distribution license:" past=STRING)?;
+Uses:
+    name="Uses:"
+    ("Past Uses:" past=STRING)?
+    ("Recommneded Uses:" recommend=STRING)?
+    ("Non-recommended Uses:" future=STRING)?
+    ("Uses repository:" repo=STRING)?;
 //
 // Dataset Composition 
 //
@@ -73,31 +85,46 @@ Maintainer:
      ('Total number of instances:' numberInst=NUMBER)? 
      (instances += Instances)*
      (relation=RelationInstances)?
-     ('Privacy:' privacy=Privacy)? 
      ('Dependencies:' dependencies=Dependencies)? 
+    ('Is sample:' sample=STRING)?
      ('Data Splits:' splits=STRING)?;
 
 
 Instances:
     name='Instances:' (instances+=Instance)*;
 
-// Instances definition
+// Instance definition
 Instance: 
+    // Qualitative
     'Instance:' name=ID 
     'Description:' descript=STRING 
     'Type:'  type=InsType  
     ('Number of attributes:' numIns=NUMBER)?
-    ('Sparsity:' sparsity=NUMBER)?
-    ('Completness:' complet=NUMBER)?
+    ('Related Labels:' labels=[Labels])?
     ('Number of Records:' records=NUMBER)?
-    ('Associated Labels:' labels=[Labels])?
-    ('Composition:' (attributes+=Attribute)*)?
-    ('Integrity rules:' (rules+=IntegrityRules)*)? 
-    ('Instance belongs to people:' 
-        'Have sensitive attributes?' ('attribute:' senseAtt=[Attribute])*
-        'Are there protecte groups?' procGroups=STRING
-        'Might be offensive' offDiscussion=STRING
-    )?;
+    ('Attributes:' (attributes+=Attribute)*)?
+
+    // Statistical
+    ((statistics+=InstanceStatistics)*)?
+
+    // Quality
+    ((dataQuality+=DataQuality)*)?
+    ('Consistency rules:' (rules+=IntegrityRules)*)? 
+   ;
+
+InstanceStatistics:
+    name="Instance Statistics:"
+    (('Pair Plot:' plot+=STRING)*)?;
+
+DataQuality:
+    name="Data Quality:"
+    ('Sparsity:' sparsity=NUMBER)?
+    ('Compeletness:' complet=NUMBER)?
+    ('Class Balance' balance=STRING)?
+    ('Noisy labels' noisy=STRING)?
+    ;
+IntegrityRules:
+    'Description:' desc=STRING;
 
 Attribute:
     'attribute:' name=ID 
@@ -128,8 +155,7 @@ Numeri:
     ('IQR:' iqr=NUMBER)?
     ;
 
-IntegrityRules:
-    'Description:' desc=STRING;
+
 
 // Relation between Instances
 RelationInstances:
@@ -143,23 +169,32 @@ Relation:
 
 // Dependencies
 Dependencies:
-        'Links:' 
+        "Description:" desc=STRING
+        ('Links:' 
             'Complete archival version:' archival=STRING
             'Restriction:' restriction=STRING
-            'Rate Limit Usage:' limit=STRING;
+            'Rate Limit Usage:' limit=STRING)?;
 
 
 SocialConcerns:
     name='Social Concerns:'
     ('Privacy:' privacy+=Privacy)?
+    ('Sensitive Data:' sensitive = SensitiveData)?
     ('Social Impact:' impact=STRING)?
     ('Bias discussion:' bias=STRING)?
     ;
 
+SensitiveData:
+    ('Description:' desc=STRING)?
+    ('Instance belongs to people:' 
+        ('Have sensitive attributes?' ('attribute:' senseAtt=[Attribute])*)?
+        ('Are there protecte groups?' procGroups=STRING)?
+        ('Might be offensive' offDiscussion=STRING)?)?
+    ;
 // Privacy
 Privacy: 
         'Legal Issues:' legal=STRING
-        'Attributes affected:' (priva=[Attribute] (',')?)*;
+        ('Attributes affected:' (priva=[Attribute] (',')?)*)?;
 
 
 // Provenance
@@ -175,16 +210,17 @@ DataSources:
 DataSource:
     'Source:' name=ID
     'Description:' desc=STRING
+    'Related Instances:' (mapInstance=[Instance] (',')?)*
     'How data is collected:' how=STRING
     'Who collects the data:' who=STRING
     'Noise Sources:' noise=STRING
     'Privacy:' priv=STRING;
 
 Annotators: 
-    name='Annotation Processes:' (annotations+=Annotator);
+    name='Data Preprocessing:' (annotations+=Annotator);
 
 Annotator:
-    'Annotator process:' name=ID
+    'Labeling process:' name=ID
     'Description:' desc=STRING
     'Type:' type=AnnotationType
     ('Labels:' (Labels)*)?
