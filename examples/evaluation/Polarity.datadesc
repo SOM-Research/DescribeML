@@ -211,4 +211,4 @@ Dataset: Polarity
                 from the star rating"
             Mapping: tag
             Who annotates the data: "320 voluunteer reviewers"
-            Process Requeriments "The process requeriments"
+            Label Requeriments "The process requeriments"

@@ -213,11 +213,17 @@ DataSource:
     'Related Instances:' (mapInstance=[Instance] (',')?)*
     'How data is collected:' how=STRING
     'Who collects the data:' who=STRING
-    'Noise Sources:' noise=STRING
-    'Privacy:' priv=STRING;
+    ('When data was collected:' when=STRING)?
+    ('Noise Sources:' noise=STRING)?
+    ('Privacy:' priv=STRING)?
+    ('Gather Requeriments' req=STRING)?;
 
 Annotators: 
-    name='Data Preprocessing:' (annotations+=Annotator);
+    name='Data Preprocessing:' (annotations+=Annotator | preprocess+=PreProcess)*;
+
+PreProcess:
+    'Preprocess id:' name=ID
+    'Description:' desc=STRING;
 
 Annotator:
     'Labeling process:' name=ID
@@ -225,7 +231,7 @@ Annotator:
     'Type:' type=AnnotationType
     ('Labels:' (Labels)*)?
     'Who annotates the data:' who=STRING
-    'Process Requeriments' req=STRING;
+    ('Label Requeriments' req=STRING)?;
 
 Labels:
     'Label:' name=ID

@@ -243,4 +243,4 @@ Dataset: Gender
                     than one entity person code as 1(1), 1(0), 1(2) are provided "
             Mapping: Person_annotation
             Who annotates the data: "The two authors"
-            Process Requeriments "The annotation was performed by TagEditor software: https://github.com/d5555/TagEditor"
+            Label Requeriments "The annotation was performed by TagEditor software: https://github.com/d5555/TagEditor"
