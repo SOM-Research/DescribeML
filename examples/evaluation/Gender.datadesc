@@ -1,0 +1,246 @@
+Dataset: Gender
+    Metadata:
+        Title: "Gender Inclusive Coreference Dataset" 
+        Unique-identifier: Gender_Inclusive_Dataset
+        Version: v0001
+        Description:  
+            Purpose: 
+                "This dataset was created to study coreference resolution in English on documents discussing people who are,
+                 in some ways, gender-variant (and generally selected so that this variance shows up linguistically).
+                 Previously coreference resolution datasets contain nearly no such examples, largely due to the ways in 
+                 which those datasets were collected (see paper for details)." 
+            Tasks: "Classification" 
+            Gaps: 
+                "As part of a study making coreference systems more gender inclusive, we collected and annotated a dataset
+                of documents by and about non-binary and binary trans people"
+        Citation: 
+            "@inproceedings{cao2019toward,
+                title={Toward Gender-Inclusive Coreference Resolution},
+                author={Yang Trista Cao and Hal Daum{\'e}},
+                booktitle={Proceedings of the Conference of
+                           the Association for Computational Linguistics (ACL)},
+                year={2020},
+                note={abs/1910.13913}
+              }"
+        Uses: 
+            Past Uses: "The dataset has been used to understand human annotation
+             biases and to test existing coreference systems. See the paper linked at the top for more details."
+               
+            Recommneded Uses:
+                "The dataset could possibly be used for developing or testing systems for referring expression generation."
+            Non-recommended Uses:
+                "This dataset should not be used for any sort of 'gender prediction.'' First, anyone using this dataset 
+                (or any related dataset, for that matter), should recognize that 'gender' doesn't mean any single thing,
+                and furthermore that pronoun != gender. Furthermore, because of the fluid and temporal notion of gender-
+                -and of gendered referring expressions like pronouns and terms of address--just because a person is
+                described in this dataset in one particular way, does not mean that this will always be the appropriate
+                way to refer to this person."
+        Distribution: 
+            Is public?: yes
+            How is distributed: 
+                "The dataset is free for download at github.com/hal3/gicoref-dataset. 
+                The dataset is distributed as of June 2020 in its first version."
+            Distribution license: 
+                "The dataset is licensed under a BSD license."
+        Area: Gender
+        Tags: Conference Trans NonBinary Inclusive
+        Authoring:
+            Authors:
+                Name Yang_Trista_Cao email "XXXX@email.com"
+                Name Hal_Daume_III	email "XXXX@email.com"
+            Founders:
+                Name UMD_CS_department type mixed
+                Name MSR type private 
+            License Information: 
+                    "The dataset is licensed under a BSD license." 
+            Maintenance:
+                Maintainer:
+                    Name Yang_Trista_Cao email "XXXX@email.com"
+                    Name Hal_Daume_III email "XXXX@gmail.com"
+                Erratum? 
+                    "Currently, no. As errors are encountered, future versions of the dataset
+                    may be released (but will be versioned). They will all be provided in the same github location."
+                Version support 
+                    "All data will be versioned."
+                Contribution guides: 
+                    "Errors may be submitted via the bugtracker on github. More extensive augmentations may be accepted at the authors' discretion."
+
+    Composition:
+         Description: 
+            "Each instance is an English document, annotated with coreference links only for person entities.
+             In particular, each entity is a set of mentions, which are annotated as contiguous text spans. 
+             Each mention is assigned a numeric identifier to group them into mentions that all refer to the same entity."
+         Total number of instances: 95
+
+         Instances: 
+                Instance: AnnotatedDocuments
+                     Description: 
+                        "Each instance consists of text that has been sentence separated, tokenized, and annotated with mentions and entity identifiers. It is in a CoNLL-style format with bracketing for entities"
+                     Type: Record_Data
+                     Number of attributes: 2
+                     Related Labels: Entity_Person_Annotation
+                     Attributes:
+                        attribute: document
+                            description: "The text workd analyzed " 
+                            completness: 100 
+                            count: 65440
+                            ofType: Categorical
+                        attribute: Person_annotation
+                            description: "Word tagged as an people entity (note that a word could reference to more than one people) " 
+                            completness: 100
+                            count: 65440
+                            ofType: Categorical 
+                Data Quality:
+                    Sparsity: 8.9 // Note that sparsity is so low! this is important to ML
+                    Compeletness: 100
+                    Class Balance "There is no analysis about class balance"
+                    Noisy labels "Please considers some humans errors in the annotation process could be done"
+
+                
+                Dependencies: 
+                    Description: "The dataset is entirely self-contained."
+                Is sample: 
+                    "It is a sample of all possible documents. It is not intended to be representative 
+                    (in fact, it is known to be quite non-representative): it was specifically designed 
+                    to focus on documents that contains mentions of people whose gender in some way does 
+                    not fall within the gender binary."     
+                Data Splits: 
+                    "We expect this data to be used solely for testing purposes.
+
+                    We do not explicitly provide a training/validation/testing split;
+                    however, we recognize that people may wish to do this, or to do some
+                    form of cross-validation. We would suggest cross-validation given that 
+                    some phenomena only occur in a few documents, and are likely to be lost in any random split.
+                    
+                    Warning: If you do use any of the data for training/testing, either
+                    in a cross-validation setup or otherwise, you may wish to be careful to ensure 
+                    that documents on very similar topics are always in the same split. For instance, 
+                    there are two documents about Leslie Feinberg in the dataset; you should ensure that 
+                    these are in the same split or evaluation scores are likely to be inflated." 
+                
+
+     Social Concerns:
+         Privacy:
+            Legal Issues: 
+                "No; all raw data in the dataset is from public sources (Wikipedia, online periodicals,
+                or online open fan-fiction). This is not explicitly identified, though many of the articles 
+                explicitly mention the gender of the people described/discussed. Yes; their names are given in running text."
+            Attributes affected: document
+        Sensitive Data: 
+            Description: 
+                "All documents deal with people, some of whom have had traumatic events in their 
+                lives that are discussed, particularly around their gender identities. All should be read with 
+                that in mind. Some of the articles, especially from fan-fiction, have explicit and intentional 
+                misgendering of characters, and a few describe (or hint out) intimate relationships (though we 
+                filtered for only stories that did not have 'adult themes')."  
+            Instance belongs to people:
+                Are there protecte groups? "Yes, most of the articles relate to real people (except the fan-fiction articles)."
+                Might be offensive "The gender information given may be sensitive in certain situations, at least for those 
+                articles dealing with real people. However, all these articles are from either Wikipedia or periodicles, 
+                and is therefore already public information."
+
+        Social Impact: 
+            "While the dataset was specifically constructed to be gender inclusive, it undoubtedly
+            fails in some ways to full achieve that goal. Part of this is due to the nature of the
+            underlying texts (eg, Wikipedia's frequent use of deadnames) and part of it is due to
+            plain difficulties in collection (automatically distinguishing specific singular uses
+            of 'they' from other uses is currently not possible, and so despite 'they' being
+            currently, likely, the most commonly used non-binary pronoun, it is perhaps underrepresented
+            in this dataset). Preprocessing hopefully did not introduce errors (in fact, we
+            corrected for many tokenization errors, for instance, that the default tokenizer
+            did not know to split 'xe'll' into two tokens as it would 'she'll')."
+        Bias discussion: 
+            "All of these sources have their own biases. Wikipedia texts tend to overuse people's deadnames,
+            and tend to treat a person's use of pronouns as a 'surprise' at the end of the document. 
+            As mentioned above, the periodical documents are specifically constrained to contain certain pronouns.
+             And the AO3 stories are also specifically selected to have non-binary pronouns."
+
+
+     Data Provenance:
+         Curation Rationale: 
+            "The data was all downloaded directly from associated webpages (Wikipedia, periodicals, or AO3).
+             Tokenization and sentence segmentation was initially done automatically but corrected by hand.
+             
+             Finally, to make annotation more feasible, we truncated every document at 1000 space-separated 
+             'words' prior to tokenization, so after tokenization, the documents may be somewhat longer than 
+             1000 tokens. Finally, there were three documents which we forgot to truncate, and so made their 
+             way into the dataset at full length (these are all from AO3)."
+          Data Sources:
+
+            Source: Wikipedia
+                Description:
+                    "The first are articles on English Wikipedia, in particular drawn from Wikipedia's List of People
+                    with Non-binary Gender Identities. These documents comprise about 2/3 of the dataset." 
+                Related Instances: AnnotatedDocuments
+                How data is collected: "Web crawling"
+                Who collects the data: "Authors"
+                Noise Sources: "See potential impact in social section" 
+                Privacy: 
+                "Individuals were not aware of data collection. The data was crawled from public web sources,
+                and the authors of the posts presumably knew that their posts would be public, but the authors 
+                were not explicitly informed that their posts were to be used in this way."
+
+            Source: Periodicals
+                Description:
+                    "The second are articles from periodicals which provide coverage of LGBTQ+ issues or are 
+                    aimed at the LGBTQ+ community, mostly drawn from Wikipedia's List of LGBT Periodicals. 
+                    These were collected by issuing a number of search queries to Google of the form site:sss 
+                    ppp, where sss is the webpage for one of the periodicals, and ppp is a non-binary pronoun 
+                    from the set {ze+hir, ze+zir, xey+xem, ey+em, zey+zem, xe+xir}. The top ten results from 
+                    each site was read by one of the authors to ensure that the use of ppp was actually a use 
+                    of that pronoun, and included if so. Note that because these articles were specifically 
+                    returned as a result of queries for that specific set of six neo-pronoun pairs, this part of
+                    the data is unlikely to include many examples of other pronouns, and few examples of singular 
+                    they. The complete set of periodicals searched were: thetransgentimes.com digitaltransgenderarchive.net
+                    ifge.org lotl.com qnews.com.au starobserver.com.au dailyxtra.com fugues.com wayves.ca thebuzzmag.ca 
+                    pinkplaymags.com pink-pages.co.in attitude.co.uk mag.bent.com divamag.co.uk fyne.co.uk gaytimes.co.uk
+                    pridelife.com boyz.co.uk scotsgay.co.uk connextionsmagazine.com curvemag.com hellomrmag.com
+                    instinctmagazine.com lavendermagazine.com metrosource.com omgmag.com out.com therainbowtimesmass.com
+                    rfdmag.org pride.com travelsofadam.com plentitudemagazine.ca, though in the end we only
+                    found/included documents from The Advocate, The DailyXtra, DigitalTrans, GLReview,
+                    LambdaLiterary and Lavender. These documents comprise about 1/6 of the dataset." 
+                Related Instances: AnnotatedDocuments
+                How data is collected: "Web crawling"
+                Who collects the data: "Authors"
+                Noise Sources: "See potential impact in social section" 
+                Privacy: 
+                "Individuals were not aware of data collection. The data was crawled from public web sources,
+                and the authors of the posts presumably knew that their posts would be public, but the authors 
+                werenot explicitly informed that their posts were to be used in this way."  
+    
+            Source: AO3
+                Description:
+                    "The third are fan-fiction stories drawn from Archive Of Our Own (AO3), a fan-fiction site created
+                    and run by fans, which includes a large number of stories centering around binary and non-binary trans
+                    characters. We selected stories by first considering the Gender-Neutral Pronouns tag (around 3700 stories),
+                    and then filtering the results to include only General Audience stories (vs, eg, 'Mature'), to icnlude 
+                    only No Archive Warnings Apply (vs, eg, 'Graphic Descriptions of Violence' or non-consentual sex), and
+                    limited the results to 'Complete Works Only.'' After that, we sorted the remaining approximately 900 
+                    stories by word count, and took the shortest ones that were actually stories (some were descriptions
+                    of audiobooks). These documents comprise about 1/6 of the dataset." 
+                Related Instances: AnnotatedDocuments
+                How data is collected: "Web crawling"
+                Who collects the data: "Authors"
+                Noise Sources: "See potential impact in social section" 
+                Privacy: 
+                    "Individuals were not aware of data collection. The data was crawled from public web sources,
+                    and the authors of the posts presumably knew that their posts would be public, but the authors 
+                    werenot explicitly informed that their posts were to be used in this way."  
+
+         Data Preprocessing: 
+            Labeling process: Labeling1
+            Description: 
+                "Our annotation process was for the authors to first independently annotate the same five
+                documents (all Wikipedia), then compare and discuss differences in annotation in an adjudication process.
+                We then independently annotated the rest of the documents, followed by a final adjudication step. 
+                The pre-adjudication documents are also included."
+            Type: Entity annotation
+            Labels:
+                Label: Entity_Person_Annotation
+                Description: 
+                    "The labels are generated with the TagEditor software, and tag the workd referencing entity persons.
+                    A numerical order has been used to identify other reference to the same entity. In case of word referencias more 
+                    than one entity person code as 1(1), 1(0), 1(2) are provided "
+            Mapping: Person_annotation
+            Who annotates the data: "The two authors"
+            Process Requeriments "The annotation was performed by TagEditor software: https://github.com/d5555/TagEditor"
