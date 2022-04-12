@@ -112,32 +112,32 @@ Dataset: Polarity
                      Attributes:
                         attribute: fold_id
                             description: "Folder Id containing the text inside the dataset " 
-                            completness: 100 
+                            completeness: 100 
                             count: 64702
                             ofType: Categorical
                         attribute: cv_tag
                             description: "Author file id containint the text inside the dataset " 
-                            completness: 100 
+                            completeness: 100 
                             count: 64702
                             ofType: Categorical 
                         attribute: html_id
                         description: "Author file ID separated by pos and negative labels " 
-                          completness: 100 
+                          completeness: 100 
                           count: 64702 
                           ofType: Categorical 
                         attribute: sent_id
                             description: "Sentence id inside every file " 
-                            completness: 100 
+                            completeness: 100 
                             count: 64702 
                             ofType: Categorical 
                             attribute: text
                         description: "The text extracted from the revies of IMDB " 
-                        completness: 100 
+                        completeness: 100 
                         count: 64702
                         ofType: Categorical 
                         attribute: tag
                           description: "The label annotated by the reviewrs " 
-                          completness: 100 
+                          completeness: 100 
                           ofType: Categorical
                            Categoric Distribution:
                             "pos: 50%
@@ -146,7 +146,7 @@ Dataset: Polarity
                         Pair Plot: "Categorical distribution of attribute tag" 
                     Data Quality:
                             Sparsity: 0
-                            Compeletness: 100
+                            Compeleteness: 100
                             Class Balance "attribute 'tag': 50% positive, 50% negative"
                 
                 Dependencies: 

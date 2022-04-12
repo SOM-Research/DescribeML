@@ -119,7 +119,7 @@ InstanceStatistics:
 DataQuality:
     name="Data Quality:"
     ('Sparsity:' sparsity=NUMBER)?
-    ('Compeletness:' complet=NUMBER)?
+    ('Compeleteness:' complet=NUMBER)?
     ('Class Balance' balance=STRING)?
     ('Noisy labels' noisy=STRING)?
     ;
@@ -130,7 +130,7 @@ Attribute:
     'attribute:' name=ID 
     'description:' attdesc=STRING 
     ('unique:' unique=NUMBER)?
-    ('completness:' completnessAtt=NUMBER)?
+    ('completeness:' completnessAtt=NUMBER)?
     ('count:' completnessAtt=NUMBER)?
     ('ofType:' ((attType=Categor)|(attType=Numeri)))? ;
 
@@ -238,43 +238,6 @@ Labels:
     'Description:' desc=STRING
     'Mapping:' (map=[Attribute] (',')?)*;
 
-
-// Requeriments
-Requeriments:
-    'Requeriments:' requeriments+=(Requeriment)*;
-
-Requeriment:
-     'Requeriment:' name=ID 'reportedby:' reporter=[Author]  action=(AccuracyRq | ConsistencyRq | CompletnessRq);  
-
-AccuracyRq:
-    'Accuracy Requeriment of' typeAcc=(DataTypeConstraints | RangeConstraints | MandatoryConstraints);
-
-    DataTypeConstraints:
-        'Data Type:' 
-            'where attribute:' att=[Attribute:QualifiedName] 'is from type:' dataType=DataTypes;
-
-    RangeConstraints:
-        'Range:' 
-            'where attribute:' att=[Attribute:QualifiedName] 'is from' lowrange=NUMBER 'to' highrange=NUMBER;
-
-    MandatoryConstraints:
-        'Mandatory:' 
-            'where attribute:' att=[Attribute:QualifiedName] 'need to:' mandatory=STRING;
-
-ConsistencyRq:
-    'Consisntecy Requeriment of' typeConst=(Sintactic | Semantic);
-
-    Sintactic:
-        'Sintactic:'
-            'where attribute:'  attObject=[Attribute:QualifiedName] 'needs to be:' operation=Operation 'than attribute:' attTarget=[Attribute:QualifiedName];
-
-    Semantic:
-        'Semantic:'
-            'where attribute' attObject=[Attribute:QualifiedName] 'need to have a distribution: of' distribution=STRING;
-
-
-CompletnessRq:
-    'Completness Requeriments of' typeComplet=('Type' |'Column Completness' |'Tuple Completness'| 'Overall Completness' | 'Population Completness');
     
 
 

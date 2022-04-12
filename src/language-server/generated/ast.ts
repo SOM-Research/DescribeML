@@ -7,17 +7,6 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { AstNode, AstReflection, Reference, isAstNode } from 'langium';
 
-export interface AccuracyRq extends AstNode {
-    readonly $container: Requeriment;
-    typeAcc: DataTypeConstraints | RangeConstraints | MandatoryConstraints
-}
-
-export const AccuracyRq = 'AccuracyRq';
-
-export function isAccuracyRq(item: unknown): item is AccuracyRq {
-    return reflection.isInstance(item, AccuracyRq);
-}
-
 export interface Annotator extends AstNode {
     readonly $container: Annotators;
     desc: string
@@ -37,6 +26,7 @@ export interface Annotators extends AstNode {
     readonly $container: DataProvenance;
     annotations: Array<Annotator>
     name: 'Data Preprocessing:'
+    preprocess: Array<PreProcess>
 }
 
 export const Annotators = 'Annotators';
@@ -137,17 +127,6 @@ export function isCategor(item: unknown): item is Categor {
     return reflection.isInstance(item, Categor);
 }
 
-export interface CompletnessRq extends AstNode {
-    readonly $container: Requeriment;
-    typeComplet: 'Type' | 'Column Completness' | 'Tuple Completness' | 'Overall Completness' | 'Population Completness'
-}
-
-export const CompletnessRq = 'CompletnessRq';
-
-export function isCompletnessRq(item: unknown): item is CompletnessRq {
-    return reflection.isInstance(item, CompletnessRq);
-}
-
 export interface Composition extends AstNode {
     readonly $container: Declaration;
     compodesc: Array<string>
@@ -164,17 +143,6 @@ export const Composition = 'Composition';
 
 export function isComposition(item: unknown): item is Composition {
     return reflection.isInstance(item, Composition);
-}
-
-export interface ConsistencyRq extends AstNode {
-    readonly $container: Requeriment;
-    typeConst: Sintactic | Semantic
-}
-
-export const ConsistencyRq = 'ConsistencyRq';
-
-export function isConsistencyRq(item: unknown): item is ConsistencyRq {
-    return reflection.isInstance(item, ConsistencyRq);
 }
 
 export interface DataProvenance extends AstNode {
@@ -214,6 +182,8 @@ export interface DataSource extends AstNode {
     name: string
     noise: string
     priv: string
+    req: string
+    when: string
     who: string
 }
 
@@ -233,18 +203,6 @@ export const DataSources = 'DataSources';
 
 export function isDataSources(item: unknown): item is DataSources {
     return reflection.isInstance(item, DataSources);
-}
-
-export interface DataTypeConstraints extends AstNode {
-    readonly $container: AccuracyRq;
-    att: Reference<Attribute>
-    dataType: DataTypes
-}
-
-export const DataTypeConstraints = 'DataTypeConstraints';
-
-export function isDataTypeConstraints(item: unknown): item is DataTypeConstraints {
-    return reflection.isInstance(item, DataTypeConstraints);
 }
 
 export interface Declaration extends AstNode {
@@ -443,18 +401,6 @@ export function isMaintenance(item: unknown): item is Maintenance {
     return reflection.isInstance(item, Maintenance);
 }
 
-export interface MandatoryConstraints extends AstNode {
-    readonly $container: AccuracyRq;
-    att: Reference<Attribute>
-    mandatory: string
-}
-
-export const MandatoryConstraints = 'MandatoryConstraints';
-
-export function isMandatoryConstraints(item: unknown): item is MandatoryConstraints {
-    return reflection.isInstance(item, MandatoryConstraints);
-}
-
 export interface Numeri extends AstNode {
     readonly $container: Attribute;
     iqr: number
@@ -473,6 +419,18 @@ export function isNumeri(item: unknown): item is Numeri {
     return reflection.isInstance(item, Numeri);
 }
 
+export interface PreProcess extends AstNode {
+    readonly $container: Annotators;
+    desc: string
+    name: string
+}
+
+export const PreProcess = 'PreProcess';
+
+export function isPreProcess(item: unknown): item is PreProcess {
+    return reflection.isInstance(item, PreProcess);
+}
+
 export interface Privacy extends AstNode {
     readonly $container: SocialConcerns;
     legal: string
@@ -483,19 +441,6 @@ export const Privacy = 'Privacy';
 
 export function isPrivacy(item: unknown): item is Privacy {
     return reflection.isInstance(item, Privacy);
-}
-
-export interface RangeConstraints extends AstNode {
-    readonly $container: AccuracyRq;
-    att: Reference<Attribute>
-    highrange: number
-    lowrange: number
-}
-
-export const RangeConstraints = 'RangeConstraints';
-
-export function isRangeConstraints(item: unknown): item is RangeConstraints {
-    return reflection.isInstance(item, RangeConstraints);
 }
 
 export interface Relation extends AstNode {
@@ -523,41 +468,6 @@ export function isRelationInstances(item: unknown): item is RelationInstances {
     return reflection.isInstance(item, RelationInstances);
 }
 
-export interface Requeriment extends AstNode {
-    readonly $container: Requeriments;
-    action: AccuracyRq | ConsistencyRq | CompletnessRq
-    name: string
-    reporter: Reference<Author>
-}
-
-export const Requeriment = 'Requeriment';
-
-export function isRequeriment(item: unknown): item is Requeriment {
-    return reflection.isInstance(item, Requeriment);
-}
-
-export interface Requeriments extends AstNode {
-    requeriments: Array<Requeriment>
-}
-
-export const Requeriments = 'Requeriments';
-
-export function isRequeriments(item: unknown): item is Requeriments {
-    return reflection.isInstance(item, Requeriments);
-}
-
-export interface Semantic extends AstNode {
-    readonly $container: ConsistencyRq;
-    attObject: Reference<Attribute>
-    distribution: string
-}
-
-export const Semantic = 'Semantic';
-
-export function isSemantic(item: unknown): item is Semantic {
-    return reflection.isInstance(item, Semantic);
-}
-
 export interface SensitiveData extends AstNode {
     readonly $container: SocialConcerns;
     desc: string
@@ -570,19 +480,6 @@ export const SensitiveData = 'SensitiveData';
 
 export function isSensitiveData(item: unknown): item is SensitiveData {
     return reflection.isInstance(item, SensitiveData);
-}
-
-export interface Sintactic extends AstNode {
-    readonly $container: ConsistencyRq;
-    attObject: Reference<Attribute>
-    attTarget: Reference<Attribute>
-    operation: Operation
-}
-
-export const Sintactic = 'Sintactic';
-
-export function isSintactic(item: unknown): item is Sintactic {
-    return reflection.isInstance(item, Sintactic);
 }
 
 export interface SocialConcerns extends AstNode {
@@ -651,14 +548,14 @@ export type Social = string
 
 export type AnnotationType = 'Bounding boxes' | 'Lines and splines' | 'Semantinc Segmentation' | '3D cuboids' | 'Polygonal segmentation' | 'Landmark and key-point' | 'Image and video annotations' | 'Entity annotation' | 'Content and text categorization'
 
-export type datasetDescriptorAstType = 'AccuracyRq' | 'Annotator' | 'Annotators' | 'Area' | 'Attribute' | 'Author' | 'Authoring' | 'Authors' | 'Binary' | 'Categor' | 'CompletnessRq' | 'Composition' | 'ConsistencyRq' | 'DataProvenance' | 'DataQuality' | 'DataSource' | 'DataSources' | 'DataTypeConstraints' | 'Declaration' | 'Dependencies' | 'DescriptionDataset' | 'Distribution' | 'Founder' | 'Founders' | 'GeneralInfo' | 'Instance' | 'Instances' | 'InstanceStatistics' | 'IntegrityRules' | 'Labels' | 'Maintainer' | 'Maintenance' | 'MandatoryConstraints' | 'Numeri' | 'Privacy' | 'RangeConstraints' | 'Relation' | 'RelationInstances' | 'Requeriment' | 'Requeriments' | 'Semantic' | 'SensitiveData' | 'Sintactic' | 'SocialConcerns' | 'Tags' | 'Uses';
+export type datasetDescriptorAstType = 'Annotator' | 'Annotators' | 'Area' | 'Attribute' | 'Author' | 'Authoring' | 'Authors' | 'Binary' | 'Categor' | 'Composition' | 'DataProvenance' | 'DataQuality' | 'DataSource' | 'DataSources' | 'Declaration' | 'Dependencies' | 'DescriptionDataset' | 'Distribution' | 'Founder' | 'Founders' | 'GeneralInfo' | 'Instance' | 'Instances' | 'InstanceStatistics' | 'IntegrityRules' | 'Labels' | 'Maintainer' | 'Maintenance' | 'Numeri' | 'PreProcess' | 'Privacy' | 'Relation' | 'RelationInstances' | 'SensitiveData' | 'SocialConcerns' | 'Tags' | 'Uses';
 
-export type datasetDescriptorAstReference = 'DataSource:mapInstance' | 'DataTypeConstraints:att' | 'Instance:labels' | 'Labels:map' | 'MandatoryConstraints:att' | 'Privacy:priva' | 'RangeConstraints:att' | 'Relation:attRel' | 'Relation:attRelTarget' | 'Relation:insRel' | 'Requeriment:reporter' | 'Semantic:attObject' | 'SensitiveData:senseAtt' | 'Sintactic:attObject' | 'Sintactic:attTarget';
+export type datasetDescriptorAstReference = 'DataSource:mapInstance' | 'Instance:labels' | 'Labels:map' | 'Privacy:priva' | 'Relation:attRel' | 'Relation:attRelTarget' | 'Relation:insRel' | 'SensitiveData:senseAtt';
 
 export class datasetDescriptorAstReflection implements AstReflection {
 
     getAllTypes(): string[] {
-        return ['AccuracyRq', 'Annotator', 'Annotators', 'Area', 'Attribute', 'Author', 'Authoring', 'Authors', 'Binary', 'Categor', 'CompletnessRq', 'Composition', 'ConsistencyRq', 'DataProvenance', 'DataQuality', 'DataSource', 'DataSources', 'DataTypeConstraints', 'Declaration', 'Dependencies', 'DescriptionDataset', 'Distribution', 'Founder', 'Founders', 'GeneralInfo', 'Instance', 'Instances', 'InstanceStatistics', 'IntegrityRules', 'Labels', 'Maintainer', 'Maintenance', 'MandatoryConstraints', 'Numeri', 'Privacy', 'RangeConstraints', 'Relation', 'RelationInstances', 'Requeriment', 'Requeriments', 'Semantic', 'SensitiveData', 'Sintactic', 'SocialConcerns', 'Tags', 'Uses'];
+        return ['Annotator', 'Annotators', 'Area', 'Attribute', 'Author', 'Authoring', 'Authors', 'Binary', 'Categor', 'Composition', 'DataProvenance', 'DataQuality', 'DataSource', 'DataSources', 'Declaration', 'Dependencies', 'DescriptionDataset', 'Distribution', 'Founder', 'Founders', 'GeneralInfo', 'Instance', 'Instances', 'InstanceStatistics', 'IntegrityRules', 'Labels', 'Maintainer', 'Maintenance', 'Numeri', 'PreProcess', 'Privacy', 'Relation', 'RelationInstances', 'SensitiveData', 'SocialConcerns', 'Tags', 'Uses'];
     }
 
     isInstance(node: unknown, type: string): boolean {
@@ -681,22 +578,13 @@ export class datasetDescriptorAstReflection implements AstReflection {
             case 'DataSource:mapInstance': {
                 return Instance;
             }
-            case 'DataTypeConstraints:att': {
-                return Attribute;
-            }
             case 'Instance:labels': {
                 return Labels;
             }
             case 'Labels:map': {
                 return Attribute;
             }
-            case 'MandatoryConstraints:att': {
-                return Attribute;
-            }
             case 'Privacy:priva': {
-                return Attribute;
-            }
-            case 'RangeConstraints:att': {
                 return Attribute;
             }
             case 'Relation:attRel': {
@@ -708,19 +596,7 @@ export class datasetDescriptorAstReflection implements AstReflection {
             case 'Relation:insRel': {
                 return Instance;
             }
-            case 'Requeriment:reporter': {
-                return Author;
-            }
-            case 'Semantic:attObject': {
-                return Attribute;
-            }
             case 'SensitiveData:senseAtt': {
-                return Attribute;
-            }
-            case 'Sintactic:attObject': {
-                return Attribute;
-            }
-            case 'Sintactic:attTarget': {
                 return Attribute;
             }
             default: {

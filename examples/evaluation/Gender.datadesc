@@ -82,17 +82,17 @@ Dataset: Gender
                      Attributes:
                         attribute: document
                             description: "The text workd analyzed " 
-                            completness: 100 
+                            completeness: 100 
                             count: 65440
                             ofType: Categorical
                         attribute: Person_annotation
                             description: "Word tagged as an people entity (note that a word could reference to more than one people) " 
-                            completness: 100
+                            completeness: 100
                             count: 65440
                             ofType: Categorical 
                 Data Quality:
                     Sparsity: 8.9 // Note that sparsity is so low! this is important to ML
-                    Compeletness: 100
+                    Compeleteness: 100
                     Class Balance "There is no analysis about class balance"
                     Noisy labels "Please considers some humans errors in the annotation process could be done"
 

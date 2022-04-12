@@ -1579,7 +1579,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Compeletness:",
+                "value": "Compeleteness:",
                 "elements": []
               },
               {
@@ -1743,7 +1743,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "completness:",
+                "value": "completeness:",
                 "elements": []
               },
               {
@@ -2844,36 +2844,96 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             }
           },
           {
-            "$type": "Keyword",
-            "value": "Noise Sources:"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "noise",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "STRING"
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "When data was collected:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "when",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "STRING"
+                  }
+                }
               }
-            }
+            ],
+            "cardinality": "?"
           },
           {
-            "$type": "Keyword",
-            "value": "Privacy:"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "priv",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "STRING"
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Noise Sources:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "noise",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "STRING"
+                  }
+                }
               }
-            }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Privacy:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "priv",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "STRING"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Gather Requeriments",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "req",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "STRING"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
           }
         ]
       }
@@ -2897,17 +2957,80 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": []
           },
           {
+            "$type": "Alternatives",
+            "elements": [
+              {
+                "$type": "Assignment",
+                "feature": "annotations",
+                "operator": "+=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "Annotator"
+                  }
+                },
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "preprocess",
+                "operator": "+=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "PreProcess"
+                  }
+                },
+                "elements": []
+              }
+            ],
+            "cardinality": "*"
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "PreProcess",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Keyword",
+            "value": "Preprocess id:",
+            "elements": []
+          },
+          {
             "$type": "Assignment",
-            "feature": "annotations",
-            "operator": "+=",
+            "feature": "name",
+            "operator": "=",
             "terminal": {
               "$type": "RuleCall",
               "arguments": [],
               "rule": {
-                "$refText": "Annotator"
+                "$refText": "ID"
               }
-            },
-            "elements": []
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": "Description:"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "desc",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "STRING"
+              }
+            }
           }
         ]
       }
@@ -3006,20 +3129,27 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             }
           },
           {
-            "$type": "Keyword",
-            "value": "Process Requeriments"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "req",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "STRING"
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Label Requeriments",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "req",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "STRING"
+                  }
+                }
               }
-            }
+            ],
+            "cardinality": "?"
           }
         ]
       }
@@ -3092,555 +3222,6 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
               }
             ],
             "cardinality": "*"
-          }
-        ]
-      }
-    },
-    {
-      "$type": "ParserRule",
-      "parameters": [],
-      "name": "Requeriments",
-      "hiddenTokens": [],
-      "alternatives": {
-        "$type": "Group",
-        "elements": [
-          {
-            "$type": "Keyword",
-            "value": "Requeriments:",
-            "elements": []
-          },
-          {
-            "$type": "Assignment",
-            "feature": "requeriments",
-            "operator": "+=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "Requeriment"
-              },
-              "elements": []
-            },
-            "cardinality": "*"
-          }
-        ]
-      }
-    },
-    {
-      "$type": "ParserRule",
-      "parameters": [],
-      "name": "Requeriment",
-      "hiddenTokens": [],
-      "alternatives": {
-        "$type": "Group",
-        "elements": [
-          {
-            "$type": "Keyword",
-            "value": "Requeriment:",
-            "elements": []
-          },
-          {
-            "$type": "Assignment",
-            "feature": "name",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "ID"
-              }
-            }
-          },
-          {
-            "$type": "Keyword",
-            "value": "reportedby:"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "reporter",
-            "operator": "=",
-            "terminal": {
-              "$type": "CrossReference",
-              "type": {
-                "$refText": "Author"
-              }
-            }
-          },
-          {
-            "$type": "Assignment",
-            "feature": "action",
-            "operator": "=",
-            "terminal": {
-              "$type": "Alternatives",
-              "elements": [
-                {
-                  "$type": "RuleCall",
-                  "arguments": [],
-                  "rule": {
-                    "$refText": "AccuracyRq"
-                  },
-                  "elements": []
-                },
-                {
-                  "$type": "RuleCall",
-                  "arguments": [],
-                  "rule": {
-                    "$refText": "ConsistencyRq"
-                  }
-                },
-                {
-                  "$type": "RuleCall",
-                  "arguments": [],
-                  "rule": {
-                    "$refText": "CompletnessRq"
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "$type": "ParserRule",
-      "parameters": [],
-      "name": "AccuracyRq",
-      "hiddenTokens": [],
-      "alternatives": {
-        "$type": "Group",
-        "elements": [
-          {
-            "$type": "Keyword",
-            "value": "Accuracy Requeriment of",
-            "elements": []
-          },
-          {
-            "$type": "Assignment",
-            "feature": "typeAcc",
-            "operator": "=",
-            "terminal": {
-              "$type": "Alternatives",
-              "elements": [
-                {
-                  "$type": "RuleCall",
-                  "arguments": [],
-                  "rule": {
-                    "$refText": "DataTypeConstraints"
-                  },
-                  "elements": []
-                },
-                {
-                  "$type": "RuleCall",
-                  "arguments": [],
-                  "rule": {
-                    "$refText": "RangeConstraints"
-                  }
-                },
-                {
-                  "$type": "RuleCall",
-                  "arguments": [],
-                  "rule": {
-                    "$refText": "MandatoryConstraints"
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "$type": "ParserRule",
-      "parameters": [],
-      "name": "DataTypeConstraints",
-      "hiddenTokens": [],
-      "alternatives": {
-        "$type": "Group",
-        "elements": [
-          {
-            "$type": "Keyword",
-            "value": "Data Type:",
-            "elements": []
-          },
-          {
-            "$type": "Keyword",
-            "value": "where attribute:"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "att",
-            "operator": "=",
-            "terminal": {
-              "$type": "CrossReference",
-              "type": {
-                "$refText": "Attribute"
-              },
-              "terminal": {
-                "$type": "RuleCall",
-                "arguments": [],
-                "rule": {
-                  "$refText": "QualifiedName"
-                }
-              }
-            }
-          },
-          {
-            "$type": "Keyword",
-            "value": "is from type:"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "dataType",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "DataTypes"
-              }
-            }
-          }
-        ]
-      }
-    },
-    {
-      "$type": "ParserRule",
-      "parameters": [],
-      "name": "RangeConstraints",
-      "hiddenTokens": [],
-      "alternatives": {
-        "$type": "Group",
-        "elements": [
-          {
-            "$type": "Keyword",
-            "value": "Range:",
-            "elements": []
-          },
-          {
-            "$type": "Keyword",
-            "value": "where attribute:"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "att",
-            "operator": "=",
-            "terminal": {
-              "$type": "CrossReference",
-              "type": {
-                "$refText": "Attribute"
-              },
-              "terminal": {
-                "$type": "RuleCall",
-                "arguments": [],
-                "rule": {
-                  "$refText": "QualifiedName"
-                }
-              }
-            }
-          },
-          {
-            "$type": "Keyword",
-            "value": "is from"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "lowrange",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "NUMBER"
-              }
-            }
-          },
-          {
-            "$type": "Keyword",
-            "value": "to"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "highrange",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "NUMBER"
-              }
-            }
-          }
-        ]
-      }
-    },
-    {
-      "$type": "ParserRule",
-      "parameters": [],
-      "name": "MandatoryConstraints",
-      "hiddenTokens": [],
-      "alternatives": {
-        "$type": "Group",
-        "elements": [
-          {
-            "$type": "Keyword",
-            "value": "Mandatory:",
-            "elements": []
-          },
-          {
-            "$type": "Keyword",
-            "value": "where attribute:"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "att",
-            "operator": "=",
-            "terminal": {
-              "$type": "CrossReference",
-              "type": {
-                "$refText": "Attribute"
-              },
-              "terminal": {
-                "$type": "RuleCall",
-                "arguments": [],
-                "rule": {
-                  "$refText": "QualifiedName"
-                }
-              }
-            }
-          },
-          {
-            "$type": "Keyword",
-            "value": "need to:"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "mandatory",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "STRING"
-              }
-            }
-          }
-        ]
-      }
-    },
-    {
-      "$type": "ParserRule",
-      "parameters": [],
-      "name": "ConsistencyRq",
-      "hiddenTokens": [],
-      "alternatives": {
-        "$type": "Group",
-        "elements": [
-          {
-            "$type": "Keyword",
-            "value": "Consisntecy Requeriment of",
-            "elements": []
-          },
-          {
-            "$type": "Assignment",
-            "feature": "typeConst",
-            "operator": "=",
-            "terminal": {
-              "$type": "Alternatives",
-              "elements": [
-                {
-                  "$type": "RuleCall",
-                  "arguments": [],
-                  "rule": {
-                    "$refText": "Sintactic"
-                  },
-                  "elements": []
-                },
-                {
-                  "$type": "RuleCall",
-                  "arguments": [],
-                  "rule": {
-                    "$refText": "Semantic"
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "$type": "ParserRule",
-      "parameters": [],
-      "name": "Sintactic",
-      "hiddenTokens": [],
-      "alternatives": {
-        "$type": "Group",
-        "elements": [
-          {
-            "$type": "Keyword",
-            "value": "Sintactic:",
-            "elements": []
-          },
-          {
-            "$type": "Keyword",
-            "value": "where attribute:"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "attObject",
-            "operator": "=",
-            "terminal": {
-              "$type": "CrossReference",
-              "type": {
-                "$refText": "Attribute"
-              },
-              "terminal": {
-                "$type": "RuleCall",
-                "arguments": [],
-                "rule": {
-                  "$refText": "QualifiedName"
-                }
-              }
-            }
-          },
-          {
-            "$type": "Keyword",
-            "value": "needs to be:"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "operation",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "Operation"
-              }
-            }
-          },
-          {
-            "$type": "Keyword",
-            "value": "than attribute:"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "attTarget",
-            "operator": "=",
-            "terminal": {
-              "$type": "CrossReference",
-              "type": {
-                "$refText": "Attribute"
-              },
-              "terminal": {
-                "$type": "RuleCall",
-                "arguments": [],
-                "rule": {
-                  "$refText": "QualifiedName"
-                }
-              }
-            }
-          }
-        ]
-      }
-    },
-    {
-      "$type": "ParserRule",
-      "parameters": [],
-      "name": "Semantic",
-      "hiddenTokens": [],
-      "alternatives": {
-        "$type": "Group",
-        "elements": [
-          {
-            "$type": "Keyword",
-            "value": "Semantic:",
-            "elements": []
-          },
-          {
-            "$type": "Keyword",
-            "value": "where attribute"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "attObject",
-            "operator": "=",
-            "terminal": {
-              "$type": "CrossReference",
-              "type": {
-                "$refText": "Attribute"
-              },
-              "terminal": {
-                "$type": "RuleCall",
-                "arguments": [],
-                "rule": {
-                  "$refText": "QualifiedName"
-                }
-              }
-            }
-          },
-          {
-            "$type": "Keyword",
-            "value": "need to have a distribution: of"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "distribution",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "STRING"
-              }
-            }
-          }
-        ]
-      }
-    },
-    {
-      "$type": "ParserRule",
-      "parameters": [],
-      "name": "CompletnessRq",
-      "hiddenTokens": [],
-      "alternatives": {
-        "$type": "Group",
-        "elements": [
-          {
-            "$type": "Keyword",
-            "value": "Completness Requeriments of",
-            "elements": []
-          },
-          {
-            "$type": "Assignment",
-            "feature": "typeComplet",
-            "operator": "=",
-            "terminal": {
-              "$type": "Alternatives",
-              "elements": [
-                {
-                  "$type": "Keyword",
-                  "value": "Type",
-                  "elements": []
-                },
-                {
-                  "$type": "Keyword",
-                  "value": "Column Completness"
-                },
-                {
-                  "$type": "Keyword",
-                  "value": "Tuple Completness"
-                },
-                {
-                  "$type": "Keyword",
-                  "value": "Overall Completness"
-                },
-                {
-                  "$type": "Keyword",
-                  "value": "Population Completness"
-                }
-              ]
-            }
           }
         ]
       }

@@ -69,36 +69,30 @@ Dataset: Melanoma_Classification_Dataset
             Images from the same patient are indicated through a unique patient identifier (field name patient_id). The dataset represents 
             2,056 patients from three continents with an average of 16 lesions per patient, consisting of 33,126 dermoscopic images and 584 
             histopathologically confirmed melanomas compared with benign melanoma mimickers. This example has been sammpled to 12023 dermoscopis samples"
-        Total number of instances: 12023
+        Total number of instances: 33126
         Instances:
               Instance:  skinImages
                 Description: "Skin images"
                 Type: Record_Data
-                Number of attributes: 10
+                Number of attributes: 8
                 Related Labels: skinLabel
                 Attributes: 
                     attribute: ImageId
                         description: 'ID of the images'
-                        completness: 100
-                        count: 12023
+                        completeness: 100
+                        count: 33126
                         ofType: Categorical   
 
                     attribute: patientID
                         description: 'ID of patients'
-                        completness: 100
-                        count: 12023
+                        completeness: 100
+                        count: 33126
                         ofType: Categorical    
-                
-                    attribute: lesionID
-                            description: 'ID of the medical staff'
-                            completness: 100
-                            count: 12023
-                            ofType: Categorical 
 
                     attribute: sex   
                         description: 'sex of the patient'
-                        completness: 100
-                        count: 12023
+                        completeness: 100
+                        count: 33126
                         ofType: Categorical
                                 Mode: "Famela"
                                 Categoric Distribution:
@@ -108,8 +102,8 @@ Dataset: Melanoma_Classification_Dataset
                     
                     attribute: age  
                         description: 'age of the patient'
-                        completness: 100
-                        count: 12023
+                        completeness: 100
+                        count: 33126
                         ofType: Numerical
                                 Mean: 34
                                 Median: 32
@@ -121,22 +115,22 @@ Dataset: Melanoma_Classification_Dataset
           
                     attribute: anatom_site_general_challenge
                         description: 'description of body zone of the image'
-                        completness: 99
-                        count: 11893
+                        completeness: 99
+                        count: 33126
                         ofType: Categorical
                                 Mode: "Chest"
 
                     attribute: diagnosis
                         description: 'previous diagnosis from medical hisotry'
-                        completness: 1
-                        count: 234
+                        completeness: 1
+                        count: 33126
                         ofType: Categorical
-                                Mode: "uknowm"
+                                Mode: "unknowm"
 
                     attribute: beningnant_malignant
                         description: 'Type of the melanoma'
-                        completness: 99
-                        count: 12002
+                        completeness: 99
+                        count: 33126
                         ofType: Categorical
                                 Categoric Distribution:
                                     "beningnant: 80%
