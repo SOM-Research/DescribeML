@@ -15,7 +15,7 @@ Great! That's it.
 Now go to /examples/evaluation and open a .datadesc file to see a working example of our preliminary evaluation.
 Remember: by default, VSCode gives you auto-completion help by hitting CTRL + Space (or equivalent in MAC)
 
-![Autocompletion feature](doc/importMenu.png)
+![Autocompletion feature](fileicons/Autcomplete.gif)
 
 ### Want to dive into language development?
 
