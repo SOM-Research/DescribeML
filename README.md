@@ -18,9 +18,11 @@ cd datasets
 code --install-extension Dataset-Descriptor-0.0.1.vsix
 ```
 
+*Troubles: If you are not able to see the syntax highlight in the examples files (p.e. *Melanoma.datadesc*) as the image below . Please, reload the VSCode editor and write the code --install command again*
+
 Great! That's it.
 
-Now go to the folder **/examples/evaluation** and open a .datadesc file to see a working example of our preliminary evaluation.
+Now go to the folder **/examples/evaluation** and open a, for example *Melanoma.datadesc* file to see a working example of our preliminary evaluation.
 
 Remember: by default, VSCode gives you auto-completion help by hitting CTRL + Space (or equivalent in MAC)
 
