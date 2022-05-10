@@ -5,169 +5,163 @@ entry DescriptionDataset:
 
 Declaration:
  'Dataset:' name=ID 
-  generalinfo=GeneralInfo
+  generalinfo=Metadata
   composition=Composition 
+  provenance=Provenance
   socialConcerns=SocialConcerns
-  provenance=DataProvenance;
-
-
+;
 
 //
-// Authoring
+// Metadata
 //
-GeneralInfo:
+Metadata:
      name= 'Metadata:'
      'Title:' title=STRING 
      'Unique-identifier:' ident=ID
      'Version:' version=ID 
+     ('Citation:' citation=STRING)?
      'Description:' 
         (description=STRING | 
         (('Purpose:' descriptionpurpose=STRING)? 
          ('Tasks:' descriptionTasks=STRING)? 
-         ('Gaps:' descriptionGaps=STRING)?  
-         ('Citation:' citation=STRING)?)) 
-     (uses=Uses)?
+         ('Gaps:' descriptionGaps=STRING)?)) 
+     ('Licences:' licence=CommonLicences)?
+     (uses=Applications)?
      (distribution=Distribution)?
      (area=Area)?
      (tags=Tags)?
-      authoring=Authoring  ;
-   
-Area:
-    name='Area:' area+=ID;
-Tags:
-    name='Tags:' (tags+=ID)*;
-Authoring:
-    name= 'Authoring:' 
-     (authors+=Authors
-        founding+= (Founders)?
-        'License Information:' licence = STRING 
-        maintenance+=Maintenance);
-Authors: 
-    name='Authors:'  (authors+=Author*);
+      authoring=Authoring;
 
-Author:
-    'Name' name=ID 'email' email=STRING;
-
-Founders: 
-    name='Founders:'  (founders+=Founder)+;
-
-Founder:
-    'Name' name=ID 'type' type=FoundersType ('grantor' grantor= STRING 'grantId:' ID)?;
-
-Maintenance: 
-    name='Maintenance:'
-    ('Maintainer:' (maintainers+=Maintainer)*)?
-    ('Erratum?' erratum=STRING)? 
-    ('Data Retention:' dataRetention=STRING)? 
-    ('Version support' support=STRING)? 
-    ('Contribution guides:' contribGuides=STRING)?;
-
-Maintainer:
-    'Name' name=ID 'email' email=STRING;
-
+// Distribution Policies
 Distribution:
     name="Distribution:"
     ("Is public?:" public=ID)?
     ("How is distributed:" past=STRING)?  
-    ("Distribution license:" past=STRING)?;
-Uses:
-    name="Uses:"
+    ("Distribution license:" lic=STRING)?;
+
+// Applications
+Applications:
+    name="Applications:"
     ("Past Uses:" past=STRING)?
-    ("Recommneded Uses:" recommend=STRING)?
-    ("Non-recommended Uses:" future=STRING)?
+    ("Recommneded:" recommend=STRING)?
+    ("Non-recommended:" future=STRING)?
     ("Uses repository:" repo=STRING)?;
+Area: name='Area:' area+=ID;
+Tags: name='Tags:' (tags+=ID)*;
+
+// Authoring
+Authoring:
+    name= 'Authoring:' 
+    (authors+=Authors
+      founding+= (Founders)?
+      ('Maintainer:' (maintainers+=Maintainer)*)?
+      ('Erratum?' erratum=STRING)? 
+      ('Data Retention:' dataRetention=STRING)? 
+      ('Version support' support=STRING)? 
+      ('Contribution guides:' contribGuides=STRING)?);
+Authors: 
+    name='Authors:'  (authors+=Author*);
+Author:
+    'Name' name=ID 'email' email=STRING;
+Founders: 
+    name='Founders:'  (founders+=Founder)+;
+Founder:
+    'Name' name=ID 'type' type=FoundersType ('grantor' grantor= STRING 'grantId:' ID)?;
+Maintainer:
+    'Name' name=ID 'email' email=STRING;
+
 //
 // Dataset Composition 
 //
  Composition:
      name='Composition:'
-     'Description:' compodesc+=STRING
-     ('Total number of instances:' numberInst=NUMBER)? 
-     (instances += Instances)*
+     'Rationale:' compodesc+=STRING
+     ('Total size:' numberInst=NUMBER)? 
+     (instances += DataInstances)*
      (relation=RelationInstances)?
      ('Dependencies:' dependencies=Dependencies)? 
-    ('Is sample:' sample=STRING)?
+     ('Is sample:' sample=STRING)?
      ('Data Splits:' splits=STRING)?;
 
-
-Instances:
-    name='Instances:' (instances+=Instance)*;
-
-// Instance definition
-Instance: 
-    // Qualitative
+// Data Instances
+DataInstances:
+    name='Data Instances:' (instances+=DataInstance)*;
+DataInstance:
     'Instance:' name=ID 
     'Description:' descript=STRING 
-    'Type:'  type=InsType  
-    ('Number of attributes:' numIns=NUMBER)?
-    ('Related Labels:' labels=[Labels])?
-    ('Number of Records:' records=NUMBER)?
+    'Type:'  type=InstanceType  
+    'Attribute number:' attrnum=NUMBER
+    ('Size:' numIns=NUMBER)?
     ('Attributes:' (attributes+=Attribute)*)?
+    ('Statistics:' statistics+=Statistics)?
+    ('Consistency rules:' (rules+=ConsistencyRules)*)?;
 
-    // Statistical
-    ((statistics+=InstanceStatistics)*)?
+// Statistics
+Statistics:
+    ('Pair Correlation:' (pair+=PairCorrelation)*)?
+    ('Quality Metircs:' metric+=QualityMetric)?;
 
-    // Quality
-    ((dataQuality+=DataQuality)*)?
-    ('Consistency rules:' (rules+=IntegrityRules)*)? 
-   ;
+PairCorrelation:
+    (
+        'between' attr1=[Attribute] 'and' 
+        (attr2=[Attribute] | 'external source'
+        'From:' from=STRING "Rationanle:" rationale=STRING)
+    )?;
 
-InstanceStatistics:
-    name="Instance Statistics:"
-    (('Pair Plot:' plot+=STRING)*)?;
-
-DataQuality:
-    name="Data Quality:"
+QualityMetric:
     ('Sparsity:' sparsity=NUMBER)?
     ('Compeleteness:' complet=NUMBER)?
     ('Class Balance' balance=STRING)?
-    ('Noisy labels' noisy=STRING)?
-    ;
-IntegrityRules:
-    'Description:' desc=STRING;
+    ('Noisy labels' noisy=STRING)?;
 
+// Consistency Rules
+ConsistencyRules:
+    'rule:' attrule1=[Attribute]
+    Operators
+    (comparator = NUMBER | attrule2=[Attribute])?;
+
+// Attributes
 Attribute:
     'attribute:' name=ID 
     'description:' attdesc=STRING 
-    ('unique:' unique=NUMBER)?
-    ('completeness:' completnessAtt=NUMBER)?
-    ('count:' completnessAtt=NUMBER)?
-    ('ofType:' ((attType=Categor)|(attType=Numeri)))? ;
+    ('labeling process:' labelProces=[LabelingProcess])?
+    ('unique values:' unique=NUMBER)?
+    ('count:' count=NUMBER)?
+    ('ofType:' ((attType=Categor)|(attType=Numeri)))?;
+   
 
 Categor:
     name='Categorical'
+    (('Statistics:')
     ('Binary attribute:' binary=Binary)?
     ('Mode:' mode=STRING)?
-    ('Categoric Distribution:' catdist=STRING)?;
+    ('Categoric Distribution:' catdist=STRING)?)?
+    ('Quality Metrics:' metrics+=QualityMetric)?;
 
 Binary:
-    'Symetry:' sym=Symetric
+    'Symmetry:' sym=AttributeSymmetry
     'Attribute Sparsity:' attspar=NUMBER;
    
 Numeri:
     name='Numerical' 
+    (('Statistics:')
     ('Mean:' mean=NUMBER)?
     ('Median:' median=NUMBER)?
     ('Standard Desviation:' std=NUMBER)?
     ('Minimmum:' min=NUMBER)?
     ('Maximmum:' max=NUMBER)?
     ('Quartiles:' quartiles=STRING)?
-    ('IQR:' iqr=NUMBER)?
-    ;
-
+    ('IQR:' iqr=NUMBER)?)?
+    ('Quality Metrics:' metrics+=QualityMetric*)?;
 
 
 // Relation between Instances
 RelationInstances:
     'Instaces relation:' (relation+=Relation)*;
-
 Relation:
-    ('Relation:' name=ID 'attribute:' attRel=[Attribute] "is related to:" insRel=[Instance] ('and attribute:' attRelTarget=[Attribute]))*;
+    ('Relation:' name=ID 'attribute:' attRel=[Attribute] "is related to:" insRel=[DataInstance] ('and attribute:' attRelTarget=[Attribute]))*;
 
-
-
-
-// Dependencies
+// Instance Dependencies
 Dependencies:
         "Description:" desc=STRING
         ('Links:' 
@@ -176,84 +170,141 @@ Dependencies:
             'Rate Limit Usage:' limit=STRING)?;
 
 
-SocialConcerns:
-    name='Social Concerns:'
-    ('Privacy:' privacy+=Privacy)?
-    ('Sensitive Data:' sensitive = SensitiveData)?
-    ('Social Impact:' impact=STRING)?
-    ('Bias discussion:' bias=STRING)?
-    ;
-
-SensitiveData:
-    ('Description:' desc=STRING)?
-    ('Instance belongs to people:' 
-        ('Have sensitive attributes?' ('attribute:' senseAtt=[Attribute])*)?
-        ('Are there protecte groups?' procGroups=STRING)?
-        ('Might be offensive' offDiscussion=STRING)?)?
-    ;
-// Privacy
-Privacy: 
-        'Legal Issues:' legal=STRING
-        ('Attributes affected:' (priva=[Attribute] (',')?)*)?;
-
-
+//
 // Provenance
-DataProvenance:
+//
+Provenance:
     name='Data Provenance:'
     'Curation Rationale:' curation=STRING
-    (datasources+=DataSources)?
-    (annotations+=Annotators)?;
+    ((gathering+=GatheringProcesses)*)?
+     ((labeling+=LabelingProcesses)*)?
+     ((other+=PreProcesses)*)?;
 
-DataSources:
-    name='Data Sources:' (datasources+=DataSource)*;
+// Gathering
+GatheringProcesses:
+    name='Gathering Processes:' (processes+=GatheringProcess)*;
 
-DataSource:
-    'Source:' name=ID
+GatheringProcess:
     'Description:' desc=STRING
-    'Related Instances:' (mapInstance=[Instance] (',')?)*
-    'How data is collected:' how=STRING
-    'Who collects the data:' who=STRING
+     source=Source  
+    'Related Instances:' (mapInstance=[DataInstance] (',')?)*
+    ('Social Issues' labelSocialIssues=[SocialIssue])?
+    ('How data is collected:' how=GatherType)?
+    ('Is language data?:' SpeechSitatuion)?
     ('When data was collected:' when=STRING)?
-    ('Noise Sources:' noise=STRING)?
-    ('Privacy:' priv=STRING)?
-    ('Gather Requeriments' req=STRING)?;
+    ('Process Demographics:' processDemo = Demographics)?
+    ('Gathering Team:' gatheringTeam = Team)?
+    ('Gather Requeriments' (requeriments+=Requeriments)*)?;
 
-Annotators: 
-    name='Data Preprocessing:' (annotations+=Annotator | preprocess+=PreProcess)*;
+Source:
+    'Source:' name=ID
+    'Description:' sourcedesc=STRING
+    'Noise:' noise=STRING;
 
-PreProcess:
-    'Preprocess id:' name=ID
-    'Description:' desc=STRING;
+SpeechSitatuion:
+    ('Time and place:' name=STRING)?
+    ('Modality:' name=SpeechModality)?
+    ('Type:' name=SpeechType)?
+    ('Syncrony:' name=SpeechSyncrony)?
+    ('Inteded Audience:' name=STRING)?;
 
-Annotator:
+
+Team:
+    'Who collects the data:' who=STRING
+    'Type' gatherType=TeamType
+    teamDemographics = Demographics;
+
+// Requeriments
+Requeriments:
+    'Requeriment:'
+    req=STRING;
+
+
+
+
+// Labeling
+LabelingProcesses: 
+    name='LabelingProcesses:' (labprocesses+=LabelingProcess)*;
+LabelingProcess:
     'Labeling process:' name=ID
     'Description:' desc=STRING
     'Type:' type=AnnotationType
     ('Labels:' (Labels)*)?
-    'Who annotates the data:' who=STRING
-    ('Label Requeriments' req=STRING)?;
-
+    ('Labeling Team:'labelingTeam = Team)?
+    ('Social Issues' labelSocialIssues=[SocialIssue])?
+    ('Label Requeriments' (requeriments+=Requeriments)*)?;
 Labels:
     'Label:' name=ID
     'Description:' desc=STRING
     'Mapping:' (map=[Attribute] (',')?)*;
 
+Demographics:
+    ('Age:' age=STRING)?
+    ('Gender:' gender=STRING)?
+    ('Country/Region:' country=STRING)?
+    ('Race/Ethnicity:' race=STRING)?
+    ('Native Language:' native=STRING)?
+    ('Socioeconomic status:' status=STRING)?
+    ('Number of speakers represented:' number=STRING)?
+    ('Presence of disordered speech:' disordered=STRING)?
+    ('Training in linguistics/other relevan disciplines:' training=STRING)?;
+
+
+// Data Preprocess
+PreProcesses:
+    name='Preprocesses:' (preprocesses+=PreProcess)*;
+PreProcess:
+    'Preprocess:' name=ID
+    'Description:' desc=STRING;
+
+
+//
+//  SocialConcerns
+//
+SocialConcerns:
+    name='Social Concerns:'
+    ('Rationale:' desc=STRING)?
+    (socialIssues+=SocialIssue)*;
+
+SocialIssue:
+    'Social Issue:' name=ID
+    'IssueType:' IssueType=SocialIssueType
+    ('Related Attributes:' ('attribute:' senseAtt=[Attribute])*)?
+    'Description:' desc=STRING
+    ('Instance belongs to people:' 
+        ('Have sensitive attributes?' ('attribute:' senseAtt=[Attribute])*)?
+        ('Are there protecte groups?' procGroups=STRING)?
+        ('Might be offensive' offDiscussion=STRING)?)?
+    ;
+
     
 
 
-// Data Type Rules
-QualifiedName returns string: ID ('.' ID)*;
-DataTypes returns string: 'String' | 'Integer' | 'Boolean' | 'Other';
-ATtype returns string: 'type';
-InsType returns string: 'Record_Data' | 'Time-Series' | 'Ordenred' | 'Graph' | 'Other';
+// Semantical Type Rules
+
+CommonLicences returns string: 'Creative Commons' | 'CC0: Public Domain' | 'CC BY-NC-SA 4.0' | 'CC BY-SA 4.0' |'CC BY-SA 3.0' |'CC BY 4.0 (Attribution 4.0 International)' |'CC BY-NC 4.0 (Attribution-NonCommercial 4.0 International)' |'CC BY 3.0 (Attribution 3.0 Unported)' | 'CC BY 3.0 IGO (Attribution 3.0 IGO)'| 'CC BY-NC-SA 3.0 IGO (Attribution-NonCommercial-ShareAlike 3.0 IGO)' | 'CC BY-ND 4.0 (Attribution-NoDerivatives 4.0 International)'
+
+                                | 'CC BY-NC-ND 4.0 (Attribution-NonCommercial-NoDerivatives 4.0 International)' | 'GPL' | 'GPL 2' | 'LGPL 3.0 (GNU Lesser General Public License 3.0)' | 'AGPL 3.0 (GNU Affero General Public License 3.0)'
+
+                                | 'FDL 1.3 (GNU Free Documentation License 1.3)' | 'Open Data Commons' |'Database: Open Database, Contents: Database Contents' |'Database: Open Database, Contents: © Original Authors' | 'PDDL (ODC Public Domain Dedication and Licence)' | 'ODC-BY 1.0 (ODC Attribution License)'
+
+                                | 'Community Data License' | 'Community Data License Agreement - Permissive - Version 1.0' | 'Community Data License Agreement - Sharing - Version 1.0' | 'Special' | 'World Bank Dataset Terms of Use' | 'Reddit API Terms' | 'U.S. Government Works' | 'EU ODP Legal Notice';
+
+InstanceType returns string: 'Record-Data' | 'Time-Series' | 'Ordered' | 'Graph' | 'Other';
 FoundersType returns string: 'private' | 'public' | 'mixed';
-Operation returns string: '<'|'>'|'='|'!='|'+'|'-';
-Categoric returns string: 'Categoric:';
-Numeric returns string: 'Numeric:';
-Symetric returns string: 'Symmetric' | 'Asymmetric';
-Proven returns string: 'Data_Provenance';
-Social returns string: 'Social_Concerns';
+AttributeSymmetry returns string: 'Symmetric' | 'Asymmetric';
 AnnotationType returns string: 'Bounding boxes' | 'Lines and splines' | 'Semantinc Segmentation' | '3D cuboids' | 'Polygonal segmentation' | 'Landmark and key-point' | 'Image and video annotations' | 'Entity annotation' | 'Content and text categorization';
+SocialIssueType returns string: 'Privacy' | 'Bias' | 'Sensitive Data' | 'Social Impact';
+GatherType returns string: 'API' | 'Sensors' | 'Manual Human Curator' | 'Software' | 'Others';
+TeamType returns string: 'Internal' | 'External' | 'Contractors' | 'Crowdsourcing';
+SpeechModality returns string: 'spoken/signed' | 'written';
+SpeechType returns string: 'Scripted/edited' | 'spontaneous';
+SpeechSyncrony returns string: 'synchronous interaction' | 'asynchronous intercation';
+
+// Logic Data Types
+DataTypes returns string: 'String' | 'Integer' | 'Boolean' | 'Other';
+QualifiedName returns string: ID ('.' ID)*;
+Operators returns string: '<'|'>'|'='|'!='|'+'|'-';
 
 // Terminals
 hidden terminal WS: /\s+/;

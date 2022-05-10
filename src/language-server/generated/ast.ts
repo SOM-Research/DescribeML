@@ -7,36 +7,23 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { AstNode, AstReflection, Reference, isAstNode } from 'langium';
 
-export interface Annotator extends AstNode {
-    readonly $container: Annotators;
-    desc: string
-    name: string
-    req: string
-    type: AnnotationType
-    who: string
+export interface Applications extends AstNode {
+    readonly $container: Metadata;
+    future: string
+    name: 'Applications:'
+    past: string
+    recommend: string
+    repo: string
 }
 
-export const Annotator = 'Annotator';
+export const Applications = 'Applications';
 
-export function isAnnotator(item: unknown): item is Annotator {
-    return reflection.isInstance(item, Annotator);
-}
-
-export interface Annotators extends AstNode {
-    readonly $container: DataProvenance;
-    annotations: Array<Annotator>
-    name: 'Data Preprocessing:'
-    preprocess: Array<PreProcess>
-}
-
-export const Annotators = 'Annotators';
-
-export function isAnnotators(item: unknown): item is Annotators {
-    return reflection.isInstance(item, Annotators);
+export function isApplications(item: unknown): item is Applications {
+    return reflection.isInstance(item, Applications);
 }
 
 export interface Area extends AstNode {
-    readonly $container: GeneralInfo;
+    readonly $container: Metadata;
     area: Array<string>
     name: 'Area:'
 }
@@ -48,10 +35,11 @@ export function isArea(item: unknown): item is Area {
 }
 
 export interface Attribute extends AstNode {
-    readonly $container: Instance;
+    readonly $container: DataInstance;
     attdesc: string
     attType: Categor | Numeri
-    completnessAtt: number
+    count: number
+    labelProces?: Reference<LabelingProcess>
     name: string
     unique: number
 }
@@ -75,12 +63,15 @@ export function isAuthor(item: unknown): item is Author {
 }
 
 export interface Authoring extends AstNode {
-    readonly $container: GeneralInfo;
+    readonly $container: Metadata;
     authors: Array<Authors>
+    contribGuides: string
+    dataRetention: string
+    erratum: string
     founding: Array<Founders>
-    licence: string
-    maintenance: Array<Maintenance>
+    maintainers: Array<Maintainer>
     name: 'Authoring:'
+    support: string
 }
 
 export const Authoring = 'Authoring';
@@ -104,7 +95,7 @@ export function isAuthors(item: unknown): item is Authors {
 export interface Binary extends AstNode {
     readonly $container: Categor;
     attspar: number
-    sym: Symetric
+    sym: AttributeSymmetry
 }
 
 export const Binary = 'Binary';
@@ -117,6 +108,7 @@ export interface Categor extends AstNode {
     readonly $container: Attribute;
     binary: Binary
     catdist: string
+    metrics: Array<QualityMetric>
     mode: string
     name: 'Categorical'
 }
@@ -131,7 +123,7 @@ export interface Composition extends AstNode {
     readonly $container: Declaration;
     compodesc: Array<string>
     dependencies: Dependencies
-    instances: Array<Instances>
+    instances: Array<DataInstances>
     name: 'Composition:'
     numberInst: number
     relation: RelationInstances
@@ -145,72 +137,55 @@ export function isComposition(item: unknown): item is Composition {
     return reflection.isInstance(item, Composition);
 }
 
-export interface DataProvenance extends AstNode {
-    readonly $container: Declaration;
-    annotations: Array<Annotators>
-    curation: string
-    datasources: Array<DataSources>
-    name: 'Data Provenance:'
+export interface ConsistencyRules extends AstNode {
+    readonly $container: DataInstance;
+    attrule1: Reference<Attribute>
+    attrule2?: Reference<Attribute>
+    comparator: number
 }
 
-export const DataProvenance = 'DataProvenance';
+export const ConsistencyRules = 'ConsistencyRules';
 
-export function isDataProvenance(item: unknown): item is DataProvenance {
-    return reflection.isInstance(item, DataProvenance);
+export function isConsistencyRules(item: unknown): item is ConsistencyRules {
+    return reflection.isInstance(item, ConsistencyRules);
 }
 
-export interface DataQuality extends AstNode {
-    readonly $container: Instance;
-    balance: string
-    complet: number
-    name: 'Data Quality:'
-    noisy: string
-    sparsity: number
-}
-
-export const DataQuality = 'DataQuality';
-
-export function isDataQuality(item: unknown): item is DataQuality {
-    return reflection.isInstance(item, DataQuality);
-}
-
-export interface DataSource extends AstNode {
-    readonly $container: DataSources;
-    desc: string
-    how: string
-    mapInstance?: Reference<Instance>
+export interface DataInstance extends AstNode {
+    readonly $container: DataInstances;
+    attributes: Array<Attribute>
+    attrnum: number
+    descript: string
     name: string
-    noise: string
-    priv: string
-    req: string
-    when: string
-    who: string
+    numIns: number
+    rules: Array<ConsistencyRules>
+    statistics: Array<Statistics>
+    type: InstanceType
 }
 
-export const DataSource = 'DataSource';
+export const DataInstance = 'DataInstance';
 
-export function isDataSource(item: unknown): item is DataSource {
-    return reflection.isInstance(item, DataSource);
+export function isDataInstance(item: unknown): item is DataInstance {
+    return reflection.isInstance(item, DataInstance);
 }
 
-export interface DataSources extends AstNode {
-    readonly $container: DataProvenance;
-    datasources: Array<DataSource>
-    name: 'Data Sources:'
+export interface DataInstances extends AstNode {
+    readonly $container: Composition;
+    instances: Array<DataInstance>
+    name: 'Data Instances:'
 }
 
-export const DataSources = 'DataSources';
+export const DataInstances = 'DataInstances';
 
-export function isDataSources(item: unknown): item is DataSources {
-    return reflection.isInstance(item, DataSources);
+export function isDataInstances(item: unknown): item is DataInstances {
+    return reflection.isInstance(item, DataInstances);
 }
 
 export interface Declaration extends AstNode {
     readonly $container: DescriptionDataset;
     composition: Composition
-    generalinfo: GeneralInfo
+    generalinfo: Metadata
     name: string
-    provenance: DataProvenance
+    provenance: Provenance
     socialConcerns: SocialConcerns
 }
 
@@ -218,6 +193,25 @@ export const Declaration = 'Declaration';
 
 export function isDeclaration(item: unknown): item is Declaration {
     return reflection.isInstance(item, Declaration);
+}
+
+export interface Demographics extends AstNode {
+    readonly $container: GatheringProcess | Team;
+    age: string
+    country: string
+    disordered: string
+    gender: string
+    native: string
+    number: string
+    race: string
+    status: string
+    training: string
+}
+
+export const Demographics = 'Demographics';
+
+export function isDemographics(item: unknown): item is Demographics {
+    return reflection.isInstance(item, Demographics);
 }
 
 export interface Dependencies extends AstNode {
@@ -245,7 +239,8 @@ export function isDescriptionDataset(item: unknown): item is DescriptionDataset 
 }
 
 export interface Distribution extends AstNode {
-    readonly $container: GeneralInfo;
+    readonly $container: Metadata;
+    lic: string
     name: 'Distribution:'
     past: string
     public: string
@@ -282,83 +277,63 @@ export function isFounders(item: unknown): item is Founders {
     return reflection.isInstance(item, Founders);
 }
 
-export interface GeneralInfo extends AstNode {
-    readonly $container: Declaration;
-    area: Area
-    authoring: Authoring
-    citation: string
-    description: string
-    descriptionGaps: string
-    descriptionpurpose: string
-    descriptionTasks: string
-    distribution: Distribution
-    ident: string
-    name: 'Metadata:'
-    tags: Tags
-    title: string
-    uses: Uses
-    version: string
-}
-
-export const GeneralInfo = 'GeneralInfo';
-
-export function isGeneralInfo(item: unknown): item is GeneralInfo {
-    return reflection.isInstance(item, GeneralInfo);
-}
-
-export interface Instance extends AstNode {
-    readonly $container: Instances;
-    attributes: Array<Attribute>
-    dataQuality: Array<DataQuality>
-    descript: string
-    labels?: Reference<Labels>
-    name: string
-    numIns: number
-    records: number
-    rules: Array<IntegrityRules>
-    statistics: Array<InstanceStatistics>
-    type: InsType
-}
-
-export const Instance = 'Instance';
-
-export function isInstance(item: unknown): item is Instance {
-    return reflection.isInstance(item, Instance);
-}
-
-export interface Instances extends AstNode {
-    readonly $container: Composition;
-    instances: Array<Instance>
-    name: 'Instances:'
-}
-
-export const Instances = 'Instances';
-
-export function isInstances(item: unknown): item is Instances {
-    return reflection.isInstance(item, Instances);
-}
-
-export interface InstanceStatistics extends AstNode {
-    readonly $container: Instance;
-    name: 'Instance Statistics:'
-    plot: Array<string>
-}
-
-export const InstanceStatistics = 'InstanceStatistics';
-
-export function isInstanceStatistics(item: unknown): item is InstanceStatistics {
-    return reflection.isInstance(item, InstanceStatistics);
-}
-
-export interface IntegrityRules extends AstNode {
-    readonly $container: Instance;
+export interface GatheringProcess extends AstNode {
+    readonly $container: GatheringProcesses;
     desc: string
+    gatheringTeam: Team
+    how: GatherType
+    labelSocialIssues?: Reference<SocialIssue>
+    mapInstance?: Reference<DataInstance>
+    processDemo: Demographics
+    requeriments: Array<Requeriments>
+    source: Source
+    when: string
 }
 
-export const IntegrityRules = 'IntegrityRules';
+export const GatheringProcess = 'GatheringProcess';
 
-export function isIntegrityRules(item: unknown): item is IntegrityRules {
-    return reflection.isInstance(item, IntegrityRules);
+export function isGatheringProcess(item: unknown): item is GatheringProcess {
+    return reflection.isInstance(item, GatheringProcess);
+}
+
+export interface GatheringProcesses extends AstNode {
+    readonly $container: Provenance;
+    name: 'Gathering Processes:'
+    processes: Array<GatheringProcess>
+}
+
+export const GatheringProcesses = 'GatheringProcesses';
+
+export function isGatheringProcesses(item: unknown): item is GatheringProcesses {
+    return reflection.isInstance(item, GatheringProcesses);
+}
+
+export interface LabelingProcess extends AstNode {
+    readonly $container: LabelingProcesses;
+    desc: string
+    labelingTeam: Team
+    labelSocialIssues?: Reference<SocialIssue>
+    name: string
+    requeriments: Array<Requeriments>
+    type: AnnotationType
+}
+
+export const LabelingProcess = 'LabelingProcess';
+
+export function isLabelingProcess(item: unknown): item is LabelingProcess {
+    return reflection.isInstance(item, LabelingProcess);
+}
+
+export interface LabelingProcesses extends AstNode {
+    readonly $container: Provenance;
+    labprocesses: Array<LabelingProcess>
+    name: 'LabelingProcesses:'
+}
+
+export const LabelingProcesses = 'LabelingProcesses';
+
+export function isLabelingProcesses(item: unknown): item is LabelingProcesses {
+    return reflection.isInstance(item, LabelingProcesses);
 }
 
 export interface Labels extends AstNode {
@@ -374,7 +349,7 @@ export function isLabels(item: unknown): item is Labels {
 }
 
 export interface Maintainer extends AstNode {
-    readonly $container: Maintenance;
+    readonly $container: Authoring;
     email: string
     name: string
 }
@@ -385,20 +360,29 @@ export function isMaintainer(item: unknown): item is Maintainer {
     return reflection.isInstance(item, Maintainer);
 }
 
-export interface Maintenance extends AstNode {
-    readonly $container: Authoring;
-    contribGuides: string
-    dataRetention: string
-    erratum: string
-    maintainers: Array<Maintainer>
-    name: 'Maintenance:'
-    support: string
+export interface Metadata extends AstNode {
+    readonly $container: Declaration;
+    area: Area
+    authoring: Authoring
+    citation: string
+    description: string
+    descriptionGaps: string
+    descriptionpurpose: string
+    descriptionTasks: string
+    distribution: Distribution
+    ident: string
+    licence: CommonLicences
+    name: 'Metadata:'
+    tags: Tags
+    title: string
+    uses: Applications
+    version: string
 }
 
-export const Maintenance = 'Maintenance';
+export const Metadata = 'Metadata';
 
-export function isMaintenance(item: unknown): item is Maintenance {
-    return reflection.isInstance(item, Maintenance);
+export function isMetadata(item: unknown): item is Metadata {
+    return reflection.isInstance(item, Metadata);
 }
 
 export interface Numeri extends AstNode {
@@ -407,6 +391,7 @@ export interface Numeri extends AstNode {
     max: number
     mean: number
     median: number
+    metrics: Array<QualityMetric>
     min: number
     name: 'Numerical'
     quartiles: string
@@ -419,8 +404,22 @@ export function isNumeri(item: unknown): item is Numeri {
     return reflection.isInstance(item, Numeri);
 }
 
+export interface PairCorrelation extends AstNode {
+    readonly $container: Statistics;
+    attr1?: Reference<Attribute>
+    attr2?: Reference<Attribute>
+    from: string
+    rationale: string
+}
+
+export const PairCorrelation = 'PairCorrelation';
+
+export function isPairCorrelation(item: unknown): item is PairCorrelation {
+    return reflection.isInstance(item, PairCorrelation);
+}
+
 export interface PreProcess extends AstNode {
-    readonly $container: Annotators;
+    readonly $container: PreProcesses;
     desc: string
     name: string
 }
@@ -431,23 +430,52 @@ export function isPreProcess(item: unknown): item is PreProcess {
     return reflection.isInstance(item, PreProcess);
 }
 
-export interface Privacy extends AstNode {
-    readonly $container: SocialConcerns;
-    legal: string
-    priva?: Reference<Attribute>
+export interface PreProcesses extends AstNode {
+    readonly $container: Provenance;
+    name: 'Preprocesses:'
+    preprocesses: Array<PreProcess>
 }
 
-export const Privacy = 'Privacy';
+export const PreProcesses = 'PreProcesses';
 
-export function isPrivacy(item: unknown): item is Privacy {
-    return reflection.isInstance(item, Privacy);
+export function isPreProcesses(item: unknown): item is PreProcesses {
+    return reflection.isInstance(item, PreProcesses);
+}
+
+export interface Provenance extends AstNode {
+    readonly $container: Declaration;
+    curation: string
+    gathering: Array<GatheringProcesses>
+    labeling: Array<LabelingProcesses>
+    name: 'Data Provenance:'
+    other: Array<PreProcesses>
+}
+
+export const Provenance = 'Provenance';
+
+export function isProvenance(item: unknown): item is Provenance {
+    return reflection.isInstance(item, Provenance);
+}
+
+export interface QualityMetric extends AstNode {
+    readonly $container: Statistics | Categor | Numeri;
+    balance: string
+    complet: number
+    noisy: string
+    sparsity: number
+}
+
+export const QualityMetric = 'QualityMetric';
+
+export function isQualityMetric(item: unknown): item is QualityMetric {
+    return reflection.isInstance(item, QualityMetric);
 }
 
 export interface Relation extends AstNode {
     readonly $container: RelationInstances;
     attRel?: Reference<Attribute>
     attRelTarget?: Reference<Attribute>
-    insRel?: Reference<Instance>
+    insRel?: Reference<DataInstance>
     name: string
 }
 
@@ -468,27 +496,22 @@ export function isRelationInstances(item: unknown): item is RelationInstances {
     return reflection.isInstance(item, RelationInstances);
 }
 
-export interface SensitiveData extends AstNode {
-    readonly $container: SocialConcerns;
-    desc: string
-    offDiscussion: string
-    procGroups: string
-    senseAtt?: Reference<Attribute>
+export interface Requeriments extends AstNode {
+    readonly $container: GatheringProcess | LabelingProcess;
+    req: string
 }
 
-export const SensitiveData = 'SensitiveData';
+export const Requeriments = 'Requeriments';
 
-export function isSensitiveData(item: unknown): item is SensitiveData {
-    return reflection.isInstance(item, SensitiveData);
+export function isRequeriments(item: unknown): item is Requeriments {
+    return reflection.isInstance(item, Requeriments);
 }
 
 export interface SocialConcerns extends AstNode {
     readonly $container: Declaration;
-    bias: string
-    impact: string
+    desc: string
     name: 'Social Concerns:'
-    privacy: Array<Privacy>
-    sensitive: SensitiveData
+    socialIssues: Array<SocialIssue>
 }
 
 export const SocialConcerns = 'SocialConcerns';
@@ -497,8 +520,59 @@ export function isSocialConcerns(item: unknown): item is SocialConcerns {
     return reflection.isInstance(item, SocialConcerns);
 }
 
+export interface SocialIssue extends AstNode {
+    readonly $container: SocialConcerns;
+    desc: string
+    IssueType: SocialIssueType
+    name: string
+    offDiscussion: string
+    procGroups: string
+    senseAtt?: Reference<Attribute>
+}
+
+export const SocialIssue = 'SocialIssue';
+
+export function isSocialIssue(item: unknown): item is SocialIssue {
+    return reflection.isInstance(item, SocialIssue);
+}
+
+export interface Source extends AstNode {
+    readonly $container: GatheringProcess;
+    name: string
+    noise: string
+    sourcedesc: string
+}
+
+export const Source = 'Source';
+
+export function isSource(item: unknown): item is Source {
+    return reflection.isInstance(item, Source);
+}
+
+export interface SpeechSitatuion extends AstNode {
+    name: string | SpeechModality | SpeechType | SpeechSyncrony
+}
+
+export const SpeechSitatuion = 'SpeechSitatuion';
+
+export function isSpeechSitatuion(item: unknown): item is SpeechSitatuion {
+    return reflection.isInstance(item, SpeechSitatuion);
+}
+
+export interface Statistics extends AstNode {
+    readonly $container: DataInstance;
+    metric: Array<QualityMetric>
+    pair: Array<PairCorrelation>
+}
+
+export const Statistics = 'Statistics';
+
+export function isStatistics(item: unknown): item is Statistics {
+    return reflection.isInstance(item, Statistics);
+}
+
 export interface Tags extends AstNode {
-    readonly $container: GeneralInfo;
+    readonly $container: Metadata;
     name: 'Tags:'
     tags: Array<string>
 }
@@ -509,53 +583,55 @@ export function isTags(item: unknown): item is Tags {
     return reflection.isInstance(item, Tags);
 }
 
-export interface Uses extends AstNode {
-    readonly $container: GeneralInfo;
-    future: string
-    name: 'Uses:'
-    past: string
-    recommend: string
-    repo: string
+export interface Team extends AstNode {
+    readonly $container: GatheringProcess | LabelingProcess;
+    gatherType: TeamType
+    teamDemographics: Demographics
+    who: string
 }
 
-export const Uses = 'Uses';
+export const Team = 'Team';
 
-export function isUses(item: unknown): item is Uses {
-    return reflection.isInstance(item, Uses);
+export function isTeam(item: unknown): item is Team {
+    return reflection.isInstance(item, Team);
 }
 
-export type QualifiedName = string
+export type CommonLicences = 'Creative Commons' | 'CC0: Public Domain' | 'CC BY-NC-SA 4.0' | 'CC BY-SA 4.0' | 'CC BY-SA 3.0' | 'CC BY 4.0 (Attribution 4.0 International)' | 'CC BY-NC 4.0 (Attribution-NonCommercial 4.0 International)' | 'CC BY 3.0 (Attribution 3.0 Unported)' | 'CC BY 3.0 IGO (Attribution 3.0 IGO)' | 'CC BY-NC-SA 3.0 IGO (Attribution-NonCommercial-ShareAlike 3.0 IGO)' | 'CC BY-ND 4.0 (Attribution-NoDerivatives 4.0 International)' | 'CC BY-NC-ND 4.0 (Attribution-NonCommercial-NoDerivatives 4.0 International)' | 'GPL' | 'GPL 2' | 'LGPL 3.0 (GNU Lesser General Public License 3.0)' | 'AGPL 3.0 (GNU Affero General Public License 3.0)' | 'FDL 1.3 (GNU Free Documentation License 1.3)' | 'Open Data Commons' | 'Database: Open Database, Contents: Database Contents' | 'Database: Open Database, Contents: © Original Authors' | 'PDDL (ODC Public Domain Dedication and Licence)' | 'ODC-BY 1.0 (ODC Attribution License)' | 'Community Data License' | 'Community Data License Agreement - Permissive - Version 1.0' | 'Community Data License Agreement - Sharing - Version 1.0' | 'Special' | 'World Bank Dataset Terms of Use' | 'Reddit API Terms' | 'U.S. Government Works' | 'EU ODP Legal Notice'
 
-export type DataTypes = 'String' | 'Integer' | 'Boolean' | 'Other'
-
-export type ATtype = string
-
-export type InsType = 'Record_Data' | 'Time-Series' | 'Ordenred' | 'Graph' | 'Other'
+export type InstanceType = 'Record-Data' | 'Time-Series' | 'Ordered' | 'Graph' | 'Other'
 
 export type FoundersType = 'private' | 'public' | 'mixed'
 
-export type Operation = '<' | '>' | '=' | '!=' | '+' | '-'
-
-export type Categoric = string
-
-export type Numeric = string
-
-export type Symetric = 'Symmetric' | 'Asymmetric'
-
-export type Proven = string
-
-export type Social = string
+export type AttributeSymmetry = 'Symmetric' | 'Asymmetric'
 
 export type AnnotationType = 'Bounding boxes' | 'Lines and splines' | 'Semantinc Segmentation' | '3D cuboids' | 'Polygonal segmentation' | 'Landmark and key-point' | 'Image and video annotations' | 'Entity annotation' | 'Content and text categorization'
 
-export type datasetDescriptorAstType = 'Annotator' | 'Annotators' | 'Area' | 'Attribute' | 'Author' | 'Authoring' | 'Authors' | 'Binary' | 'Categor' | 'Composition' | 'DataProvenance' | 'DataQuality' | 'DataSource' | 'DataSources' | 'Declaration' | 'Dependencies' | 'DescriptionDataset' | 'Distribution' | 'Founder' | 'Founders' | 'GeneralInfo' | 'Instance' | 'Instances' | 'InstanceStatistics' | 'IntegrityRules' | 'Labels' | 'Maintainer' | 'Maintenance' | 'Numeri' | 'PreProcess' | 'Privacy' | 'Relation' | 'RelationInstances' | 'SensitiveData' | 'SocialConcerns' | 'Tags' | 'Uses';
+export type SocialIssueType = 'Privacy' | 'Bias' | 'Sensitive Data' | 'Social Impact'
 
-export type datasetDescriptorAstReference = 'DataSource:mapInstance' | 'Instance:labels' | 'Labels:map' | 'Privacy:priva' | 'Relation:attRel' | 'Relation:attRelTarget' | 'Relation:insRel' | 'SensitiveData:senseAtt';
+export type GatherType = 'API' | 'Sensors' | 'Manual Human Curator' | 'Software' | 'Others'
+
+export type TeamType = 'Internal' | 'External' | 'Contractors' | 'Crowdsourcing'
+
+export type SpeechModality = 'spoken/signed' | 'written'
+
+export type SpeechType = 'Scripted/edited' | 'spontaneous'
+
+export type SpeechSyncrony = 'synchronous interaction' | 'asynchronous intercation'
+
+export type DataTypes = 'String' | 'Integer' | 'Boolean' | 'Other'
+
+export type QualifiedName = string
+
+export type Operators = '<' | '>' | '=' | '!=' | '+' | '-'
+
+export type datasetDescriptorAstType = 'Applications' | 'Area' | 'Attribute' | 'Author' | 'Authoring' | 'Authors' | 'Binary' | 'Categor' | 'Composition' | 'ConsistencyRules' | 'DataInstance' | 'DataInstances' | 'Declaration' | 'Demographics' | 'Dependencies' | 'DescriptionDataset' | 'Distribution' | 'Founder' | 'Founders' | 'GatheringProcess' | 'GatheringProcesses' | 'LabelingProcess' | 'LabelingProcesses' | 'Labels' | 'Maintainer' | 'Metadata' | 'Numeri' | 'PairCorrelation' | 'PreProcess' | 'PreProcesses' | 'Provenance' | 'QualityMetric' | 'Relation' | 'RelationInstances' | 'Requeriments' | 'SocialConcerns' | 'SocialIssue' | 'Source' | 'SpeechSitatuion' | 'Statistics' | 'Tags' | 'Team';
+
+export type datasetDescriptorAstReference = 'Attribute:labelProces' | 'ConsistencyRules:attrule1' | 'ConsistencyRules:attrule2' | 'GatheringProcess:labelSocialIssues' | 'GatheringProcess:mapInstance' | 'LabelingProcess:labelSocialIssues' | 'Labels:map' | 'PairCorrelation:attr1' | 'PairCorrelation:attr2' | 'Relation:attRel' | 'Relation:attRelTarget' | 'Relation:insRel' | 'SocialIssue:senseAtt';
 
 export class datasetDescriptorAstReflection implements AstReflection {
 
     getAllTypes(): string[] {
-        return ['Annotator', 'Annotators', 'Area', 'Attribute', 'Author', 'Authoring', 'Authors', 'Binary', 'Categor', 'Composition', 'DataProvenance', 'DataQuality', 'DataSource', 'DataSources', 'Declaration', 'Dependencies', 'DescriptionDataset', 'Distribution', 'Founder', 'Founders', 'GeneralInfo', 'Instance', 'Instances', 'InstanceStatistics', 'IntegrityRules', 'Labels', 'Maintainer', 'Maintenance', 'Numeri', 'PreProcess', 'Privacy', 'Relation', 'RelationInstances', 'SensitiveData', 'SocialConcerns', 'Tags', 'Uses'];
+        return ['Applications', 'Area', 'Attribute', 'Author', 'Authoring', 'Authors', 'Binary', 'Categor', 'Composition', 'ConsistencyRules', 'DataInstance', 'DataInstances', 'Declaration', 'Demographics', 'Dependencies', 'DescriptionDataset', 'Distribution', 'Founder', 'Founders', 'GatheringProcess', 'GatheringProcesses', 'LabelingProcess', 'LabelingProcesses', 'Labels', 'Maintainer', 'Metadata', 'Numeri', 'PairCorrelation', 'PreProcess', 'PreProcesses', 'Provenance', 'QualityMetric', 'Relation', 'RelationInstances', 'Requeriments', 'SocialConcerns', 'SocialIssue', 'Source', 'SpeechSitatuion', 'Statistics', 'Tags', 'Team'];
     }
 
     isInstance(node: unknown, type: string): boolean {
@@ -575,16 +651,31 @@ export class datasetDescriptorAstReflection implements AstReflection {
 
     getReferenceType(referenceId: datasetDescriptorAstReference): string {
         switch (referenceId) {
-            case 'DataSource:mapInstance': {
-                return Instance;
+            case 'Attribute:labelProces': {
+                return LabelingProcess;
             }
-            case 'Instance:labels': {
-                return Labels;
+            case 'ConsistencyRules:attrule1': {
+                return Attribute;
+            }
+            case 'ConsistencyRules:attrule2': {
+                return Attribute;
+            }
+            case 'GatheringProcess:labelSocialIssues': {
+                return SocialIssue;
+            }
+            case 'GatheringProcess:mapInstance': {
+                return DataInstance;
+            }
+            case 'LabelingProcess:labelSocialIssues': {
+                return SocialIssue;
             }
             case 'Labels:map': {
                 return Attribute;
             }
-            case 'Privacy:priva': {
+            case 'PairCorrelation:attr1': {
+                return Attribute;
+            }
+            case 'PairCorrelation:attr2': {
                 return Attribute;
             }
             case 'Relation:attRel': {
@@ -594,9 +685,9 @@ export class datasetDescriptorAstReflection implements AstReflection {
                 return Attribute;
             }
             case 'Relation:insRel': {
-                return Instance;
+                return DataInstance;
             }
-            case 'SensitiveData:senseAtt': {
+            case 'SocialIssue:senseAtt': {
                 return Attribute;
             }
             default: {

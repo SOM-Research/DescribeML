@@ -1,5 +1,5 @@
 import { ValidationAcceptor, ValidationCheck, ValidationRegistry } from 'langium';
-import { datasetDescriptorAstType, Maintenance, GeneralInfo, Author, Founder, Composition, Authoring } from './generated/ast';
+import { datasetDescriptorAstType, Metadata, Author, Founder, Composition, Authoring } from './generated/ast';
 import { DatasetDescriptorServices } from './dataset-descriptor-module';
 
 /**
@@ -15,12 +15,11 @@ export class DatasetDescriptorValidationRegistry extends ValidationRegistry {
         super(services);
         const validator = services.validation.DatasetDescriptorValidator;
         const checks: DatasetDescriptorChecks = {
-            GeneralInfo: validator.hintsOfDescription,
+            Metadata: validator.hintsOfDescription,
             Author: validator.authorValidator,
             Founder: validator.hintsOfFounder,
             Authoring: validator.hintsOfAuthoring,
             Composition:validator.hintOfComposition,
-            Maintenance:validator.hintsofMaintenance
         };
         this.register(checks, validator);
     }
@@ -31,7 +30,7 @@ export class DatasetDescriptorValidationRegistry extends ValidationRegistry {
  */
 export class DatasetDescriptorValidator {
 
-    hintsOfDescription(type:GeneralInfo, accept: ValidationAcceptor): void {
+    hintsOfDescription(type:Metadata, accept: ValidationAcceptor): void {
           //  accept('warning', 'Version should have the following form: V000', { node: type, property: 'version' });
             accept('hint', 'For what propose was the dataser created? \nPlease provide a description', { node: type, property: 'descriptionpurpose' });
             accept('hint', 'Was there a specific task in mind?\nPlease provide a description', { node: type, property: 'descriptionTasks'});
@@ -46,15 +45,13 @@ export class DatasetDescriptorValidator {
     hintsOfAuthoring(type: Authoring, accept: ValidationAcceptor): void {
         
          accept('hint', 'Who is the author of the dataset?', { node: type, property:'name' });
+         accept('hint', 'Who maintan the dataset? How can be contacted?', { node: type, property: 'maintainers' });
+         accept('hint', 'Is there an erratum? If so, please provide a link or other access point?', { node: type, property: 'erratum' });
+         accept('hint', 'If the dataset belongs to people, are there applicable limits on the retention of the data associated with them? If so, please describre how. If not, please describre how its obsolescence will be communicated to the dataset', { node: type, property: 'dataRetention' });
+         accept('hint', '1 - Will the dataset by updated (p.e: to correct labels, add or delete new instances)? If so, please describre how \n2 - Will older version of the dataset continue to be supported/hosted/maintained?', { node: type, property: 'support' });
+         accept('hint', 'Please describre the mechanism for contribution here', { node: type, property: 'contribGuides' });
      }
     
-    hintsofMaintenance(type:Maintenance, accept: ValidationAcceptor): void {
-        accept('hint', 'Who maintan the dataset? How can be contacted?', { node: type, property: 'maintainers' });
-        accept('hint', 'Is there an erratum? If so, please provide a link or other access point?', { node: type, property: 'erratum' });
-        accept('hint', 'If the dataset belongs to people, are there applicable limits on the retention of the data associated with them? If so, please describre how. If not, please describre how its obsolescence will be communicated to the dataset', { node: type, property: 'dataRetention' });
-        accept('hint', '1 - Will the dataset by updated (p.e: to correct labels, add or delete new instances)? If so, please describre how \n2 - Will older version of the dataset continue to be supported/hosted/maintained?', { node: type, property: 'support' });
-        accept('hint', 'Please describre the mechanism for contribution here', { node: type, property: 'contribGuides' });
-    }
 
     hintOfComposition(type: Composition, accept: ValidationAcceptor): void {
         accept('hint', 'What do the instances that comprise the dataset represent(for example, documents, photos, people, countries)', { node: type, property: 'compodesc' });

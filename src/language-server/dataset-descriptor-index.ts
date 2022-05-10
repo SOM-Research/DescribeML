@@ -6,7 +6,7 @@
 
  import { AstNodeDescription, DefaultAstNodeDescriptionProvider, interruptAndCheck, LangiumDocument, LangiumServices, streamAllContents } from 'langium';
  import { CancellationToken } from 'vscode-languageserver';
- import { isAttribute, Instance } from './generated/ast';
+ import { isAttribute, DataInstance } from './generated/ast';
 
  
  export class DatasetDescriptorDescriptionProvider extends DefaultAstNodeDescriptionProvider {
@@ -26,7 +26,7 @@
              await interruptAndCheck(cancelToken);
              const name = this.nameProvider.getName(content.node);
              if (isAttribute(content.node)){
-                 let container = content.node.$container as Instance;
+                 let container = content.node.$container as DataInstance;
                  if (name && (container.name)) {
                      descr.push(this.createDescription(content.node, container.name+'.'+ name, document));
                  }
