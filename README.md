@@ -4,15 +4,26 @@ A Visual Studio Code language plugin to describe machine-learning datasets. This
 
 ## Using the plug-in
 
-This work is still in a double-blind peer-review process. Therefore, the plugin is not published in the Visual Studio Code Market. Instead, a packaged release of the plugin is ready to be installed. Can be found at the root of the project. The specific file is Dataset-Descriptor-0.0.1.vsix.
+This work is still in a double-blind peer-review process. Therefore, the plugin is not published in the Visual Studio Code Market. Instead, a packaged release of the plugin is ready to be installed. Can be found at the root of the project. 
+
+The file is **Dataset-Descriptor-0.0.1.vsix**
 
 Open your terminal (or the terminal inside the VSCode) and write this:
 
-```code --install-extension Dataset-Descriptor-0.0.1.vsix```
+```
+git clone https://github.com/SOM-Research/Dataset-Descriptor.git datasets
+
+cd datasets 
+
+code --install-extension Dataset-Descriptor-0.0.1.vsix
+```
+
+*Troubles: If you are not able to see the syntax highlight in the examples files (p.e. *Melanoma.datadesc*) as the image below . Please, reload the VSCode editor and write the code --install command again*
 
 Great! That's it.
 
-Now go to /examples/evaluation and open a .datadesc file to see a working example of our preliminary evaluation.
+Now go to the folder **/examples/evaluation** and open a, for example *Melanoma.datadesc* file to see a working example of our preliminary evaluation.
+
 Remember: by default, VSCode gives you auto-completion help by hitting CTRL + Space (or equivalent in MAC)
 
 ![Autocompletion feature](fileicons/Autcomplete.gif)
