@@ -3,28 +3,31 @@ Dataset: Polarity
         Title: "Movie Review Polarity" 
         Unique-identifier: Movie_Review_Polarity
         Version: v0001
+        Release Date: "2002"
+        Citation: 
+            "Bo Pang and Lillian Lee. 2004. A sentimental education: Sentiment analysis using
+            subjectivity summarization based on minimum cuts. In Proceedings of the 42nd Annual
+            Meeting of the Association for Computational Linguistics. 271."
         Description:  
             Purpose: 
                 "The dataset was created to enable research on predicting sentiment polarity—i.e., given a piece of English text, predict whether
                 it has a positive or negative affect—or stance—toward its topic.The dataset was created intentionally with that task in mind, 
                 focusing on movie reviews as a place where affect/sentiment is frequently expressed." 
-            Tasks: "Classification"  
-        Citation: 
-            "Bo Pang and Lillian Lee. 2004. A sentimental education: Sentiment analysis using
-            subjectivity summarization based on minimum cuts. In Proceedings of the 42nd Annual
-            Meeting of the Association for Computational Linguistics. 271."
-        Uses: 
+            Tasks: "Classification" 
+            Gaps: "Gender Reference"
+        Licences: CC BY 4.0 (Attribution 4.0 International)
+        Applications: 
             Past Uses:
                "At the time of publication, only the original paper (http://xxx.lanl.
                 gov/pdf/cs/0409058v1). Between then and 2012, a collection of papers 
                 that used this dataset was maintained at http://www.cs.cornell.
                 edu/people/pabo/movie%2Dreview%2Ddata/otherexperiments.html."
-            Recommneded Uses:
+            Recommneded:
                 "The dataset could be used for anything related to modeling or
                 understanding movie reviews. For instance, one may induce a
                 lexicon of words/phrases that are highly indicative of sentiment
                 polarity, or learn to automatically generate movie reviews"
-            Non-recommended Uses:
+            Non-recommended:
                 "This data is collected solely in the movie review domain, so
                 systems trained on it may or may not generalize to other sentiment prediction tasks. 
                 Consequently, such systems should not— without additional verification—be used to make consequential
@@ -48,20 +51,12 @@ Dataset: Polarity
             Authors:
                 Name Bo_Pong email "XXXX@email.com"
                 Name Lillian_Lee	email "XXXX@email.com"
-            Founders:
+            Funders:
                 Name National_Science_Fundations type mixed
                 Name Deparment_of_the_Interior type public 
                 Name National_Business_Center type mixed
                 Name Cornell_University type mixed
-                Name Sloan_Fundaiton type private 
-            License Information: "
-                    The crawled data copyright belongs to the authors of the reviews
-                    unless otherwise stated. There is no license, but there is a request
-                    to cite the corresponding paper if the dataset is used: Thumbs up?
-                    Sentiment classification using machine learning techniques. Bo
-                    Pang, Lillian Lee, and Shivakumar Vaithyanathan. Proceedings
-                    of EMNLP, 2002." 
-            Maintenance:
+                Name Sloan_Fundaiton type private
                 Maintainer:
                     Name Bo_Pong email "XXXX@email.com"
                 Erratum? 
@@ -86,15 +81,14 @@ Dataset: Polarity
                     Is there an erratum? If so, please provid"
 
     Composition:
-         Description: 
+         Rationale: 
             "The instances are movie reviews extracted from newsgroup postings,
             together with a sentiment polarity rating for whether the text
             corresponds to a review with a rating that is either strongly positive (high number of stars)
             or strongly negative (low number of  stars). The sentiment polarity rating is binary {positive, negative}."
-         Total number of instances: 64702
-
-         Instances: 
-                Instance: MovieReviews
+         Total size: 64702
+         Data Instances: 
+                Instance: MovieReviews 
                      Description: 
                         "Each instance consists of the text associated with the review, with
                         obvious ratings information removed from that text (some errors
@@ -106,45 +100,44 @@ Dataset: Polarity
                         stars that that review gave (details on the mapping from
                         number of stars to polarity is given below in “Data Preprocessing”). 
                         There is total number of 64702 sentences analyzed"
-                     Type: Record_Data
-                     Number of attributes: 6
-                     Related Labels: Tag
+                     Type: Record-Data
+                     Attribute number: 6
                      Attributes:
                         attribute: fold_id
                             description: "Folder Id containing the text inside the dataset " 
-                            completeness: 100 
                             count: 64702
                             ofType: Categorical
+
                         attribute: cv_tag
                             description: "Author file id containint the text inside the dataset " 
-                            completeness: 100 
                             count: 64702
                             ofType: Categorical 
+
                         attribute: html_id
                         description: "Author file ID separated by pos and negative labels " 
-                          completeness: 100 
                           count: 64702 
                           ofType: Categorical 
+
                         attribute: sent_id
                             description: "Sentence id inside every file " 
-                            completeness: 100 
                             count: 64702 
                             ofType: Categorical 
+
                             attribute: text
                         description: "The text extracted from the revies of IMDB " 
-                        completeness: 100 
                         count: 64702
                         ofType: Categorical 
+
                         attribute: tag
                           description: "The label annotated by the reviewrs " 
-                          completeness: 100 
                           ofType: Categorical
-                           Categoric Distribution:
-                            "pos: 50%
-                             neg: 50%"
-                    Instance Statistics:
-                        Pair Plot: "Categorical distribution of attribute tag" 
-                    Data Quality:
+                          Statistics:
+                            Categoric Distribution:
+                             "pos: 50%
+                              neg: 50%"
+
+                    Statistics:
+                        Quality Metrics:
                             Sparsity: 0
                             Compeleteness: 100
                             Class Balance "attribute 'tag': 50% positive, 50% negative"
@@ -162,53 +155,129 @@ Dataset: Polarity
                     cross-validation experiments; results are measured in
                     classification accuracy. " 
 
-     Social Concerns:
-         Privacy:
-            Legal Issues: "Not known by the authors"
-        Sensitive Data: 
-            Description: "Some movie reviews might contain moderately inappropriate or
-            offensive language, but we do not expect this to be the norm"  
-            Instance belongs to people:
-                Are there protecte groups? "No"
-        Social Impact: 
-            "Some personal information is retained from the newsgroup posting
-            in the “raw form” of the dataset (as opposed to the “preprocessed” version, 
-            in which these are automatically removed), including the name and email address 
-            the author posted under (note that these are already public on the internet newsgroup 
-            archive)."
-
-
-     Data Provenance:
-         Curation Rationale: 
+    Data Provenance:
+        Curation Rationale: 
             "The data was mostly observable as raw text, except that the
             labels were extracted by the process described below. The
             data was collected by downloading reviews from the IMDb
             archive of the rec.arts.movies.reviews newsgroup, at
             http://reviews.imdb.com/Reviews."
-          Data Sources:
-            Source: IMDb
-            Description:
-                "The sample of instances collected is English movie reviews from
-                the rec.arts.movies.reviews newsgroup, from which a
-                “number of stars” rating could be extracted. The sample is limited
-                to forty reviews per unique author in order to achieve broader
-                coverage by authorship. Beyond that, the sample is arbitrar" 
-            Related Instances: MovieReviews
-            How data is collected: "Unkown to the authors"
-            Who collects the data: "Uknown to the authors"
-            Noise Sources: "Uknown from the source, see preprocessing" 
-            Privacy: 
-             "Individuals were not aware of data collection. The data was crawled from public web sources,
-             and the authors of the posts presumably knew that their posts would be public, but the authors 
-             werenot explicitly informed that their posts were to be used in this way."
-         Data Preprocessing: 
-            Labeling process: labelproces1
-            Description: "Desc of lbel"
-            Type: Entity annotation
-            Labels:
-                Label: Tag
-                Description: "The label is the positive/negative sentiment polarity rating derived
-                from the star rating"
-            Mapping: tag
-            Who annotates the data: "320 voluunteer reviewers"
-            Label Requeriments "The process requeriments"
+            Gathering Processes:
+                Description: "The
+                data was collected by downloading reviews from the IMDb
+                archive of the rec.arts.movies.reviews newsgroup, at
+                http://reviews.imdb.com/Reviews."
+                Source: IMDb
+                    Description:
+                        "The sample of instances collected is English movie reviews from
+                        the rec.arts.movies.reviews newsgroup, from which a
+                        “number of stars” rating could be extracted. The sample is limited
+                        to forty reviews per unique author in order to achieve broader
+                        coverage by authorship. Beyond that, the sample is arbitrar" 
+                    Noise: "unknown"
+                Related Instances: MovieReviews
+                Social Issues privacyAware
+                How data is collected: Manual Human Curator
+                When data was collected: "There are 1,400 instances in total in the original (v1.x versions)
+                and 2,000 instances in total in v2.0 (from 2014)."
+    
+    LabelingProcesses: 
+        Labeling process: labelproces1
+        Description: "A Rating between 0 a 5 fives stars following the
+         requeriments listed below. o to deermine whether a review was
+          positive or negative.
+
+        The original html files do not have consistent formats -- a review may
+        not have the author's rating with it, and when it does, the rating can
+        appear at different places in the file in different forms.  We only
+        recognize some of the more explicit ratings, which are extracted via a
+        set of ad-hoc rules.  In essence, a file's classification is determined
+        based on the first rating we were able to identify
+        
+        We attempted to recognize half stars, but they are specified in an
+        especially free way, which makes them difficult to recognize.  Hence,
+        we may lose a half star very occasionally; but this only results in 2.5
+        stars in five star system being categorized as negative, which is 
+        still reasonable."
+        Type: Entity annotation
+        Labels:
+            Label: Tag
+            Description: "The label is the positive/negative sentiment polarity rating derived
+            from the star rating"
+        Mapping: tag
+        Label Requeriments 
+          Requeriment:                     
+            "- In order to obtain more accurate rating decisions, the maximum
+                rating must be specified explicitly, both for numerical ratings
+                and star ratings.  ('8/10', 'four out of five', and 'OUT OF
+                ****: ***'' are examples of rating indications we recognize.)"
+           Requeriment:  " 
+            - With a five-star system (or compatible number systems):
+                three-and-a-half stars and up are considered positive, 
+                two stars and below are considered negative."     
+           Requeriment:   "
+            - With a four-star system (or compatible number system):
+                three stars and up are considered positive, 
+                one-and-a-half stars and below are considered negative.  "
+            Requeriment:   "
+            - With a letter grade system:
+                B or above is considered positive,
+                C- or below is considered negative."
+       
+    Preprocesses:
+        Preprocess: Cleaning
+          Description: 
+            "Instances for which an explicit rating could not be found
+            were discarded. Also only instances with strongly-positive
+            or strongly-negative ratings were retained. 
+            
+            Star ratings were extracted by automatically looking for text like “**** out of
+            *****” in the review, using that as a label, and then removing
+            the corresponding text. When the star rating was out of five stars,
+            anything at least four was considered positive and anything at
+            most two negative; when out of four, three and up is considered
+            positive, and one or less is considered negative. Occasionally half
+            stars are missed which affects the labeling of negative examples.
+            Everything in the middle was discarded. In order to ensure that
+            sufficiently many authors are represented, at most 20 reviews
+            (per positive/negative label) per author are included.
+
+            In a later version of the dataset (v1.1), non-English reviews were
+            also removed.
+
+            Some preprocessing errors were caught in later versions. The following fixes were made: (1) Some reviews had rating information
+            in several places that was missed by the initial filters; these are
+            removed. (2) Some reviews had unexpected/unparsed ranges and
+            these were fixed. (3) Sometimes the boilerplate removal removed
+            too much of the text."
+
+     Social Concerns:
+       Social Issue: privacyAware
+         IssueType: Privacy
+         Description: 
+            "Individuals were not aware of data collection. The data was crawled from public web sources,
+            and the authors of the posts presumably knew that their posts would be public, but the authors 
+            werenot explicitly informed that their posts were to be used in this way."
+        
+         Social Issue: inappropiateContent
+        IssueType: Social Impact
+        Related Attributes: 
+            attribute: text
+        Description: 
+            "Some movie reviews might contain moderately inappropriate or
+            offensive language, but we do not expect this to be the norm"  
+        Instance belongs to people:
+            Are there protecte groups? "No"
+       
+        Social Issue: personalInformation
+        IssueType: Privacy
+        Description: 
+            "Some personal information is retained from the newsgroup posting
+            in the “raw form” of the dataset (as opposed to the “preprocessed” version, 
+            in which these are automatically removed), including the name and email address 
+            the author posted under (note that these are already public on the internet newsgroup 
+            archive)."                    
+  
+            
+
+
