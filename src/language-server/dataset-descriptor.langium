@@ -19,6 +19,7 @@ Metadata:
      'Title:' title=STRING 
      'Unique-identifier:' ident=ID
      'Version:' version=ID 
+     ('Release Date:' dates=STRING )?
      ('Citation:' citation=STRING)?
      'Description:' 
         (description=STRING | 
@@ -42,9 +43,9 @@ Distribution:
 // Applications
 Applications:
     name="Applications:"
-    ("Past Uses:" past=STRING)?
-    ("Recommneded:" recommend=STRING)?
-    ("Non-recommended:" future=STRING)?
+    ("Past Uses:" (past+=STRING)*)?
+    ("Recommneded:" (recommend+=STRING)*)?
+    ("Non-recommended:" (future+=STRING)*)?
     ("Uses repository:" repo=STRING)?;
 Area: name='Area:' area+=ID;
 Tags: name='Tags:' (tags+=ID)*;
@@ -64,9 +65,9 @@ Authors:
 Author:
     'Name' name=ID 'email' email=STRING;
 Founders: 
-    name='Founders:'  (founders+=Founder)+;
-Founder:
-    'Name' name=ID 'type' type=FoundersType ('grantor' grantor= STRING 'grantId:' ID)?;
+    name='Funders:'  (funders+=Funder)+;
+Funder:
+    'Name' name=ID 'type' type=FundersType ('grantor' grantor= STRING 'grantId:' ID)?;
 Maintainer:
     'Name' name=ID 'email' email=STRING;
 
@@ -99,7 +100,7 @@ DataInstance:
 // Statistics
 Statistics:
     ('Pair Correlation:' (pair+=PairCorrelation)*)?
-    ('Quality Metircs:' metric+=QualityMetric)?;
+    ('Quality Metrics:' metric+=QualityMetric)?;
 
 PairCorrelation:
     (
@@ -185,8 +186,10 @@ GatheringProcesses:
     name='Gathering Processes:' (processes+=GatheringProcess)*;
 
 GatheringProcess:
+    'Process:' name=ID
     'Description:' desc=STRING
      source=Source  
+    ('Gathering dates range:' gatherDates=STRING)?
     'Related Instances:' (mapInstance=[DataInstance] (',')?)*
     ('Social Issues' labelSocialIssues=[SocialIssue])?
     ('How data is collected:' how=GatherType)?
@@ -199,7 +202,7 @@ GatheringProcess:
 Source:
     'Source:' name=ID
     'Description:' sourcedesc=STRING
-    'Noise:' noise=STRING;
+    'Noise:' (noise+=STRING)*;
 
 SpeechSitatuion:
     ('Time and place:' name=STRING)?
@@ -291,7 +294,7 @@ CommonLicences returns string: 'Creative Commons' | 'CC0: Public Domain' | 'CC B
                                 | 'Community Data License' | 'Community Data License Agreement - Permissive - Version 1.0' | 'Community Data License Agreement - Sharing - Version 1.0' | 'Special' | 'World Bank Dataset Terms of Use' | 'Reddit API Terms' | 'U.S. Government Works' | 'EU ODP Legal Notice';
 
 InstanceType returns string: 'Record-Data' | 'Time-Series' | 'Ordered' | 'Graph' | 'Other';
-FoundersType returns string: 'private' | 'public' | 'mixed';
+FundersType returns string: 'private' | 'public' | 'mixed';
 AttributeSymmetry returns string: 'Symmetric' | 'Asymmetric';
 AnnotationType returns string: 'Bounding boxes' | 'Lines and splines' | 'Semantinc Segmentation' | '3D cuboids' | 'Polygonal segmentation' | 'Landmark and key-point' | 'Image and video annotations' | 'Entity annotation' | 'Content and text categorization';
 SocialIssueType returns string: 'Privacy' | 'Bias' | 'Sensitive Data' | 'Social Impact';

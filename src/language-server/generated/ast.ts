@@ -9,10 +9,10 @@ import { AstNode, AstReflection, Reference, isAstNode } from 'langium';
 
 export interface Applications extends AstNode {
     readonly $container: Metadata;
-    future: string
+    future: Array<string>
     name: 'Applications:'
-    past: string
-    recommend: string
+    past: Array<string>
+    recommend: Array<string>
     repo: string
 }
 
@@ -252,23 +252,10 @@ export function isDistribution(item: unknown): item is Distribution {
     return reflection.isInstance(item, Distribution);
 }
 
-export interface Founder extends AstNode {
-    readonly $container: Founders;
-    grantor: string
-    name: string
-    type: FoundersType
-}
-
-export const Founder = 'Founder';
-
-export function isFounder(item: unknown): item is Founder {
-    return reflection.isInstance(item, Founder);
-}
-
 export interface Founders extends AstNode {
     readonly $container: Authoring;
-    founders: Array<Founder>
-    name: 'Founders:'
+    funders: Array<Funder>
+    name: 'Funders:'
 }
 
 export const Founders = 'Founders';
@@ -277,13 +264,28 @@ export function isFounders(item: unknown): item is Founders {
     return reflection.isInstance(item, Founders);
 }
 
+export interface Funder extends AstNode {
+    readonly $container: Founders;
+    grantor: string
+    name: string
+    type: FundersType
+}
+
+export const Funder = 'Funder';
+
+export function isFunder(item: unknown): item is Funder {
+    return reflection.isInstance(item, Funder);
+}
+
 export interface GatheringProcess extends AstNode {
     readonly $container: GatheringProcesses;
     desc: string
+    gatherDates: string
     gatheringTeam: Team
     how: GatherType
     labelSocialIssues?: Reference<SocialIssue>
     mapInstance?: Reference<DataInstance>
+    name: string
     processDemo: Demographics
     requeriments: Array<Requeriments>
     source: Source
@@ -365,6 +367,7 @@ export interface Metadata extends AstNode {
     area: Area
     authoring: Authoring
     citation: string
+    dates: string
     description: string
     descriptionGaps: string
     descriptionpurpose: string
@@ -539,7 +542,7 @@ export function isSocialIssue(item: unknown): item is SocialIssue {
 export interface Source extends AstNode {
     readonly $container: GatheringProcess;
     name: string
-    noise: string
+    noise: Array<string>
     sourcedesc: string
 }
 
@@ -600,7 +603,7 @@ export type CommonLicences = 'Creative Commons' | 'CC0: Public Domain' | 'CC BY-
 
 export type InstanceType = 'Record-Data' | 'Time-Series' | 'Ordered' | 'Graph' | 'Other'
 
-export type FoundersType = 'private' | 'public' | 'mixed'
+export type FundersType = 'private' | 'public' | 'mixed'
 
 export type AttributeSymmetry = 'Symmetric' | 'Asymmetric'
 
@@ -624,14 +627,14 @@ export type QualifiedName = string
 
 export type Operators = '<' | '>' | '=' | '!=' | '+' | '-'
 
-export type datasetDescriptorAstType = 'Applications' | 'Area' | 'Attribute' | 'Author' | 'Authoring' | 'Authors' | 'Binary' | 'Categor' | 'Composition' | 'ConsistencyRules' | 'DataInstance' | 'DataInstances' | 'Declaration' | 'Demographics' | 'Dependencies' | 'DescriptionDataset' | 'Distribution' | 'Founder' | 'Founders' | 'GatheringProcess' | 'GatheringProcesses' | 'LabelingProcess' | 'LabelingProcesses' | 'Labels' | 'Maintainer' | 'Metadata' | 'Numeri' | 'PairCorrelation' | 'PreProcess' | 'PreProcesses' | 'Provenance' | 'QualityMetric' | 'Relation' | 'RelationInstances' | 'Requeriments' | 'SocialConcerns' | 'SocialIssue' | 'Source' | 'SpeechSitatuion' | 'Statistics' | 'Tags' | 'Team';
+export type datasetDescriptorAstType = 'Applications' | 'Area' | 'Attribute' | 'Author' | 'Authoring' | 'Authors' | 'Binary' | 'Categor' | 'Composition' | 'ConsistencyRules' | 'DataInstance' | 'DataInstances' | 'Declaration' | 'Demographics' | 'Dependencies' | 'DescriptionDataset' | 'Distribution' | 'Founders' | 'Funder' | 'GatheringProcess' | 'GatheringProcesses' | 'LabelingProcess' | 'LabelingProcesses' | 'Labels' | 'Maintainer' | 'Metadata' | 'Numeri' | 'PairCorrelation' | 'PreProcess' | 'PreProcesses' | 'Provenance' | 'QualityMetric' | 'Relation' | 'RelationInstances' | 'Requeriments' | 'SocialConcerns' | 'SocialIssue' | 'Source' | 'SpeechSitatuion' | 'Statistics' | 'Tags' | 'Team';
 
 export type datasetDescriptorAstReference = 'Attribute:labelProces' | 'ConsistencyRules:attrule1' | 'ConsistencyRules:attrule2' | 'GatheringProcess:labelSocialIssues' | 'GatheringProcess:mapInstance' | 'LabelingProcess:labelSocialIssues' | 'Labels:map' | 'PairCorrelation:attr1' | 'PairCorrelation:attr2' | 'Relation:attRel' | 'Relation:attRelTarget' | 'Relation:insRel' | 'SocialIssue:senseAtt';
 
 export class datasetDescriptorAstReflection implements AstReflection {
 
     getAllTypes(): string[] {
-        return ['Applications', 'Area', 'Attribute', 'Author', 'Authoring', 'Authors', 'Binary', 'Categor', 'Composition', 'ConsistencyRules', 'DataInstance', 'DataInstances', 'Declaration', 'Demographics', 'Dependencies', 'DescriptionDataset', 'Distribution', 'Founder', 'Founders', 'GatheringProcess', 'GatheringProcesses', 'LabelingProcess', 'LabelingProcesses', 'Labels', 'Maintainer', 'Metadata', 'Numeri', 'PairCorrelation', 'PreProcess', 'PreProcesses', 'Provenance', 'QualityMetric', 'Relation', 'RelationInstances', 'Requeriments', 'SocialConcerns', 'SocialIssue', 'Source', 'SpeechSitatuion', 'Statistics', 'Tags', 'Team'];
+        return ['Applications', 'Area', 'Attribute', 'Author', 'Authoring', 'Authors', 'Binary', 'Categor', 'Composition', 'ConsistencyRules', 'DataInstance', 'DataInstances', 'Declaration', 'Demographics', 'Dependencies', 'DescriptionDataset', 'Distribution', 'Founders', 'Funder', 'GatheringProcess', 'GatheringProcesses', 'LabelingProcess', 'LabelingProcesses', 'Labels', 'Maintainer', 'Metadata', 'Numeri', 'PairCorrelation', 'PreProcess', 'PreProcesses', 'Provenance', 'QualityMetric', 'Relation', 'RelationInstances', 'Requeriments', 'SocialConcerns', 'SocialIssue', 'Source', 'SpeechSitatuion', 'Statistics', 'Tags', 'Team'];
     }
 
     isInstance(node: unknown, type: string): boolean {

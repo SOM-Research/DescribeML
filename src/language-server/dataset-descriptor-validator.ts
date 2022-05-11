@@ -1,5 +1,5 @@
 import { ValidationAcceptor, ValidationCheck, ValidationRegistry } from 'langium';
-import { datasetDescriptorAstType, Metadata, Author, Founder, Composition, Authoring } from './generated/ast';
+import { datasetDescriptorAstType, Metadata, Author, Funder, Composition, Authoring } from './generated/ast';
 import { DatasetDescriptorServices } from './dataset-descriptor-module';
 
 /**
@@ -17,7 +17,7 @@ export class DatasetDescriptorValidationRegistry extends ValidationRegistry {
         const checks: DatasetDescriptorChecks = {
             Metadata: validator.hintsOfDescription,
             Author: validator.authorValidator,
-            Founder: validator.hintsOfFounder,
+            Funder: validator.hintsOfFunder,
             Authoring: validator.hintsOfAuthoring,
             Composition:validator.hintOfComposition,
         };
@@ -39,7 +39,7 @@ export class DatasetDescriptorValidator {
     }
 
     
-    hintsOfFounder(type: Founder, accept: ValidationAcceptor): void {
+    hintsOfFunder(type: Funder, accept: ValidationAcceptor): void {
         accept('hint', '1 - Who founded the creation of the dataset?\n2 - If is there any associated grant, please provide the number and the name of the grantor and the gran name and number', { node: type, property:'name' });
     }
     hintsOfAuthoring(type: Authoring, accept: ValidationAcceptor): void {
