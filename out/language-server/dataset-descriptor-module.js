@@ -6,6 +6,8 @@ const langium_1 = require("langium");
 const module_1 = require("./generated/module");
 const dataset_descriptor_validator_1 = require("./dataset-descriptor-validator");
 const dataset_descriptor_index_1 = require("./dataset-descriptor-index");
+const dataset_descriptor_documentation_1 = require("./dataset-descriptor-documentation");
+const dataset_descriptor_uploader_1 = require("./dataset-descriptor-uploader");
 /**
  * Dependency injection module that overrides Langium default services and contributes the
  * declared custom services. The Langium defaults can be partially specified to override only
@@ -18,6 +20,12 @@ exports.DatasetDescriptorModule = {
     },
     index: {
         AstNodeDescriptionProvider: (services) => new dataset_descriptor_index_1.DatasetDescriptorDescriptionProvider(services)
+    },
+    generation: {
+        DocumentationGenerator: (injector) => new dataset_descriptor_documentation_1.DocumentationGenerator(injector)
+    },
+    uploader: {
+        DatasetUploader: (injector) => new dataset_descriptor_uploader_1.DatasetUploader(injector)
     }
 };
 /**
@@ -28,9 +36,9 @@ exports.DatasetDescriptorModule = {
  */
 function createDatasetDescriptorServices(context) {
     const shared = (0, langium_1.inject)((0, langium_1.createDefaultSharedModule)(context), module_1.datasetDescriptorGeneratedSharedModule);
-    const domainmodel = (0, langium_1.inject)((0, langium_1.createDefaultModule)({ shared }), module_1.DatasetDescriptorGeneratedModule, exports.DatasetDescriptorModule);
-    shared.ServiceRegistry.register(domainmodel);
-    return { shared, domainmodel };
+    const datasetDescription = (0, langium_1.inject)((0, langium_1.createDefaultModule)({ shared }), module_1.DatasetDescriptorGeneratedModule, exports.DatasetDescriptorModule);
+    shared.ServiceRegistry.register(datasetDescription);
+    return { shared, datasetDescription };
 }
 exports.createDatasetDescriptorServices = createDatasetDescriptorServices;
 //# sourceMappingURL=dataset-descriptor-module.js.map

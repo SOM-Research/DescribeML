@@ -23,7 +23,7 @@ Metadata:
      ('Citation:' citation=STRING)?
      'Description:' 
         (description=STRING | 
-        (('Purpose:' descriptionpurpose=STRING)? 
+        (('Purposes:' descriptionpurpose=STRING)? 
          ('Tasks:' descriptionTasks=STRING)? 
          ('Gaps:' descriptionGaps=STRING)?)) 
      ('Licences:' licence=CommonLicences)?
@@ -58,8 +58,8 @@ Authoring:
       ('Maintainer:' (maintainers+=Maintainer)*)?
       ('Erratum?' erratum=STRING)? 
       ('Data Retention:' dataRetention=STRING)? 
-      ('Version support' support=STRING)? 
-      ('Contribution guides:' contribGuides=STRING)?);
+      ('Version lifecycle' support=STRING)? 
+      ('Contribution guidelines:' contribGuides=STRING)?);
 Authors: 
     name='Authors:'  (authors+=Author*);
 Author:
@@ -117,9 +117,9 @@ QualityMetric:
 
 // Consistency Rules
 ConsistencyRules:
-    'rule:' attrule1=[Attribute]
-    Operators
-    (comparator = NUMBER | attrule2=[Attribute])?;
+    'inv:' instance1=[DataInstance] ": ("attrule1=[Attribute]  Operators (comparator = NUMBER | attrule2=[Attribute])? ")";
+   
+   
 
 // Attributes
 Attribute:
@@ -136,7 +136,7 @@ Categor:
     (('Statistics:')
     ('Binary attribute:' binary=Binary)?
     ('Mode:' mode=STRING)?
-    ('Categoric Distribution:' catdist=STRING)?)?
+    ('Categorical Distribution:' catdist=STRING)?)?
     ('Quality Metrics:' metrics+=QualityMetric)?;
 
 Binary:
@@ -307,7 +307,7 @@ SpeechSyncrony returns string: 'synchronous interaction' | 'asynchronous interca
 // Logic Data Types
 DataTypes returns string: 'String' | 'Integer' | 'Boolean' | 'Other';
 QualifiedName returns string: ID ('.' ID)*;
-Operators returns string: '<'|'>'|'='|'!='|'+'|'-';
+Operators returns string: '<'|'>'|'='|'!='|'+'|'-'|'>=';
 
 // Terminals
 hidden terminal WS: /\s+/;

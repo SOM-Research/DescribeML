@@ -142,6 +142,7 @@ export interface ConsistencyRules extends AstNode {
     attrule1: Reference<Attribute>
     attrule2?: Reference<Attribute>
     comparator: number
+    instance1: Reference<DataInstance>
 }
 
 export const ConsistencyRules = 'ConsistencyRules';
@@ -625,11 +626,11 @@ export type DataTypes = 'String' | 'Integer' | 'Boolean' | 'Other'
 
 export type QualifiedName = string
 
-export type Operators = '<' | '>' | '=' | '!=' | '+' | '-'
+export type Operators = '<' | '>' | '=' | '!=' | '+' | '-' | '>='
 
 export type datasetDescriptorAstType = 'Applications' | 'Area' | 'Attribute' | 'Author' | 'Authoring' | 'Authors' | 'Binary' | 'Categor' | 'Composition' | 'ConsistencyRules' | 'DataInstance' | 'DataInstances' | 'Declaration' | 'Demographics' | 'Dependencies' | 'DescriptionDataset' | 'Distribution' | 'Founders' | 'Funder' | 'GatheringProcess' | 'GatheringProcesses' | 'LabelingProcess' | 'LabelingProcesses' | 'Labels' | 'Maintainer' | 'Metadata' | 'Numeri' | 'PairCorrelation' | 'PreProcess' | 'PreProcesses' | 'Provenance' | 'QualityMetric' | 'Relation' | 'RelationInstances' | 'Requeriments' | 'SocialConcerns' | 'SocialIssue' | 'Source' | 'SpeechSitatuion' | 'Statistics' | 'Tags' | 'Team';
 
-export type datasetDescriptorAstReference = 'Attribute:labelProces' | 'ConsistencyRules:attrule1' | 'ConsistencyRules:attrule2' | 'GatheringProcess:labelSocialIssues' | 'GatheringProcess:mapInstance' | 'LabelingProcess:labelSocialIssues' | 'Labels:map' | 'PairCorrelation:attr1' | 'PairCorrelation:attr2' | 'Relation:attRel' | 'Relation:attRelTarget' | 'Relation:insRel' | 'SocialIssue:senseAtt';
+export type datasetDescriptorAstReference = 'Attribute:labelProces' | 'ConsistencyRules:attrule1' | 'ConsistencyRules:attrule2' | 'ConsistencyRules:instance1' | 'GatheringProcess:labelSocialIssues' | 'GatheringProcess:mapInstance' | 'LabelingProcess:labelSocialIssues' | 'Labels:map' | 'PairCorrelation:attr1' | 'PairCorrelation:attr2' | 'Relation:attRel' | 'Relation:attRelTarget' | 'Relation:insRel' | 'SocialIssue:senseAtt';
 
 export class datasetDescriptorAstReflection implements AstReflection {
 
@@ -662,6 +663,9 @@ export class datasetDescriptorAstReflection implements AstReflection {
             }
             case 'ConsistencyRules:attrule2': {
                 return Attribute;
+            }
+            case 'ConsistencyRules:instance1': {
+                return DataInstance;
             }
             case 'GatheringProcess:labelSocialIssues': {
                 return SocialIssue;

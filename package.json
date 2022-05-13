@@ -1,5 +1,5 @@
 {
-    "name": "Dataset Descriptor",
+    "name": "Dataset-Descriptor",
     "displayName": "Dataset Descriptor",
     "description": "Please enter a brief description here",
     "version": "0.0.1",
@@ -108,6 +108,7 @@
         "csv-parser": "^3.0.0",
         "langium": "^0.2.0",
         "mathjs": "^10.1.1",
+        "vsce": "^2.7.0",
         "vscode-languageclient": "^7.0.0",
         "vscode-languageserver": "^7.0.0"
     },

@@ -13,7 +13,7 @@ Dataset: Gender
                 note={abs/1910.13913}
               }"
         Description:  
-            Purpose: 
+            Purposes::
                 "This dataset was created to study coreference resolution in English on documents discussing people who are,
                  in some ways, gender-variant (and generally selected so that this variance shows up linguistically).
                  Previously coreference resolution datasets contain nearly no such examples, largely due to the ways in 
@@ -59,9 +59,9 @@ Dataset: Gender
             Erratum? 
                 "Currently, no. As errors are encountered, future versions of the dataset
                 may be released (but will be versioned). They will all be provided in the same github location."
-            Version support 
+            Version lifecycle 
                 "All data will be versioned."
-            Contribution guides: 
+            Contribution guidelines: 
                 "Errors may be submitted via the bugtracker on github. More extensive augmentations may be accepted at the authors' discretion."
 
     Composition:
