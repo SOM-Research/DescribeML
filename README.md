@@ -26,9 +26,13 @@ Now go to the folder **/examples/evaluation** and open a, for example *Melanoma.
 
 Remember: by default, VSCode gives you auto-completion help by hitting CTRL + Space (or equivalent in MAC)
 
+The full grammar in Extended Backus-Naur form (EBNF) can be seen in **src/language-server/dataset-descriptor.langium**
+
 ![Autocompletion feature](fileicons/Autcomplete.gif)
 
 ### Want to dive into language development?
+
+
 
 If you want to contribute or dive into the plugin or the language, you may need extra steps. As Langium (the base framework of the plugin) is not stable, there are a few actions we need to do manually.
 
