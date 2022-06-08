@@ -307,7 +307,7 @@ Dataset: Melanoma_Classification_Dataset
       Rationale: 'Rationale'
       Social Issue: raceRepresentative
         IssueType: Bias
-        Related Attributes: attribute: ImageId
+        Related Attributes: ImageId
         Description: "Dataset is not representative with respect to darker skin types"
       Social Issue: generalIncidence
         IssueType: Social Impact

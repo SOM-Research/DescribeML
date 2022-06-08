@@ -276,7 +276,7 @@ SocialIssue:
     'Description:' desc=STRING
     ('Instance belongs to people:' 
         ('Have sensitive attributes?' ('attribute:' senseAtt=[Attribute])*)?
-        ('Are there protecte groups?' procGroups=STRING)?
+        ('Are there protected groups?' procGroups=STRING)?
         ('Might be offensive' offDiscussion=STRING)?)?
     ;
 
