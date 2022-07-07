@@ -115,24 +115,22 @@ let previewPanel : vscode.WebviewPanel;
 
 async function initHtmlPreview(context: vscode.ExtensionContext) {
    
-    if (! previewPanel) {
-        previewPanel = vscode.window.createWebviewPanel(
-            // Webview id
-            'liveHTMLPreviewer',
-            // Webview title
-            'Dataset Documentation Preview',
-            // This will open the second column for preview inside editor
-            2,
-            {
-                // Enable scripts in the webview
-                enableScripts: true,
-                retainContextWhenHidden: true,
-                // And restrict the webview to only loading content from our extension's `assets` directory.
-                localResourceRoots: [vscode.Uri.file(path.join(context.extensionPath, 'assets'))]
-            
-            }
-        );
-    }
+    previewPanel = vscode.window.createWebviewPanel(
+        // Webview id
+        'liveHTMLPreviewer',
+        // Webview title
+        'Dataset Documentation Preview',
+        // This will open the second column for preview inside editor
+        2,
+        {
+            // Enable scripts in the webview
+            enableScripts: false,
+            retainContextWhenHidden: false,
+            // And restrict the webview to only loading content from our extension's `assets` directory.
+            localResourceRoots: [vscode.Uri.file(path.join(context.extensionPath, 'assets'))]
+        
+        }
+    );
     const generator =  datasetServices.generation.DocumentationGenerator;
     const text = vscode.window.activeTextEditor?.document.getText();
     
