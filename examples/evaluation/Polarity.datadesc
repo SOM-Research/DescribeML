@@ -22,7 +22,7 @@ Dataset: Polarity
                 gov/pdf/cs/0409058v1). Between then and 2012, a collection of papers 
                 that used this dataset was maintained at http://www.cs.cornell.
                 edu/people/pabo/movie%2Dreview%2Ddata/otherexperiments.html."
-            Recommneded:
+            Recommended:
                 "The dataset could be used for anything related to modeling or
                 understanding movie reviews. For instance, one may induce a
                 lexicon of words/phrases that are highly indicative of sentiment
@@ -59,7 +59,7 @@ Dataset: Polarity
                 Name Sloan_Fundaiton type private
                 Maintainer:
                     Name Bo_Pong email "XXXX@email.com"
-                Erratum? 
+                Erratum?: 
                     "Since its initial release (v0.9) there have been three later releases
                     (v1.0, v1.1, and v2.0). There is not an explicit erratum, but updates and
                     known errors are specified in higher version README
@@ -71,7 +71,7 @@ Dataset: Polarity
                     movie%2Dreview%2Ddata/poldata.README.2.0.txt. Updates are listed
                     on the dataset web page. (This datasheet largely summarizes
                     these sources.)"
-                Version lifecycle
+                Version lifecycle:
                     "The dataset has already been updated; older versions are kept
                     around for consistency."
                 Contribution guidelines: 
@@ -139,7 +139,7 @@ Dataset: Polarity
                     Statistics:
                         Quality Metrics:
                             Sparsity: 0
-                            Compeleteness: 100
+                            Completeness: 100
                             Class Balance "attribute 'tag': 50% positive, 50% negative"
                 
                 Dependencies: 
@@ -177,7 +177,7 @@ Dataset: Polarity
                         coverage by authorship. Beyond that, the sample is arbitrar" 
                     Noise: "unknown"
                 Related Instances: MovieReviews
-                Social Issues privacyAware
+                Social Issues: privacyAware
                 How data is collected: Manual Human Curator
                 When data was collected: "There are 1,400 instances in total in the original (v1.x versions)
                 and 2,000 instances in total in v2.0 (from 2014)."
@@ -206,21 +206,21 @@ Dataset: Polarity
             Description: "The label is the positive/negative sentiment polarity rating derived
             from the star rating"
         Mapping: tag
-        Label Requeriments 
-          Requeriment:                     
+        Label Requirements:
+          Requirement:                     
             "- In order to obtain more accurate rating decisions, the maximum
                 rating must be specified explicitly, both for numerical ratings
                 and star ratings.  ('8/10', 'four out of five', and 'OUT OF
                 ****: ***'' are examples of rating indications we recognize.)"
-           Requeriment:  " 
+          Requirement:  " 
             - With a five-star system (or compatible number systems):
                 three-and-a-half stars and up are considered positive, 
                 two stars and below are considered negative."     
-           Requeriment:   "
+          Requirement:   "
             - With a four-star system (or compatible number system):
                 three stars and up are considered positive, 
                 one-and-a-half stars and below are considered negative.  "
-            Requeriment:   "
+          Requirement:"
             - With a letter grade system:
                 B or above is considered positive,
                 C- or below is considered negative."

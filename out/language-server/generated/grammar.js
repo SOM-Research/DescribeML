@@ -550,7 +550,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Recommneded:",
+                "value": "Recommended:",
                 "elements": []
               },
               {
@@ -767,7 +767,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                 "elements": [
                   {
                     "$type": "Keyword",
-                    "value": "Erratum?",
+                    "value": "Erratum?:",
                     "elements": []
                   },
                   {
@@ -813,7 +813,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                 "elements": [
                   {
                     "$type": "Keyword",
-                    "value": "Version lifecycle",
+                    "value": "Version lifecycle:",
                     "elements": []
                   },
                   {
@@ -1587,7 +1587,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                   },
                   {
                     "$type": "Keyword",
-                    "value": "Rationanle:"
+                    "value": "Rationale:"
                   },
                   {
                     "$type": "Assignment",
@@ -1645,7 +1645,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Compeleteness:",
+                "value": "Completeness:",
                 "elements": []
               },
               {
@@ -2755,7 +2755,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Social Issues",
+                "value": "Social Issues:",
                 "elements": []
               },
               {
@@ -2887,7 +2887,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Gather Requeriments",
+                "value": "Gather Requirements:",
                 "elements": []
               },
               {
@@ -3164,7 +3164,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
         "elements": [
           {
             "$type": "Keyword",
-            "value": "Requeriment:",
+            "value": "Requirement:",
             "elements": []
           },
           {
@@ -3322,7 +3322,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Social Issues",
+                "value": "Social Issues:",
                 "elements": []
               },
               {
@@ -3344,7 +3344,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Label Requeriments",
+                "value": "Label Requirements:",
                 "elements": []
               },
               {
@@ -3930,7 +3930,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                 "elements": [
                   {
                     "$type": "Keyword",
-                    "value": "Are there protecte groups?",
+                    "value": "Are there protected groups?",
                     "elements": []
                   },
                   {

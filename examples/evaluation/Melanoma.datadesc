@@ -40,7 +40,7 @@ Dataset: Melanoma_Classification_Dataset
             identify melanoma in lesion images. The competition was launched on DATE on 
             the Kaggle platform and ran through DATE. You can learn more about the competition
             and results here: LINK"
-            Recommneded: 
+            Recommended: 
                 "Identify melanoma in lesion images" 
                 "Predict incidence of melanoma in a population"
             Non-recommended: "Due to low population prevalence and challenges with access 
@@ -86,7 +86,7 @@ Dataset: Melanoma_Classification_Dataset
             Name Other_founding_sources_II type public
                 grantor "NIH Core Grant"
                 grantId: P30_CA008748
-            Erratum? "There is no erratum known" 
+            Erratum?: "There is no erratum known" 
             Contribution guidelines: "No contribution guidelines provided"
 
     Composition:
@@ -114,7 +114,7 @@ Dataset: Melanoma_Classification_Dataset
                         Statistics:
                             Categorical Distribution: "ers"
                         Quality Metrics: 
-                            Compeleteness: 100 
+                            Completeness: 100 
 
                     attribute: patientID
                         description: 'ID of patients'
@@ -172,9 +172,9 @@ Dataset: Melanoma_Classification_Dataset
                 between ImageId and diagnosis 
                 between age and external source 
                     From: "we" 
-                    Rationanle: "dwe"
+                    Rationale: "dwe"
             Quality Metrics: 
-                Compeleteness: 100
+                Completeness: 100
         Consistency rules: 
             inv: skinImages : (age >= 0)
         Is sample:
@@ -209,7 +209,7 @@ Dataset: Melanoma_Classification_Dataset
                         (https://www.kaggle.com/c/siim- isic-melanoma- classification/discussion/161943)."
 
                 Related Instances: skinImages
-                Social Issues PrivacyIssue1
+                Social Issues: PrivacyIssue1
                 How data is collected: Manual Human Curator
                 When data was collected: 
                     "Images were originally collected by imaging centers during 1998 - 2019; this dataset was curated from those image 
@@ -219,40 +219,40 @@ Dataset: Melanoma_Classification_Dataset
                 Gathering Team:
                     Who collects the data: ""
                     Type Internal
-                Gather Requeriments 
-                  Requeriment: "1) We queried clinical imaging databases across the six centers to generate a multicenter imaging dataset. 
+                Gather Requirements:
+                  Requirement: "1) We queried clinical imaging databases across the six centers to generate a multicenter imaging dataset. 
                     Images consisted of 12,743,090 pixels on average but ranged from 307,200 to 24,000,000. Among patients with 
                     dermoscopy imaging from 1998 to 2019, those with multiple skin lesions were identified."
 
-                  Requeriment: "2) Memorial Sloan Kettering: Images were acquired using a dermoscopic attachment to either a digital single reflex 
+                  Requirement: "2) Memorial Sloan Kettering: Images were acquired using a dermoscopic attachment to either a digital single reflex 
                     lens (SLR) camera or to a smartphone. Each lesion was imaged with polarized and/or nonpolarized dermoscopy. 
                     For each lesion, 3- 5 images are collected during each patient visit and stored in a specialized image database 
                     called VectraTM (Canfield Scientific Inc., Parsippany, NJ, USA)."
                  
-                  Requeriment: "3) Hospital Clinic Barcelona: The dermatology department is equipped with the digital dermatoscopy system 
+                  Requirement: "3) Hospital Clinic Barcelona: The dermatology department is equipped with the digital dermatoscopy system 
                     MoleMaxTM HD (Derma Medical Systems, Vienna, Austria) and corresponding image database to store the collected images. 
                     Each lesion was photographed using polarized dermoscopy."
                  
-                  Requeriment: "4) University of Queensland: All images used for the studies were extracted from the VectraTM image database 
+                  Requirement: "4) University of Queensland: All images used for the studies were extracted from the VectraTM image database 
                     (Canfield Scientific Inc., Parsippany, NJ, USA)."
                  
-                  Requeriment: "5) Medical University Vienna: We extracted polarized dermoscopic images from 2015-2019 which were stored in the 
+                  Requirement: "5) Medical University Vienna: We extracted polarized dermoscopic images from 2015-2019 which were stored in the 
                     MoleMax HD System (Derma Medical Systems, Vienna, Austria)."
                  
-                  Requeriment: "6) Melanoma Institute Australia and the Sydney Melanoma Diagnosis Centre: Images are acquired using a dermoscopic 
+                  Requirement: "6) Melanoma Institute Australia and the Sydney Melanoma Diagnosis Centre: Images are acquired using a dermoscopic 
                     attachment to either a digital single reflex lens (SLR) camera or to a smartphone and stored in DermEngineTM 
                     (Metaoptima, Vancouver, British Columbia, Canada)."
                  
-                  Requeriment: "7) Once the images had been collected from all the various centers, a software annotation tool, called ‘Tagger,’
+                  Requirement: "7) Once the images had been collected from all the various centers, a software annotation tool, called ‘Tagger,’
                     was developed internally to review diagnostic labeling of grouped images."
                  
-                  Requeriment: "8) Additional metadata including demographics of the patients was collected at each imaging center at the time 
+                  Requirement: "8) Additional metadata including demographics of the patients was collected at each imaging center at the time 
                    the images were taken, method unclear."
 
         LabelingProcesses: 
             Labeling process: skinLabeling
                 Description: "Medical staff looking at the data and images and annotiating the diagnosis"
-                Type: 
+                Type: Image and video annotations
                 Labels: 
                     Label: skinLabel
                         Description: "marked as beningnant or malignant"
@@ -261,24 +261,24 @@ Dataset: Melanoma_Classification_Dataset
                     Who collects the data: "Internal Medical staff"
                     Type Internal
                     Country/Region: "Australia"
-                Social Issues raceRepresentative
-                Label Requeriments 
-                    Requeriment: "1) Images containing any potentially identifying features, such as jewelry or tattoos, or from patients without 
+                Social Issues: raceRepresentative
+                Label Requirements: 
+                    Requirement: "1) Images containing any potentially identifying features, such as jewelry or tattoos, or from patients without 
                         at least three qualifying images were excluded during quality assurance review."
                     
-                    Requeriment: "2) When multiple image types were available, the selected image was either the one of highest resolution or if Ç
+                    Requirement: "2) When multiple image types were available, the selected image was either the one of highest resolution or if Ç
                         multiple images at the same resolution were available, one was chosen randomly."
 
-                    Requeriment: "3) A software annotation tool, called ‘Tagger,’ was developed internally to review diagnostic labeling of grouped 
+                    Requirement: "3) A software annotation tool, called ‘Tagger,’ was developed internally to review diagnostic labeling of grouped 
                         images. Using this tool, dermoscopy expert reviewers (EC, OR) were presented sets of 30 images with a shared diagnosis
                         in order to identify the ones with erroneous labeling. Reviewers invested 22 hours over three weeks of quality assurance
                         in ‘Tagger’ and spent an average of 4 seconds per set when flagging a single image, and 11 seconds per set when flagging 
                         several images. Out of all images reviewed in Tagger, 2.7% were removed, out of concern for erroneous labels."
 
-                    Requeriment: "4)There were selection criteria followed at each image source Center; see information in corresponding paper for details: 
+                    Requirement: "4)There were selection criteria followed at each image source Center; see information in corresponding paper for details: 
                         link to paper"
                     
-                    Requeriment: "5) Due to the retrospective nature of image acquisition and potential surveillance bias in different patient populations, 
+                    Requirement: "5) Due to the retrospective nature of image acquisition and potential surveillance bias in different patient populations, 
                         the number of lesions per patient was not distributed identically between the class of patients with a melanoma image and 
                         the class without a melanoma image. Lesions in both classes were subsampled through patient matching, which led to a loss 
                         of 4.1% of images."

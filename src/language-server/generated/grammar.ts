@@ -549,7 +549,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Recommneded:",
+                "value": "Recommended:",
                 "elements": []
               },
               {
@@ -766,7 +766,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                 "elements": [
                   {
                     "$type": "Keyword",
-                    "value": "Erratum?",
+                    "value": "Erratum?:",
                     "elements": []
                   },
                   {
@@ -812,7 +812,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                 "elements": [
                   {
                     "$type": "Keyword",
-                    "value": "Version lifecycle",
+                    "value": "Version lifecycle:",
                     "elements": []
                   },
                   {
@@ -1586,7 +1586,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                   },
                   {
                     "$type": "Keyword",
-                    "value": "Rationanle:"
+                    "value": "Rationale:"
                   },
                   {
                     "$type": "Assignment",
@@ -1644,7 +1644,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Compeleteness:",
+                "value": "Completeness:",
                 "elements": []
               },
               {
@@ -2754,7 +2754,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Social Issues",
+                "value": "Social Issues:",
                 "elements": []
               },
               {
@@ -2886,7 +2886,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Gather Requeriments",
+                "value": "Gather Requirements:",
                 "elements": []
               },
               {
@@ -3163,7 +3163,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
         "elements": [
           {
             "$type": "Keyword",
-            "value": "Requeriment:",
+            "value": "Requirement:",
             "elements": []
           },
           {
@@ -3321,7 +3321,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Social Issues",
+                "value": "Social Issues:",
                 "elements": []
               },
               {
@@ -3343,7 +3343,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Label Requeriments",
+                "value": "Label Requirements:",
                 "elements": []
               },
               {
@@ -3929,7 +3929,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                 "elements": [
                   {
                     "$type": "Keyword",
-                    "value": "Are there protecte groups?",
+                    "value": "Are there protected groups?",
                     "elements": []
                   },
                   {

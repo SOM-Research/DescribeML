@@ -44,7 +44,7 @@ Distribution:
 Applications:
     name="Applications:"
     ("Past Uses:" (past+=STRING)*)?
-    ("Recommneded:" (recommend+=STRING)*)?
+    ("Recommended:" (recommend+=STRING)*)?
     ("Non-recommended:" (future+=STRING)*)?
     ("Uses repository:" repo=STRING)?;
 Area: name='Area:' area+=ID;
@@ -56,9 +56,9 @@ Authoring:
     (authors+=Authors
       founding+= (Founders)?
       ('Maintainer:' (maintainers+=Maintainer)*)?
-      ('Erratum?' erratum=STRING)? 
+      ('Erratum?:' erratum=STRING)? 
       ('Data Retention:' dataRetention=STRING)? 
-      ('Version lifecycle' support=STRING)? 
+      ('Version lifecycle:' support=STRING)? 
       ('Contribution guidelines:' contribGuides=STRING)?);
 Authors: 
     name='Authors:'  (authors+=Author*);
@@ -106,12 +106,12 @@ PairCorrelation:
     (
         'between' attr1=[Attribute] 'and' 
         (attr2=[Attribute] | 'external source'
-        'From:' from=STRING "Rationanle:" rationale=STRING)
+        'From:' from=STRING "Rationale:" rationale=STRING)
     )?;
 
 QualityMetric:
     ('Sparsity:' sparsity=NUMBER)?
-    ('Compeleteness:' complet=NUMBER)?
+    ('Completeness:' complet=NUMBER)?
     ('Class Balance' balance=STRING)?
     ('Noisy labels' noisy=STRING)?;
 
@@ -191,13 +191,13 @@ GatheringProcess:
      source=Source  
     ('Gathering dates range:' gatherDates=STRING)?
     'Related Instances:' (mapInstance=[DataInstance] (',')?)*
-    ('Social Issues' labelSocialIssues=[SocialIssue])?
+    ('Social Issues:' labelSocialIssues=[SocialIssue])?
     ('How data is collected:' how=GatherType)?
     ('Is language data?:' SpeechSitatuion)?
     ('When data was collected:' when=STRING)?
     ('Process Demographics:' processDemo = Demographics)?
     ('Gathering Team:' gatheringTeam = Team)?
-    ('Gather Requeriments' (requeriments+=Requeriments)*)?;
+    ('Gather Requirements:' (requeriments+=Requeriments)*)?;
 
 Source:
     'Source:' name=ID
@@ -219,7 +219,7 @@ Team:
 
 // Requeriments
 Requeriments:
-    'Requeriment:'
+    'Requirement:'
     req=STRING;
 
 
@@ -234,8 +234,8 @@ LabelingProcess:
     'Type:' type=AnnotationType
     ('Labels:' (Labels)*)?
     ('Labeling Team:'labelingTeam = Team)?
-    ('Social Issues' labelSocialIssues=[SocialIssue])?
-    ('Label Requeriments' (requeriments+=Requeriments)*)?;
+    ('Social Issues:' labelSocialIssues=[SocialIssue])?
+    ('Label Requirements:' (requeriments+=Requeriments)*)?;
 Labels:
     'Label:' name=ID
     'Description:' desc=STRING
