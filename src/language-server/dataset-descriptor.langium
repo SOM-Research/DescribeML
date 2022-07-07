@@ -19,12 +19,14 @@ Metadata:
      'Title:' title=STRING 
      'Unique-identifier:' ident=ID
      'Version:' version=ID 
-     ('Release Date:' dates=STRING )?
+     ('Release Date:' dates=DateYear )?
+     ('Updated Date:' dates=DateYear )?
+     ('Published Date:' dates=DateYear )?
      ('Citation:' citation=STRING)?
      'Description:' 
         (description=STRING | 
         (('Purposes:' descriptionpurpose=STRING)? 
-         ('Tasks:' descriptionTasks=STRING)? 
+         ('Tasks:' '[' descriptionTasks+=MLTasks ((','descriptionTasks+=MLTasks)*']')?)? 
          ('Gaps:' descriptionGaps=STRING)?)) 
      ('Licences:' licence=CommonLicences)?
      (uses=Applications)?
@@ -36,7 +38,7 @@ Metadata:
 // Distribution Policies
 Distribution:
     name="Distribution:"
-    ("Is public?:" public=ID)?
+    ("Is public?:" public=BooleanAnswer)?
     ("How is distributed:" past=STRING)?  
     ("Distribution license:" lic=STRING)?;
 
@@ -56,20 +58,20 @@ Authoring:
     (authors+=Authors
       founding+= (Founders)?
       ('Maintainer:' (maintainers+=Maintainer)*)?
-      ('Erratum?:' erratum=STRING)? 
+      ('Erratum?:' (erratum=STRING | erratum=BooleanAnswer))? 
       ('Data Retention:' dataRetention=STRING)? 
       ('Version lifecycle:' support=STRING)? 
       ('Contribution guidelines:' contribGuides=STRING)?);
 Authors: 
     name='Authors:'  (authors+=Author*);
 Author:
-    'Name' name=ID 'email' email=STRING;
+    'Name' name=ID 'email' email=EmailType;
 Founders: 
     name='Funders:'  (funders+=Funder)+;
 Funder:
     'Name' name=ID 'type' type=FundersType ('grantor' grantor= STRING 'grantId:' ID)?;
 Maintainer:
-    'Name' name=ID 'email' email=STRING;
+    'Name' name=ID 'email' email=EmailType;
 
 //
 // Dataset Composition 
@@ -136,7 +138,7 @@ Categor:
     (('Statistics:')
     ('Binary attribute:' binary=Binary)?
     ('Mode:' mode=STRING)?
-    ('Categorical Distribution:' catdist=STRING)?)?
+    ('Categorical Distribution:' '[' catdist=CategoricalDistributionType '%' (',' catdist=CategoricalDistributionType '%')* ']'))?
     ('Quality Metrics:' metrics+=QualityMetric)?;
 
 Binary:
@@ -276,7 +278,7 @@ SocialIssue:
     'Description:' desc=STRING
     ('Instance belongs to people:' 
         ('Have sensitive attributes?' ('attribute:' senseAtt=[Attribute])*)?
-        ('Are there protected groups?' procGroups=STRING)?
+        ('Are there protected groups?' procGroups=BooleanAnswer)?
         ('Might be offensive' offDiscussion=STRING)?)?
     ;
 
@@ -292,22 +294,25 @@ CommonLicences returns string: 'Creative Commons' | 'CC0: Public Domain' | 'CC B
                                 | 'FDL 1.3 (GNU Free Documentation License 1.3)' | 'Open Data Commons' |'Database: Open Database, Contents: Database Contents' |'Database: Open Database, Contents: © Original Authors' | 'PDDL (ODC Public Domain Dedication and Licence)' | 'ODC-BY 1.0 (ODC Attribution License)'
 
                                 | 'Community Data License' | 'Community Data License Agreement - Permissive - Version 1.0' | 'Community Data License Agreement - Sharing - Version 1.0' | 'Special' | 'World Bank Dataset Terms of Use' | 'Reddit API Terms' | 'U.S. Government Works' | 'EU ODP Legal Notice';
-
+MLTasks returns string:  'text-classification'|'question-answering'|'text-generation'|'token-classification'|'translation'|'fill-mask'|'text-retrieval'|'conditional-text-generation'|'sequence-modeling'|'summarization'|'other'|'structure-prediction'|'information-retrieval'|'text2text-generation'|'zero-shot-retrieval'|'zero-shot-information-retrieval'|'automatic-speech-recognition'|'image-classification'|'speech-processing'|'text-scoring'|'audio-classification'|'conversational'|'question-generation'|'image-to-text'|'data-to-text'|'classification'|'object-detection'|'multiple-choice'|'text-mining'|'image-segmentation'|'dialog-response-generation'|'named-entity-recognition'|'sentiment-analysis'|'machine-translation'|'tabular-to-text'|'table-to-text'|'simplification'|'sentence-similarity'|'zero-shot-classification'|'visual-question-answering'|'text_classification'|'time-series-forecasting'|'computer-vision'|'feature-extraction'|'symbolic-regression'|'topic modeling'|'one liner summary'|'email subject'|'meeting title'|'text-to-structured'|'reasoning'|'paraphrasing'|'paraphrase'|'code-generation'|'tts'|'image-retrieval'|'image-captioning'|'language-modelling'|'video-captionning'|'neural-machine-translation'|'transkation'|'text-generation-other-common-sense-inference'|'text-generation-other-discourse-analysis'|'text-to-tabular'|'text-generation-other-code-modeling'|'other-text-search'|'Code Generation'|'Translation'|'Text2Text generation'|'text-to-slide'|'question-pairing'|'Information Retrieval'|'Semantic Search'|'Evaluation of language models'|'masked-language-modeling'|'multi-class classification'|'topic-classification'|'patents'|'paraphrase detection'|'news-classification'|'Summarization'|'cross-language-transcription'|'language-modeling'|'other-test'|'grammatical error correction'|'named-entity-disambiguation'|'textual-entailment'|'natural-language-inference'|'query-paraphrasing'|'machine translation'|'long-texts'|'text-regression'|'entity-extraction'|'unpaired-image-to-image-translation'|'image'|'generative-modelling'|'Token Classification'|'caption-retrieval'|'gpt-3'|'crowdsourced'|'sequence2sequence'|'Inclusive Language'|'Text Neutralization'|'text-to-speech'|'question_answering'|'super-resolution'|'image-enhancement'|'speech-synthesis'|'data-integration'|'Language-model'|'Automatic-Speech-Recognition'|'influence-attribution'|'question-answering-retrieval'|'text'|'linear-regression'|'table-question-answering'|'tabular-classification'|'syntactic-evaluation'|'deduplication'|'sequence-modelling'|'abstractive-qa'|'closed-domain-abstrative-qa'; 
 InstanceType returns string: 'Record-Data' | 'Time-Series' | 'Ordered' | 'Graph' | 'Other';
 FundersType returns string: 'private' | 'public' | 'mixed';
 AttributeSymmetry returns string: 'Symmetric' | 'Asymmetric';
-AnnotationType returns string: 'Bounding boxes' | 'Lines and splines' | 'Semantinc Segmentation' | '3D cuboids' | 'Polygonal segmentation' | 'Landmark and key-point' | 'Image and video annotations' | 'Entity annotation' | 'Content and text categorization';
-SocialIssueType returns string: 'Privacy' | 'Bias' | 'Sensitive Data' | 'Social Impact';
+AnnotationType returns string: 'Bounding boxes' | 'Lines and splines' | 'Semantinc Segmentation' | '3D cuboids' | 'Polygonal segmentation' | 'Landmark and key-point' | 'Image and video annotations' | 'Entity annotation' | 'Content and textual categorization';
+SocialIssueType returns string: 'Privacy' | 'Bias' | 'Sensitive Data' | 'Social Impact'; // Expecting Fairness Ontology
 GatherType returns string: 'API' | 'Sensors' | 'Manual Human Curator' | 'Software' | 'Others';
 TeamType returns string: 'Internal' | 'External' | 'Contractors' | 'Crowdsourcing';
 SpeechModality returns string: 'spoken/signed' | 'written';
 SpeechType returns string: 'Scripted/edited' | 'spontaneous';
 SpeechSyncrony returns string: 'synchronous interaction' | 'asynchronous intercation';
+BooleanAnswer returns string: 'Yes' | 'No';
 
 // Logic Data Types
+CategoricalDistributionType returns string: STRING + ':' + NUMBER;
 DataTypes returns string: 'String' | 'Integer' | 'Boolean' | 'Other';
 QualifiedName returns string: ID ('.' ID)*;
 Operators returns string: '<'|'>'|'='|'!='|'+'|'-'|'>=';
+
 
 // Terminals
 hidden terminal WS: /\s+/;
@@ -317,3 +322,17 @@ terminal STRING: /"[^"]*"|'[^']*'/;
 
 hidden terminal ML_COMMENT: /\/\*[\s\S]*?\*\//;
 hidden terminal SL_COMMENT: /\/\/[^\n\r]*/;
+
+
+// Date Logic
+Dash returns string: "-";
+Day returns string: "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12" | "13" | "14" | "15" | "16" | "17" | "18" | "19" | "20" | "21" | "22" | "23" | "24" | "25" | "26" | "27" | "28" | "29" | "30" | "31";
+Month returns string: "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11"| "12";
+Year returns string: "1989" | "1990" | "1991"| "1992" | "1993" | "1994" | "1995" | "1996" | "1997" | "1998" | "1999" | "2000" | "2001" | "2002" | "2003" | "2004" | "2005" | "2006" | "2007" | "2008" | "2009" | "2010" | "2011" | "2012" | "2013" | "2014" | "2015" | "2016" | "2017" | "2018" | "2019" | "2020" | "2021" | "2022" | "2023" | "2024" | "2025";
+DateYear returns string: Day+Dash+Month+Dash+Year;
+
+// Email
+EmailType returns string: ID+'@'+ID+'.'+ID;
+
+
+
