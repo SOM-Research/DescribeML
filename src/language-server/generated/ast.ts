@@ -52,7 +52,7 @@ export function isAttribute(item: unknown): item is Attribute {
 
 export interface Author extends AstNode {
     readonly $container: Authors;
-    email: string
+    email: EmailType
     name: string
 }
 
@@ -67,7 +67,7 @@ export interface Authoring extends AstNode {
     authors: Array<Authors>
     contribGuides: string
     dataRetention: string
-    erratum: string
+    erratum: string | BooleanAnswer
     founding: Array<Founders>
     maintainers: Array<Maintainer>
     name: 'Authoring:'
@@ -107,7 +107,7 @@ export function isBinary(item: unknown): item is Binary {
 export interface Categor extends AstNode {
     readonly $container: Attribute;
     binary: Binary
-    catdist: string
+    catdist: CategoricalDistributionType
     metrics: Array<QualityMetric>
     mode: string
     name: 'Categorical'
@@ -117,6 +117,25 @@ export const Categor = 'Categor';
 
 export function isCategor(item: unknown): item is Categor {
     return reflection.isInstance(item, Categor);
+}
+
+export interface Citation extends AstNode {
+    readonly $container: Metadata;
+    citeText: string
+    doi: string
+    keywords: Array<string>
+    license: string
+    name: 'Citation:'
+    publisher: string
+    title: string
+    url: string
+    year: string
+}
+
+export const Citation = 'Citation';
+
+export function isCitation(item: unknown): item is Citation {
+    return reflection.isInstance(item, Citation);
 }
 
 export interface Composition extends AstNode {
@@ -244,7 +263,7 @@ export interface Distribution extends AstNode {
     lic: string
     name: 'Distribution:'
     past: string
-    public: string
+    public: BooleanAnswer
 }
 
 export const Distribution = 'Distribution';
@@ -353,7 +372,7 @@ export function isLabels(item: unknown): item is Labels {
 
 export interface Maintainer extends AstNode {
     readonly $container: Authoring;
-    email: string
+    email: EmailType
     name: string
 }
 
@@ -367,12 +386,14 @@ export interface Metadata extends AstNode {
     readonly $container: Declaration;
     area: Area
     authoring: Authoring
-    citation: string
-    dates: string
+    citation: Citation
+    datesP: DateYear
+    datesR: DateYear
+    datesU: DateYear
     description: string
     descriptionGaps: string
     descriptionpurpose: string
-    descriptionTasks: string
+    descriptionTasks: Array<MLTasks>
     distribution: Distribution
     ident: string
     licence: CommonLicences
@@ -530,7 +551,7 @@ export interface SocialIssue extends AstNode {
     IssueType: SocialIssueType
     name: string
     offDiscussion: string
-    procGroups: string
+    procGroups: BooleanAnswer
     senseAtt?: Reference<Attribute>
 }
 
@@ -602,13 +623,15 @@ export function isTeam(item: unknown): item is Team {
 
 export type CommonLicences = 'Creative Commons' | 'CC0: Public Domain' | 'CC BY-NC-SA 4.0' | 'CC BY-SA 4.0' | 'CC BY-SA 3.0' | 'CC BY 4.0 (Attribution 4.0 International)' | 'CC BY-NC 4.0 (Attribution-NonCommercial 4.0 International)' | 'CC BY 3.0 (Attribution 3.0 Unported)' | 'CC BY 3.0 IGO (Attribution 3.0 IGO)' | 'CC BY-NC-SA 3.0 IGO (Attribution-NonCommercial-ShareAlike 3.0 IGO)' | 'CC BY-ND 4.0 (Attribution-NoDerivatives 4.0 International)' | 'CC BY-NC-ND 4.0 (Attribution-NonCommercial-NoDerivatives 4.0 International)' | 'GPL' | 'GPL 2' | 'LGPL 3.0 (GNU Lesser General Public License 3.0)' | 'AGPL 3.0 (GNU Affero General Public License 3.0)' | 'FDL 1.3 (GNU Free Documentation License 1.3)' | 'Open Data Commons' | 'Database: Open Database, Contents: Database Contents' | 'Database: Open Database, Contents: © Original Authors' | 'PDDL (ODC Public Domain Dedication and Licence)' | 'ODC-BY 1.0 (ODC Attribution License)' | 'Community Data License' | 'Community Data License Agreement - Permissive - Version 1.0' | 'Community Data License Agreement - Sharing - Version 1.0' | 'Special' | 'World Bank Dataset Terms of Use' | 'Reddit API Terms' | 'U.S. Government Works' | 'EU ODP Legal Notice'
 
+export type MLTasks = 'text-classification' | 'question-answering' | 'text-generation' | 'token-classification' | 'translation' | 'fill-mask' | 'text-retrieval' | 'conditional-text-generation' | 'sequence-modeling' | 'summarization' | 'other' | 'structure-prediction' | 'information-retrieval' | 'text2text-generation' | 'zero-shot-retrieval' | 'zero-shot-information-retrieval' | 'automatic-speech-recognition' | 'image-classification' | 'speech-processing' | 'text-scoring' | 'audio-classification' | 'conversational' | 'question-generation' | 'image-to-text' | 'data-to-text' | 'classification' | 'object-detection' | 'multiple-choice' | 'text-mining' | 'image-segmentation' | 'dialog-response-generation' | 'named-entity-recognition' | 'sentiment-analysis' | 'machine-translation' | 'tabular-to-text' | 'table-to-text' | 'simplification' | 'sentence-similarity' | 'zero-shot-classification' | 'visual-question-answering' | 'text_classification' | 'time-series-forecasting' | 'computer-vision' | 'feature-extraction' | 'symbolic-regression' | 'topic modeling' | 'one liner summary' | 'email subject' | 'meeting title' | 'text-to-structured' | 'reasoning' | 'paraphrasing' | 'paraphrase' | 'code-generation' | 'tts' | 'image-retrieval' | 'image-captioning' | 'language-modelling' | 'video-captionning' | 'neural-machine-translation' | 'transkation' | 'text-generation-other-common-sense-inference' | 'text-generation-other-discourse-analysis' | 'text-to-tabular' | 'text-generation-other-code-modeling' | 'other-text-search' | 'Code Generation' | 'Translation' | 'Text2Text generation' | 'text-to-slide' | 'question-pairing' | 'Information Retrieval' | 'Semantic Search' | 'Evaluation of language models' | 'masked-language-modeling' | 'multi-class classification' | 'topic-classification' | 'patents' | 'paraphrase detection' | 'news-classification' | 'Summarization' | 'cross-language-transcription' | 'language-modeling' | 'other-test' | 'grammatical error correction' | 'named-entity-disambiguation' | 'textual-entailment' | 'natural-language-inference' | 'query-paraphrasing' | 'machine translation' | 'long-texts' | 'text-regression' | 'entity-extraction' | 'unpaired-image-to-image-translation' | 'image' | 'generative-modelling' | 'Token Classification' | 'caption-retrieval' | 'gpt-3' | 'crowdsourced' | 'sequence2sequence' | 'Inclusive Language' | 'Text Neutralization' | 'text-to-speech' | 'question_answering' | 'super-resolution' | 'image-enhancement' | 'speech-synthesis' | 'data-integration' | 'Language-model' | 'Automatic-Speech-Recognition' | 'influence-attribution' | 'question-answering-retrieval' | 'text' | 'linear-regression' | 'table-question-answering' | 'tabular-classification' | 'syntactic-evaluation' | 'deduplication' | 'sequence-modelling' | 'abstractive-qa' | 'closed-domain-abstrative-qa'
+
 export type InstanceType = 'Record-Data' | 'Time-Series' | 'Ordered' | 'Graph' | 'Other'
 
 export type FundersType = 'private' | 'public' | 'mixed'
 
 export type AttributeSymmetry = 'Symmetric' | 'Asymmetric'
 
-export type AnnotationType = 'Bounding boxes' | 'Lines and splines' | 'Semantinc Segmentation' | '3D cuboids' | 'Polygonal segmentation' | 'Landmark and key-point' | 'Image and video annotations' | 'Entity annotation' | 'Content and text categorization'
+export type AnnotationType = 'Bounding boxes' | 'Lines and splines' | 'Semantinc Segmentation' | '3D cuboids' | 'Polygonal segmentation' | 'Landmark and key-point' | 'Image and video annotations' | 'Entity annotation' | 'Content and textual categorization'
 
 export type SocialIssueType = 'Privacy' | 'Bias' | 'Sensitive Data' | 'Social Impact'
 
@@ -622,20 +645,30 @@ export type SpeechType = 'Scripted/edited' | 'spontaneous'
 
 export type SpeechSyncrony = 'synchronous interaction' | 'asynchronous intercation'
 
+export type BooleanAnswer = 'Yes' | 'No'
+
+export type CategoricalDistributionType = string
+
 export type DataTypes = 'String' | 'Integer' | 'Boolean' | 'Other'
 
 export type QualifiedName = string
 
 export type Operators = '<' | '>' | '=' | '!=' | '+' | '-' | '>='
 
-export type datasetDescriptorAstType = 'Applications' | 'Area' | 'Attribute' | 'Author' | 'Authoring' | 'Authors' | 'Binary' | 'Categor' | 'Composition' | 'ConsistencyRules' | 'DataInstance' | 'DataInstances' | 'Declaration' | 'Demographics' | 'Dependencies' | 'DescriptionDataset' | 'Distribution' | 'Founders' | 'Funder' | 'GatheringProcess' | 'GatheringProcesses' | 'LabelingProcess' | 'LabelingProcesses' | 'Labels' | 'Maintainer' | 'Metadata' | 'Numeri' | 'PairCorrelation' | 'PreProcess' | 'PreProcesses' | 'Provenance' | 'QualityMetric' | 'Relation' | 'RelationInstances' | 'Requeriments' | 'SocialConcerns' | 'SocialIssue' | 'Source' | 'SpeechSitatuion' | 'Statistics' | 'Tags' | 'Team';
+export type Dash = string
+
+export type DateYear = string
+
+export type EmailType = string
+
+export type datasetDescriptorAstType = 'Applications' | 'Area' | 'Attribute' | 'Author' | 'Authoring' | 'Authors' | 'Binary' | 'Categor' | 'Citation' | 'Composition' | 'ConsistencyRules' | 'DataInstance' | 'DataInstances' | 'Declaration' | 'Demographics' | 'Dependencies' | 'DescriptionDataset' | 'Distribution' | 'Founders' | 'Funder' | 'GatheringProcess' | 'GatheringProcesses' | 'LabelingProcess' | 'LabelingProcesses' | 'Labels' | 'Maintainer' | 'Metadata' | 'Numeri' | 'PairCorrelation' | 'PreProcess' | 'PreProcesses' | 'Provenance' | 'QualityMetric' | 'Relation' | 'RelationInstances' | 'Requeriments' | 'SocialConcerns' | 'SocialIssue' | 'Source' | 'SpeechSitatuion' | 'Statistics' | 'Tags' | 'Team';
 
 export type datasetDescriptorAstReference = 'Attribute:labelProces' | 'ConsistencyRules:attrule1' | 'ConsistencyRules:attrule2' | 'ConsistencyRules:instance1' | 'GatheringProcess:labelSocialIssues' | 'GatheringProcess:mapInstance' | 'LabelingProcess:labelSocialIssues' | 'Labels:map' | 'PairCorrelation:attr1' | 'PairCorrelation:attr2' | 'Relation:attRel' | 'Relation:attRelTarget' | 'Relation:insRel' | 'SocialIssue:senseAtt';
 
 export class datasetDescriptorAstReflection implements AstReflection {
 
     getAllTypes(): string[] {
-        return ['Applications', 'Area', 'Attribute', 'Author', 'Authoring', 'Authors', 'Binary', 'Categor', 'Composition', 'ConsistencyRules', 'DataInstance', 'DataInstances', 'Declaration', 'Demographics', 'Dependencies', 'DescriptionDataset', 'Distribution', 'Founders', 'Funder', 'GatheringProcess', 'GatheringProcesses', 'LabelingProcess', 'LabelingProcesses', 'Labels', 'Maintainer', 'Metadata', 'Numeri', 'PairCorrelation', 'PreProcess', 'PreProcesses', 'Provenance', 'QualityMetric', 'Relation', 'RelationInstances', 'Requeriments', 'SocialConcerns', 'SocialIssue', 'Source', 'SpeechSitatuion', 'Statistics', 'Tags', 'Team'];
+        return ['Applications', 'Area', 'Attribute', 'Author', 'Authoring', 'Authors', 'Binary', 'Categor', 'Citation', 'Composition', 'ConsistencyRules', 'DataInstance', 'DataInstances', 'Declaration', 'Demographics', 'Dependencies', 'DescriptionDataset', 'Distribution', 'Founders', 'Funder', 'GatheringProcess', 'GatheringProcesses', 'LabelingProcess', 'LabelingProcesses', 'Labels', 'Maintainer', 'Metadata', 'Numeri', 'PairCorrelation', 'PreProcess', 'PreProcesses', 'Provenance', 'QualityMetric', 'Relation', 'RelationInstances', 'Requeriments', 'SocialConcerns', 'SocialIssue', 'Source', 'SpeechSitatuion', 'Statistics', 'Tags', 'Team'];
     }
 
     isInstance(node: unknown, type: string): boolean {
