@@ -3,8 +3,9 @@ Dataset: Melanoma_Classification_Dataset
         Title: "2020 SIIM-ISIC Melanoma Classification Challenge Dataset" 
         Unique-identifier: SIC_Melanoma_Classification_Challenge_Dataset
         Version: v0001 
-        Release Date: "10-08-20"
-        Citation: "International Skin Imaging Collaboration. SIIM-ISIC 2020 Challenge Dataset. 
+        Release Date: 10-08-20
+        Citation: 
+            Raw Citation:"International Skin Imaging Collaboration. SIIM-ISIC 2020 Challenge Dataset. 
           International Skin Imaging Collaboration https://doi.org/10.34970/2020-ds01 (2020)."
         Description:
             Purposes:
@@ -25,7 +26,7 @@ Dataset: Melanoma_Classification_Dataset
                 The dataset is also enriched for melanoma in general and does not represent
                 true incidence of melanoma." 
             Tasks:
-                "Classification"
+                [classification,image-classification]
             Gaps:    
                 "As the leading healthcare organization for informatics in medical imaging,
                 the Society for Imaging Informatics in Medicine (SIIM)'s mission is to 
@@ -65,14 +66,14 @@ Dataset: Melanoma_Classification_Dataset
     
     Authoring:
         Authors:
-            Name Skin_Imaging_Collaboration_ISIC  email "email@email.com"
-            Name International_Skin_Imaging_Collaboration  email "email@email.com"
-            Name Hospital_Clinic_de_Barcelona email "email@email.com"
-            Name Medical_University_of_Vienna email "email@email.com"
-            Name Memorial_Sloan_Kettering_Cancer_Center email "email@email.com"
-            Name Melanoma_Institute_Australiaa email "email@email.com"
-            Name University_of_Queensland email "email@email.com"
-            Name University_of_athens_medical_school email "email@email.com"
+            Name Skin_Imaging_Collaboration_ISIC  email emailo@emailo.com
+            Name International_Skin_Imaging_Collaboration  email emailo@emailo.com
+            Name Hospital_Clinic_de_Barcelona email emailo@emailo.com
+            Name Medical_University_of_Vienna email emailo@emailo.com
+            Name Memorial_Sloan_Kettering_Cancer_Center email emailo@emailo.com
+            Name Melanoma_Institute_Australiaa email emailo@emailo.com
+            Name University_of_Queensland email emailo@emailo.com
+            Name University_of_athens_medical_school email emailo@emailo.com
         Funders:
             Name The_University_of_Queensland  type mixed 
                 grantor "National Health and Medical Research Council (NHMRC) – Centre of Research Excellence Scheme" 
@@ -111,11 +112,6 @@ Dataset: Melanoma_Classification_Dataset
                         description: 'ID of the images'
                         count: 33126
                         ofType:  Categorical
-                        Statistics:
-                            Categorical Distribution: "ers"
-                        Quality Metrics: 
-                            Completeness: 100 
-
                     attribute: patientID
                         description: 'ID of patients'
                         count: 33126
@@ -128,10 +124,11 @@ Dataset: Melanoma_Classification_Dataset
                         Statistics:
                                 Mode: "Famela"
                                 Categorical Distribution:
-                                    "Male: 40%
-                                    Famela: 55%
-                                    Non-binay: 5%"
-                    
+                                    [
+                                        "Male": 40%,
+                                        "Famela": 55%,
+                                        "Non-binay": 5%
+                                    ]
                     attribute: age  
                         description: 'age of the patient'
                         count: 33126
@@ -165,8 +162,10 @@ Dataset: Melanoma_Classification_Dataset
                         ofType: Categorical
                         Statistics:
                                 Categorical Distribution:
-                                    "beningnant: 80%
-                                     malignant: 20%"
+                                    [
+                                        "beningnant": 80%,
+                                     "malignant": 20%
+                                    ]
         Statistics: 
             Pair Correlation: 
                 between ImageId and diagnosis 
@@ -313,8 +312,3 @@ Dataset: Melanoma_Classification_Dataset
         IssueType: Social Impact
         Description: "Dataset is a convenience sample and is not representative of general incidence of melanoma"
 
-
-
-
-        
-               
