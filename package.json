@@ -123,6 +123,7 @@
         "csv-parser": "^3.0.0",
         "langium": "^0.2.0",
         "mathjs": "^10.1.1",
+        "pug": "^3.0.2",
         "twig": "^1.15.4",
         "vsce": "^2.7.0",
         "vscode-languageclient": "^7.0.0",

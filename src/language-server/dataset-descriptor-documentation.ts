@@ -1,10 +1,8 @@
 import { AstNode, LangiumParser } from 'langium';
 import { DescriptionDataset, isDescriptionDataset } from './generated/ast';
 import { DatasetDescriptorServices } from './dataset-descriptor-module';
-//import * as vscode from 'vscode';
-//import fs from 'fs';
-//import * as vscode from 'vscode';
-// import Twig from 'twig';
+
+
 //import { AnyRecord } from 'dns';
 //import { forEach } from 'mathjs';
 
@@ -45,20 +43,12 @@ export class DocumentationGenerator implements Generator {
             <meta charset="utf-8"/>`;
         head = this.addSchemaOrg(description, head, description.title)
         head = this.addStyles(head);
-        head = head +  
-    `</head>`
-
-        const body = this.buildBody(description)
-        const html = head + body + `</html>`; 
-
-        // Save the file. TO DO: Ensure only in the active workspace is saved
-        //vscode.workspace.workspaceFolders?.forEach(workspace => {
-       //     const filePath = workspace.uri.fsPath + "/" + description.title + ".html";
-       //     fs.writeFileSync(filePath, html, 'utf8');
-        //});
+        let body = this.buildBody(description);
+        head = head + 
+    `</head>` 
+      const html = head + body 
+      return html
         
-
-        return html;
     }
 
     addSchemaOrg(description: any, head: string, title: string) : string {
@@ -165,9 +155,20 @@ export class DocumentationGenerator implements Generator {
     </style>`
     }
 
-    buildBody(description: any) : string {
+    buildBody(description: any) : any {
 
-        return `
+        const pug = require('pug');
+        const path = require('path')
+        let sep = path.sep
+        let dirname = __dirname;
+        // Compile the source code
+        const compiledFunction = pug.compileFile(dirname+sep+'templates'+sep+'document.pug');
+        // Compile the source code
+        return compiledFunction({
+            description: description
+          });
+
+        /*
 <html>
     <body>
         <h1> Documentation of ${description.title} </h1>
@@ -204,6 +205,6 @@ export class DocumentationGenerator implements Generator {
 
        
     </body>
-`
+`*/
     }
 }

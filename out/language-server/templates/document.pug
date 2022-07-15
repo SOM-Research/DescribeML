@@ -1,0 +1,126 @@
+body    
+    h1 Documentation of #{description.title}'s dataset
+    h2 Metadata: 
+    div     
+        p identifier:  #{ description.metadata.ident } 
+        p version:  #{ description.metadata.version } 
+        if (description.metadata.datesR)
+            p Release date:  #{ description.metadata.datesR } 
+        if (description.metadata.datesU)
+            p Update date:  #{ description.metadata.datesU } 
+        if (description.metadata.datesP)
+            p Published date: #{ description.metadata.datesP } 
+        if description.metadata.citation 
+            p Citation:  #{ description.metadata.citation.citeText } 
+        end
+        div
+            h3 For what prupose was the dataset created?
+            p #{ description.metadata.descriptionpurpose}
+        div
+            h3 Was there any specific tasks?
+            p #{ description.metadata.descriptionTasks}
+        div
+            h3 Was there a specific gap that needed to be filled?
+            p #{ description.metadata.descriptionGaps}
+        div
+            h3 Distribution, licences and applications 
+            p Licence: #{ description.metadata.licence}
+            p Is public? #{ description.metadata.distribution.public}
+            p How is distributsed? #{ description.metadata.distribution.past}
+            p Past applications: #{ description.metadata.uses.past}
+            p Recommended applications: #{ description.metadata.uses.recommend}
+            p Non-recommended: #{ description.metadata.uses.future}
+        div
+            h3 Keywords
+            p Area:  
+                each element in description.metadata.area.area
+                    div #{element}
+            p Tags:
+                each element in description.metadata.tags.tags
+                    div #{element} 
+        div
+            h2 Authoring: 
+            div 
+                h3 Who created the dataset? 
+                table
+                    tr
+                        th Name
+                        th email
+                    each author in description.metadata.authoring.authors[0].authors 
+                        tr
+                            td  #{author.name}
+                            td  #{author.email}
+            div
+                h3 Who funded the dataset? 
+                table
+                    tr
+                        th Name
+                        th type
+                        th Grant
+                    each funder in description.metadata.authoring.founding[0].funders
+                        tr
+                            td #{funder.name}
+                            td #{funder.type}
+                            td #{funder.grantId}
+            div
+                if description.metadata.authoring.maintainers
+                    h3 Who Maintains the dataset?
+                    table
+                        tr
+                            th Name
+                            th Email
+                        each mantainer in description.metadata.authoring.maintainers
+                            tr
+                                td #{mantainer.name}
+                                td #{mantainer.type}
+                if description.metadata.erratum
+                    p Erratum: #{ description.metadata.erratum}
+                if description.metadata.dataRetention
+           
+                    p Data Retention: #{ description.metadata.dataRetention}
+                if description.metadata.support 
+                    p Version lifecycle: #{ description.metadata.support}
+                if description.metadata.contribGuides
+                    p Contribution guidelines: #{ description.metadata.contribGuides}
+    
+    h2 Composition:
+    div 
+        p Rationale: #{description.composition.compodesc}
+        p Total Size: #{description.composition.numberInst}
+        div 
+            p Instance: #{description.composition.instances[0].instances[0].name}
+            p Description: #{description.composition.instances[0].instances[0].descrip}
+            p Size: #{description.composition.instances[0].instances[0].numIns}
+            p Number of attributes: #{description.composition.instances[0].instances[0].attrnum}
+            p Type: #{description.composition.instances[0].instances[0].type}
+            h3 Attributes: 
+            each attribute in description.composition.instances[0].instances[0].attributes
+                div 
+                    p Name: #{attribute.name}
+                    if attribute.attdesc
+                        p Description: #{attribute.attdesc}
+                    if attribute.unique
+                        p Unique Values: #{attribute.unique}
+                    if attribute.count
+                        p Count: #{attribute.count}
+                    if attribute.attType
+                        p Type: #{attribute.attType}
+  
+    h2 Provenance: 
+    p Curation Rationale: #{description.provenance.curation}
+
+    h2 Social Concerns 
+    p Rationale: #{description.socialConcerns.desc}
+    each issue in description.socialConcerns.socialIssues
+        div 
+            p Issue: #{issue.name}
+            p Issue Type: #{issue.IssueType}
+            p Description: #{issue.desc}
+            if issue.senseAtt
+                p Related Attributes: #{issue.senseAtt}
+        
+        
+
+
+
+

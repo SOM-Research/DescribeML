@@ -8,8 +8,6 @@ import {
 import { createDatasetDescriptorServices, DatasetDescriptorServices} from './language-server/dataset-descriptor-module';
 
 
-
-
 let client: LanguageClient;
 
 let datasetServices : DatasetDescriptorServices;
@@ -141,9 +139,11 @@ async function initHtmlPreview(context: vscode.ExtensionContext) {
     const text = vscode.window.activeTextEditor?.document.getText();
     
     if (text) {
+   
         const returner = generator.generate(text);
+        updateHtmlPreview(returner);
         console.log(returner);
-        updateHtmlPreview(generator.generate(text));
+       
     }
 
     previewPanel.onDidDispose(() => {
@@ -152,7 +152,7 @@ async function initHtmlPreview(context: vscode.ExtensionContext) {
     //updateHtmlPreview("<h1> hello world </h1>")
 }
 
-function updateHtmlPreview(html : string | undefined) {
+function updateHtmlPreview(html : string | void) {
     if (previewPanel && html) {
         previewPanel.webview.html = html;
     }
