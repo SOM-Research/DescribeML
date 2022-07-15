@@ -27,7 +27,7 @@ Dataset: Gender
             Past Uses: "The dataset has been used to understand human annotation
              biases and to test existing coreference systems. See the paper linked at the top for more details."
                
-            Recommneded:
+            Recommended:
                 "The dataset could possibly be used for developing or testing systems for referring expression generation."
             Non-recommended:
                 "This dataset should not be used for any sort of 'gender prediction.'' First, anyone using this dataset 
@@ -56,10 +56,10 @@ Dataset: Gender
             Maintainer:
                 Name Yang_Trista_Cao email "XXXX@email.com"
                 Name Hal_Daume_III email "XXXX@gmail.com"
-            Erratum? 
+            Erratum?: 
                 "Currently, no. As errors are encountered, future versions of the dataset
                 may be released (but will be versioned). They will all be provided in the same github location."
-            Version lifecycle 
+            Version lifecycle: 
                 "All data will be versioned."
             Contribution guidelines: 
                 "Errors may be submitted via the bugtracker on github. More extensive augmentations may be accepted at the authors' discretion."
@@ -187,8 +187,8 @@ Dataset: Gender
              Mapping: Person_annotation
         Labeling Team:
             Who collects the data: "The two authors"
-        Label Requeriments  
-            Requeriment: "The annotation was performed by TagEditor software: https://github.com/d5555/TagEditor"              
+        Label Requirements:  
+            Requirement: "The annotation was performed by TagEditor software: https://github.com/d5555/TagEditor"              
 
      Social Concerns:
         Social Issue: privacyIndividual

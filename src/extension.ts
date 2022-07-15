@@ -1,12 +1,11 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
+import fs from 'fs';
 import {
     LanguageClient, LanguageClientOptions, ServerOptions, TransportKind
 } from 'vscode-languageclient/node';
 
 import { createDatasetDescriptorServices, DatasetDescriptorServices} from './language-server/dataset-descriptor-module';
-
-
 
 
 let client: LanguageClient;
@@ -29,6 +28,10 @@ export function activate(context: vscode.ExtensionContext): void {
     context.subscriptions.push(vscode.commands.registerCommand('datadesc.generateDocumentation', async () => {
        await initHtmlPreview(context);
     }));
+
+    context.subscriptions.push(vscode.commands.registerCommand('datadesc.saveDocumentHTML', async () => {
+        await saveDocumentHTML(context);
+     }));
 
 
 }
@@ -114,38 +117,61 @@ async function loadCsv(context: vscode.ExtensionContext, filepath: vscode.Uri) {
 let previewPanel : vscode.WebviewPanel;
 
 async function initHtmlPreview(context: vscode.ExtensionContext) {
-   
-    if (! previewPanel) {
-        previewPanel = vscode.window.createWebviewPanel(
-            // Webview id
-            'liveHTMLPreviewer',
-            // Webview title
-            'Dataset Documentation Preview',
-            // This will open the second column for preview inside editor
-            2,
-            {
-                // Enable scripts in the webview
-                enableScripts: true,
-                retainContextWhenHidden: true,
-                // And restrict the webview to only loading content from our extension's `assets` directory.
-                localResourceRoots: [vscode.Uri.file(path.join(context.extensionPath, 'assets'))]
-            
-            }
-        );
-    }
+    let title:string = 'Dataset Documentation';
+    previewPanel = vscode.window.createWebviewPanel(
+        // Webview id
+        'liveHTMLPreviewer',
+        // Webview title
+        title,
+        // This will open the second column for preview inside editor
+        2,
+        {
+            // Enable scripts in the webview
+            enableScripts: false,
+            retainContextWhenHidden: false,
+            // And restrict the webview to only loading content from our extension's `assets` directory.
+            localResourceRoots: [vscode.Uri.file(path.join(context.extensionPath, 'assets'))]
+        
+        }
+    );
+    setPreviewActiveContext(true);
     const generator =  datasetServices.generation.DocumentationGenerator;
     const text = vscode.window.activeTextEditor?.document.getText();
     
     if (text) {
+   
         const returner = generator.generate(text);
+        updateHtmlPreview(returner);
         console.log(returner);
-        updateHtmlPreview(generator.generate(text));
+       
     }
+
+    previewPanel.onDidDispose(() => {
+        setPreviewActiveContext(false);
+    })
     //updateHtmlPreview("<h1> hello world </h1>")
 }
 
-function updateHtmlPreview(html : string | undefined) {
+function updateHtmlPreview(html : string | void) {
     if (previewPanel && html) {
         previewPanel.webview.html = html;
+    }
+}
+
+function setPreviewActiveContext(value: boolean) {
+    vscode.commands.executeCommand('setContext', 'liveHTMLPreviewer', value);
+}
+
+function saveDocumentHTML(context: vscode.ExtensionContext) {
+    const text = previewPanel.webview.html;
+    const title = previewPanel.title;
+    if (text) {
+        // Save the file. TO DO: Ensure only in the  workspace is saved
+        vscode.workspace.workspaceFolders?.forEach(workspace => {
+            const filePath = workspace.uri.fsPath + "/" + title + ".html";
+            fs.writeFileSync(filePath, text, 'utf8');
+            // Display a message box to the user
+		    vscode.window.showInformationMessage('Congrats! Your file, '+title+'.html, has been saved in your root folder of the workspace');
+        });
     }
 }

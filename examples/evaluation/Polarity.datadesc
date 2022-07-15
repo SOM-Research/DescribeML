@@ -3,17 +3,18 @@ Dataset: Polarity
         Title: "Movie Review Polarity" 
         Unique-identifier: Movie_Review_Polarity
         Version: v0001
-        Release Date: "2002"
+        Release Date: 13-12-2010
         Citation: 
-            "Bo Pang and Lillian Lee. 2004. A sentimental education: Sentiment analysis using
-            subjectivity summarization based on minimum cuts. In Proceedings of the 42nd Annual
-            Meeting of the Association for Computational Linguistics. 271."
+            Raw Citation:
+                "Bo Pang and Lillian Lee. 2004. A sentimental education: Sentiment analysis using
+                subjectivity summarization based on minimum cuts. In Proceedings of the 42nd Annual
+                Meeting of the Association for Computational Linguistics. 271."
         Description:  
             Purposes: 
                 "The dataset was created to enable research on predicting sentiment polarity—i.e., given a piece of English text, predict whether
                 it has a positive or negative affect—or stance—toward its topic.The dataset was created intentionally with that task in mind, 
                 focusing on movie reviews as a place where affect/sentiment is frequently expressed." 
-            Tasks: "Classification" 
+            Tasks: [classification, sentiment-analysis]
             Gaps: "Gender Reference"
         Licences: CC BY 4.0 (Attribution 4.0 International)
         Applications: 
@@ -22,7 +23,7 @@ Dataset: Polarity
                 gov/pdf/cs/0409058v1). Between then and 2012, a collection of papers 
                 that used this dataset was maintained at http://www.cs.cornell.
                 edu/people/pabo/movie%2Dreview%2Ddata/otherexperiments.html."
-            Recommneded:
+            Recommended:
                 "The dataset could be used for anything related to modeling or
                 understanding movie reviews. For instance, one may induce a
                 lexicon of words/phrases that are highly indicative of sentiment
@@ -33,7 +34,7 @@ Dataset: Polarity
                 Consequently, such systems should not— without additional verification—be used to make consequential
                 decisions about people"
         Distribution: 
-            Is public?: yes
+            Is public?: Yes
             How is distributed: 
                 "The dataset is distributed on Bo Pang’s webpage at Cornell: http:
                 //www.cs.cornell.edu/people/pabo/movie-review-data. The dataset does
@@ -49,17 +50,15 @@ Dataset: Polarity
         Tags: Movie Review Sentiment Classification
         Authoring:
             Authors:
-                Name Bo_Pong email "XXXX@email.com"
-                Name Lillian_Lee	email "XXXX@email.com"
+                Name Bo_Pong email XXXX@mail.com
+                Name Lillian_Lee email XXXX@mail.com
             Funders:
                 Name National_Science_Fundations type mixed
                 Name Deparment_of_the_Interior type public 
                 Name National_Business_Center type mixed
                 Name Cornell_University type mixed
                 Name Sloan_Fundaiton type private
-                Maintainer:
-                    Name Bo_Pong email "XXXX@email.com"
-                Erratum? 
+            Erratum?: 
                     "Since its initial release (v0.9) there have been three later releases
                     (v1.0, v1.1, and v2.0). There is not an explicit erratum, but updates and
                     known errors are specified in higher version README
@@ -69,15 +68,15 @@ Dataset: Polarity
                     2Ddata/README.1.1 and http://www.cs.cornell.edu/people/pabo/
                     movie-review-data/diff.txt; v2.0: http://www.cs.cornell.edu/people/pabo/
                     movie%2Dreview%2Ddata/poldata.README.2.0.txt. Updates are listed
+                    cornell.edu/home/llee, respectively.
                     on the dataset web page. (This datasheet largely summarizes
                     these sources.)"
-                Version lifecycle
+            Version lifecycle:
                     "The dataset has already been updated; older versions are kept
                     around for consistency."
-                Contribution guidelines: 
+            Contribution guidelines: 
                     "The curators of the dataset, Bo Pang and Lillian lee, can be contacted at 
                     https://sites.google.com/site/bopang42/ and http://www.cs.
-                    cornell.edu/home/llee, respectively.
                     Is there an erratum? If so, please provid"
 
     Composition:
@@ -89,57 +88,44 @@ Dataset: Polarity
          Total size: 64702
          Data Instances: 
                 Instance: MovieReviews 
-                     Description: 
-                        "Each instance consists of the text associated with the review, with
-                        obvious ratings information removed from that text (some errors
-                        were found and later fixed). The text was down-cased and HTML
-                        tags were removed. Boilerplate newsgroup header/footer text was
-                        removed. Some additional unspecified automatic filtering was
-                        done. Each instance also has an associated target value: a positive
-                        (+1) or negative (-1) sentiment polarity rating based on the number of 
-                        stars that that review gave (details on the mapping from
-                        number of stars to polarity is given below in “Data Preprocessing”). 
-                        There is total number of 64702 sentences analyzed"
+                     Description: "···"
                      Type: Record-Data
-                     Attribute number: 6
-                     Attributes:
+                     Attribute number: 06
+                     Attributes: 
                         attribute: fold_id
                             description: "Folder Id containing the text inside the dataset " 
                             count: 64702
                             ofType: Categorical
-
                         attribute: cv_tag
                             description: "Author file id containint the text inside the dataset " 
                             count: 64702
                             ofType: Categorical 
-
                         attribute: html_id
                         description: "Author file ID separated by pos and negative labels " 
                           count: 64702 
                           ofType: Categorical 
-
                         attribute: sent_id
                             description: "Sentence id inside every file " 
                             count: 64702 
                             ofType: Categorical 
-
-                            attribute: text
-                        description: "The text extracted from the revies of IMDB " 
-                        count: 64702
-                        ofType: Categorical 
-
+                        attribute: text_body
+                            description: "The text extracted from the revies of IMDB " 
+                            count: 64702
+                            ofType: Categorical 
                         attribute: tag
                           description: "The label annotated by the reviewrs " 
                           ofType: Categorical
                           Statistics:
                             Categorical Distribution:
-                             "pos: 50%
-                              neg: 50%"
+                            [
+                             "pos": 50%,
+                             "neg": 50%
+                            ]
 
                     Statistics:
                         Quality Metrics:
-                            Sparsity: 0
-                            Compeleteness: 100
+                            Sparsity: 00
+                            Completeness: 100
                             Class Balance "attribute 'tag': 50% positive, 50% negative"
                 
                 Dependencies: 
@@ -177,7 +163,7 @@ Dataset: Polarity
                         coverage by authorship. Beyond that, the sample is arbitrar" 
                     Noise: "unknown"
                 Related Instances: MovieReviews
-                Social Issues privacyAware
+                Social Issues: privacyAware
                 How data is collected: Manual Human Curator
                 When data was collected: "There are 1,400 instances in total in the original (v1.x versions)
                 and 2,000 instances in total in v2.0 (from 2014)."
@@ -206,21 +192,21 @@ Dataset: Polarity
             Description: "The label is the positive/negative sentiment polarity rating derived
             from the star rating"
         Mapping: tag
-        Label Requeriments 
-          Requeriment:                     
+        Label Requirements:
+          Requirement:                     
             "- In order to obtain more accurate rating decisions, the maximum
                 rating must be specified explicitly, both for numerical ratings
                 and star ratings.  ('8/10', 'four out of five', and 'OUT OF
                 ****: ***'' are examples of rating indications we recognize.)"
-           Requeriment:  " 
+          Requirement:  " 
             - With a five-star system (or compatible number systems):
                 three-and-a-half stars and up are considered positive, 
                 two stars and below are considered negative."     
-           Requeriment:   "
+          Requirement:   "
             - With a four-star system (or compatible number system):
                 three stars and up are considered positive, 
                 one-and-a-half stars and below are considered negative.  "
-            Requeriment:   "
+          Requirement:"
             - With a letter grade system:
                 B or above is considered positive,
                 C- or below is considered negative."
@@ -253,26 +239,26 @@ Dataset: Polarity
             too much of the text."
 
      Social Concerns:
-       Social Issue: privacyAware
-         IssueType: Privacy
-         Description: 
+        Social Issue: privacyAware
+          IssueType: Privacy
+          Description: 
             "Individuals were not aware of data collection. The data was crawled from public web sources,
             and the authors of the posts presumably knew that their posts would be public, but the authors 
             werenot explicitly informed that their posts were to be used in this way."
         
-         Social Issue: inappropiateContent
-        IssueType: Social Impact
-        Related Attributes: 
-            attribute: text
-        Description: 
+        Social Issue: inappropiateContent
+          IssueType: Social Impact
+          Related Attributes: 
+            attribute: text_body
+          Description: 
             "Some movie reviews might contain moderately inappropriate or
             offensive language, but we do not expect this to be the norm"  
         Instance belongs to people:
-            Are there protecte groups? "No"
-       
+            Are there protected groups? Yes
+
         Social Issue: personalInformation
-        IssueType: Privacy
-        Description: 
+          IssueType: Privacy
+          Description: 
             "Some personal information is retained from the newsgroup posting
             in the “raw form” of the dataset (as opposed to the “preprocessed” version, 
             in which these are automatically removed), including the name and email address 
