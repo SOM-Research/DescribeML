@@ -1,6 +1,10 @@
 import { AstNode, LangiumParser } from 'langium';
 import { DescriptionDataset, isDescriptionDataset } from './generated/ast';
 import { DatasetDescriptorServices } from './dataset-descriptor-module';
+//import * as vscode from 'vscode';
+//import fs from 'fs';
+//import * as vscode from 'vscode';
+// import Twig from 'twig';
 //import { AnyRecord } from 'dns';
 //import { forEach } from 'mathjs';
 
@@ -20,7 +24,6 @@ export class DocumentationGenerator implements Generator {
     }
 
     generate(DescriptionDataset : string | AstNode) : string | undefined {
-        console.log('hola');
         const astNode = (typeof(DescriptionDataset) == 'string' ? this.parser.parse(DescriptionDataset).value : DescriptionDataset);
         return (isDescriptionDataset(astNode) ? this.Declaration2Html(astNode) : undefined);
     }
@@ -47,6 +50,14 @@ export class DocumentationGenerator implements Generator {
 
         const body = this.buildBody(description)
         const html = head + body + `</html>`; 
+
+        // Save the file. TO DO: Ensure only in the active workspace is saved
+        //vscode.workspace.workspaceFolders?.forEach(workspace => {
+       //     const filePath = workspace.uri.fsPath + "/" + description.title + ".html";
+       //     fs.writeFileSync(filePath, html, 'utf8');
+        //});
+        
+
         return html;
     }
 
@@ -66,7 +77,8 @@ export class DocumentationGenerator implements Generator {
                 "contactType": "email,
                 "email":${author.email}
             }
-        },`
+        },
+    `
 
         })
 
@@ -79,7 +91,8 @@ export class DocumentationGenerator implements Generator {
                 "@type":"Funder",
                 "name":"${funder.name}",
                 "sameAs":"${funder.type}"
-            },`
+            },
+        `
     
         })
 
@@ -92,33 +105,18 @@ export class DocumentationGenerator implements Generator {
         "description":${description.metadata.descriptionpurpose},
         "url":"",
         "sameAs":"",
-        "identifier": [${description.metadata.uniqueId}],
+        "identifier": [${description.metadata.ident}],
         "keywords":[
-            "AREA > ${description.metadata.area}",
-            "TAGS > ${description.metadata.tags}",
+            "AREA > ${description.metadata.area.area[0]}",
+            "TAGS > ${JSON.stringify(description.metadata.tags.tags)}",
         ],
-        "license" : ${description.metadata.license},
+        "license" : ${description.metadata.licence},
         "hasPart" : [
             {
             "@type": "Dataset",
-            "name": ${description.metadata},
-            "description": "Informative description of the first subdataset...",
-            "license" : "https://creativecommons.org/publicdomain/zero/1.0/",
-            "creator":{
-                "@type":"Organization",
-                "name": "Sub dataset 01 creator"
-            }
+            "name": ${description.composition.instances[0].instances[0].name},
+            "description": ${description.composition.instances[0].instances[0].descript},
             },
-            {
-            "@type": "Dataset",
-            "name": "Sub dataset 02",
-            "description": "Informative description of the second subdataset...",
-            "license" : "https://creativecommons.org/publicdomain/zero/1.0/",
-            "creator":{
-                "@type":"Organization",
-                "name": "Sub dataset 02 creator"
-            }
-            }
         ],
         "includedInDataCatalog":{
             "@type":"DataCatalog",
@@ -168,14 +166,10 @@ export class DocumentationGenerator implements Generator {
     }
 
     buildBody(description: any) : string {
+
         return `
 <html>
-    <head>
-	    <title>${description.title}</title>
-	    <meta charset="utf-8"/>
-
-    </head>
-    <body>'''
+    <body>
         <h1> Documentation of ${description.title} </h1>
         <br>
         <div> 

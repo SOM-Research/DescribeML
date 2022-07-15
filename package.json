@@ -57,18 +57,33 @@
                     "light": "fileicons/docs.svg",
                     "dark": "fileicons/docs.svg"
                 }
+            },
+            {
+                "command": "datadesc.saveDocumentHTML",
+                "title": "Save HTML",
+                "shortTitle": "Save HTML",
+                "category": "Dataset",
+                "icon": {
+                    "light": "fileicons/docs.svg",
+                    "dark": "fileicons/docs.svg"
+                }
             }
         ],
         "menus": {
             "editor/title": [
                 {
                     "when": "resourceLangId == dataset-descriptor",
-                    "command": "datadesc.loadDataset",
+                    "command": "datadesc.generateDocumentation",
                     "group": "navigation"
                 },
                 {
                     "when": "resourceLangId == dataset-descriptor",
-                    "command": "datadesc.generateDocumentation",
+                    "command": "datadesc.loadDataset",
+                    "group": "navigation"
+                },
+                {
+                    "when": "liveHTMLPreviewer",
+                    "command": "datadesc.saveDocumentHTML",
                     "group": "navigation"
                 }
             ]
@@ -108,12 +123,14 @@
         "csv-parser": "^3.0.0",
         "langium": "^0.2.0",
         "mathjs": "^10.1.1",
+        "twig": "^1.15.4",
         "vsce": "^2.7.0",
         "vscode-languageclient": "^7.0.0",
         "vscode-languageserver": "^7.0.0"
     },
     "devDependencies": {
         "@types/node": "^14.17.3",
+        "@types/twig": "^1.12.9",
         "@types/vscode": "^1.56.0",
         "@typescript-eslint/eslint-plugin": "^4.14.1",
         "@typescript-eslint/parser": "^4.14.1",

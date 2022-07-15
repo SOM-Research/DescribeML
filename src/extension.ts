@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
+import fs from 'fs';
 import {
     LanguageClient, LanguageClientOptions, ServerOptions, TransportKind
 } from 'vscode-languageclient/node';
@@ -29,6 +30,10 @@ export function activate(context: vscode.ExtensionContext): void {
     context.subscriptions.push(vscode.commands.registerCommand('datadesc.generateDocumentation', async () => {
        await initHtmlPreview(context);
     }));
+
+    context.subscriptions.push(vscode.commands.registerCommand('datadesc.saveDocumentHTML', async () => {
+        await saveDocumentHTML(context);
+     }));
 
 
 }
@@ -114,12 +119,12 @@ async function loadCsv(context: vscode.ExtensionContext, filepath: vscode.Uri) {
 let previewPanel : vscode.WebviewPanel;
 
 async function initHtmlPreview(context: vscode.ExtensionContext) {
-   
+    let title:string = 'Dataset Documentation';
     previewPanel = vscode.window.createWebviewPanel(
         // Webview id
         'liveHTMLPreviewer',
         // Webview title
-        'Dataset Documentation Preview',
+        title,
         // This will open the second column for preview inside editor
         2,
         {
@@ -131,6 +136,7 @@ async function initHtmlPreview(context: vscode.ExtensionContext) {
         
         }
     );
+    setPreviewActiveContext(true);
     const generator =  datasetServices.generation.DocumentationGenerator;
     const text = vscode.window.activeTextEditor?.document.getText();
     
@@ -139,11 +145,33 @@ async function initHtmlPreview(context: vscode.ExtensionContext) {
         console.log(returner);
         updateHtmlPreview(generator.generate(text));
     }
+
+    previewPanel.onDidDispose(() => {
+        setPreviewActiveContext(false);
+    })
     //updateHtmlPreview("<h1> hello world </h1>")
 }
 
 function updateHtmlPreview(html : string | undefined) {
     if (previewPanel && html) {
         previewPanel.webview.html = html;
+    }
+}
+
+function setPreviewActiveContext(value: boolean) {
+    vscode.commands.executeCommand('setContext', 'liveHTMLPreviewer', value);
+}
+
+function saveDocumentHTML(context: vscode.ExtensionContext) {
+    const text = previewPanel.webview.html;
+    const title = previewPanel.title;
+    if (text) {
+        // Save the file. TO DO: Ensure only in the  workspace is saved
+        vscode.workspace.workspaceFolders?.forEach(workspace => {
+            const filePath = workspace.uri.fsPath + "/" + title + ".html";
+            fs.writeFileSync(filePath, text, 'utf8');
+            // Display a message box to the user
+		    vscode.window.showInformationMessage('Congrats! Your file, '+title+'.html, has been saved in your root folder of the workspace');
+        });
     }
 }
