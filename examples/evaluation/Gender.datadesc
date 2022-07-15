@@ -2,9 +2,10 @@ Dataset: Gender
     Metadata:
         Title: "Gender Inclusive Coreference Dataset" 
         Unique-identifier: Gender_Inclusive_Dataset
-        Version: v0001 
+        Version: v0001
+        Release Date: 20-10-2019 
         Citation: 
-            "@inproceedings{cao2019toward,
+            Raw Citation: "@inproceedings{cao2019toward,
                 title={Toward Gender-Inclusive Coreference Resolution},
                 author={Yang Trista Cao and Hal Daum{\'e}},
                 booktitle={Proceedings of the Conference of
@@ -13,17 +14,17 @@ Dataset: Gender
                 note={abs/1910.13913}
               }"
         Description:  
-            Purposes::
+            Purposes:
                 "This dataset was created to study coreference resolution in English on documents discussing people who are,
                  in some ways, gender-variant (and generally selected so that this variance shows up linguistically).
                  Previously coreference resolution datasets contain nearly no such examples, largely due to the ways in 
                  which those datasets were collected (see paper for details)." 
-            Tasks: "Classification" 
+            Tasks:[reasoning, text-classification]
             Gaps: 
                 "As part of a study making coreference systems more gender inclusive, we collected and annotated a dataset
-                of documents by and about non-binary and binary trans people"
+                of documents by and about non-binary and binary trans people" 
         Licences:  FDL 1.3 (GNU Free Documentation License 1.3)
-        Applications:: 
+        Applications:
             Past Uses: "The dataset has been used to understand human annotation
              biases and to test existing coreference systems. See the paper linked at the top for more details."
                
@@ -37,7 +38,7 @@ Dataset: Gender
                 described in this dataset in one particular way, does not mean that this will always be the appropriate
                 way to refer to this person."
         Distribution: 
-            Is public?: yes
+            Is public?: Yes
             How is distributed: 
                 "The dataset is free for download at github.com/hal3/gicoref-dataset. 
                 The dataset is distributed as of June 2020 in its first version."
@@ -48,14 +49,14 @@ Dataset: Gender
 
         Authoring:
             Authors:
-                Name Yang_Trista_Cao email "XXXX@email.com"
-                Name Hal_Daume_III	email "XXXX@email.com"
+                Name Yang_Trista_Cao email emailo@emailo.com
+                Name Hal_Daume_III	email emailo@emailo.com
             Funders:
                 Name UMD_CS_department type mixed
                 Name MSR type private 
             Maintainer:
-                Name Yang_Trista_Cao email "XXXX@email.com"
-                Name Hal_Daume_III email "XXXX@gmail.com"
+                Name Yang_Trista_Cao email emailo@emailo.com
+                Name Hal_Daume_III email emailo@emailo.com
             Erratum?: 
                 "Currently, no. As errors are encountered, future versions of the dataset
                 may be released (but will be versioned). They will all be provided in the same github location."
@@ -87,6 +88,8 @@ Dataset: Gender
                             ofType: Categorical 
                 
                 Statistics:
+                    Categorical Distribution:
+                        ["": 0%]
                     Quality Metrics: 
                         Sparsity: 8.9 
                         Noisy labels "Please considers some humans errors in the annotation process could be done"
@@ -187,6 +190,7 @@ Dataset: Gender
              Mapping: Person_annotation
         Labeling Team:
             Who collects the data: "The two authors"
+        Type External
         Label Requirements:  
             Requirement: "The annotation was performed by TagEditor software: https://github.com/d5555/TagEditor"              
 
@@ -210,7 +214,7 @@ Dataset: Gender
                 misgendering of characters, and a few describe (or hint out) intimate relationships (though we 
                 filtered for only stories that did not have 'adult themes')."
             Instance belongs to people:
-                Are there protecte groups? "Yes, most of the articles relate to real people (except the fan-fiction articles)."
+                Are there protected groups? Yes
                 Might be offensive "The gender information given may be sensitive in certain situations, at least for those 
                 articles dealing with real people. However, all these articles are from either Wikipedia or periodicles, 
                 and is therefore already public information."
