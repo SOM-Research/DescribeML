@@ -6,16 +6,16 @@ A Visual Studio Code language plugin to describe machine-learning datasets. This
 
 This work is still in a double-blind peer-review process. Therefore, the plugin is not published in the Visual Studio Code Market. Instead, a packaged release of the plugin is ready to be installed. Can be found at the root of the project. 
 
-The file is **Dataset-Descriptor-0.0.1.vsix**
+The file is **DescribeML-0.0.2.vsix**
 
 Open your terminal (or the terminal inside the VSCode) and write this:
 
 ```
-git clone https://github.com/SOM-Research/Dataset-Descriptor.git datasets
+git clone https://github.com/SOM-Research/DescribeML.git datasets
 
 cd datasets 
 
-code --install-extension Dataset-Descriptor-0.0.1.vsix
+code --install-extension DescribeML-0.0.2.vsix
 ```
 
 *Troubles: If you are not able to see the syntax highlight in the examples files (p.e. *Melanoma.datadesc*) as the image below . Please, reload the VSCode editor and write the code --install command again*
