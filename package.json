@@ -6,7 +6,7 @@
     "engines": {
         "vscode": "^1.56.0"
     },
-    "publisher": "SOM Research Group",
+    "publisher": "SOMResearchGroup",
     "author":{
         "name": "Joan Giner-Miguelez",
         "name": "Abel Gómez",
@@ -137,7 +137,7 @@
         "langium:watch": "langium generate --watch"
     },
     "dependencies": {
-        "colors": "^1.4.0",
+        "colors": "1.4.0",
         "commander": "^8.0.0",
         "csv-parse": "^5.0.4",
         "csv-parser": "^3.0.0",
