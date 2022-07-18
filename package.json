@@ -1,11 +1,31 @@
 {
-    "name": "Dataset-Descriptor",
-    "displayName": "Dataset Descriptor",
-    "description": "Please enter a brief description here",
+    "name": "DescribeML",
+    "displayName": "DescribeML",
+    "description": "DescribeML is a language plug-in to describe machine-learning datasets in a standard format. Build better data describing the composition, provenance and social concerns of your dataset.",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.56.0"
     },
+    "publisher": "SOM Research Group",
+    "author":{
+        "name": "Joan Giner-Miguelez",
+        "name": "Abel Gómez",
+        "name": "Jordi Cabot"
+    },
+    "homepage": "https://github.com/SOM-Research/DescribeML",
+    "repository":{
+        "type": "git",
+        "url": "https://github.com/SOM-Research/DescribeML"
+    },
+    "icon": "fileicons/requisito.png",
+    "keywords": [
+        "Data Science",
+        "Datasets",
+        "ML",
+        "Machine Learning",
+        "DSL"
+    ],
+    "license": "GPLv3",
     "categories": [
         "Programming Languages",
         "Snippets"
@@ -44,8 +64,8 @@
                 "shortTitle": "Dataset",
                 "category": "Dataset",
                 "icon": {
-                    "light": "fileicons/uploads.svg",
-                    "dark": "fileicons/uploads.svg"
+                    "light": "fileicons/cloud-computing.png",
+                    "dark": "fileicons/cloud-computing.png"
                 }
             },
             {
@@ -54,8 +74,8 @@
                 "shortTitle": "Documentation",
                 "category": "Dataset",
                 "icon": {
-                    "light": "fileicons/docs.svg",
-                    "dark": "fileicons/docs.svg"
+                    "light": "fileicons/html.png",
+                    "dark": "fileicons/html.png"
                 }
             },
             {
@@ -64,8 +84,8 @@
                 "shortTitle": "Save HTML",
                 "category": "Dataset",
                 "icon": {
-                    "light": "fileicons/docs.svg",
-                    "dark": "fileicons/docs.svg"
+                    "light": "fileicons/save.png",
+                    "dark": "fileicons/save.png"
                 }
             }
         ],

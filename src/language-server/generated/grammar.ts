@@ -582,6 +582,29 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                     "elements": [
                       {
                         "$type": "Keyword",
+                        "value": "authors:",
+                        "elements": []
+                      },
+                      {
+                        "$type": "Assignment",
+                        "feature": "authorsPaper",
+                        "operator": "=",
+                        "terminal": {
+                          "$type": "RuleCall",
+                          "arguments": [],
+                          "rule": {
+                            "$refText": "STRING"
+                          }
+                        }
+                      }
+                    ],
+                    "cardinality": "?"
+                  },
+                  {
+                    "$type": "Group",
+                    "elements": [
+                      {
+                        "$type": "Keyword",
                         "value": "keywords:",
                         "elements": []
                       },
@@ -676,33 +699,10 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                           }
                         }
                       }
-                    ],
-                    "cardinality": "?"
-                  },
-                  {
-                    "$type": "Group",
-                    "elements": [
-                      {
-                        "$type": "Keyword",
-                        "value": "license:",
-                        "elements": []
-                      },
-                      {
-                        "$type": "Assignment",
-                        "feature": "license",
-                        "operator": "=",
-                        "terminal": {
-                          "$type": "RuleCall",
-                          "arguments": [],
-                          "rule": {
-                            "$refText": "STRING"
-                          }
-                        }
-                      }
-                    ],
-                    "cardinality": "?"
+                    ]
                   }
-                ]
+                ],
+                "cardinality": "?"
               }
             ]
           }
@@ -1984,7 +1984,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Class Balance",
+                "value": "Class Balance:",
                 "elements": []
               },
               {
@@ -2007,7 +2007,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Noisy labels",
+                "value": "Noisy labels:",
                 "elements": []
               },
               {
@@ -2343,7 +2343,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                 "elements": [
                   {
                     "$type": "Keyword",
-                    "value": "Categorical Distribution:",
+                    "value": "Categoric Distribution:",
                     "elements": []
                   },
                   {
@@ -2397,7 +2397,8 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                     "$type": "Keyword",
                     "value": "]"
                   }
-                ]
+                ],
+                "cardinality": "?"
               }
             ],
             "cardinality": "?"

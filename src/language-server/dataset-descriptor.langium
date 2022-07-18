@@ -38,13 +38,14 @@ Metadata:
 Citation:
     name="Citation:"
     (("Raw Citation:") citeText=STRING |
-    ("doi:" doi=STRING)?
-    ("url:" url=STRING)?
+    (("doi:" doi=STRING)? 
+    ("url:" url=STRING)? 
+    ("authors:" authorsPaper=STRING)?
     ("keywords:" "["(keywords+=STRING)*"]")?
     ("title:" title=STRING)?
     ("publisher:" publisher=STRING)?
-    ("year:" year=STRING)?
-    ("license:" license=STRING)?);
+    ("year:" year=STRING) )?
+    );
 // Distribution Policies
 Distribution:
     name="Distribution:"
@@ -124,8 +125,8 @@ PairCorrelation:
 QualityMetric:
     ('Sparsity:' sparsity=NUMBER)?
     ('Completeness:' complet=NUMBER)?
-    ('Class Balance' balance=STRING)?
-    ('Noisy labels' noisy=STRING)?;
+    ('Class Balance:' balance=STRING)?
+    ('Noisy labels:' noisy=STRING)?;
 
 // Consistency Rules
 ConsistencyRules:
@@ -148,7 +149,7 @@ Categor:
     (('Statistics:')
     ('Binary attribute:' binary=Binary)?
     ('Mode:' mode=STRING)?
-    ('Categorical Distribution:' '[' catdist=CategoricalDistributionType '%' (',' catdist=CategoricalDistributionType '%')* ']'))?
+    ('Categoric Distribution:' '[' catdist=CategoricalDistributionType '%' (',' catdist=CategoricalDistributionType '%')* ']')?)?
     ('Quality Metrics:' metrics+=QualityMetric)?;
 
 Binary:

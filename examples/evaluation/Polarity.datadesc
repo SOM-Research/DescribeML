@@ -5,10 +5,11 @@ Dataset: Polarity
         Version: v0001
         Release Date: 13-12-2010
         Citation: 
-            Raw Citation:
-                "Bo Pang and Lillian Lee. 2004. A sentimental education: Sentiment analysis using
-                subjectivity summarization based on minimum cuts. In Proceedings of the 42nd Annual
-                Meeting of the Association for Computational Linguistics. 271."
+            doi: "10.5281/zenodo.569"
+            authors: "Bo Pang and Lillian Lee"
+            title: "A sentimental education: Sentiment analysis using subjectivity summarization based on minimum cuts"
+            publisher: "Springer, proceedings of the 42nd Annual Meeting of the Association for Computational Linguistics"
+            year: "2004"
         Description:  
             Purposes: 
                 "The dataset was created to enable research on predicting sentiment polarity—i.e., given a piece of English text, predict whether
@@ -116,7 +117,7 @@ Dataset: Polarity
                           description: "The label annotated by the reviewrs " 
                           ofType: Categorical
                           Statistics:
-                            Categorical Distribution:
+                            Categoric Distribution:
                             [
                              "pos": 50%,
                              "neg": 50%
@@ -126,7 +127,7 @@ Dataset: Polarity
                         Quality Metrics:
                             Sparsity: 00
                             Completeness: 100
-                            Class Balance "attribute 'tag': 50% positive, 50% negative"
+                            Class Balance: "attribute 'tag': 50% positive, 50% negative"
                 
                 Dependencies: 
                     Description: "The dataset is entirely self-contained."
@@ -191,7 +192,7 @@ Dataset: Polarity
             Label: Tag
             Description: "The label is the positive/negative sentiment polarity rating derived
             from the star rating"
-        Mapping: tag
+            Mapping: ImageId
         Label Requirements:
           Requirement:                     
             "- In order to obtain more accurate rating decisions, the maximum

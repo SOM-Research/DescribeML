@@ -123,7 +123,7 @@ Dataset: Melanoma_Classification_Dataset
                         ofType: Categorical
                         Statistics:
                                 Mode: "Famela"
-                                Categorical Distribution:
+                                Categoric Distribution:
                                     [
                                         "Male": 40%,
                                         "Famela": 55%,
@@ -161,9 +161,9 @@ Dataset: Melanoma_Classification_Dataset
                         count: 33126
                         ofType: Categorical
                         Statistics:
-                                Categorical Distribution:
+                                Categoric Distribution:
                                     [
-                                        "beningnant": 80%,
+                                     "beningnant": 80%,
                                      "malignant": 20%
                                     ]
         Statistics: 
@@ -208,7 +208,6 @@ Dataset: Melanoma_Classification_Dataset
                         (https://www.kaggle.com/c/siim- isic-melanoma- classification/discussion/161943)."
 
                 Related Instances: skinImages
-                Social Issues: PrivacyIssue1
                 How data is collected: Manual Human Curator
                 When data was collected: 
                     "Images were originally collected by imaging centers during 1998 - 2019; this dataset was curated from those image 
@@ -260,7 +259,6 @@ Dataset: Melanoma_Classification_Dataset
                     Who collects the data: "Internal Medical staff"
                     Type Internal
                     Country/Region: "Australia"
-                Social Issues: raceRepresentative
                 Label Requirements: 
                     Requirement: "1) Images containing any potentially identifying features, such as jewelry or tattoos, or from patients without 
                         at least three qualifying images were excluded during quality assurance review."
@@ -303,12 +301,13 @@ Dataset: Melanoma_Classification_Dataset
 
 
     Social Concerns: 
-      Rationale: 'Rationale'
+      Rationale: 'Dataset may not be representative of the real world data, and the cavenience sample is not representative of general incidence of melanoma'
       Social Issue: raceRepresentative
         IssueType: Bias
-        Related Attributes: ImageId
+        Related Attributes: 
+            attribute: ImageId  
         Description: "Dataset is not representative with respect to darker skin types"
       Social Issue: generalIncidence
-        IssueType: Social Impact
+        IssueType: Social Impact        
         Description: "Dataset is a convenience sample and is not representative of general incidence of melanoma"
 

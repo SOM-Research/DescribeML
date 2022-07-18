@@ -121,10 +121,10 @@ export function isCategor(item: unknown): item is Categor {
 
 export interface Citation extends AstNode {
     readonly $container: Metadata;
+    authorsPaper: string
     citeText: string
     doi: string
     keywords: Array<string>
-    license: string
     name: 'Citation:'
     publisher: string
     title: string

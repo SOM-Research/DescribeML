@@ -88,11 +88,11 @@ Dataset: Gender
                             ofType: Categorical 
                 
                 Statistics:
-                    Categorical Distribution:
+                    Categoric Distribution:
                         ["": 0%]
                     Quality Metrics: 
                         Sparsity: 8.9 
-                        Noisy labels "Please considers some humans errors in the annotation process could be done"
+                        Noisy labels: "Please considers some humans errors in the annotation process could be done"
                 Is sample: 
                     "It is a sample of all possible documents. It is not intended to be representative 
                     (in fact, it is known to be quite non-representative): it was specifically designed 
