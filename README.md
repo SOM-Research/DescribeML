@@ -10,7 +10,7 @@ The easiest way to install the plugin is using the **Visual Studio Code Market**
 
 ### Manually
 
-Instead, you can install it manually, using the packaged release of the plugin in this repository that can be found at the root of the project. 
+Instead, you can install it manually, using the packaged release of the plugin in this [repository](https://github.com/SOM-Research/DescribeML) that can be found at the root of the project. 
 
 The file is **DescribeML-0.0.3.vsix**
 
@@ -30,7 +30,7 @@ Great! That's it.
 
 ## Usage
 
-To start using our tool, we recommend accessing to the **/examples/evaluation** folder in the repository and open and take a look in some, for example *Melanoma.descml* file to see a working example of our preliminary evaluation.
+To start using our tool, we recommend accessing to the **examples/evaluation** folder in the tool's [repository](https://github.com/SOM-Research/DescribeML), and take a look to the full descriptions example present there. For example, at the *Melanoma.descml* file.
 
 Remember: by default, VSCode gives you auto-completion help by hitting CTRL + Space (or equivalent in MAC)
 
