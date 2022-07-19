@@ -1,10 +1,16 @@
-# Dataset-Descriptor
+# DescribeML
 A Visual Studio Code language plugin to describe machine-learning datasets. This plugin helps you define your data's provenance, composition, and social concerns in a standard format.
 
 
-## Using the plug-in
+## Installation 
 
-This work is still in a double-blind peer-review process. Therefore, the plugin is not published in the Visual Studio Code Market. Instead, a packaged release of the plugin is ready to be installed. Can be found at the root of the project. 
+### Via marketplace
+
+The easiest way to install the plugin is using the **Visual Studio Code Market**. Just, type "describeML" in the extension tab, and that's it!
+
+### Manually
+
+Instead, you can install it manually, using the packaged release of the plugin in this repository that can be found at the root of the project. 
 
 The file is **DescribeML-0.0.2.vsix**
 
@@ -18,21 +24,21 @@ cd datasets
 code --install-extension DescribeML-0.0.2.vsix
 ```
 
-*Troubles: If you are not able to see the syntax highlight in the examples files (p.e. *Melanoma.datadesc*) as the image below . Please, reload the VSCode editor and write the code --install command again*
+*Troubles: If you cannot see the syntax highlight in the examples files (p.e. *Melanoma.datadesc*) as the image below. Please, reload the VSCode editor and write the code --install command again*
 
 Great! That's it.
 
-Now go to the folder **/examples/evaluation** and open a, for example *Melanoma.datadesc* file to see a working example of our preliminary evaluation.
+## Usage
+
+To start using our tool, we recommend accessing to the **/examples/evaluation** folder in the repository and open and take a look in some, for example *Melanoma.datadesc* file to see a working example of our preliminary evaluation.
 
 Remember: by default, VSCode gives you auto-completion help by hitting CTRL + Space (or equivalent in MAC)
 
-The full grammar in Extended Backus-Naur form (EBNF) can be seen in **src/language-server/dataset-descriptor.langium**
-
 ![Autocompletion feature](fileicons/Autcomplete.gif)
 
-### Want to dive into language development?
+## Contributions
 
-
+The full grammar in Extended Backus-Naur form (EBNF) can be seen in **src/language-server/dataset-descriptor.langium**
 
 If you want to contribute or dive into the plugin or the language, you may need extra steps. As Langium (the base framework of the plugin) is not stable, there are a few actions we need to do manually.
 
@@ -42,9 +48,9 @@ If you want to contribute or dive into the plugin or the language, you may need 
 
 3 - Copy the folder "langium" and "langium-cli" from folder /packages to /node_modules
 
-4 - Get the folder /packages/langium-vscode and paste it inside your VSCode extension folder (tipically <user home>/.vscode/extensions)
+4 - Get the folder /packages/langium-vscode and paste it inside your VSCode extension folder (typically <user home>/.vscode/extensions)
   
-5 - Install de Langium plugin thourgh the UI of VSCode
+5 - Install de Langium plugin through the UI of VSCode
 
 
 ## Testing the extensions under the hood
@@ -52,5 +58,3 @@ If you want to contribute or dive into the plugin or the language, you may need 
 This repo comes with an already built-in config to debug. Just go to Debug in VSCode, and launch the Extension config. Please check your port 6009 are free.
   
 For more information about how the framework works and how the language can be extended, please refer to https://github.com/langium/langium or the VSCode extension API documentation https://code.visualstudio.com/api
-
-
