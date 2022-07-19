@@ -39,7 +39,7 @@
                     "dataset-descriptor"
                 ],
                 "extensions": [
-                    ".datadesc"
+                    ".descml"
                 ],
                 "configuration": "./language-configuration.json"
             }

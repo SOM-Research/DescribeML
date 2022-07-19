@@ -24,13 +24,13 @@ cd datasets
 code --install-extension DescribeML-0.0.2.vsix
 ```
 
-*Troubles: If you cannot see the syntax highlight in the examples files (p.e. *Melanoma.datadesc*) as the image below. Please, reload the VSCode editor and write the code --install command again*
+*Troubles: If you cannot see the syntax highlight in the examples files (p.e. *Melanoma.descml*) as the image below. Please, reload the VSCode editor and write the code --install command again*
 
 Great! That's it.
 
 ## Usage
 
-To start using our tool, we recommend accessing to the **/examples/evaluation** folder in the repository and open and take a look in some, for example *Melanoma.datadesc* file to see a working example of our preliminary evaluation.
+To start using our tool, we recommend accessing to the **/examples/evaluation** folder in the repository and open and take a look in some, for example *Melanoma.descml* file to see a working example of our preliminary evaluation.
 
 Remember: by default, VSCode gives you auto-completion help by hitting CTRL + Space (or equivalent in MAC)
 
