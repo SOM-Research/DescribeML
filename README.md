@@ -53,8 +53,11 @@ To start using our tool, we recommend accessing to the **examples/evaluation** f
 Check out the **quick [presentation](https://www.youtube.com/watch?v=Bf3bhWB-UJY) video!**
 
 Remember: by default, VSCode gives you auto-completion help by hitting CTRL + Space (or equivalent in MAC)
+<div align="center">
 
 ![Autocompletion feature](fileicons/Autcomplete.gif)
+
+</div>
 
 ## Research background
 
