@@ -26,7 +26,7 @@ The easiest way to install the plugin is by using the **Visual Studio Code Marke
 
 Instead, you can install it manually using the packaged release of the plugin in this [repository](https://github.com/SOM-Research/DescribeML) that can be found at the root of the project. 
 
-The file is **DescribeML-0.0.3.vsix**
+The file is **DescribeML-0.0.5.vsix**
 
 Open your terminal (or the terminal inside the VSCode) and write this:
 
