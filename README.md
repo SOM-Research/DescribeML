@@ -34,7 +34,7 @@ Open your terminal (or the terminal inside the VSCode) and write this:
 
 git clone https://github.com/SOM-Research/DescribeML.git datasets
 cd datasets 
-code --install-extension DescribeML-0.0.3.vsix
+code --install-extension DescribeML-0.0.5.vsix
 ```
 
 <span style="font-size:0.7em;">*Troubles: If you cannot see the syntax highlight in the examples files (p.e. *Melanoma.descml*) as the image below. Please, reload the VSCode editor and write the code --install command again* </span>
