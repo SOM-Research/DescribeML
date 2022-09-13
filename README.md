@@ -45,7 +45,12 @@ Great! That's it.
 
 1) The first step is to create a *.descml* file
 
-2) The easy way to start using our tool is to use the *preloader data service*,  located at the top left of your editor, clicking at:<div style="display:flex; justify-content:center; align-items: center;"><div style='width:40px'>![upload](fileicons/cloud-computing.png)</div></div>
+2) The easy way to start using our tool is to use the *preloader data service*,  located at the top left of your editor, clicking at: <img
+  src="fileicons/cloud-computing.png"
+  alt="preloader service"
+  title="Optional title"
+  style="display: inline-block; margin: 0 auto; width: 40px">
+
 3) Select your dataset file (*.csv*), and the tool will generate a darft of your description file.
 
 4) Follow the examples in the **examples/evaluation** [folders](https://github.com/SOM-Research/DescribeML) to get a sense of the tool's possibilities. Take a look at the *Melanoma.descml* file, for example.
@@ -56,7 +61,13 @@ Great! That's it.
 
 </div>
 
-6) Once you are happy with your documentation, you can generate HTML documentation by using clicking the button next to the prealoder service:<div style="display:flex; justify-content:center; align-items: center;"><div style='width:40px'>![upload](fileicons/html.png)</div></div>
+6) Once you are happy with your documentation, you can generate HTML documentation by clicking the generator button next to the prealoder service: <img
+  src="fileicons/html.png"
+  alt="HTML generator"
+  title="Optional title"
+  style="display: inline-block; margin: 0 auto; width: 40px">
+
+
 
 
 
