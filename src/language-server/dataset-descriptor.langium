@@ -26,14 +26,17 @@ Metadata:
      'Description:' 
         (description=STRING | 
         (('Purposes:' descriptionpurpose=STRING)? 
-         ('Tasks:' '[' descriptionTasks+=MLTasks ((','descriptionTasks+=MLTasks)*']')?)? 
+           ('Tasks:' '[' descriptionTasks+=Tasks ((','descriptionTasks+=Tasks)*']')?)? 
          ('Gaps:' descriptionGaps=STRING)?)) 
-     ('Licences:' licence=CommonLicences)?
      (uses=Applications)?
      (distribution=Distribution)?
      (area=Area)?
      (tags=Tags)?
+     (bachmarking=Benchmarking)?
       authoring=Authoring;
+
+Tasks:
+     name=MLTasks;
 
 Citation:
     name="Citation:"
@@ -50,6 +53,7 @@ Citation:
 Distribution:
     name="Distribution:"
     ("Is public?:" public=BooleanAnswer)?
+    ('Licences:' licence=CommonLicences)?
     ("How is distributed:" past=STRING)?  
     ("Distribution license:" lic=STRING)?;
 
@@ -62,6 +66,18 @@ Applications:
     ("Uses repository:" repo=STRING)?;
 Area: name='Area:' area+=ID;
 Tags: name='Tags:' (tags+=ID)*;
+
+Benchmarking:
+    name="Benchmarking:"
+    (("Task:" taskName=[Tasks:MLTasks])?
+    ('['("Model:" (modelName=STRING))?
+    ("Metrics:" '['     
+                ("F1:" (f1=NUMBER))?
+                ("Acurracy:" (acurracy=NUMBER))?
+                ("Precision:" (precision=NUMBER))?
+                ("Recall:" (recall=NUMBER))? ']'?)?
+    ("Reference:" (reference=STRING))?']')*)*;
+
 
 // Authoring
 Authoring:
@@ -112,6 +128,7 @@ DataInstance:
 
 // Statistics
 Statistics:
+    ('Correlations:' correlations=Correlations)?
     ('Pair Correlation:' (pair+=PairCorrelation)*)?
     ('Quality Metrics:' metric+=QualityMetric)?;
 
@@ -147,15 +164,45 @@ Attribute:
 Categor:
     name='Categorical'
     (('Statistics:')
+    ('Unique:' unique=NUMBER)?
+    ('Unique percentage:' uniqueper=NUMBER '%')?
+    ('Missing Values:' missingv=NUMBER)?
+    ('Completeness:' complet=NUMBER )?
+    ('First Rows:' firstrows=FirstRows)?
+     ('Min-lenght:' minlenght=NUMBER)?
+    ('Max-lenght:' maxlenght=NUMBER)?
+    ('Median-lenght:' medianlenght=NUMBER )?
+    ('Lenght-histogram:' '[' lenghthistorgram=HistogramType (',' lenghthistorgram+=HistogramType)* ']')?
+    ('Chi-Squared:' chisquared=ChiSquare )?
     ('Binary attribute:' binary=Binary)?
     ('Mode:' mode=STRING)?
-    ('Categoric Distribution:' '[' catdist=CategoricalDistributionType '%' (',' catdist=CategoricalDistributionType '%')* ']')?)?
+    ('Categoric Distribution:' '[' catdist=StringNumberType '%' (',' catdist+=StringNumberType '%')* ']')?)?
     ('Quality Metrics:' metrics+=QualityMetric)?;
 
 Binary:
     'Symmetry:' sym=AttributeSymmetry
     'Attribute Sparsity:' attspar=NUMBER;
-   
+
+FirstRows:
+    '0:' rows+=STRING ','
+    '1:' rows+=STRING ','
+    '2:' rows+=STRING ','
+    '3:' rows+=STRING ','
+    '4:' rows+=STRING ','
+    '5:' rows+=STRING;
+
+ChiSquare:
+    ('statistic:' statistic=NUMBER ',')?
+    ('p-value:' pvalue=NUMBER)?;
+
+Correlations:
+    ('Pearson:'  '[' pearson=StringNumberType (',' pearson+=StringNumberType)* ']')?
+    ('Spearman:' '[' spearman=StringNumberType (',' spearman+=StringNumberType)* ']')?
+    ('Kendall:' '[' kendall=StringNumberType (',' kendall+=StringNumberType)* ']')?
+    ('Cramers:' '[' cramers=StringNumberType (',' cramers+=StringNumberType)* ']')?
+    ('Phi-k:' '[' phik=StringNumberType (',' phik+=StringNumberType)* ']')?;
+
+
 Numeri:
     name='Numerical' 
     (('Statistics:')
@@ -164,10 +211,15 @@ Numeri:
     ('Standard Desviation:' std=NUMBER)?
     ('Minimmum:' min=NUMBER)?
     ('Maximmum:' max=NUMBER)?
-    ('Quartiles:' quartiles=STRING)?
+    ('Quartiles:' quartiles=Quartile)?
     ('IQR:' iqr=NUMBER)?)?
     ('Quality Metrics:' metrics+=QualityMetric*)?;
 
+Quartile:
+    'Q1:' q1=NUMBER 
+    'Q2:' q2=NUMBER 
+    'Q3:' q3=NUMBER 
+    'Q4:' q4=NUMBER;
 
 // Relation between Instances
 RelationInstances:
@@ -337,7 +389,8 @@ SpeechSyncrony returns string: 'synchronous interaction' | 'asynchronous interca
 BooleanAnswer returns string: 'Yes' | 'No';
 
 // Logic Data Types
-CategoricalDistributionType returns string: STRING + ':' + NUMBER;
+StringNumberType returns string: STRING + ':' + NUMBER;
+HistogramType returns string: NUMBER + ':' + NUMBER;
 DataTypes returns string: 'String' | 'Integer' | 'Boolean' | 'Other';
 QualifiedName returns string: ID ('.' ID)*;
 Operators returns string: '<'|'>'|'='|'!='|'+'|'-'|'>=';

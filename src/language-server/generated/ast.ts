@@ -92,6 +92,24 @@ export function isAuthors(item: unknown): item is Authors {
     return reflection.isInstance(item, Authors);
 }
 
+export interface Benchmarking extends AstNode {
+    readonly $container: Metadata;
+    acurracy: number
+    f1: number
+    modelName: string
+    name: 'Benchmarking:'
+    precision: number
+    recall: number
+    reference: string
+    taskName?: Reference<Tasks>
+}
+
+export const Benchmarking = 'Benchmarking';
+
+export function isBenchmarking(item: unknown): item is Benchmarking {
+    return reflection.isInstance(item, Benchmarking);
+}
+
 export interface Binary extends AstNode {
     readonly $container: Categor;
     attspar: number
@@ -107,16 +125,38 @@ export function isBinary(item: unknown): item is Binary {
 export interface Categor extends AstNode {
     readonly $container: Attribute;
     binary: Binary
-    catdist: CategoricalDistributionType
+    catdist: StringNumberType
+    chisquared: ChiSquare
+    complet: number
+    firstrows: FirstRows
+    lenghthistorgram: HistogramType
+    maxlenght: number
+    medianlenght: number
     metrics: Array<QualityMetric>
+    minlenght: number
+    missingv: number
     mode: string
     name: 'Categorical'
+    unique: number
+    uniqueper: number
 }
 
 export const Categor = 'Categor';
 
 export function isCategor(item: unknown): item is Categor {
     return reflection.isInstance(item, Categor);
+}
+
+export interface ChiSquare extends AstNode {
+    readonly $container: Categor;
+    pvalue: number
+    statistic: number
+}
+
+export const ChiSquare = 'ChiSquare';
+
+export function isChiSquare(item: unknown): item is ChiSquare {
+    return reflection.isInstance(item, ChiSquare);
 }
 
 export interface Citation extends AstNode {
@@ -168,6 +208,21 @@ export const ConsistencyRules = 'ConsistencyRules';
 
 export function isConsistencyRules(item: unknown): item is ConsistencyRules {
     return reflection.isInstance(item, ConsistencyRules);
+}
+
+export interface Correlations extends AstNode {
+    readonly $container: Statistics;
+    cramers: StringNumberType
+    kendall: StringNumberType
+    pearson: StringNumberType
+    phik: StringNumberType
+    spearman: StringNumberType
+}
+
+export const Correlations = 'Correlations';
+
+export function isCorrelations(item: unknown): item is Correlations {
+    return reflection.isInstance(item, Correlations);
 }
 
 export interface DataInstance extends AstNode {
@@ -261,6 +316,7 @@ export function isDescriptionDataset(item: unknown): item is DescriptionDataset 
 export interface Distribution extends AstNode {
     readonly $container: Metadata;
     lic: string
+    licence: CommonLicences
     name: 'Distribution:'
     past: string
     public: BooleanAnswer
@@ -270,6 +326,17 @@ export const Distribution = 'Distribution';
 
 export function isDistribution(item: unknown): item is Distribution {
     return reflection.isInstance(item, Distribution);
+}
+
+export interface FirstRows extends AstNode {
+    readonly $container: Categor;
+    rows: Array<string>
+}
+
+export const FirstRows = 'FirstRows';
+
+export function isFirstRows(item: unknown): item is FirstRows {
+    return reflection.isInstance(item, FirstRows);
 }
 
 export interface Founders extends AstNode {
@@ -386,6 +453,7 @@ export interface Metadata extends AstNode {
     readonly $container: Declaration;
     area: Area
     authoring: Authoring
+    bachmarking: Benchmarking
     citation: Citation
     datesP: DateYear
     datesR: DateYear
@@ -393,10 +461,9 @@ export interface Metadata extends AstNode {
     description: string
     descriptionGaps: string
     descriptionpurpose: string
-    descriptionTasks: Array<MLTasks>
+    descriptionTasks: Array<Tasks>
     distribution: Distribution
     ident: string
-    licence: CommonLicences
     name: 'Metadata:'
     tags: Tags
     title: string
@@ -419,7 +486,7 @@ export interface Numeri extends AstNode {
     metrics: Array<QualityMetric>
     min: number
     name: 'Numerical'
-    quartiles: string
+    quartiles: Quartile
     std: number
 }
 
@@ -494,6 +561,20 @@ export const QualityMetric = 'QualityMetric';
 
 export function isQualityMetric(item: unknown): item is QualityMetric {
     return reflection.isInstance(item, QualityMetric);
+}
+
+export interface Quartile extends AstNode {
+    readonly $container: Numeri;
+    q1: number
+    q2: number
+    q3: number
+    q4: number
+}
+
+export const Quartile = 'Quartile';
+
+export function isQuartile(item: unknown): item is Quartile {
+    return reflection.isInstance(item, Quartile);
 }
 
 export interface Relation extends AstNode {
@@ -586,6 +667,7 @@ export function isSpeechSitatuion(item: unknown): item is SpeechSitatuion {
 
 export interface Statistics extends AstNode {
     readonly $container: DataInstance;
+    correlations: Correlations
     metric: Array<QualityMetric>
     pair: Array<PairCorrelation>
 }
@@ -606,6 +688,17 @@ export const Tags = 'Tags';
 
 export function isTags(item: unknown): item is Tags {
     return reflection.isInstance(item, Tags);
+}
+
+export interface Tasks extends AstNode {
+    readonly $container: Metadata;
+    name: MLTasks
+}
+
+export const Tasks = 'Tasks';
+
+export function isTasks(item: unknown): item is Tasks {
+    return reflection.isInstance(item, Tasks);
 }
 
 export interface Team extends AstNode {
@@ -647,7 +740,9 @@ export type SpeechSyncrony = 'synchronous interaction' | 'asynchronous intercati
 
 export type BooleanAnswer = 'Yes' | 'No'
 
-export type CategoricalDistributionType = string
+export type StringNumberType = string
+
+export type HistogramType = string
 
 export type DataTypes = 'String' | 'Integer' | 'Boolean' | 'Other'
 
@@ -661,14 +756,14 @@ export type DateYear = string
 
 export type EmailType = string
 
-export type datasetDescriptorAstType = 'Applications' | 'Area' | 'Attribute' | 'Author' | 'Authoring' | 'Authors' | 'Binary' | 'Categor' | 'Citation' | 'Composition' | 'ConsistencyRules' | 'DataInstance' | 'DataInstances' | 'Declaration' | 'Demographics' | 'Dependencies' | 'DescriptionDataset' | 'Distribution' | 'Founders' | 'Funder' | 'GatheringProcess' | 'GatheringProcesses' | 'LabelingProcess' | 'LabelingProcesses' | 'Labels' | 'Maintainer' | 'Metadata' | 'Numeri' | 'PairCorrelation' | 'PreProcess' | 'PreProcesses' | 'Provenance' | 'QualityMetric' | 'Relation' | 'RelationInstances' | 'Requeriments' | 'SocialConcerns' | 'SocialIssue' | 'Source' | 'SpeechSitatuion' | 'Statistics' | 'Tags' | 'Team';
+export type datasetDescriptorAstType = 'Applications' | 'Area' | 'Attribute' | 'Author' | 'Authoring' | 'Authors' | 'Benchmarking' | 'Binary' | 'Categor' | 'ChiSquare' | 'Citation' | 'Composition' | 'ConsistencyRules' | 'Correlations' | 'DataInstance' | 'DataInstances' | 'Declaration' | 'Demographics' | 'Dependencies' | 'DescriptionDataset' | 'Distribution' | 'FirstRows' | 'Founders' | 'Funder' | 'GatheringProcess' | 'GatheringProcesses' | 'LabelingProcess' | 'LabelingProcesses' | 'Labels' | 'Maintainer' | 'Metadata' | 'Numeri' | 'PairCorrelation' | 'PreProcess' | 'PreProcesses' | 'Provenance' | 'QualityMetric' | 'Quartile' | 'Relation' | 'RelationInstances' | 'Requeriments' | 'SocialConcerns' | 'SocialIssue' | 'Source' | 'SpeechSitatuion' | 'Statistics' | 'Tags' | 'Tasks' | 'Team';
 
-export type datasetDescriptorAstReference = 'Attribute:labelProces' | 'ConsistencyRules:attrule1' | 'ConsistencyRules:attrule2' | 'ConsistencyRules:instance1' | 'GatheringProcess:labelSocialIssues' | 'GatheringProcess:mapInstance' | 'LabelingProcess:labelSocialIssues' | 'Labels:map' | 'PairCorrelation:attr1' | 'PairCorrelation:attr2' | 'Relation:attRel' | 'Relation:attRelTarget' | 'Relation:insRel' | 'SocialIssue:senseAtt';
+export type datasetDescriptorAstReference = 'Attribute:labelProces' | 'Benchmarking:taskName' | 'ConsistencyRules:attrule1' | 'ConsistencyRules:attrule2' | 'ConsistencyRules:instance1' | 'GatheringProcess:labelSocialIssues' | 'GatheringProcess:mapInstance' | 'LabelingProcess:labelSocialIssues' | 'Labels:map' | 'PairCorrelation:attr1' | 'PairCorrelation:attr2' | 'Relation:attRel' | 'Relation:attRelTarget' | 'Relation:insRel' | 'SocialIssue:senseAtt';
 
 export class datasetDescriptorAstReflection implements AstReflection {
 
     getAllTypes(): string[] {
-        return ['Applications', 'Area', 'Attribute', 'Author', 'Authoring', 'Authors', 'Binary', 'Categor', 'Citation', 'Composition', 'ConsistencyRules', 'DataInstance', 'DataInstances', 'Declaration', 'Demographics', 'Dependencies', 'DescriptionDataset', 'Distribution', 'Founders', 'Funder', 'GatheringProcess', 'GatheringProcesses', 'LabelingProcess', 'LabelingProcesses', 'Labels', 'Maintainer', 'Metadata', 'Numeri', 'PairCorrelation', 'PreProcess', 'PreProcesses', 'Provenance', 'QualityMetric', 'Relation', 'RelationInstances', 'Requeriments', 'SocialConcerns', 'SocialIssue', 'Source', 'SpeechSitatuion', 'Statistics', 'Tags', 'Team'];
+        return ['Applications', 'Area', 'Attribute', 'Author', 'Authoring', 'Authors', 'Benchmarking', 'Binary', 'Categor', 'ChiSquare', 'Citation', 'Composition', 'ConsistencyRules', 'Correlations', 'DataInstance', 'DataInstances', 'Declaration', 'Demographics', 'Dependencies', 'DescriptionDataset', 'Distribution', 'FirstRows', 'Founders', 'Funder', 'GatheringProcess', 'GatheringProcesses', 'LabelingProcess', 'LabelingProcesses', 'Labels', 'Maintainer', 'Metadata', 'Numeri', 'PairCorrelation', 'PreProcess', 'PreProcesses', 'Provenance', 'QualityMetric', 'Quartile', 'Relation', 'RelationInstances', 'Requeriments', 'SocialConcerns', 'SocialIssue', 'Source', 'SpeechSitatuion', 'Statistics', 'Tags', 'Tasks', 'Team'];
     }
 
     isInstance(node: unknown, type: string): boolean {
@@ -690,6 +785,9 @@ export class datasetDescriptorAstReflection implements AstReflection {
         switch (referenceId) {
             case 'Attribute:labelProces': {
                 return LabelingProcess;
+            }
+            case 'Benchmarking:taskName': {
+                return Tasks;
             }
             case 'ConsistencyRules:attrule1': {
                 return Attribute;

@@ -22,7 +22,7 @@ Dataset: Melanoma_Classification_Dataset
                 is actively pursuing methods by which to increase the diversity of images
                 obtained, but at this point caution should be used when attempting to
                 generalize algorithms trained on images from specialized referral centers
-                (such as the dataset described herein) to the global population at large
+                (such as the described herein) to the global population at large
                 The dataset is also enriched for melanoma in general and does not represent
                 true incidence of melanoma." 
             Tasks:
@@ -34,7 +34,6 @@ Dataset: Melanoma_Classification_Dataset
                 innovation in a multi-disciplinary community. SIIM is joined by the 
                 International Skin Imaging Collaboration (ISIC), an international effort
                 to improve melanoma diagnosis. "  
-        Licences: CC BY-NC 4.0 (Attribution-NonCommercial 4.0 International)
         Applications:
             Past Uses: "Yes. The 2020 SIIM-ISIC Melanoma Classification challenge dataset 
             was created for the purpose of conducting a machine learning competition to 
@@ -56,6 +55,7 @@ Dataset: Melanoma_Classification_Dataset
             to the global population at large. The dataset is also enriched for melanoma in 
             general and does not represent true incidence of melanoma."
         Distribution:
+            Licences: CC BY 3.0 (Attribution 3.0 Unported)
             Distribution license: " In addition to the CC-BY-NC license, the dataset is 
             governed by the ISIC Terms of Use. Learn more about the terms of use here:
              https://datanutrition.org/labels/isic-2020/ "
@@ -63,7 +63,24 @@ Dataset: Melanoma_Classification_Dataset
             HealthCare
         Tags:
             Images Melanoma diagnosis Skin Image 
-    
+        Benchmarking:
+         Task: classification
+         [
+            Model: "ROBERTA"
+            Metrics: [ F1:20 Acurracy: 30 Recall: 10 ]
+            Reference: "https://www.kaggle.com/c/siim-isic-melanoma-classification/overview/evaluation"
+         ]
+         [   
+            Model: "ROBERTA V2"
+            Metrics: [ F1:30 Acurracy: 40 Recall: 20 ]
+            Reference: "https://www.kaggle.com/c/siim-isic-melanoma-classification/overview/evaluation"
+         ]
+         Task: image-classification
+         [
+            Model: "EfficientNet"
+            Metrics: [ F1:20 Acurracy: 30 Recall: 10 ]
+            Reference: "https://www.kaggle.com/c/siim-isic-melanoma-classification/overview/evaluation"
+         ]
     Authoring:
         Authors:
             Name Skin_Imaging_Collaboration_ISIC  email emailo@emailo.com
@@ -122,11 +139,11 @@ Dataset: Melanoma_Classification_Dataset
                         count: 33126
                         ofType: Categorical
                         Statistics:
-                                Mode: "Famela"
+                                Mode: "Femala"
                                 Categoric Distribution:
                                     [
                                         "Male": 40%,
-                                        "Famela": 55%,
+                                        "Femala": 55%,
                                         "Non-binay": 5%
                                     ]
                     attribute: age  
@@ -139,8 +156,9 @@ Dataset: Melanoma_Classification_Dataset
                                 Standard Desviation: 0.2
                                 Minimmum: 5
                                 Maximmum: 87
-                                Quartiles: '1º: 17 || 2º: 27 ||  3º:30 || 4º: 30'
+                                Quartiles:  Q1:17 Q2:27 Q3:30 Q4:30
                                 IQR: 1.2
+
           
                     attribute: anatom_site_general_challenge
                         description: 'description of body zone of the image'
@@ -154,7 +172,8 @@ Dataset: Melanoma_Classification_Dataset
                         count: 33126
                         ofType: Categorical
                         Statistics:
-                                Mode: "unknowm"
+                            Mode: "unknowm"
+
 
                     attribute: beningnant_malignant
                         description: 'Type of the melanoma'
@@ -193,7 +212,7 @@ Dataset: Melanoma_Classification_Dataset
         Gathering Processes:
             Process: Gather1
                 Description: 
-                    "The source are: Memorial Sloan Kettering Cancer Center, New York; the Melanoma Institute Australia and the Melanoma 
+                    "The sources are: Memorial Sloan Kettering Cancer Center, New York; the Melanoma Institute Australia and the Melanoma 
                     Diagnosis Centre, Sydney; the University of Queensland, Brisbane; the Medical University of Vienna, Vienna; and 
                     Hospital Clínic de Barcelona, Barcelona."
                 Source: GeneralHospital1
@@ -218,33 +237,33 @@ Dataset: Melanoma_Classification_Dataset
                     Who collects the data: ""
                     Type Internal
                 Gather Requirements:
-                  Requirement: "1) We queried clinical imaging databases across the six centers to generate a multicenter imaging dataset. 
+                  Requirement: "We queried clinical imaging databases across the six centers to generate a multicenter imaging dataset. 
                     Images consisted of 12,743,090 pixels on average but ranged from 307,200 to 24,000,000. Among patients with 
                     dermoscopy imaging from 1998 to 2019, those with multiple skin lesions were identified."
 
-                  Requirement: "2) Memorial Sloan Kettering: Images were acquired using a dermoscopic attachment to either a digital single reflex 
+                  Requirement: "Memorial Sloan Kettering: Images were acquired using a dermoscopic attachment to either a digital single reflex 
                     lens (SLR) camera or to a smartphone. Each lesion was imaged with polarized and/or nonpolarized dermoscopy. 
                     For each lesion, 3- 5 images are collected during each patient visit and stored in a specialized image database 
                     called VectraTM (Canfield Scientific Inc., Parsippany, NJ, USA)."
                  
-                  Requirement: "3) Hospital Clinic Barcelona: The dermatology department is equipped with the digital dermatoscopy system 
+                  Requirement: "Hospital Clinic Barcelona: The dermatology department is equipped with the digital dermatoscopy system 
                     MoleMaxTM HD (Derma Medical Systems, Vienna, Austria) and corresponding image database to store the collected images. 
                     Each lesion was photographed using polarized dermoscopy."
                  
-                  Requirement: "4) University of Queensland: All images used for the studies were extracted from the VectraTM image database 
+                  Requirement: "University of Queensland: All images used for the studies were extracted from the VectraTM image database 
                     (Canfield Scientific Inc., Parsippany, NJ, USA)."
                  
-                  Requirement: "5) Medical University Vienna: We extracted polarized dermoscopic images from 2015-2019 which were stored in the 
+                  Requirement: "Medical University Vienna: We extracted polarized dermoscopic images from 2015-2019 which were stored in the 
                     MoleMax HD System (Derma Medical Systems, Vienna, Austria)."
                  
-                  Requirement: "6) Melanoma Institute Australia and the Sydney Melanoma Diagnosis Centre: Images are acquired using a dermoscopic 
+                  Requirement: "Melanoma Institute Australia and the Sydney Melanoma Diagnosis Centre: Images are acquired using a dermoscopic 
                     attachment to either a digital single reflex lens (SLR) camera or to a smartphone and stored in DermEngineTM 
                     (Metaoptima, Vancouver, British Columbia, Canada)."
                  
-                  Requirement: "7) Once the images had been collected from all the various centers, a software annotation tool, called ‘Tagger,’
+                  Requirement: "Once the images had been collected from all the various centers, a software annotation tool, called ‘Tagger,’
                     was developed internally to review diagnostic labeling of grouped images."
                  
-                  Requirement: "8) Additional metadata including demographics of the patients was collected at each imaging center at the time 
+                  Requirement: "Additional metadata including demographics of the patients was collected at each imaging center at the time 
                    the images were taken, method unclear."
 
         LabelingProcesses: 

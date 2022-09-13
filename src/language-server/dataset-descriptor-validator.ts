@@ -1,5 +1,5 @@
 import { ValidationAcceptor, ValidationCheck, ValidationRegistry } from 'langium';
-import { datasetDescriptorAstType, Metadata, Author, Funder, Composition, Authoring } from './generated/ast';
+import { datasetDescriptorAstType, Metadata, Author, Funder, Composition, Authoring, Tasks } from './generated/ast';
 import { DatasetDescriptorServices } from './dataset-descriptor-module';
 
 /**
@@ -33,11 +33,15 @@ export class DatasetDescriptorValidator {
     hintsOfDescription(type:Metadata, accept: ValidationAcceptor): void {
           //  accept('warning', 'Version should have the following form: V000', { node: type, property: 'version' });
             accept('hint', 'For what propose was the dataser created? \nPlease provide a description', { node: type, property: 'descriptionpurpose' });
-            accept('hint', 'Was there a specific task in mind?\nPlease provide a description', { node: type, property: 'descriptionTasks'});
             accept('hint', 'Was there specific gap that needed to be filled?\nPlease provide a description', { node: type, property: 'descriptionGaps'});
            
     }
 
+     
+    hintsOfTasks(type: Tasks, accept: ValidationAcceptor): void {
+        accept('hint', 'Was there a specific task in mind?\nPlease provide a description', { node: type, property: 'name'});
+
+    }
     
     hintsOfFunder(type: Funder, accept: ValidationAcceptor): void {
         accept('hint', '1 - Who founded the creation of the dataset?\n2 - If is there any associated grant, please provide the number and the name of the grantor and the gran name and number', { node: type, property:'name' });

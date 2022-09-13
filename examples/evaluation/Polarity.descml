@@ -15,9 +15,8 @@ Dataset: Polarity
                 "The dataset was created to enable research on predicting sentiment polarity—i.e., given a piece of English text, predict whether
                 it has a positive or negative affect—or stance—toward its topic.The dataset was created intentionally with that task in mind, 
                 focusing on movie reviews as a place where affect/sentiment is frequently expressed." 
-            Tasks: [classification, sentiment-analysis]
+            Tasks: [classification, sentiment-analysis,Evaluation of language models]
             Gaps: "Gender Reference"
-        Licences: CC BY 4.0 (Attribution 4.0 International)
         Applications: 
             Past Uses:
                "At the time of publication, only the original paper (http://xxx.lanl.
@@ -36,6 +35,7 @@ Dataset: Polarity
                 decisions about people"
         Distribution: 
             Is public?: Yes
+            Licences: CC BY 4.0 (Attribution 4.0 International)
             How is distributed: 
                 "The dataset is distributed on Bo Pang’s webpage at Cornell: http:
                 //www.cs.cornell.edu/people/pabo/movie-review-data. The dataset does
@@ -51,7 +51,7 @@ Dataset: Polarity
         Tags: Movie Review Sentiment Classification
         Authoring:
             Authors:
-                Name bo_Pong email XXXX@mail.com
+                Name Bo_Pong email XXXX@mail.com
                 Name Lillian_Lee email XXXX@mail.com
             Funders:
                 Name National_Science_Fundations type mixed
@@ -119,8 +119,8 @@ Dataset: Polarity
                           Statistics:
                             Categoric Distribution:
                             [
-                             "pos": 50%,
-                             "neg": 50%
+                             "pos": 47%,
+                             "neg": 53%
                             ]
 
                     Statistics:
@@ -150,7 +150,7 @@ Dataset: Polarity
             archive of the rec.arts.movies.reviews newsgroup, at
             http://reviews.imdb.com/Reviews."
             Gathering Processes:
-              Process: Gather1
+              Process: Reviews
                 Description: "The
                 data was collected by downloading reviews from the IMDb
                 archive of the rec.arts.movies.reviews newsgroup, at
@@ -192,7 +192,7 @@ Dataset: Polarity
             Label: Tag
             Description: "The label is the positive/negative sentiment polarity rating derived
             from the star rating"
-            Mapping: ImageId
+            Mapping: tag
         Label Requirements:
           Requirement:                     
             "- In order to obtain more accurate rating decisions, the maximum
