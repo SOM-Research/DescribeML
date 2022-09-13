@@ -20,11 +20,11 @@ Check out a quick presentation of the tool:
 
 ### Via marketplace
 
-The easiest way to install the plugin is using the **Visual Studio Code Market**. Just, type "describeML" in the extension tab, and that's it!
+The easiest way to install the plugin is by using the **Visual Studio Code Market**. Just type "describeML" in the extension tab, and that's it!
 
 ### Manually
 
-Instead, you can install it manually, using the packaged release of the plugin in this [repository](https://github.com/SOM-Research/DescribeML) that can be found at the root of the project. 
+Instead, you can install it manually using the packaged release of the plugin in this [repository](https://github.com/SOM-Research/DescribeML) that can be found at the root of the project. 
 
 The file is **DescribeML-0.0.3.vsix**
 
@@ -33,44 +33,52 @@ Open your terminal (or the terminal inside the VSCode) and write this:
 ```
 
 git clone https://github.com/SOM-Research/DescribeML.git datasets
-
 cd datasets 
-
-
-
 code --install-extension DescribeML-0.0.3.vsix
-
 ```
 
-*Troubles: If you cannot see the syntax highlight in the examples files (p.e. *Melanoma.descml*) as the image below. Please, reload the VSCode editor and write the code --install command again*
+<span style="font-size:0.7em;">*Troubles: If you cannot see the syntax highlight in the examples files (p.e. *Melanoma.descml*) as the image below. Please, reload the VSCode editor and write the code --install command again* </span>
 
 Great! That's it.
 
-## Usage
+## Getting Started
 
-To start using our tool, we recommend accessing to the **examples/evaluation** folder in the tool's [repository](https://github.com/SOM-Research/DescribeML), and take a look to the full descriptions examples present there. For example, at the *Melanoma.descml* file.
+1) The first step is to create a *.descml* file
 
-Check out the **quick [presentation](https://www.youtube.com/watch?v=Bf3bhWB-UJY) video!**
+2) The easy way to start using our tool is to use the *preloader data service*,  located at the top left of your editor, clicking at:<div style="display:flex; justify-content:center; align-items: center;"><div style='width:40px'>![upload](fileicons/cloud-computing.png)</div></div>
+3) Select your dataset file (*.csv*), and the tool will generate a darft of your description file.
 
-Remember: by default, VSCode gives you auto-completion help by hitting CTRL + Space (or equivalent in MAC)
+4) Follow the examples in the **examples/evaluation** [folders](https://github.com/SOM-Research/DescribeML) to get a sense of the tool's possibilities. Take a look at the *Melanoma.descml* file, for example.
+5) During the documentation process, hitting CTRL + Space (equivalent in other OS) gives you auto-completion help. In addition, the part marked with the points below gives you hints to complete the documentation, and the outline in the right part shows you the document structure.
 <div align="center">
 
 ![Autocompletion feature](fileicons/Autcomplete.gif)
 
 </div>
 
+6) Once you are happy with your documentation, you can generate HTML documentation by using clicking the button next to the prealoder service:<div style="display:flex; justify-content:center; align-items: center;"><div style='width:40px'>![upload](fileicons/html.png)</div></div>
+
+
+
+
+
+For more information, check out the **quick [presentation](https://www.youtube.com/watch?v=Bf3bhWB-UJY) video!**
+
+
+
+
 ## Research background
 
 DescribeML is part of an ongoing research project to improve dataset documentation for machine learning. The core of our proposal is a domain-specific language ([preprint here](https://arxiv.org/pdf/2207.02848.pdf)) that allows data creators to describe relevant aspects of their data for the machine learning field and beyond. The [Critical Dataset Studios](https://knowingmachines.org/reading-list#dataset_documentation_practices) of the [Knowing Machines](https://knowingmachines.org) project have compiled an excellent list of current documentation practices.
 
-The tool will be presentend at the ACM/IEEE 25th International Conference on [Model Driven Engineering Languages and Systems](https://conf.researchr.org/home/models-2022) and a preprint of the tool publication can be seen [here](https://modeling-languages.com/wp-content/uploads/2022/08/2022___MODELS___DescribeML_Tool-10.pdf)
+The tool will be presented at the ACM/IEEE 25th International Conference on [Model Driven Engineering Languages and Systems](https://conf.researchr.org/home/models-2022) and a preprint of the tool publication can be seen [here](https://modeling-languages.com/wp-content/uploads/2022/08/2022___MODELS___DescribeML_Tool-10.pdf)
 
 
 ## Contributing
 
-The full grammar in Extended Backus-Naur form (EBNF) can be seen in **src/language-server/dataset-descriptor.langium**
+The complete grammar in Extended Backus-Naur form (EBNF) can be seen in **src/language-server/dataset-descriptor.langium**
 
-If you want to contribute or dive into the plugin or the language, you may need extra steps. To match with the exact Langium version (the base framework of the plugin)  there are few actions we need to do manually.
+You may need extra steps to contribute or dive into the plugin or the language. (to match with the exact version of the Langium, the base framework we used)
 
 1 - "npm install" to install dependencies.
 
