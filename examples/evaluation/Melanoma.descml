@@ -3,37 +3,20 @@ Dataset: Melanoma_Classification_Dataset
         Title: "2020 SIIM-ISIC Melanoma Classification Challenge Dataset" 
         Unique-identifier: SIC_Melanoma_Classification_Challenge_Dataset
         Version: v0001 
-        Release Date: 10-08-20
+        Dates:
+            Release Date: 10-08-20
         Citation: 
-            Raw Citation:"International Skin Imaging Collaboration. SIIM-ISIC 2020 Challenge Dataset. 
-          International Skin Imaging Collaboration https://doi.org/10.34970/2020-ds01 (2020)."
+            Title: "A patient-centric dataset of images and metadata for identifying melanomas using clinical context"
+            Authors: "Rotemberg, V., Kurtansky, N., Betz-Stablein, B., Caffery, L., Chousakos, E., Codella, N., Combalia, M., Dusza, S., Guitera, P., Gutman, D., Halpern, A., Helba, B., Kittler, H., Kose, K., Langer, S., Lioprys, K., Malvehy, J., Musthaq, S., Nanda, J., Reiter, O., Shih, G., Stratigos, A., Tschandl, P., Weber, J. & Soyer, P"
+            Year: 2021 
+            Journal: "Sci Data 8, 34"
+            DOI: 10.1038/s41597-021-00815-z
         Description:
-            Purposes:
-                "The 2020 SIIM-ISIC Melanoma Classification challenge dataset
-                was created for the purpose of conducting a machine learning
-                competition to identify melanoma in lesion images.
-                
-                Due to low population prevalence and challenges with access to 
-                care in different populations, the images gathered for large datasets
-                such as this for AI classification have a strong tendency to under-represent
-                darker skin types. This may lead to either overdiagnosis or underdiagnosis
-                of melanomas in darker skin types, both of which would have significant
-                clinical implications and will require prospective study. The ISIC Archive
-                is actively pursuing methods by which to increase the diversity of images
-                obtained, but at this point caution should be used when attempting to
-                generalize algorithms trained on images from specialized referral centers
-                (such as the described herein) to the global population at large
-                The dataset is also enriched for melanoma in general and does not represent
-                true incidence of melanoma." 
-            Tasks:
-                [classification,image-classification]
-            Gaps:    
-                "As the leading healthcare organization for informatics in medical imaging,
-                the Society for Imaging Informatics in Medicine (SIIM)'s mission is to 
-                advance medical imaging informatics through education, research, and 
-                innovation in a multi-disciplinary community. SIIM is joined by the 
-                International Skin Imaging Collaboration (ISIC), an international effort
-                to improve melanoma diagnosis. "  
+            Purposes: "The 2020 SIIM-ISIC Melanoma Classification challenge dataset..." 
+            Tasks:    [classification, image-classification]
+            Gaps:     "As the leading healthcare organization for informatics in medical imaging..."  
+            Areas:    HealthCare
+            Tags:     Images Melanoma diagnosis Skin Image
         Applications:
             Past Uses: "Yes. The 2020 SIIM-ISIC Melanoma Classification challenge dataset 
             was created for the purpose of conducting a machine learning competition to 
@@ -56,31 +39,9 @@ Dataset: Melanoma_Classification_Dataset
             general and does not represent true incidence of melanoma."
         Distribution:
             Licences: CC BY 3.0 (Attribution 3.0 Unported)
-            Distribution license: " In addition to the CC-BY-NC license, the dataset is 
-            governed by the ISIC Terms of Use. Learn more about the terms of use here:
-             https://datanutrition.org/labels/isic-2020/ "
-        Area:
-            HealthCare
-        Tags:
-            Images Melanoma diagnosis Skin Image 
-        Benchmarking:
-         Task: classification
-         [
-            Model: "ROBERTA"
-            Metrics: [ F1:20 Acurracy: 30 Recall: 10 ]
-            Reference: "https://www.kaggle.com/c/siim-isic-melanoma-classification/overview/evaluation"
-         ]
-         [   
-            Model: "ROBERTA V2"
-            Metrics: [ F1:30 Acurracy: 40 Recall: 20 ]
-            Reference: "https://www.kaggle.com/c/siim-isic-melanoma-classification/overview/evaluation"
-         ]
-         Task: image-classification
-         [
-            Model: "EfficientNet"
-            Metrics: [ F1:20 Acurracy: 30 Recall: 10 ]
-            Reference: "https://www.kaggle.com/c/siim-isic-melanoma-classification/overview/evaluation"
-         ]
+            Rights(stand-alone): Access
+            Rights(with models): Benchmark
+            Additional Conditions "In addition to the CC-BY-NC license, the dataset is governed by the ISIC Terms of Use. Learn more about the terms of use here: https://datanutrition.org/labels/isic-2020/ "                          
     Authoring:
         Authors:
             Name Skin_Imaging_Collaboration_ISIC  email emailo@emailo.com
@@ -195,12 +156,14 @@ Dataset: Melanoma_Classification_Dataset
                 Completeness: 100
         Consistency rules: 
             inv: skinImages : (age >= 0)
-        Is sample:
-            "Yes, sample dataset used accurately reflects the intent or desired outcome and has been 
-            evaluated to ensure that it is fit for purpose. We queried clinical imaging databases containing 
-            images from 1998 to 2019 across the six centers to generate a multicenter imaging dataset. 
-            Images that met the selection criteria were added to the imaging dataset and underwent a quality 
-            assurance review to validate their inclusion in the dataset." 
+        Is sample: YES
+            Sampling Method: Other
+            Sampling criteria:
+                "Yes, sample dataset used accurately reflects the intent or desired outcome and has been 
+                evaluated to ensure that it is fit for purpose. We queried clinical imaging databases containing 
+                images from 1998 to 2019 across the six centers to generate a multicenter imaging dataset. 
+                Images that met the selection criteria were added to the imaging dataset and underwent a quality 
+                assurance review to validate their inclusion in the dataset." 
 
         Data Splits:
             "Yes. In order to test algorithm generalizability, a subset of images from six sites (five geographic locations)

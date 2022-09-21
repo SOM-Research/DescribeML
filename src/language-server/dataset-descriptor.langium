@@ -19,43 +19,92 @@ Metadata:
      'Title:' title=STRING 
      'Unique-identifier:' ident=ID
      'Version:' version=ID 
-     ('Release Date:' datesR=DateYear )?
-     ('Updated Date:' datesU=DateYear )?
-     ('Published Date:' datesP=DateYear )?
+     (dates=Dates)?
      (citation=Citation)?
-     'Description:' 
-        (description=STRING | 
-        (('Purposes:' descriptionpurpose=STRING)? 
-           ('Tasks:' '[' descriptionTasks+=Tasks ((','descriptionTasks+=Tasks)*']')?)? 
-         ('Gaps:' descriptionGaps=STRING)?)) 
+     (desc=Description)?
      (uses=Applications)?
      (distribution=Distribution)?
-     (area=Area)?
-     (tags=Tags)?
-     (bachmarking=Benchmarking)?
       authoring=Authoring;
 
-Tasks:
-     name=MLTasks;
+// Dates
+Dates:
+    name="Dates:"
+     (datesR=ReleaseDate )?
+     (datesU=UpdateDate )?
+     (datesP=PublishedDate )?;
+ReleaseDate:
+    name="Release Date:"
+    datesR=DateYear;
 
+UpdateDate:
+    name="Updated Date:"
+    datesU=DateYear;
+
+PublishedDate:
+    name="Published Date:"
+    datesP=DateYear;
+
+// Descriptions
+Description: 
+    name="Description:"
+    (desc=STRING | 
+        (('Purposes:' descriptionpurpose=STRING)? 
+         (tasks='Tasks:' '[' descriptionTasks+=Task ((','descriptionTasks+=Task)*']')?)? 
+         ('Gaps:' descriptionGaps=STRING)?)) 
+         (area=Areas)?
+         (tags=Tags)?;
+Tasks:
+     name='Tasks:' '[' descriptionTasks+=Task ((','descriptionTasks+=Task)*)?']';
+Task:
+    name=MLTasks;
+
+
+Areas: name='Areas:' areas+=Area;
+Tags: name='Tags:' (tags+=Tag)*;
+
+Area:
+    name=ID;
+Tag:
+    name=ID;
+
+// Citations
 Citation:
     name="Citation:"
     (("Raw Citation:") citeText=STRING |
-    (("doi:" doi=STRING)? 
-    ("url:" url=STRING)? 
-    ("authors:" authorsPaper=STRING)?
-    ("keywords:" "["(keywords+=STRING)*"]")?
-    ("title:" title=STRING)?
-    ("publisher:" publisher=STRING)?
-    ("year:" year=STRING) )?
+     ("Title:" title=Title)?
+     ("Authors:" authorsPaper=Citeauthors)?
+     ("Year:" year=NUMBER) )?
+     ("Keywords:" "["(keywords+=Keyword)*"]")?
+     ("Journal:" publisher=Publisher)?
+     (("DOI:" doi=DoiCite)? 
+     ("Url:" url=CiteUrl)? 
     );
-// Distribution Policies
+
+Title:
+    name=STRING;
+Citeauthors:
+    name=STRING;
+Keyword:
+    name=STRING;
+Publisher:
+    name=STRING;
+DoiCite:
+    name=DOI;
+CiteUrl:
+    name=STRING;
+
+
+
+// Distrubtion
 Distribution:
     name="Distribution:"
     ("Is public?:" public=BooleanAnswer)?
     ('Licences:' licence=CommonLicences)?
-    ("How is distributed:" past=STRING)?  
-    ("Distribution license:" lic=STRING)?;
+    ('Rights(stand-alone):' rights=RightsData)?
+    ('Rights(with models):' rightsModels=RightsModel)?
+    ('Credit/Attribution Notice' attribution=STRING)?
+    ('Designated Third Partes' thirdParties=STRING)?
+    ('Additional Conditions' addCond=STRING)?;
 
 // Applications
 Applications:
@@ -63,9 +112,9 @@ Applications:
     ("Past Uses:" (past+=STRING)*)?
     ("Recommended:" (recommend+=STRING)*)?
     ("Non-recommended:" (future+=STRING)*)?
-    ("Uses repository:" repo=STRING)?;
-Area: name='Area:' area+=ID;
-Tags: name='Tags:' (tags+=ID)*;
+    ("Uses repository:" repo=STRING)?
+    (bachmarking=Benchmarking)?;
+
 
 Benchmarking:
     name="Benchmarking:"
@@ -110,7 +159,7 @@ Maintainer:
      (instances += DataInstances)*
      (relation=RelationInstances)?
      ('Dependencies:' dependencies=Dependencies)? 
-     ('Is sample:' sample=STRING)?
+     ('Is sample:' ((sample='NO')|(sample=Sample)))?
      ('Data Splits:' splits=STRING)?;
 
 // Data Instances
@@ -236,6 +285,25 @@ Dependencies:
             'Rate Limit Usage:' limit=STRING)?;
 
 
+// Sampling
+Sample:
+    name='YES' 
+    ('Sampling Method:' type=SampleType)?
+    ('Sampling criteria:' (criteria=STRING))?
+    ('Sampling Characteristics:' (charact+=SamplingCharacteristics)*)?
+
+    ;
+
+SamplingCharacteristics:
+    'Total Data Sampled' total=NUMBER
+    'Sampling Rate' rate=NUMBER
+    'Sampling Mean' mean=STRING
+    'Sampling Standard Deviation' std=NUMBER
+    'Sampling Distribution' distribution=NUMBER
+    'Sampling Variation' variation=NUMBER;
+
+
+
 //
 // Provenance
 //
@@ -299,12 +367,31 @@ LabelingProcess:
     ('Type:' type=AnnotationType)?
     ('Labels:' (Labels)*)?
     ('Labeling Team:'labelingTeam = Team)?
+    ('Infrastructure:' infra=Infrastructure)?
+    ('Validation:' validation=Validation)?
     ('Social Issues:' labelSocialIssues=[SocialIssue])?
     ('Label Requirements:' (requeriments+=Requeriments)*)?;
 Labels:
     'Label:' name=ID
     'Description:' desc=STRING
     'Mapping:' (map=[Attribute] (',')?)*;
+
+Infrastructure:
+    ('Tool' tool=STRING)?
+    ('Platform' platform=STRING)?
+    ('Language' language=STRING)?
+    ('Version' version=STRING)?
+    ('Comments' other=STRING)?;
+
+Validation:
+    ('Validation Method:' method=STRING)?
+    ('Validation Dates:' validationDates=STRING)?
+    ('Golden Questions:' '[' goldenquestions=STRING (',' goldenquestions=STRING)* ']')?
+    ('Inter-rater adjudication policy:' interRater=STRING)?
+    ('Validation Requirements:' (requeriments+=Requeriments)*)?;
+
+LabelRequeriments:
+    ('Requirements:' (requeriments+=Requeriments)*)?;
 
 Demographics:
     ('Age:' age=STRING)?
@@ -350,10 +437,13 @@ SocialIssue:
 
 // Semantical Type Rules
 
-CommonLicences returns string:    'Creative Commons' | 'CC0: Public Domain' | 'CC BY-NC-SA 4.0' | 'CC BY-SA 4.0' |'CC BY-SA 3.0' |'CC BY 4.0 (Attribution 4.0 International)' |'CC BY-NC 4.0 (Attribution-NonCommercial 4.0 International)' |'CC BY 3.0 (Attribution 3.0 Unported)' | 'CC BY 3.0 IGO (Attribution 3.0 IGO)'| 'CC BY-NC-SA 3.0 IGO (Attribution-NonCommercial-ShareAlike 3.0 IGO)' | 'CC BY-ND 4.0 (Attribution-NoDerivatives 4.0 International)'
+CommonLicences returns string:    'The Montreal data licence' | 'Creative Commons' | 'CC0: Public Domain' | 'CC BY-NC-SA 4.0' | 'CC BY-SA 4.0' |'CC BY-SA 3.0' |'CC BY 4.0 (Attribution 4.0 International)' |'CC BY-NC 4.0 (Attribution-NonCommercial 4.0 International)' |'CC BY 3.0 (Attribution 3.0 Unported)' | 'CC BY 3.0 IGO (Attribution 3.0 IGO)'| 'CC BY-NC-SA 3.0 IGO (Attribution-NonCommercial-ShareAlike 3.0 IGO)' | 'CC BY-ND 4.0 (Attribution-NoDerivatives 4.0 International)'
                                 | 'CC BY-NC-ND 4.0 (Attribution-NonCommercial-NoDerivatives 4.0 International)' | 'GPL' | 'GPL 2' | 'LGPL 3.0 (GNU Lesser General Public License 3.0)' | 'AGPL 3.0 (GNU Affero General Public License 3.0)'
                                 | 'FDL 1.3 (GNU Free Documentation License 1.3)' | 'Open Data Commons' |'Database: Open Database, Contents: Database Contents' |'Database: Open Database, Contents: © Original Authors' | 'PDDL (ODC Public Domain Dedication and Licence)' | 'ODC-BY 1.0 (ODC Attribution License)'
                                 | 'Community Data License' | 'Community Data License Agreement - Permissive - Version 1.0' | 'Community Data License Agreement - Sharing - Version 1.0' | 'Special' | 'World Bank Dataset Terms of Use' | 'Reddit API Terms' | 'U.S. Government Works' | 'EU ODP Legal Notice';
+RightsData returns string: 'Access' | 'Tagging' | 'Distribute' | 'Re-Represent';
+RightsModel returns string: 'Benchmark' | 'Research' | 'Publish' | 'Internal Use' | 'Output Commercialization' | 'Model Commercialization';
+
 MLTasks returns string: 'text-classification'|'question-answering'|'text-generation'|'token-classification'|'translation'|
                         'fill-mask'|'text-retrieval'|'conditional-text-generation'|'sequence-modeling'|'summarization'|'other'|
                         'structure-prediction'|'information-retrieval'|'text2text-generation'|'zero-shot-retrieval'|
@@ -387,7 +477,7 @@ SpeechModality returns string: 'spoken/signed' | 'written';
 SpeechType returns string: 'Scripted/edited' | 'spontaneous';
 SpeechSyncrony returns string: 'synchronous interaction' | 'asynchronous intercation';
 BooleanAnswer returns string: 'Yes' | 'No';
-
+SampleType returns string: 'Cluster Sampling' | 'Haphazard Sampling' | 'Multi-stage Sampling' | 'Stratified Sampling' | 'Systematic Sampling' | 'Weighted Sampling' | 'Other';
 // Logic Data Types
 StringNumberType returns string: STRING + ':' + NUMBER;
 HistogramType returns string: NUMBER + ':' + NUMBER;
@@ -412,6 +502,7 @@ Dash returns string: "-";
 //Month returns string: "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11"| "12";
 //Year returns string: "1989" | "1990" | "1991"| "1992" | "1993" | "1994" | "1995" | "1996" | "1997" | "1998" | "1999" | "2000" | "2001" | "2002" | "2003" | "2004" | "2005" | "2006" | "2007" | "2008" | "2009" | "2010" | "2011" | "2012" | "2013" | "2014" | "2015" | "2016" | "2017" | "2018" | "2019" | "2020" | "2021" | "2022" | "2023" | "2024" | "2025";
 DateYear returns string: NUMBER+Dash+NUMBER+Dash+NUMBER;
+DOI returns string: NUMBER+"/"+ID+"-"NUMBER+"-"+NUMBER+"-"+ID;
 
 // Email
 EmailType returns string: ID+'@'+ID+'.'+ID;

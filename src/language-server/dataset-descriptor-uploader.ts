@@ -54,24 +54,25 @@ export class DatasetUploader implements Uploader {
         Title: "" 
         Unique-identifier: aUniqueId
         Version: v0000
-        Release Date: 11-11-1989
+        Dates:
+            Release Date: 11-11-1989
         Citation: 
             Raw Citation: ""
         Description:  
             Purposes: "" 
             Tasks: [other]
-        Gaps: ""
-        Licences: CC0: Public Domain
+            Gaps: ""
+            Areas: datasetArea
+            Tags: datasetTags
         Applications: 
             Past Uses:""
             Recommended:""
             Non-recommended:""
+            Benchmarking: [  ]
         Distribution: 
-            Is public?: Yes
-            How is distributed:  ""
-            Distribution license: ""
-        Area: datasetArea
-        Tags: datasetTags
+            Licences: CC0: Public Domain
+            Rights(stand-alone): Access
+            Rights(with models): Benchmark
         Authoring:
             Authors:
                 Name authorName email XXXX@mail.com
@@ -124,7 +125,6 @@ Composition:
                 // Class Balance ""
     Dependencies:
         Description: ""
-    Is sample: ""
     Data Splits: ""\n`
 
         return body;
