@@ -56,9 +56,9 @@ DescribeML is a VSCode language plugin to describe machine-learning datasets. <b
 + **Version:** `ID`  The version of the dataset 
 
 + **Date:**  <a name="dates"></a> The date of the dataset 
-    + **Created:** `DATES`  The date of the dataset creation: 
-    + **Modified:** `DATES` The date of the dataset modification: 
-    + **Published:** `DATES`  The date of the dataset publication:
+    + **Created:** `DATE`  The date of the dataset creation: 
+    + **Modified:** `DATE` The date of the dataset modification: 
+    + **Published:** `DATE`  The date of the dataset publication:
 
  + **Citation:** <a name="citation"></a>The citation of the dataset: 
     
