@@ -26,7 +26,7 @@ The easiest way to install the plugin is by using the **Visual Studio Code Marke
 
 Instead, you can install it manually using the packaged release of the plugin in this [repository](https://github.com/SOM-Research/DescribeML) that can be found at the root of the project. 
 
-The file is **DescribeML-0.0.3.vsix**
+The file is **DescribeML-0.0.5.vsix**
 
 Open your terminal (or the terminal inside the VSCode) and write this:
 
@@ -34,7 +34,7 @@ Open your terminal (or the terminal inside the VSCode) and write this:
 
 git clone https://github.com/SOM-Research/DescribeML.git datasets
 cd datasets 
-code --install-extension DescribeML-0.0.3.vsix
+code --install-extension DescribeML-0.0.5.vsix
 ```
 
 <span style="font-size:0.7em;">*Troubles: If you cannot see the syntax highlight in the examples files (p.e. *Melanoma.descml*) as the image below. Please, reload the VSCode editor and write the code --install command again* </span>
@@ -45,7 +45,12 @@ Great! That's it.
 
 1) The first step is to create a *.descml* file
 
-2) The easy way to start using our tool is to use the *preloader data service*,  located at the top left of your editor, clicking at:<div style="display:flex; justify-content:center; align-items: center;"><div style='width:40px'>![upload](fileicons/cloud-computing.png)</div></div>
+2) The easy way to start using our tool is to use the *preloader data service*,  located at the top left of your editor, clicking at: <img
+  src="fileicons/cloud-computing.png"
+  alt="preloader service"
+  title="Optional title"
+  style="display: inline-block; margin: 0 auto; width: 40px">
+
 3) Select your dataset file (*.csv*), and the tool will generate a darft of your description file.
 
 4) Follow the examples in the **examples/evaluation** [folders](https://github.com/SOM-Research/DescribeML) to get a sense of the tool's possibilities. Take a look at the *Melanoma.descml* file, for example.
@@ -56,7 +61,13 @@ Great! That's it.
 
 </div>
 
-6) Once you are happy with your documentation, you can generate HTML documentation by using clicking the button next to the prealoder service:<div style="display:flex; justify-content:center; align-items: center;"><div style='width:40px'>![upload](fileicons/html.png)</div></div>
+6) Once you are happy with your documentation, you can generate HTML documentation by clicking the generator button next to the prealoder service: <img
+  src="fileicons/html.png"
+  alt="HTML generator"
+  title="Optional title"
+  style="display: inline-block; margin: 0 auto; width: 40px">
+
+
 
 
 
@@ -69,9 +80,9 @@ For more information, check out the **quick [presentation](https://www.youtube.c
 
 ## Research background
 
-DescribeML is part of an ongoing research project to improve dataset documentation for machine learning. The core of our proposal is a domain-specific language ([preprint here](https://arxiv.org/pdf/2207.02848.pdf)) that allows data creators to describe relevant aspects of their data for the machine learning field and beyond. The [Critical Dataset Studios](https://knowingmachines.org/reading-list#dataset_documentation_practices) of the [Knowing Machines](https://knowingmachines.org) project have compiled an excellent list of current documentation practices.
+DescribeML is part of an ongoing research project to improve dataset documentation for machine learning. The core of our proposal is a domain-specific language ([preprint here](https://www.researchgate.net/publication/361836238_A_domain-specific_language_for_describing_machine_learning_datasets)) that allows data creators to describe relevant aspects of their data for the machine learning field and beyond. The [Critical Dataset Studios](https://knowingmachines.org/reading-list#dataset_documentation_practices) of the [Knowing Machines](https://knowingmachines.org) project have compiled an excellent list of current documentation practices.
 
-The tool will be presented at the ACM/IEEE 25th International Conference on [Model Driven Engineering Languages and Systems](https://conf.researchr.org/home/models-2022) and a preprint of the tool publication can be seen [here](https://modeling-languages.com/wp-content/uploads/2022/08/2022___MODELS___DescribeML_Tool-10.pdf)
+The tool will be presented at the ACM/IEEE 25th International Conference on [Model Driven Engineering Languages and Systems](https://conf.researchr.org/home/models-2022) and a preprint of the tool publication can be seen [here](https://www.researchgate.net/publication/363256430_DescribeML_A_Tool_for_Describing_Machine_Learning_Datasets)
 
 
 ## Contributing
