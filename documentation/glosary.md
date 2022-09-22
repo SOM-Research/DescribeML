@@ -1,9 +1,15 @@
 <div align="center">
 
-<div align="center" style="width:100px">
+<div align="center" style="width:50px">
+    
+ <img
+  src="../fileicons/requisito.png"
+  alt="HTML generator"
+  title="Optional title"
+  style="display: inline-block; margin: 0 auto; width: 200px">
 
-![logo](../fileicons/requisito.png)
 </div>
+    
 # DescribeML: 
 #### Language Reference Guide 
 (Version 0.0.5)
