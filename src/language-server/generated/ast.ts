@@ -320,12 +320,12 @@ export function isDeclaration(item: unknown): item is Declaration {
 
 export interface Demographics extends AstNode {
     readonly $container: GatheringProcess | Team;
-    age: string
+    age: number
     country: string
     disordered: string
     gender: string
     native: string
-    number: string
+    number: number
     race: string
     status: string
     training: string
@@ -477,6 +477,18 @@ export function isGatheringProcesses(item: unknown): item is GatheringProcesses 
     return reflection.isInstance(item, GatheringProcesses);
 }
 
+export interface GoldenQuestion extends AstNode {
+    readonly $container: Validation;
+    answer: number
+    question: string
+}
+
+export const GoldenQuestion = 'GoldenQuestion';
+
+export function isGoldenQuestion(item: unknown): item is GoldenQuestion {
+    return reflection.isInstance(item, GoldenQuestion);
+}
+
 export interface Infrastructure extends AstNode {
     readonly $container: LabelingProcess;
     language: string
@@ -623,7 +635,9 @@ export function isPairCorrelation(item: unknown): item is PairCorrelation {
 export interface PreProcess extends AstNode {
     readonly $container: PreProcesses;
     desc: string
+    labelSocialIssues?: Reference<SocialIssue>
     name: string
+    type: DataProcess
 }
 
 export const PreProcess = 'PreProcess';
@@ -936,8 +950,7 @@ export function isUpdateDate(item: unknown): item is UpdateDate {
 
 export interface Validation extends AstNode {
     readonly $container: LabelingProcess;
-    goldenquestions: string
-    interRater: string
+    goldenquestions: GoldenQuestion
     method: string
     requeriments: Array<Requeriments>
     validationDates: string
@@ -981,6 +994,8 @@ export type BooleanAnswer = 'Yes' | 'No'
 
 export type SampleType = 'Cluster Sampling' | 'Haphazard Sampling' | 'Multi-stage Sampling' | 'Stratified Sampling' | 'Systematic Sampling' | 'Weighted Sampling' | 'Other'
 
+export type DataProcess = 'Missing Values' | 'Data Augmentation' | 'Outlier Filtering' | 'Remove Duplicates' | 'Data reduction' | 'Sampling' | 'Data Normalization' | 'Others'
+
 export type StringNumberType = string
 
 export type HistogramType = string
@@ -999,14 +1014,14 @@ export type DOI = string
 
 export type EmailType = string
 
-export type datasetDescriptorAstType = 'Applications' | 'Area' | 'Areas' | 'Attribute' | 'Author' | 'Authoring' | 'Authors' | 'Benchmarking' | 'Binary' | 'Categor' | 'ChiSquare' | 'Citation' | 'Citeauthors' | 'CiteUrl' | 'Composition' | 'ConsistencyRules' | 'Correlations' | 'DataInstance' | 'DataInstances' | 'Dates' | 'Declaration' | 'Demographics' | 'Dependencies' | 'Description' | 'DescriptionDataset' | 'Distribution' | 'DoiCite' | 'FirstRows' | 'Founders' | 'Funder' | 'GatheringProcess' | 'GatheringProcesses' | 'Infrastructure' | 'Keyword' | 'LabelingProcess' | 'LabelingProcesses' | 'LabelRequeriments' | 'Labels' | 'Maintainer' | 'Metadata' | 'Numeri' | 'PairCorrelation' | 'PreProcess' | 'PreProcesses' | 'Provenance' | 'PublishedDate' | 'Publisher' | 'QualityMetric' | 'Quartile' | 'Relation' | 'RelationInstances' | 'ReleaseDate' | 'Requeriments' | 'Sample' | 'SamplingCharacteristics' | 'SocialConcerns' | 'SocialIssue' | 'Source' | 'SpeechSitatuion' | 'Statistics' | 'Tag' | 'Tags' | 'Task' | 'Tasks' | 'Team' | 'Title' | 'UpdateDate' | 'Validation';
+export type datasetDescriptorAstType = 'Applications' | 'Area' | 'Areas' | 'Attribute' | 'Author' | 'Authoring' | 'Authors' | 'Benchmarking' | 'Binary' | 'Categor' | 'ChiSquare' | 'Citation' | 'Citeauthors' | 'CiteUrl' | 'Composition' | 'ConsistencyRules' | 'Correlations' | 'DataInstance' | 'DataInstances' | 'Dates' | 'Declaration' | 'Demographics' | 'Dependencies' | 'Description' | 'DescriptionDataset' | 'Distribution' | 'DoiCite' | 'FirstRows' | 'Founders' | 'Funder' | 'GatheringProcess' | 'GatheringProcesses' | 'GoldenQuestion' | 'Infrastructure' | 'Keyword' | 'LabelingProcess' | 'LabelingProcesses' | 'LabelRequeriments' | 'Labels' | 'Maintainer' | 'Metadata' | 'Numeri' | 'PairCorrelation' | 'PreProcess' | 'PreProcesses' | 'Provenance' | 'PublishedDate' | 'Publisher' | 'QualityMetric' | 'Quartile' | 'Relation' | 'RelationInstances' | 'ReleaseDate' | 'Requeriments' | 'Sample' | 'SamplingCharacteristics' | 'SocialConcerns' | 'SocialIssue' | 'Source' | 'SpeechSitatuion' | 'Statistics' | 'Tag' | 'Tags' | 'Task' | 'Tasks' | 'Team' | 'Title' | 'UpdateDate' | 'Validation';
 
-export type datasetDescriptorAstReference = 'Attribute:labelProces' | 'Benchmarking:taskName' | 'ConsistencyRules:attrule1' | 'ConsistencyRules:attrule2' | 'ConsistencyRules:instance1' | 'GatheringProcess:labelSocialIssues' | 'GatheringProcess:mapInstance' | 'LabelingProcess:labelSocialIssues' | 'Labels:map' | 'PairCorrelation:attr1' | 'PairCorrelation:attr2' | 'Relation:attRel' | 'Relation:attRelTarget' | 'Relation:insRel' | 'SocialIssue:senseAtt';
+export type datasetDescriptorAstReference = 'Attribute:labelProces' | 'Benchmarking:taskName' | 'ConsistencyRules:attrule1' | 'ConsistencyRules:attrule2' | 'ConsistencyRules:instance1' | 'GatheringProcess:labelSocialIssues' | 'GatheringProcess:mapInstance' | 'LabelingProcess:labelSocialIssues' | 'Labels:map' | 'PairCorrelation:attr1' | 'PairCorrelation:attr2' | 'PreProcess:labelSocialIssues' | 'Relation:attRel' | 'Relation:attRelTarget' | 'Relation:insRel' | 'SocialIssue:senseAtt';
 
 export class datasetDescriptorAstReflection implements AstReflection {
 
     getAllTypes(): string[] {
-        return ['Applications', 'Area', 'Areas', 'Attribute', 'Author', 'Authoring', 'Authors', 'Benchmarking', 'Binary', 'Categor', 'ChiSquare', 'Citation', 'Citeauthors', 'CiteUrl', 'Composition', 'ConsistencyRules', 'Correlations', 'DataInstance', 'DataInstances', 'Dates', 'Declaration', 'Demographics', 'Dependencies', 'Description', 'DescriptionDataset', 'Distribution', 'DoiCite', 'FirstRows', 'Founders', 'Funder', 'GatheringProcess', 'GatheringProcesses', 'Infrastructure', 'Keyword', 'LabelingProcess', 'LabelingProcesses', 'LabelRequeriments', 'Labels', 'Maintainer', 'Metadata', 'Numeri', 'PairCorrelation', 'PreProcess', 'PreProcesses', 'Provenance', 'PublishedDate', 'Publisher', 'QualityMetric', 'Quartile', 'Relation', 'RelationInstances', 'ReleaseDate', 'Requeriments', 'Sample', 'SamplingCharacteristics', 'SocialConcerns', 'SocialIssue', 'Source', 'SpeechSitatuion', 'Statistics', 'Tag', 'Tags', 'Task', 'Tasks', 'Team', 'Title', 'UpdateDate', 'Validation'];
+        return ['Applications', 'Area', 'Areas', 'Attribute', 'Author', 'Authoring', 'Authors', 'Benchmarking', 'Binary', 'Categor', 'ChiSquare', 'Citation', 'Citeauthors', 'CiteUrl', 'Composition', 'ConsistencyRules', 'Correlations', 'DataInstance', 'DataInstances', 'Dates', 'Declaration', 'Demographics', 'Dependencies', 'Description', 'DescriptionDataset', 'Distribution', 'DoiCite', 'FirstRows', 'Founders', 'Funder', 'GatheringProcess', 'GatheringProcesses', 'GoldenQuestion', 'Infrastructure', 'Keyword', 'LabelingProcess', 'LabelingProcesses', 'LabelRequeriments', 'Labels', 'Maintainer', 'Metadata', 'Numeri', 'PairCorrelation', 'PreProcess', 'PreProcesses', 'Provenance', 'PublishedDate', 'Publisher', 'QualityMetric', 'Quartile', 'Relation', 'RelationInstances', 'ReleaseDate', 'Requeriments', 'Sample', 'SamplingCharacteristics', 'SocialConcerns', 'SocialIssue', 'Source', 'SpeechSitatuion', 'Statistics', 'Tag', 'Tags', 'Task', 'Tasks', 'Team', 'Title', 'UpdateDate', 'Validation'];
     }
 
     isInstance(node: unknown, type: string): boolean {
@@ -1058,6 +1073,9 @@ export class datasetDescriptorAstReflection implements AstReflection {
             }
             case 'PairCorrelation:attr2': {
                 return Attribute;
+            }
+            case 'PreProcess:labelSocialIssues': {
+                return SocialIssue;
             }
             case 'Relation:attRel': {
                 return Attribute;

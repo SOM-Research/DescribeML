@@ -272,7 +272,7 @@ Quartile:
 
 // Relation between Instances
 RelationInstances:
-    'Instaces relation:' (relation+=Relation)*;
+    'Instances relation:' (relation+=Relation)*;
 Relation:
     ('Relation:' name=ID 'attribute:' attRel=[Attribute] "is related to:" insRel=[DataInstance] ('and attribute:' attRelTarget=[Attribute]))*;
 
@@ -386,21 +386,23 @@ Infrastructure:
 Validation:
     ('Validation Method:' method=STRING)?
     ('Validation Dates:' validationDates=STRING)?
-    ('Golden Questions:' '[' goldenquestions=STRING (',' goldenquestions=STRING)* ']')?
-    ('Inter-rater adjudication policy:' interRater=STRING)?
+    ('Golden Questions:' '[' goldenquestions=GoldenQuestion (',' goldenquestions=GoldenQuestion)* ']')?
     ('Validation Requirements:' (requeriments+=Requeriments)*)?;
 
+GoldenQuestion:
+    'Question:' question=STRING
+    'Inter-annotation agreement:' answer=NUMBER;
 LabelRequeriments:
     ('Requirements:' (requeriments+=Requeriments)*)?;
 
 Demographics:
-    ('Age:' age=STRING)?
+    ('Age:' age=NUMBER)?
     ('Gender:' gender=STRING)?
     ('Country/Region:' country=STRING)?
     ('Race/Ethnicity:' race=STRING)?
     ('Native Language:' native=STRING)?
     ('Socioeconomic status:' status=STRING)?
-    ('Number of speakers represented:' number=STRING)?
+    ('Number of speakers represented:' number=NUMBER)?
     ('Presence of disordered speech:' disordered=STRING)?
     ('Training in linguistics/other relevan disciplines:' training=STRING)?;
 
@@ -410,7 +412,9 @@ PreProcesses:
     name='Preprocesses:' (preprocesses+=PreProcess)*;
 PreProcess:
     'Preprocess:' name=ID
-    'Description:' desc=STRING;
+    'Description:' desc=STRING
+    'Type:' type=DataProcess
+    ('Social Issues:' labelSocialIssues=[SocialIssue])?;
 
 
 //
@@ -424,8 +428,8 @@ SocialConcerns:
 SocialIssue:
     'Social Issue:' name=ID
     'IssueType:' IssueType=SocialIssueType
-    ('Related Attributes:' ('attribute:' senseAtt=[Attribute])*)?
     'Description:' desc=STRING
+    ('Related Attributes:' ('attribute:' senseAtt=[Attribute])*)?
     ('Instance belongs to people:' 
         ('Have sensitive attributes?' ('attribute:' senseAtt=[Attribute])*)?
         ('Are there protected groups?' procGroups=BooleanAnswer)?
@@ -441,7 +445,7 @@ CommonLicences returns string:    'The Montreal data licence' | 'Creative Common
                                 | 'CC BY-NC-ND 4.0 (Attribution-NonCommercial-NoDerivatives 4.0 International)' | 'GPL' | 'GPL 2' | 'LGPL 3.0 (GNU Lesser General Public License 3.0)' | 'AGPL 3.0 (GNU Affero General Public License 3.0)'
                                 | 'FDL 1.3 (GNU Free Documentation License 1.3)' | 'Open Data Commons' |'Database: Open Database, Contents: Database Contents' |'Database: Open Database, Contents: © Original Authors' | 'PDDL (ODC Public Domain Dedication and Licence)' | 'ODC-BY 1.0 (ODC Attribution License)'
                                 | 'Community Data License' | 'Community Data License Agreement - Permissive - Version 1.0' | 'Community Data License Agreement - Sharing - Version 1.0' | 'Special' | 'World Bank Dataset Terms of Use' | 'Reddit API Terms' | 'U.S. Government Works' | 'EU ODP Legal Notice';
-RightsData returns string: 'Access' | 'Tagging' | 'Distribute' | 'Re-Represent';
+RightsData returns string: 'Access' | 'Tagging' | 'Distribute' | 'Re-Represent''Access' | 'Tagging' | 'Distribute' | 'Re-Represent';
 RightsModel returns string: 'Benchmark' | 'Research' | 'Publish' | 'Internal Use' | 'Output Commercialization' | 'Model Commercialization';
 
 MLTasks returns string: 'text-classification'|'question-answering'|'text-generation'|'token-classification'|'translation'|
@@ -478,6 +482,8 @@ SpeechType returns string: 'Scripted/edited' | 'spontaneous';
 SpeechSyncrony returns string: 'synchronous interaction' | 'asynchronous intercation';
 BooleanAnswer returns string: 'Yes' | 'No';
 SampleType returns string: 'Cluster Sampling' | 'Haphazard Sampling' | 'Multi-stage Sampling' | 'Stratified Sampling' | 'Systematic Sampling' | 'Weighted Sampling' | 'Other';
+DataProcess returns string: 'Missing Values' | 'Data Augmentation' | 'Outlier Filtering' | 'Remove Duplicates' | 'Data reduction' | 'Sampling' | 'Data Normalization' | 'Others'; 
+
 // Logic Data Types
 StringNumberType returns string: STRING + ':' + NUMBER;
 HistogramType returns string: NUMBER + ':' + NUMBER;

@@ -280,15 +280,17 @@ Dataset: Melanoma_Classification_Dataset
                 were not monitored, as that would not reflect clinical practice, but labels were verified visually by an expert in dermoscopy. 
                 Images of lesions were attributed to patients based on the clinical imaging database identification codes which are stored at the 
                 time of capture during each clinical photography session."
+                Type: Others
 
 
     Social Concerns: 
       Rationale: 'Dataset may not be representative of the real world data, and the cavenience sample is not representative of general incidence of melanoma'
       Social Issue: raceRepresentative
         IssueType: Bias
+        Description: "Dataset is not representative with respect to darker skin types"
         Related Attributes: 
             attribute: ImageId  
-        Description: "Dataset is not representative with respect to darker skin types"
+       
       Social Issue: generalIncidence
         IssueType: Social Impact        
         Description: "Dataset is a convenience sample and is not representative of general incidence of melanoma"

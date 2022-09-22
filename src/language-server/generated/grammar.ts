@@ -4251,7 +4251,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
         "elements": [
           {
             "$type": "Keyword",
-            "value": "Instaces relation:",
+            "value": "Instances relation:",
             "elements": []
           },
           {
@@ -5806,7 +5806,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                   "$type": "RuleCall",
                   "arguments": [],
                   "rule": {
-                    "$refText": "STRING"
+                    "$refText": "GoldenQuestion"
                   }
                 }
               },
@@ -5826,7 +5826,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                       "$type": "RuleCall",
                       "arguments": [],
                       "rule": {
-                        "$refText": "STRING"
+                        "$refText": "GoldenQuestion"
                       }
                     }
                   }
@@ -5836,29 +5836,6 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
               {
                 "$type": "Keyword",
                 "value": "]"
-              }
-            ],
-            "cardinality": "?"
-          },
-          {
-            "$type": "Group",
-            "elements": [
-              {
-                "$type": "Keyword",
-                "value": "Inter-rater adjudication policy:",
-                "elements": []
-              },
-              {
-                "$type": "Assignment",
-                "feature": "interRater",
-                "operator": "=",
-                "terminal": {
-                  "$type": "RuleCall",
-                  "arguments": [],
-                  "rule": {
-                    "$refText": "STRING"
-                  }
-                }
               }
             ],
             "cardinality": "?"
@@ -5887,6 +5864,50 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
               }
             ],
             "cardinality": "?"
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "GoldenQuestion",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Keyword",
+            "value": "Question:",
+            "elements": []
+          },
+          {
+            "$type": "Assignment",
+            "feature": "question",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "STRING"
+              }
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": "Inter-annotation agreement:"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "answer",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "NUMBER"
+              }
+            }
           }
         ]
       }
@@ -5946,7 +5967,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                   "$type": "RuleCall",
                   "arguments": [],
                   "rule": {
-                    "$refText": "STRING"
+                    "$refText": "NUMBER"
                   }
                 }
               }
@@ -6084,7 +6105,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                   "$type": "RuleCall",
                   "arguments": [],
                   "rule": {
-                    "$refText": "STRING"
+                    "$refText": "NUMBER"
                   }
                 }
               }
@@ -6215,6 +6236,44 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                 "$refText": "STRING"
               }
             }
+          },
+          {
+            "$type": "Keyword",
+            "value": "Type:"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "type",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "DataProcess"
+              }
+            }
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Social Issues:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "labelSocialIssues",
+                "operator": "=",
+                "terminal": {
+                  "$type": "CrossReference",
+                  "type": {
+                    "$refText": "SocialIssue"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
           }
         ]
       }
@@ -6319,6 +6378,22 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             }
           },
           {
+            "$type": "Keyword",
+            "value": "Description:"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "desc",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "STRING"
+              }
+            }
+          },
+          {
             "$type": "Group",
             "elements": [
               {
@@ -6350,22 +6425,6 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
               }
             ],
             "cardinality": "?"
-          },
-          {
-            "$type": "Keyword",
-            "value": "Description:"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "desc",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "STRING"
-              }
-            }
           },
           {
             "$type": "Group",
@@ -7697,6 +7756,58 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
           {
             "$type": "Keyword",
             "value": "Other",
+            "elements": []
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "DataProcess",
+      "hiddenTokens": [],
+      "type": "string",
+      "alternatives": {
+        "$type": "Alternatives",
+        "elements": [
+          {
+            "$type": "Keyword",
+            "value": "Missing Values",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Data Augmentation",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Outlier Filtering",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Remove Duplicates",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Data reduction",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Sampling",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Data Normalization",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Others",
             "elements": []
           }
         ]
