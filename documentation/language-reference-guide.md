@@ -38,8 +38,8 @@ DescribeML is a VSCode language plugin to describe machine-learning datasets. <b
     + [Statistics](#statistics)
     + [Consistency Rules](#consistency)
 + [Provenance](#provenance)
-    + [Gathering proccesses](#gathering)
-    + [Labeling proccesses](#labeling)
+    + [Gathering processes](#gathering)
+    + [Labeling processes](#labeling)
     + [Data preprocesses](#preprocess)
 + [Social Concerns](#concerns)
 
@@ -52,40 +52,57 @@ DescribeML is a VSCode language plugin to describe machine-learning datasets. <b
 #### <a name="metadata"></a> Metadata:
 
 + **Title:** `STRING`: The public title of the dataset
-+ **Unique-identifier:** `ID` Version or set of versions of the dataset
++ **Unique-identifier:** `ID` Machine-readable unique identifier of the dataset
 + **Version:** `ID`  The version of the dataset 
 
 + **Date:**  <a name="dates"></a> The date of the dataset 
-    + **Created:** `DATE`  The date of the dataset creation: 
-    + **Modified:** `DATE` The date of the dataset modification: 
-    + **Published:** `DATE`  The date of the dataset publication:
+    + **Created:** `DATE`  The date where the dataset was initially created: 
+    + **Modified:** `DATE` The date where the dataset was last modified: 
+    + **Published:** `DATE`  The publication date of the dataset:
 
- + **Citation:** <a name="citation"></a>The citation of the dataset: 
-    
-    + **Raw Citation:** `STRING` The bibtex citation, or equivalent format, of the dataset 
+ + **Citation:** <a name="citation"></a>The citation of the dataset, between chose between a raw citation and a structured format
+    ```json
+        Citation: 
+                title: "SIIM-ISIC 2020 Challenge Dataset. International Skin Imaging Collaboration"
+                year: 2020
+                publisher: "International Skin Imaging Collaboration"
+                doi: "doi.org/10.34970/2020-ds01"
+                url: "https://www.kaggle.com/c/siim-isic-melanoma-classification"
+    ```
+    + **Raw Citation:** `STRING` Raw citation as text, or as Bibtex or equivalent format, of the dataset 
     + **OR:**
         +   **Title:** `STRING` The title of the dataset
         +   **Authors:** `STRING` The authors of the dataset
         +   **Year:** `DATE` The year of the dataset
-        +   **Jorunal/Conference:** `STRING` The publisher of the dataset
+        +   **Journal/Conference:** `STRING` The publisher of the dataset
         +   **Publisher:** `STRING` The publisher of the dataset:
         +   **URL:** `URL` The URL of the dataset
         +   **DOI:** `ID` The DOI of the dataset
         +   **ISBN:** `ID` The ISBN of the dataset
 + **Description:** <a name="description"></a> The description of the dataset
-    + **Description:** `STRING` Textual descripiton of the dataset
+    ```json
+        Description:    
+            Purposes:
+                Purposes: "The 2020 SIIM-ISIC Melanoma" 
+                Tasks:    [classification]
+                Gaps:     "As the leading healthcare organization for informatics in medical imaging..." 
+                Areas:    HealthCare
+                Tags:     Images Melanoma diagnosis Skin Image
+    ```
+    + **Description:** `STRING` Textual description of the dataset
     **OR:**
-        + **Purposes** `STRING` Summerize the purposes of the dataset
-        + **Tasks:** `TASKS ENUMERATE` List of common ML tasks, use other if not fits your case: `Autocomplete feature will guides you trought the options`
-        + **Gaps:** `STRING` Which gaps this datasest aim to fill
-    + **Areas:** `ID` Set a list of Areas of the dataset
-    + **Tags:** `ID` Set a list of Tags of the dataset
+        + **Purposes** `STRING` For what purposes was the dataset created?
+        + **Tasks:** `TASKS ENUMERATE` List of ML tasks the dataset is intended for: `Autocomplete feature will guide you througt the options`
+        + **Gaps:** `STRING` Which gaps does the dataset aims to fill
+    + **Areas:** `ID` Set a list of areas of the dataset
+    + **Tags:** `ID, ...` Set a list of Tags of the dataset
+
 +  **Applications** <a name="applications"></a> Summerize the applications of the dataset
     + **Past Uses:** `STRING` Summerize the past uses of the dataset
     + **Recommended uses:** `STRING` Summerize the recommended uses of the dataset
-    + **Non-recommneded uses:** `STRING` Summerize the non-recommended uses of the dataset
-    + **Benchmarking** Benchmarking of the dataset
-        + **Task:** `TASKS ENUMERATE` Task to benchmark `Autocomplete feature will guide you throught the options`
+    + **Non-recommended uses:** `STRING` Summerize the non-recommended uses of the dataset.
+    + **Benchmarking:** Benchmarking of the dataset
+        + **Task:** `TASKS ENUMERATE` Task to benchmark `Autocomplete feature will guide you through the options`
         + **Metric:** Metric to benchmark   
             + **F1:** `NUMBER` F1 score
             + **Accuracy:** `NUMBER` Accuracy score
