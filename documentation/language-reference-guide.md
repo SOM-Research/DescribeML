@@ -62,7 +62,7 @@ Full examples of the language can be found in the public open repository [here](
     + **Created:** `DATE`  The date where the dataset was initially created: 
     + **Modified:** `DATE` The date where the dataset was last modified: 
     + **Published:** `DATE`  The publication date of the dataset:
-    <br>
+        <br>
         > Example
         ```ruby 
         Dates:
@@ -82,7 +82,7 @@ Full examples of the language can be found in the public open repository [here](
         +   **URL:** `URL` The URL of the dataset
         +   **DOI:** `ID` The DOI of the dataset
         +   **ISBN:** `ID` The ISBN of the dataset
-        <br>
+            <br>
             > Example:
             ```ruby
             Citation: 
@@ -100,7 +100,7 @@ Full examples of the language can be found in the public open repository [here](
         + **Gaps:** `STRING` Which gaps does the dataset aims to fill
     + **Areas:** `ID` Set a list of areas of the dataset
     + **Tags:** `ID, ...` Set a list of Tags of the dataset
-<br>
+        <br>
         > Example:
         ```ruby
         Description:    
@@ -123,7 +123,7 @@ Full examples of the language can be found in the public open repository [here](
             + **Precision:** `NUMBER` Precision score
             + **Recall:** `NUMBER` Recall score
         + **Reference:** `STRING` Source of the benchmark
-    <br>
+            <br>
             > Example
             ```ruby
             Applications:
@@ -153,7 +153,7 @@ Full examples of the language can be found in the public open repository [here](
     + **Credits/Attribution Notice:** `STRING` Who needs to be credited when using the dataset
     + **Designated Third Parties:** `STRING` Third parties in charge of licensing and distribution issues
     + **Additional Conditions:** `STRING` Other issues specified by the authors
-    <br>
+        <br>
         > Example
          ```ruby
         Distribution:
@@ -229,9 +229,8 @@ Full examples of the language can be found in the public open repository [here](
                     + **Symmetry:** `ENUMERATE` `Symmetryc | Asymmetryc`
                     + **Attribute Sparsity:** `NUMBER` How sparse is the binary attribute?
                 + **Categoric Distribution:** `["CATEGORY": "NUMBER"%, ...]` Categoric distribution of the attribute
-            <br> 
-                    > Example:
-                    
+                    <br> 
+                    > Example
                     ```ruby
                     attribute: beningnant_malignant
                         description: 'Type of the melanoma'
@@ -258,6 +257,7 @@ Full examples of the language can be found in the public open repository [here](
                 + **Maximmum:** `NUMBER` Max of the attribute
                 + **Quartiles:** `[Q1:NUMBER, ...]` Median lengths of the attribute
                 + **IQR:** `NUMBER` Histogram of the attribute
+                    <br>
                     > Example
                     ```ruby	
                     attribute: acidity 
@@ -285,28 +285,28 @@ Full examples of the language can be found in the public open repository [here](
             + **Completeness**: `NUMBER` Completeness of the instance
             + **Class balance**: `STRING` Class balance of the instance
             + **Noisy labels**: `STRING` Noisy labels of the instance
-            <br>
-            > Example:
-            ```ruby
-            Statistics: 
-                Correlations: Spearman: ['1': 0.2, '2':0.3, '3':0.4, '4':0.5, '5':0.6, '6':0.7, '7':0.8, '8':0.9] 
-                Pair Correlation: 
-                    between ImageId and diagnosis 
-                    between age and external source 
-                        From: "National statistical office" 
-                        Rationale: "The age average is similar to the Nevada state age average due to
-                                    national statistical office average of 2022 of Nevada"
-                Quality Metrics: 
-                    Completeness: 100
+                <br>
+                > Example:
+                ```ruby
+                Statistics: 
+                    Correlations: Spearman: ['1': 0.2, '2':0.3, '3':0.4, '4':0.5, '5':0.6, '6':0.7, '7':0.8, '8':0.9] 
+                    Pair Correlation: 
+                        between ImageId and diagnosis 
+                        between age and external source 
+                            From: "National statistical office" 
+                            Rationale: "The age average is similar to the Nevada state age average due to
+                                        national statistical office average of 2022 of Nevada"
+                    Quality Metrics: 
+                        Completeness: 100
         
         
     + **Consistency Rules:** <a name="consistency"></a> Set the consistency rules of your dataset
         + **Rule:** `OCLExpression` OCL expression of the rule
-        <br>
-        >Example:
-        ```ruby
-            Consistency rules: 
-            inv: skinImages : (age >= 0)
+            <br>
+            >Example:
+            ```ruby
+                Consistency rules: 
+                inv: skinImages : (age >= 0)
 + **Dependencies:** Dependencies of the rule
     + **Description:** `STRING` Description of the dependencies
     + **Links:** `URL` Link to the dependency artifact
@@ -357,7 +357,7 @@ Full examples of the language can be found in the public open repository [here](
             + **Socioeconomic status** `STRING` Socioeconomic status
             + **Training in linguistics/other relevant disciplines** `STRING` Explain the training of the participants
     + **Gathering Requirements:** `Requirement: STRING, ...`
-    <br>
+        <br>
         > Example:
         ```ruby
         Data Provenance:
@@ -418,7 +418,7 @@ Full examples of the language can be found in the public open repository [here](
             + **Inter-annotation agreement:** `NUMBER` Inter-annotation agreement for each question. Low values mean low confidence in the annotation
         + **Validation Requirements:** `Requirement: STRING, ...` Provide comments about the validation tool
     + **Labeling Requirements:** `Requirement: STRING, ...`
-    <br>
+        <br>
         > Example:
         ```ruby
         LabelingProcesses: 
@@ -445,7 +445,7 @@ Full examples of the language can be found in the public open repository [here](
 
 ##### Social Concerns
 
-+ **Social Concerns** <a name="preprocess"></a>
++ **Social Concerns** <a name="concerns"></a>
     + **Rationale:** `STRING` Rationale of the social concerns of the dataset
     + **Social Issues:** Social issues identified from the data
         + **Social Issue:** `ID` Machine-readable name of the social issue
@@ -456,16 +456,16 @@ Full examples of the language can be found in the public open repository [here](
             + **Have sensitive attributes?** `[Attribute], ...` List of sensitive attributes
             + **Are there protected groups?** `ENUMERATE` (Yes, No, Unknown)
             + **Might be offensive?** `STRING` Is there offensive content in the dataset
-            <br>
-            > Examples
-            ```ruby
-            Social Concerns: 
-                Rationale: 'Dataset may not be representative of the real world data, and the cavenience sample is not representative of general incidence of melanoma'
-                Social Issue: raceRepresentative
-                    IssueType: Bias
-                    Description: "Dataset is not representative with respect to darker skin types"
-                    Related Attributes: 
-                        attribute: ImageId 
+                <br>
+                > Examples
+                ```ruby
+                Social Concerns: 
+                    Rationale: 'Dataset may not be representative of the real world data, and the cavenience sample is not representative of general incidence of melanoma'
+                    Social Issue: raceRepresentative
+                        IssueType: Bias
+                        Description: "Dataset is not representative with respect to darker skin types"
+                        Related Attributes: 
+                            attribute: ImageId 
 
 ***
 ***
