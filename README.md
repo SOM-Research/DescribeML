@@ -53,7 +53,7 @@ Great! That's it.
 
 3) Select your dataset file (*.csv*), and the tool will generate a darft of your description file.
 
-4) Follow the examples in the **examples/evaluation** [folders](https://github.com/SOM-Research/DescribeML) to get a sense of the tool's possibilities. Take a look at the *Melanoma.descml* file, for example.
+4) To help you, take a look to the [Language Reference Guide](/documentation/language-reference-guide.md) and follow the examples in the **examples/evaluation** [folders](https://github.com/SOM-Research/DescribeML) to get a sense of the tool's possibilities. Take a look at the *Melanoma.descml* file, for example.
 5) During the documentation process, hitting CTRL + Space (equivalent in other OS) gives you auto-completion help. In addition, the part marked with the points below gives you hints to complete the documentation, and the outline in the right part shows you the document structure.
 <div align="center">
 
