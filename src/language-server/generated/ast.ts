@@ -51,6 +51,7 @@ export interface Attribute extends AstNode {
     attdesc: string
     attType: Categor | Numeri
     count: number
+    label?: Reference<Labels>
     labelProces?: Reference<LabelingProcess>
     name: string
     unique: number
@@ -113,7 +114,7 @@ export interface Benchmarking extends AstNode {
     precision: number
     recall: number
     reference: string
-    taskName?: Reference<Tasks>
+    taskName: Task
 }
 
 export const Benchmarking = 'Benchmarking';
@@ -891,7 +892,7 @@ export function isTags(item: unknown): item is Tags {
 }
 
 export interface Task extends AstNode {
-    readonly $container: Description | Tasks;
+    readonly $container: Description | Tasks | Benchmarking;
     name: MLTasks
 }
 
@@ -1016,7 +1017,7 @@ export type EmailType = string
 
 export type datasetDescriptorAstType = 'Applications' | 'Area' | 'Areas' | 'Attribute' | 'Author' | 'Authoring' | 'Authors' | 'Benchmarking' | 'Binary' | 'Categor' | 'ChiSquare' | 'Citation' | 'Citeauthors' | 'CiteUrl' | 'Composition' | 'ConsistencyRules' | 'Correlations' | 'DataInstance' | 'DataInstances' | 'Dates' | 'Declaration' | 'Demographics' | 'Dependencies' | 'Description' | 'DescriptionDataset' | 'Distribution' | 'DoiCite' | 'FirstRows' | 'Founders' | 'Funder' | 'GatheringProcess' | 'GatheringProcesses' | 'GoldenQuestion' | 'Infrastructure' | 'Keyword' | 'LabelingProcess' | 'LabelingProcesses' | 'LabelRequeriments' | 'Labels' | 'Maintainer' | 'Metadata' | 'Numeri' | 'PairCorrelation' | 'PreProcess' | 'PreProcesses' | 'Provenance' | 'PublishedDate' | 'Publisher' | 'QualityMetric' | 'Quartile' | 'Relation' | 'RelationInstances' | 'ReleaseDate' | 'Requeriments' | 'Sample' | 'SamplingCharacteristics' | 'SocialConcerns' | 'SocialIssue' | 'Source' | 'SpeechSitatuion' | 'Statistics' | 'Tag' | 'Tags' | 'Task' | 'Tasks' | 'Team' | 'Title' | 'UpdateDate' | 'Validation';
 
-export type datasetDescriptorAstReference = 'Attribute:labelProces' | 'Benchmarking:taskName' | 'ConsistencyRules:attrule1' | 'ConsistencyRules:attrule2' | 'ConsistencyRules:instance1' | 'GatheringProcess:labelSocialIssues' | 'GatheringProcess:mapInstance' | 'LabelingProcess:labelSocialIssues' | 'Labels:map' | 'PairCorrelation:attr1' | 'PairCorrelation:attr2' | 'PreProcess:labelSocialIssues' | 'Relation:attRel' | 'Relation:attRelTarget' | 'Relation:insRel' | 'SocialIssue:senseAtt';
+export type datasetDescriptorAstReference = 'Attribute:label' | 'Attribute:labelProces' | 'ConsistencyRules:attrule1' | 'ConsistencyRules:attrule2' | 'ConsistencyRules:instance1' | 'GatheringProcess:labelSocialIssues' | 'GatheringProcess:mapInstance' | 'LabelingProcess:labelSocialIssues' | 'Labels:map' | 'PairCorrelation:attr1' | 'PairCorrelation:attr2' | 'PreProcess:labelSocialIssues' | 'Relation:attRel' | 'Relation:attRelTarget' | 'Relation:insRel' | 'SocialIssue:senseAtt';
 
 export class datasetDescriptorAstReflection implements AstReflection {
 
@@ -1041,11 +1042,11 @@ export class datasetDescriptorAstReflection implements AstReflection {
 
     getReferenceType(referenceId: datasetDescriptorAstReference): string {
         switch (referenceId) {
+            case 'Attribute:label': {
+                return Labels;
+            }
             case 'Attribute:labelProces': {
                 return LabelingProcess;
-            }
-            case 'Benchmarking:taskName': {
-                return Tasks;
             }
             case 'ConsistencyRules:attrule1': {
                 return Attribute;

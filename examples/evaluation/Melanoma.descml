@@ -37,6 +37,18 @@ Dataset: Melanoma_Classification_Dataset
             images from specialized referral centers (such as the dataset described herein) 
             to the global population at large. The dataset is also enriched for melanoma in 
             general and does not represent true incidence of melanoma."
+            Benchmarking:
+                Task: Language-model
+                [
+                    Model: "ModelExample"
+                    Metrics:[
+                        F1: 81
+                        Acurracy: 81
+                        Precision: 81
+                        Recall: 81
+                    ]
+                    Reference: "https://www.kaggle.com/c/siim-isic-melanoma-classification/leaderboard"
+                ]
         Distribution:
             Licences: CC BY 3.0 (Attribution 3.0 Unported)
             Rights(stand-alone): Access
@@ -138,14 +150,20 @@ Dataset: Melanoma_Classification_Dataset
 
                     attribute: beningnant_malignant
                         description: 'Type of the melanoma'
+                        label: skinLabel
                         count: 33126
                         ofType: Categorical
                         Statistics:
-                                Categoric Distribution:
-                                    [
-                                     "beningnant": 80%,
-                                     "malignant": 20%
-                                    ]
+                            Missing Values: 0
+                            Completeness: 100
+                            Chi-Squared:
+                                p-value: 0
+                            Categoric Distribution:
+                                [
+                                    "beningnant": 80%,
+                                    "malignant": 20%
+                                ]
+                            
         Statistics: 
             Pair Correlation: 
                 between ImageId and diagnosis 

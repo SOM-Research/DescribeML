@@ -1486,16 +1486,10 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                     "feature": "taskName",
                     "operator": "=",
                     "terminal": {
-                      "$type": "CrossReference",
-                      "type": {
-                        "$refText": "Tasks"
-                      },
-                      "terminal": {
-                        "$type": "RuleCall",
-                        "arguments": [],
-                        "rule": {
-                          "$refText": "MLTasks"
-                        }
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "Task"
                       }
                     }
                   }
@@ -2892,6 +2886,28 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                 "$refText": "STRING"
               }
             }
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "label:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "label",
+                "operator": "=",
+                "terminal": {
+                  "$type": "CrossReference",
+                  "type": {
+                    "$refText": "Labels"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
           },
           {
             "$type": "Group",

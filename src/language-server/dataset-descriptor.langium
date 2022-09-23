@@ -118,7 +118,7 @@ Applications:
 
 Benchmarking:
     name="Benchmarking:"
-    (("Task:" taskName=[Tasks:MLTasks])?
+    (("Task:" taskName=Task)?
     ('['("Model:" (modelName=STRING))?
     ("Metrics:" '['     
                 ("F1:" (f1=NUMBER))?
@@ -204,6 +204,7 @@ ConsistencyRules:
 Attribute:
     'attribute:' name=ID 
     'description:' attdesc=STRING 
+    ('label:' label=[Labels])?
     ('labeling process:' labelProces=[LabelingProcess])?
     ('unique values:' unique=NUMBER)?
     ('count:' count=NUMBER)?
@@ -428,8 +429,9 @@ SocialConcerns:
 SocialIssue:
     'Social Issue:' name=ID
     'IssueType:' IssueType=SocialIssueType
-    'Description:' desc=STRING
+        'Description:' desc=STRING
     ('Related Attributes:' ('attribute:' senseAtt=[Attribute])*)?
+
     ('Instance belongs to people:' 
         ('Have sensitive attributes?' ('attribute:' senseAtt=[Attribute])*)?
         ('Are there protected groups?' procGroups=BooleanAnswer)?
@@ -445,7 +447,7 @@ CommonLicences returns string:    'The Montreal data licence' | 'Creative Common
                                 | 'CC BY-NC-ND 4.0 (Attribution-NonCommercial-NoDerivatives 4.0 International)' | 'GPL' | 'GPL 2' | 'LGPL 3.0 (GNU Lesser General Public License 3.0)' | 'AGPL 3.0 (GNU Affero General Public License 3.0)'
                                 | 'FDL 1.3 (GNU Free Documentation License 1.3)' | 'Open Data Commons' |'Database: Open Database, Contents: Database Contents' |'Database: Open Database, Contents: © Original Authors' | 'PDDL (ODC Public Domain Dedication and Licence)' | 'ODC-BY 1.0 (ODC Attribution License)'
                                 | 'Community Data License' | 'Community Data License Agreement - Permissive - Version 1.0' | 'Community Data License Agreement - Sharing - Version 1.0' | 'Special' | 'World Bank Dataset Terms of Use' | 'Reddit API Terms' | 'U.S. Government Works' | 'EU ODP Legal Notice';
-RightsData returns string: 'Access' | 'Tagging' | 'Distribute' | 'Re-Represent''Access' | 'Tagging' | 'Distribute' | 'Re-Represent';
+RightsData returns string: 'Access' | 'Tagging' | 'Distribute' | 'Re-Represent';
 RightsModel returns string: 'Benchmark' | 'Research' | 'Publish' | 'Internal Use' | 'Output Commercialization' | 'Model Commercialization';
 
 MLTasks returns string: 'text-classification'|'question-answering'|'text-generation'|'token-classification'|'translation'|
