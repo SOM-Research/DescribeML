@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>language-reference-guide.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<div align="center">
+<div align="center" style="width:50px">
+<p><img
+  src="../fileicons/requisito.png"
+  alt="HTML generator"
+  title="Optional title"
+  style="display: inline-block; margin: 0 auto; width: 200px"></p>
+</div>
+<h1 id="describeml">DescribeML:</h1>
+<h4 id="language-reference-guide">Language Reference Guide</h4>
+<p>(Version 0.0.5)</p>
+<p>DescribeML is a VSCode language plugin to describe machine-learning datasets. <br></p>
+<p>Full examples of the language can be found in the public open repository <a href="https://github.com/SOM-Research/DescribeML/tree/main/examples/evaluation">here</a></p>
+</div>
+<hr>
+<h2 id="general-structure">General Structure:</h2>
+<ul>
+<li>
+<p><a href="#metadata">Metadata</a></p>
+<ul>
+<li><a href="#dates">Dates</a></li>
+<li><a href="#citation">Citation</a></li>
+<li><a href="#description">Description</a></li>
+<li><a href="#applications">Applications</a></li>
+<li><a href="#distribution">Distribution</a></li>
+<li><a href="#authoring">Authoring</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#composition">Composition</a></p>
+<ul>
+<li><a href="#instances">Instances</a></li>
+<li><a href="#attributes">Attributes</a></li>
+<li><a href="#statistics">Statistics</a></li>
+<li><a href="#consistency">Consistency Rules</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#provenance">Provenance</a></p>
+<ul>
+<li><a href="#gathering">Gathering processes</a></li>
+<li><a href="#labeling">Labeling processes</a></li>
+<li><a href="#preprocess">Data preprocesses</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#concerns">Social Concerns</a></p>
+</li>
+</ul>
+<hr>
+<hr>
+<h4 id="a-name%22metadata%22a-metadata"><a name="metadata"></a> Metadata:</h4>
+<ul>
+<li>
+<p><strong>Title:</strong> <code>STRING</code>: The public title of the dataset</p>
+</li>
+<li>
+<p><strong>Unique-identifier:</strong> <code>ID</code> Machine-readable unique identifier of the dataset</p>
+</li>
+<li>
+<p><strong>Version:</strong> <code>ID</code>  The version of the dataset</p>
+</li>
+<li>
+<p><strong>Date:</strong>  <a name="dates"></a> The date of the dataset</p>
+<ul>
+<li><strong>Created:</strong> <code>DATE</code>  The date where the dataset was initially created:</li>
+<li><strong>Modified:</strong> <code>DATE</code> The date where the dataset was last modified:</li>
+<li><strong>Published:</strong> <code>DATE</code>  The publication date of the dataset:
+<br>
+<blockquote>
+<p>Example</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-symbol">Dates:</span>
+    Release <span class="hljs-symbol">Date:</span> <span class="hljs-number">10</span>-08-<span class="hljs-number">20</span> 
+    Modified <span class="hljs-symbol">Date:</span> <span class="hljs-number">10</span>-08-<span class="hljs-number">20</span>
+    Published <span class="hljs-symbol">Date:</span> <span class="hljs-number">10</span>-08-<span class="hljs-number">20</span>
+</div></code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Citation:</strong> <a name="citation"></a>The citation of the dataset, between chose between a raw citation and a structured format</p>
+<ul>
+<li><strong>Raw Citation:</strong> <code>STRING</code> Raw citation as text, or as Bibtex or equivalent format, of the dataset</li>
+<li><strong>OR:</strong>
+<ul>
+<li><strong>Title:</strong> <code>STRING</code> The title of the dataset</li>
+<li><strong>Authors:</strong> <code>STRING</code> The authors of the dataset</li>
+<li><strong>Year:</strong> <code>DATE</code> The year of the dataset</li>
+<li><strong>Journal/Conference:</strong> <code>STRING</code> The publisher of the dataset</li>
+<li><strong>Publisher:</strong> <code>STRING</code> The publisher of the dataset:</li>
+<li><strong>URL:</strong> <code>URL</code> The URL of the dataset</li>
+<li><strong>DOI:</strong> <code>ID</code> The DOI of the dataset</li>
+<li><strong>ISBN:</strong> <code>ID</code> The ISBN of the dataset
+<br>
+<blockquote>
+<p>Example:</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-symbol">Citation:</span> 
+        <span class="hljs-symbol">Title:</span> <span class="hljs-string">"SIIM-ISIC 2020 Challenge Dataset. International Skin Imaging Collaboration"</span>
+        <span class="hljs-symbol">Year:</span> <span class="hljs-number">2020</span>
+        <span class="hljs-symbol">Publisher:</span> <span class="hljs-string">"International Skin Imaging Collaboration"</span>
+        <span class="hljs-symbol">DOI:</span> <span class="hljs-string">"doi.org/10.34970/2020-ds01"</span>
+        <span class="hljs-symbol">Url:</span> <span class="hljs-string">"https://www.kaggle.com/c/siim-isic-melanoma-classification"</span> 
+</div></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Description:</strong> <a name="description"></a> The description of the dataset</p>
+<ul>
+<li><strong>Description:</strong> <code>STRING</code> Textual description of the dataset
+<strong>OR:</strong>
+<ul>
+<li><strong>Purposes</strong> <code>STRING</code> For what purposes was the dataset created?</li>
+<li><strong>Tasks:</strong> <code>TASKS ENUMERATE</code> List of ML tasks the dataset is intended for: <code>Autocomplete feature will guide you through the options</code></li>
+<li><strong>Gaps:</strong> <code>STRING</code> Which gaps does the dataset aims to fill</li>
+</ul>
+</li>
+<li><strong>Areas:</strong> <code>ID</code> Set a list of areas of the dataset</li>
+<li><strong>Tags:</strong> <code>ID, ...</code> Set a list of Tags of the dataset
+<br>
+<blockquote>
+<p>Example:</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-symbol">Description:</span>    
+    <span class="hljs-symbol">Purposes:</span>
+        <span class="hljs-symbol">Purposes:</span> <span class="hljs-string">"The 2020 SIIM-ISIC Melanoma"</span> 
+        <span class="hljs-symbol">Tasks:</span>    [classification]
+        <span class="hljs-symbol">Gaps:</span>     <span class="hljs-string">"As the leading healthcare organization for informatics in medical imaging..."</span> 
+        <span class="hljs-symbol">Areas:</span>    HealthCare
+        <span class="hljs-symbol">Tags:</span>     Images Melanoma diagnosis SkinImage
+        
+</div></code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Applications</strong> <a name="applications"></a> Summerize the applications of the dataset</p>
+<ul>
+<li><strong>Past Uses:</strong> <code>STRING</code> Summerize the past uses of the dataset</li>
+<li><strong>Recommended uses:</strong> <code>STRING</code> Summerize the recommended uses of the dataset</li>
+<li><strong>Non-recommended uses:</strong> <code>STRING</code> Summerize the non-recommended uses of the dataset.</li>
+<li><strong>Benchmarking:</strong> Benchmarking of the dataset
+<ul>
+<li><strong>Task:</strong> <code>TASKS ENUMERATE</code> Task to benchmark <code>Autocomplete feature will guide you through the options</code></li>
+<li><strong>Metric:</strong> Metric to benchmark
+<ul>
+<li><strong>F1:</strong> <code>NUMBER</code> F1 score</li>
+<li><strong>Accuracy:</strong> <code>NUMBER</code> Accuracy score</li>
+<li><strong>Precision:</strong> <code>NUMBER</code> Precision score</li>
+<li><strong>Recall:</strong> <code>NUMBER</code> Recall score</li>
+</ul>
+</li>
+<li><strong>Reference:</strong> <code>STRING</code> Source of the benchmark
+<br>
+<blockquote>
+<p>Example</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-symbol">Applications:</span>
+    Past <span class="hljs-symbol">Uses:</span> <span class="hljs-string">"The 2020 SIIM-ISIC Melanoma Classification... "</span>
+    <span class="hljs-symbol">Recommended:</span> 
+        <span class="hljs-string">"Identify melanoma in lesion images."</span> 
+        <span class="hljs-string">"Predict incidence of melanoma in a population."</span>
+    Non-<span class="hljs-symbol">recommended:</span> <span class="hljs-string">"Due to low population prevalence and challenges with access."</span>
+    <span class="hljs-symbol">Benchmarking:</span>
+        <span class="hljs-symbol">Task:</span> Language-model
+        [
+            <span class="hljs-symbol">Model:</span> <span class="hljs-string">"ModelExample"</span>
+            <span class="hljs-symbol">Metrics:</span>[
+                <span class="hljs-symbol">F1:</span> <span class="hljs-number">81</span>
+                <span class="hljs-symbol">Accuracy:</span> <span class="hljs-number">81</span>
+                <span class="hljs-symbol">Precision:</span> <span class="hljs-number">81</span>
+                <span class="hljs-symbol">Recall:</span> <span class="hljs-number">81</span>
+            ]
+            <span class="hljs-symbol">Reference:</span> <span class="hljs-string">"https://www.kaggle.com/c/siim-isic-melanoma-classification/leaderboard"</span>
+        ]
+
+</div></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Distribution</strong> <a name="distribution"></a> Summerize the distribution of the dataset</p>
+<ul>
+<li><strong>Is public?:</strong> <code>BOOL</code> Indicate if the dataset is publicly available</li>
+<li><strong>Licenses:</strong> <code>LICENCES ENUMERATE</code> List of standard licenses, use others if not fit your case: <code>The Montreal data license , Creative Commons, CC0: Public Domain ...</code></li>
+<li><strong>Rights(stand-alone)</strong> <code>ENUMERATE</code> Montreal data licence enumerate of stand-alone rights: Access | Tagging |'Distribute | Re-Represent</li>
+<li><strong>Rights(with models):</strong> <code>ENUMERATE</code> Montreal data licence enumerate of model related rights: <code>Benchmark | Research | Publish' | Internal Use | 'Output Commercialization' | Model Commercialization</code></li>
+<li><strong>Credits/Attribution Notice:</strong> <code>STRING</code> Who needs to be credited when using the dataset</li>
+<li><strong>Designated Third Parties:</strong> <code>STRING</code> Third parties in charge of licensing and distribution issues</li>
+<li><strong>Additional Conditions:</strong> <code>STRING</code> Other issues specified by the authors
+<br>
+<blockquote>
+<p>Example</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-symbol">Distribution:</span>
+       <span class="hljs-symbol">Licences:</span> CC BY <span class="hljs-number">3.0</span> (Attribution <span class="hljs-number">3.0</span> Unported)
+       Rights(stand-alone): Access
+       Rights(with models): Benchmark
+       Additional Conditions <span class="hljs-string">"In addition to the CC-BY-NC license, the dataset is governed by the ISIC Terms of Use ... "</span>                          
+</div></code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Authoring</strong> <a name="authoring"></a> Authoring of the dataset</p>
+<ul>
+<li><strong>Authors</strong> Authors of the dataset
+<ul>
+<li><strong>Name:</strong> <code>STRING</code> Name of the author</li>
+<li><strong>Email:</strong> <code>EMAIL</code> Email of the author</li>
+</ul>
+</li>
+<li><strong>Founders</strong> Founders of the dataset
+<ul>
+<li><strong>Name:</strong> <code>STRING</code> Name of the founder</li>
+<li><strong>Type:</strong> <code>ENUMERATE</code> Type of the founder <code>private | public | mixed;</code></li>
+<li><strong>Grantor</strong> <code>STRING</code> Grantor of the dataset</li>
+<li><strong>Grant ID:</strong> <code>ID</code> Machine-readable name of the grant id</li>
+</ul>
+</li>
+<li><strong>Maintainers</strong> Maintainers of the dataset
+<ul>
+<li><strong>Name:</strong> <code>STRING</code> Name of the maintainer</li>
+<li><strong>Email:</strong> <code>EMAIL</code> Email of the maintainer</li>
+</ul>
+</li>
+<li><strong>Erratum?:</strong> <code>STRING</code> Is there any erratum?</li>
+<li><strong>Data retention:</strong> <code>STRING</code> Please indicate any data retention policy</li>
+<li><strong>Version lifecycle:</strong> <code>STRING</code> Describe the planned version lifecycle</li>
+<li><strong>Contribution guidelines</strong> <code>STRING </code>Is there any contribution guideline?
+<br>
+<blockquote>
+<p>Example:</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-symbol">Authoring:</span>
+    <span class="hljs-symbol">Authors:</span>
+        Name Skin_Imaging_Collaboration_ISIC  email emailo@emailo.com
+        [...]
+    <span class="hljs-symbol">Funders:</span>
+        Name The_University_of_Queensland  type mixed 
+            grantor <span class="hljs-string">"National Health and Medical Research Council (NHMRC) – Centre of Research Excellence Scheme"</span> 
+            <span class="hljs-symbol">grantId:</span> APP1099021
+        [...]
+        <span class="hljs-symbol">Erratum?:</span> <span class="hljs-string">"There is no erratum known"</span> 
+        Contribution <span class="hljs-symbol">guidelines:</span> <span class="hljs-string">"No contribution guidelines provided"</span>
+
+</div></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<h4 id="a-name%22composition%22a-composition"><a name="composition"></a> Composition:</h4>
+<ul>
+<li><strong>Rationale</strong> <code>STRING </code>Provide a composition rationale</li>
+<li><strong>Total Size</strong> <code>NUMBER </code>Total size of tuples of the dataset</li>
+<li><strong>Instances</strong> <a name="instances"></a> A composition description of each instance of the dataset
+<ul>
+<li>
+<p><strong>Instance:</strong> <code>ID</code> Machine-readable name of the instance</p>
+</li>
+<li>
+<p><strong>Size:</strong> <code>NUMBER</code> Size of the instance</p>
+</li>
+<li>
+<p><strong>Description:</strong> <code>STRING</code> Description of the instance</p>
+</li>
+<li>
+<p><strong>Type:</strong> <code>ENUMERATE</code> Type of the instance <code>Record-Data | Time-Series | Ordered | Graph | Other</code></p>
+</li>
+<li>
+<p><strong>Attribute Number:</strong> <code>NUMBER</code> Number of attributes</p>
+</li>
+<li>
+<p><strong>Attributes:</strong> <a name="attributes"></a> Description of each attribute of the instance</p>
+<ul>
+<li>
+<p><strong>attribute:</strong> <code>ID</code> Machine-readable name of the attribute</p>
+</li>
+<li>
+<p><strong>Description:</strong> <code>STRING</code> Description of the attribute</p>
+</li>
+<li>
+<p><strong>Associated label:</strong> <code>Labels</code> Reference to a declared label in a labeling process (first you should complete the provenance part)</p>
+</li>
+<li>
+<p><strong>unique values:</strong> <code>NUMBER</code> Type of the attribute</p>
+</li>
+<li>
+<p><strong>ofType:</strong> <code>ENUMERATE</code> Type of the attribute <code>Categorical | Nominal</code>
+<strong>If</strong> <code>ofType</code> is <code>Categorical</code></p>
+<ul>
+<li><strong>Statistics:</strong> Statistic of the attribute
+<ul>
+<li>
+<p><strong>Unique:</strong> <code>NUMBER</code> Unique tuples (without duplications)</p>
+</li>
+<li>
+<p><strong>Unique Percentage:</strong> <code>NUMBER</code> Percentage of unique tuples</p>
+</li>
+<li>
+<p><strong>Missing Values:</strong> <code>NUMBER</code> Number of missing values</p>
+</li>
+<li>
+<p><strong>Completeness:</strong> <code>NUMBER</code> Completeness of the attribute</p>
+</li>
+<li>
+<p><strong>Mode:</strong> <code>STRING</code> Mode of the attribute</p>
+</li>
+<li>
+<p><strong>First Rows:</strong> <code>[0: ROW1, ...]</code> Percentage of the mode</p>
+</li>
+<li>
+<p><strong>Min-leght:</strong> <code>NUMBER</code> Min of the attribute</p>
+</li>
+<li>
+<p><strong>Max-lenght:</strong> <code>NUMBER</code> Max of the attribute</p>
+</li>
+<li>
+<p><strong>Median-lenght:</strong> <code>NUMER</code> Median lengths of the attribute</p>
+</li>
+<li>
+<p><strong>Lenght-histogram:</strong> <code>STRING</code> Histogram of the attribute</p>
+</li>
+<li>
+<p><strong>Chi-Squared:</strong> Chi-Squared of the attribute</p>
+<ul>
+<li><strong>statistic:</strong> Statistic of the chi-sqaure analysis</li>
+<li><strong>p-value:</strong> p-value of the chi-sqaure analysis</li>
+</ul>
+</li>
+<li>
+<p><strong>Binary attribute:</strong> <code>BOOL</code> Is a binary attribute?</p>
+<ul>
+<li><strong>Symmetry:</strong> <code>ENUMERATE</code> <code>Symmetryc | Asymmetryc</code></li>
+<li><strong>Attribute Sparsity:</strong> <code>NUMBER</code> How sparse is the binary attribute?</li>
+</ul>
+</li>
+<li>
+<p><strong>Categoric Distribution:</strong> <code>[&quot;CATEGORY&quot;: &quot;NUMBER&quot;%, ...]</code> Categoric distribution of the attribute
+<br></p>
+<blockquote>
+<p>Example:</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-symbol">attribute:</span> beningnant_malignant
+    <span class="hljs-symbol">description:</span> <span class="hljs-string">'Type of the melanoma'</span>
+    <span class="hljs-symbol">label:</span> skinLabel
+    <span class="hljs-symbol">count:</span> <span class="hljs-number">33126</span>
+    <span class="hljs-symbol">ofType:</span> Categorical
+    <span class="hljs-symbol">Statistics:</span>
+        Missing <span class="hljs-symbol">Values:</span> <span class="hljs-number">0</span>
+        <span class="hljs-symbol">Completeness:</span> <span class="hljs-number">100</span>
+        Chi-<span class="hljs-symbol">Squared:</span>
+            p-<span class="hljs-symbol">value:</span> <span class="hljs-number">0</span>
+        Categoric <span class="hljs-symbol">Distribution:</span>
+            [
+                <span class="hljs-string">"beningnant"</span>: <span class="hljs-number">80</span>%,
+                <span class="hljs-string">"malignant"</span>: <span class="hljs-number">20</span>%
+            ]
+        
+</div></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Else</strong> <code>ofType</code> is <code>Nominal</code></p>
+<ul>
+<li><strong>Statistics:</strong> Statistics of the attribute
+<ul>
+<li><strong>Mean:</strong> <code>NUMBER</code> Unique tuples (without duplications)</li>
+<li><strong>Median:</strong> <code>NUMBER</code> Percentage of unique tuples</li>
+<li><strong>Mode:</strong> <code>NUMBER</code> Mode of the attribute</li>
+<li><strong>Minimmum:</strong> <code>NUMBER</code> Min of the attribute</li>
+<li><strong>Maximmum:</strong> <code>NUMBER</code> Max of the attribute</li>
+<li><strong>Quartiles:</strong> <code>[Q1:NUMBER, ...]</code> Median lengths of the attribute</li>
+<li><strong>IQR:</strong> <code>NUMBER</code> Histogram of the attribute
+<blockquote>
+<p>Example</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-symbol">attribute:</span> acidity 
+    <span class="hljs-symbol">description:</span> <span class="hljs-string">'wine acidity mesure'</span>
+    <span class="hljs-symbol">count:</span> <span class="hljs-number">33126</span>
+    <span class="hljs-symbol">ofType:</span> Numerical
+    <span class="hljs-symbol">Statistics:</span>
+            <span class="hljs-symbol">Mean:</span> <span class="hljs-number">4</span>
+            <span class="hljs-symbol">Median:</span> <span class="hljs-number">4.1</span>
+            Standard <span class="hljs-symbol">Desviation:</span> <span class="hljs-number">0</span>.<span class="hljs-number">2</span>
+            <span class="hljs-symbol">Minimmum:</span> <span class="hljs-number">5</span>
+            <span class="hljs-symbol">Maximmum:</span> <span class="hljs-number">87</span>
+            <span class="hljs-symbol">Quartiles:</span>  <span class="hljs-symbol">Q1:</span><span class="hljs-number">17</span> <span class="hljs-symbol">Q2:</span><span class="hljs-number">27</span> <span class="hljs-symbol">Q3:</span><span class="hljs-number">30</span> <span class="hljs-symbol">Q4:</span><span class="hljs-number">30</span>
+            <span class="hljs-symbol">IQR:</span> <span class="hljs-number">1.2</span>
+</div></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Statistics:</strong> <a name="statistics"></a> (instance) Statistic of the instance</p>
+<ul>
+<li><strong>Correlations:</strong>  Correlation of the instance, choose one calculation type
+<ul>
+<li><strong>Pearson:</strong> <code>[INDEX:&quot;NUMBER&quot;, ...]</code> Pearson correlation of the instance</li>
+<li><strong>Spearman:</strong> <code>[INDEX:&quot;NUMBER&quot;, ...]</code> Spearman correlation of the instance</li>
+<li><strong>Kendall:</strong> <code>[INDEX:&quot;NUMBER&quot;, ...]</code> Kendall correlation of the instance</li>
+<li><strong>Cramers:</strong> <code>[INDEX:&quot;NUMBER&quot;, ...]</code> Cramers correlation of the instance</li>
+<li><strong>Phi-k</strong> <code>[INDEX:&quot;NUMBER&quot;, ...]</code> Phi-k correlation of the instance</li>
+</ul>
+</li>
+<li><strong>Pair Correlation</strong> <code>Between [ATTRIBUTE], and [ATTRIBUTE]</code> Points the relevant pair-correlation between two instances of declared attributes.</li>
+<li><strong>Quality Metrics:</strong> General quality metrics of the instance
+<ul>
+<li><strong>Sparsity</strong>: <code>NUMBER</code> Sparsity of the instance</li>
+<li><strong>Completeness</strong>: <code>NUMBER</code> Completeness of the instance</li>
+<li><strong>Class balance</strong>: <code>STRING</code> Class balance of the instance</li>
+<li><strong>Noisy labels</strong>: <code>STRING</code> Noisy labels of the instance
+<br></li>
+</ul>
+<blockquote>
+<p>Example:</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-symbol">Statistics:</span> 
+    <span class="hljs-symbol">Correlations:</span> <span class="hljs-symbol">Spearman:</span> [<span class="hljs-string">'1'</span>: <span class="hljs-number">0</span>.<span class="hljs-number">2</span>, <span class="hljs-string">'2'</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span>.<span class="hljs-number">3</span>, <span class="hljs-string">'3'</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span>.<span class="hljs-number">4</span>, <span class="hljs-string">'4'</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span>.<span class="hljs-number">5</span>, <span class="hljs-string">'5'</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span>.<span class="hljs-number">6</span>, <span class="hljs-string">'6'</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span>.<span class="hljs-number">7</span>, <span class="hljs-string">'7'</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span>.<span class="hljs-number">8</span>, <span class="hljs-string">'8'</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span>.<span class="hljs-number">9</span>] 
+    Pair <span class="hljs-symbol">Correlation:</span> 
+        between ImageId <span class="hljs-keyword">and</span> diagnosis 
+        between age <span class="hljs-keyword">and</span> external source 
+            <span class="hljs-symbol">From:</span> <span class="hljs-string">"National statistical office"</span> 
+            <span class="hljs-symbol">Rationale:</span> <span class="hljs-string">"The age average is similar to the Nevada state age average due to
+                        national statistical office average of 2022 of Nevada"</span>
+    Quality <span class="hljs-symbol">Metrics:</span> 
+        <span class="hljs-symbol">Completeness:</span> <span class="hljs-number">100</span>
+
+
+</div></code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Consistency Rules:</strong> <a name="consistency"></a> Set the consistency rules of your dataset</p>
+<ul>
+<li><strong>Rule:</strong> <code>OCLExpression</code> OCL expression of the rule
+<br></li>
+</ul>
+<blockquote>
+<p>Example:</p>
+</blockquote>
+<pre class="hljs"><code><div>    Consistency <span class="hljs-symbol">rules:</span> 
+    <span class="hljs-symbol">inv:</span> skinImages : (age &gt;= <span class="hljs-number">0</span>)
+</div></code></pre>
+</li>
+</ul>
+</li>
+<li><strong>Dependencies:</strong> Dependencies of the rule
+<ul>
+<li><strong>Description:</strong> <code>STRING</code> Description of the dependencies</li>
+<li><strong>Links:</strong> <code>URL</code> Link to the dependency artifact</li>
+</ul>
+</li>
+<li><strong>Instances relation:</strong> <code>Relation: ID attribute: [ATTRIBUTE] is related to [INSTANCE]</code> Relation between instances</li>
+</ul>
+<hr>
+<hr>
+<h4 id="a-name%22provenance%22a-provenance"><a name="provenance"></a> Provenance:</h4>
+<ul>
+<li><strong>Curation Rationale</strong> <code>STRING</code> Provide a provenance rationale</li>
+<li><strong>Gathering Processes: <a name="gathering"></a></strong>
+<ul>
+<li><strong>Process:</strong> <code>ID</code> Machine-readable name of the process</li>
+<li><strong>Description:</strong> <code>STRING</code> Description of the process</li>
+<li><strong>When data was collected:</strong> <code>STRING</code> Date where data the process was performed</li>
+<li><strong>How data was collected</strong> <code>STRING</code> How data was collected</li>
+<li><strong>Is language data:</strong>  Set the speech situation
+<ul>
+<li><strong>Language:</strong> <code>STRING</code> Language of the data</li>
+<li><strong>Time and place:</strong> <code>STRING</code></li>
+<li><strong>Modality:</strong> <code>ENUMERATE</code> Modality of the speech <code>spoken/signed | written</code></li>
+<li><strong>Type:</strong> <code>ENUMERATE</code> Type of the speech <code>scripted/edited | spontaneous</code></li>
+<li><strong>Syncrony:</strong> <code>ENUMERATE</code> Synchrony of the speech <code>synchronous |asynchronous</code></li>
+<li><strong>Inteded Audience:</strong> <code>STRING</code> Intended audience of the speech</li>
+</ul>
+</li>
+<li><strong>Social Issues:</strong> <code>[SOCIAL ISSUES]</code> Relation of the gathering process with an already declared social issue instance</li>
+<li><strong>Source:</strong> Source of the data
+<ul>
+<li><strong>Source:</strong> <code>ID</code> machine-readable name of the source</li>
+<li><strong>Description:</strong> <code>STRING</code> Description of the source</li>
+<li><strong>Noise:</strong> <code>STRING</code> Description of the source's noise</li>
+<li><strong>Links:</strong> <code>URL</code> Link to the source artifact</li>
+</ul>
+</li>
+<li><strong>Process Demographics:</strong>
+<ul>
+<li><strong>Age:</strong> <code>NUMBER</code> Median age of the participants</li>
+<li><strong>Gender:</strong> <code>STRING</code> Gender relation of the participants</li>
+<li><strong>Country/Region</strong> <code>STRING</code> Country/Region of the participants</li>
+<li><strong>Race/Ethnicity</strong> <code>STIRNG</code> Race or ethnicity of the participants</li>
+<li><strong>Native Langugage</strong> <code>STRING</code> Native language of the participants</li>
+<li><strong>Socioeconomic status</strong> <code>STRING</code> Socioeconomic status</li>
+<li><strong>Number of speakers represented:</strong> <code>NUMBER</code> Number of participants</li>
+<li><strong>Precense of disorders in speech:</strong> <code>STRING</code> Number of speakers</li>
+<li><strong>Training in linguistics/other relevant disciplines</strong> <code>STRING</code> Explain the training of the participants</li>
+</ul>
+</li>
+<li><strong>Gathering Team</strong> Team in charge of gathering the data
+<ul>
+<li><strong>Who collects the data:</strong> <code>STRING</code> Who collects the data</li>
+<li><strong>Type</strong> <code>ENUMERATE</code> <code>Internal | External | Contractors | Crowdsourcing</code></li>
+<li><strong>Demographics:</strong> Demographics of the gathering team
+<ul>
+<li><strong>Age:</strong> <code>NUMBER</code> Median age of the participants</li>
+<li><strong>Gender:</strong> <code>STRING</code> Gender relation of the participants</li>
+<li><strong>Country/Region</strong> <code>STRING</code> Country/Region of the participants</li>
+<li><strong>Race/Ethnicity</strong> <code>STIRNG</code> Race or ethnicity of the participants</li>
+<li><strong>Native Langugage</strong> <code>STRING</code> Native language of the participants</li>
+<li><strong>Socioeconomic status</strong> <code>STRING</code> Socioeconomic status</li>
+<li><strong>Training in linguistics/other relevant disciplines</strong> <code>STRING</code> Explain the training of the participants</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Gathering Requirements:</strong> <code>Requirement: STRING, ...</code>
+<br>
+<blockquote>
+<p>Example:</p>
+</blockquote>
+<pre class="hljs"><code><div>Data <span class="hljs-symbol">Provenance:</span>
+    Curation <span class="hljs-symbol">Rationale:</span>  <span class="hljs-string">"The curation process have been conducted by several health institutions... "</span> 
+    Gathering <span class="hljs-symbol">Processes:</span>
+        <span class="hljs-symbol">Process:</span> GatheringProcess1
+            <span class="hljs-symbol">Description:</span> 
+                <span class="hljs-string">"The sources are: the Melanoma Institute Australia and the ..."</span>
+            <span class="hljs-symbol">Source:</span> GeneralHospital1
+                <span class="hljs-symbol">Description:</span> <span class="hljs-string">'Source Description'</span>
+                <span class="hljs-symbol">Noise:</span>  
+                    <span class="hljs-string">"Inconsistent lighting in images may alter skin type"</span>
+                    <span class="hljs-string">"Duplicates:..."</span>
+            Related <span class="hljs-symbol">Instances:</span> skinImages
+            How data is <span class="hljs-symbol">collected:</span> Manual Human Curator
+            When data was <span class="hljs-symbol">collected:</span> 
+                <span class="hljs-symbol">Range:</span> <span class="hljs-number">1998</span> - <span class="hljs-number">2019</span>
+            Process <span class="hljs-symbol">Demographics:</span>
+                Country/<span class="hljs-symbol">Region:</span> <span class="hljs-string">'Australia'</span> 
+                [...]
+            Gathering <span class="hljs-symbol">Team:</span>
+                Who collects the <span class="hljs-symbol">data:</span> <span class="hljs-string">"A team of dermatologists and pathologists"</span>
+                Type Internal
+            Gather <span class="hljs-symbol">Requirements:</span>
+            <span class="hljs-symbol">Requirement:</span> <span class="hljs-string">"We queried clinical imaging databases across the six centers to generate a ..."</span>
+</div></code></pre>
+</li>
+</ul>
+</li>
+<li><strong>LabelingProcesses:</strong> <a name="labeling"></a>
+<ul>
+<li><strong>Labeling process:</strong> <code>ID</code> Machine-readable name of the labeling process</li>
+<li><strong>Description:</strong> <code>STRING</code> Description of the labeling process</li>
+<li><strong>Type:</strong> <code>ENUMERATE</code> <code>'Bounding boxes' | 'Lines and splines' | 'Semantinc Segmentation' | '3D cuboids' | 'Polygonal segmentation' | 'Landmark and key-point' | 'Image and video annotations' | 'Entity annotation' | 'Content and textual categorization</code></li>
+<li><strong>Labels:</strong>  Labels of the labeling process
+<ul>
+<li><strong>Label:</strong> <code>ID</code> Machine-readable name of the label</li>
+<li><strong>Description:</strong> <code>STRING</code> Description of the label</li>
+<li><strong>Mapping:</strong> [ATTRIBUTE,...] Relate a label with instances of attributes already declared in the documentation</li>
+</ul>
+</li>
+<li><strong>Labeling Team</strong>:
+<ul>
+<li><strong>Who collects the data:</strong> <code>STRING</code> Who collects the data</li>
+<li><strong>Type</strong> <code>ENUMERATE</code> <code>Internal, External, Contractors, Crowdsourcing</code></li>
+<li><strong>Demographics:</strong> Demographics of the gathering team
+<ul>
+<li><strong>Age:</strong> <code>NUMBER</code> Median age of the participants</li>
+<li><strong>Gender:</strong> <code>STRING</code> Gender relation of the participants</li>
+<li><strong>Country/Region</strong> <code>STRING</code> Country/Region of the participants</li>
+<li><strong>Race/Ethnicity</strong> <code>STIRNG</code> Race or ethnicity of the participants</li>
+<li><strong>Native Langugage</strong> <code>STRING</code> Native language of the participants</li>
+<li><strong>Socioeconomic status</strong> <code>STRING</code> Socioeconomic status</li>
+<li><strong>Number of speakers represented:</strong> <code>NUMBER</code> Number of participants</li>
+<li><strong>Precense of disorders in speech:</strong> <code>STRING</code> Number of speakers</li>
+<li><strong>Training in linguistics/other relevant disciplines</strong> <code>STRING</code> Explain the training of the participants</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Infrastructure:</strong> Infrastructure used to annotate the data
+<ul>
+<li><strong>Tool:</strong> <code>STRING</code> Tool used to annotate the data</li>
+<li><strong>Platform:</strong> <code>STRING</code> Platform where the tool works</li>
+<li><strong>Version:</strong> <code>STRING</code> Version of the tool and platform</li>
+<li><strong>Language:</strong> <code>STRING</code> Language of the tool</li>
+<li><strong>Comments:</strong> <code>STRING</code> Provide comments about the tool</li>
+</ul>
+</li>
+<li><strong>Validation:</strong> Validation methods to ensure annotation quality
+<ul>
+<li><strong>Validation Methods:</strong> <code>STRING</code> Validation method used</li>
+<li><strong>Validation Dates:</strong> <code>STRING</code> Dates where the validation where done annotations</li>
+<li><strong>Golden Questions:</strong>  Golden Question pass to the annotators
+<ul>
+<li><strong>Question:</strong> <code>STRING</code> Textual question</li>
+<li><strong>Inter-annotation agreement:</strong> <code>NUMBER</code> Inter-annotation agreement for each question. Low values mean low confidence in the annotation</li>
+</ul>
+</li>
+<li><strong>Validation Requirements:</strong> <code>Requirement: STRING, ...</code> Provide comments about the validation tool</li>
+</ul>
+</li>
+<li><strong>Labeling Requirements:</strong> <code>Requirement: STRING, ...</code>
+<br>
+<blockquote>
+<p>Example:</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-symbol">LabelingProcesses:</span> 
+        Labeling <span class="hljs-symbol">process:</span> skinLabeling
+            <span class="hljs-symbol">Description:</span> <span class="hljs-string">"Medical staff looking at the data and images and annotating the diagnosis"</span>
+            <span class="hljs-symbol">Type:</span> Image <span class="hljs-keyword">and</span> video annotations
+            <span class="hljs-symbol">Labels:</span> 
+                <span class="hljs-symbol">Label:</span> skinLabel
+                    <span class="hljs-symbol">Description:</span> <span class="hljs-string">"marked as beningnant or malignant"</span>
+                    <span class="hljs-symbol">Mapping:</span> beningnant_malignant
+            Labeling <span class="hljs-symbol">Team:</span>
+                Who collects the <span class="hljs-symbol">data:</span> <span class="hljs-string">"Internal Medical staff"</span>
+                Type Internal
+                Country/<span class="hljs-symbol">Region:</span> <span class="hljs-string">"Australia"</span>
+            Label <span class="hljs-symbol">Requirements:</span> 
+                <span class="hljs-symbol">Requirement:</span> <span class="hljs-string">"1) Images containing any potentially identifying features, such as jewelry
+</span></div></code></pre>
+</li>
+</ul>
+</li>
+<li><strong>Preprocesses:</strong> <a name="preprocess"></a> Data preprocesses done over the data
+<ul>
+<li><strong>Preprocess:</strong> <code>ID</code> machine-readable name of the preprocess</li>
+<li><strong>Type:</strong> <code>ENUMERATE</code> Type of preprocess applied <code>'Missing Values' | 'Data Augmentation' | 'Outlier Filtering' | 'Remove Duplicates' | 'Data reduction' | 'Sampling' | 'Data Normalization' | 'Others' </code></li>
+<li><strong>Description:</strong> <code>STRING</code> Description of the preprocess</li>
+<li><strong>Social Issues:</strong> <code>[SOCIAL ISSUES]</code> Relation of the preprocess with an already declared social issue instance</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h5 id="social-concerns">Social Concerns</h5>
+<ul>
+<li><strong>Social Concerns</strong> <a name="preprocess"></a>
+<ul>
+<li><strong>Rationale:</strong> <code>STRING</code> Rationale of the social concerns of the dataset</li>
+<li><strong>Social Issues:</strong> Social issues identified from the data
+<ul>
+<li><strong>Social Issue:</strong> <code>ID</code> Machine-readable name of the social issue</li>
+<li><strong>IssueType:</strong> <code>ENUMERATE</code> Type of social concern <code>'Privacy' | 'Bias' | 'Sensitive Data' | 'Social Impact'</code></li>
+<li><strong>Description:</strong> <code>STRING</code> Description of the social issue</li>
+<li><strong>Related Attributes</strong> <code>attribute: [ATTRIBUTE]</code> Attributes related to the social issue</li>
+<li><strong>Instace belong to people:</strong>
+<ul>
+<li><strong>Have sensitive attributes?</strong> <code>[Attribute], ...</code> List of sensitive attributes</li>
+<li><strong>Are there protected groups?</strong> <code>ENUMERATE</code> (Yes, No, Unknown)</li>
+<li><strong>Might be offensive?</strong> <code>STRING</code> Is there offensive content in the dataset
+<br></li>
+</ul>
+<blockquote>
+<p>Examples</p>
+</blockquote>
+<pre class="hljs"><code><div>Social <span class="hljs-symbol">Concerns:</span> 
+    <span class="hljs-symbol">Rationale:</span> <span class="hljs-string">'Dataset may not be representative of the real world data, and the cavenience sample is not representative of general incidence of melanoma'</span>
+    Social <span class="hljs-symbol">Issue:</span> raceRepresentative
+        <span class="hljs-symbol">IssueType:</span> Bias
+        <span class="hljs-symbol">Description:</span> <span class="hljs-string">"Dataset is not representative with respect to darker skin types"</span>
+        Related <span class="hljs-symbol">Attributes:</span> 
+            <span class="hljs-symbol">attribute:</span> ImageId 
+
+</div></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<div align="center">
+For any related question, please contact the authors at: jginermi@uoc.edu
+</div>
+
+</body>
+</html>
