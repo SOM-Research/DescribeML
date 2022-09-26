@@ -5,39 +5,41 @@ body
         p identifier:  #{ description.metadata.ident } 
         p version:  #{ description.metadata.version } 
         if (description.metadata.datesR)
-            p Release date:  #{ description.metadata.datesR } 
+            p Release date:  #{ description.metadata.dates.datesR } 
         if (description.metadata.datesU)
-            p Update date:  #{ description.metadata.datesU } 
+            p Update date:  #{ description.metadata.dates.datesU } 
         if (description.metadata.datesP)
-            p Published date: #{ description.metadata.datesP } 
+            p Published date: #{ description.metadata.dates.datesP } 
         if description.metadata.citation 
             p Citation:  #{ description.metadata.citation.citeText } 
         end
         div
             h3 For what prupose was the dataset created?
-            p #{ description.metadata.descriptionpurpose}
+            p #{ description.metadata.desc.descriptionpurpose}
         div
             h3 Was there any specific tasks?
-            p #{ description.metadata.descriptionTasks}
+            each element in description.metadata.desc.descriptionTasks
+                p #{element.name}
+
         div
             h3 Was there a specific gap that needed to be filled?
-            p #{ description.metadata.descriptionGaps}
+            p #{ description.metadata.desc.descriptionGaps}
         div
             h3 Distribution, licences and applications 
-            p Licence: #{ description.metadata.licence}
+            p Licence: #{ description.metadata.distribution.licence}
             p Is public? #{ description.metadata.distribution.public}
-            p How is distributsed? #{ description.metadata.distribution.past}
+            p Additional Conditions? #{ description.metadata.distribution.addConds}
             p Past applications: #{ description.metadata.uses.past}
             p Recommended applications: #{ description.metadata.uses.recommend}
             p Non-recommended: #{ description.metadata.uses.future}
         div
             h3 Keywords
             p Area:  
-                each element in description.metadata.area.area
-                    div #{element}
+                each element in description.metadata.desc.area.areas 
+                    div #{element.name}
             p Tags:
-                each element in description.metadata.tags.tags
-                    div #{element} 
+                each element in description.metadata.desc.tags.tags
+                    div #{element.name} 
         div
             h2 Authoring: 
             div 

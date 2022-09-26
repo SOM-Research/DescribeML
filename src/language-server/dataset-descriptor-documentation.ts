@@ -25,9 +25,8 @@ export class DocumentationGenerator implements Generator {
         const astNode = (typeof(DescriptionDataset) == 'string' ? this.parser.parse(DescriptionDataset).value : DescriptionDataset);
         return (isDescriptionDataset(astNode) ? this.Declaration2Html(astNode) : undefined);
     }
-
+    // Main function
     Declaration2Html(DescriptionDataset : DescriptionDataset) : string {
-
         const description = {
             title : DescriptionDataset.elements[0].name,
             metadata : DescriptionDataset.elements[0].generalinfo,
@@ -35,7 +34,6 @@ export class DocumentationGenerator implements Generator {
             provenance : DescriptionDataset.elements[0].provenance,
             socialConcerns : DescriptionDataset.elements[0].socialConcerns,
         }
-
         let head = `
 <html>
         <head>
@@ -46,9 +44,8 @@ export class DocumentationGenerator implements Generator {
         let body = this.buildBody(description);
         head = head + 
     `</head>` 
-      const html = head + body 
-      return html
-        
+        const html = head + body 
+        return html 
     }
 
     addSchemaOrg(description: any, head: string, title: string) : string {
@@ -69,7 +66,6 @@ export class DocumentationGenerator implements Generator {
             }
         },
     `
-
         })
 
         // Add funders
@@ -83,7 +79,15 @@ export class DocumentationGenerator implements Generator {
                 "sameAs":"${funder.type}"
             },
         `
-    
+        })
+
+        let areas = ''
+        let tags = ''
+        description.metadata.desc.tags.tags.forEach(function (tag: any) {
+            tags = tags + tag.name + ',' 
+        })
+        description.metadata.desc.area.areas.forEach(function (area: any) {
+            areas = areas + area.name + ',' 
         })
 
         head = head + `
@@ -92,15 +96,15 @@ export class DocumentationGenerator implements Generator {
         "@context":"https://schema.org/",
         "@type":"Dataset",
         "name":"${title}",
-        "description":${description.metadata.descriptionpurpose},
+        "description":${description.metadata.desc.descriptionpurpose},
         "url":"",
         "sameAs":"",
         "identifier": [${description.metadata.ident}],
         "keywords":[
-            "AREA > ${description.metadata.area.area[0]}",
-            "TAGS > ${JSON.stringify(description.metadata.tags.tags)}",
+            "AREA > ${areas}",
+            "TAGS > ${tags}",
         ],
-        "license" : ${description.metadata.licence},
+        "license" : ${description.metadata.distribution.licence},
         "hasPart" : [
             {
             "@type": "Dataset",
@@ -124,7 +128,7 @@ export class DocumentationGenerator implements Generator {
                 "contentUrl":"http://gis.ncdc.noaa.gov/all-records/catalog/search/resource/details.page?id=gov.noaa.ncdc:C00510"
             }
         ],
-        "temporalCoverage":"${description.metadata.datesR}/${description.metadata.datesU}",
+        "temporalCoverage":"${description.metadata.dates.datesR}/${description.metadata.dates.datesU}",
      `;
 
         head = head + authors + funders + ` 
@@ -167,44 +171,5 @@ export class DocumentationGenerator implements Generator {
         return compiledFunction({
             description: description
           });
-
-        /*
-<html>
-    <body>
-        <h1> Documentation of ${description.title} </h1>
-        <br>
-        <div> 
-            <h2> Who created the dataset? </h2>
-            <table>
-                <tr>
-                <th>Name</th>
-                <th>email</th>
-                </tr>
-                <tr>
-                <td>${description.metadata.authoring.authors[0].authors[0].name}</td>
-                <td>${description.metadata.authoring.authors[0].authors[0].email}</td>
-                </tr>
-                <tr>
-                <td>${description.metadata.authoring.authors[0].authors[1].name}</td>
-                <td>${description.metadata.authoring.authors[0].authors[1].email}</td>
-                </tr>
-            </table>
-        </div>
-        <div>
-            <h2> For what prupose was the dataset created?</h2>
-            <p> ${description.metadata.descriptionpurpose}</p>
-        </div>
-        <div>
-            <h2> Was there any specific tasks?</h2>
-            <p> ${description.metadata.descriptionTasks}</p>
-        </div>
-        <div>
-            <h2> Was there a specific gap that needed to be filled?d?</h2>
-            <p> ${description.metadata.descriptionGaps}</p>
-        </div>
-
-       
-    </body>
-`*/
     }
 }
