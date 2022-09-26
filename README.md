@@ -26,7 +26,7 @@ The easiest way to install the plugin is by using the **Visual Studio Code Marke
 
 Instead, you can install it manually using the packaged release of the plugin in this [repository](https://github.com/SOM-Research/DescribeML) that can be found at the root of the project. 
 
-The file is **DescribeML-0.0.6.vsix**
+The file is **DescribeML-0.0.8.vsix**
 
 Open your terminal (or the terminal inside the VSCode) and write this:
 
@@ -34,7 +34,7 @@ Open your terminal (or the terminal inside the VSCode) and write this:
 
 git clone https://github.com/SOM-Research/DescribeML.git datasets
 cd datasets 
-code --install-extension DescribeML-0.0.6.vsix
+code --install-extension DescribeML-0.0.8.vsix
 ```
 
 <span style="font-size:0.7em;">*Troubles: If you cannot see the syntax highlight in the examples files (p.e. *Melanoma.descml*) as the image below. Please, reload the VSCode editor and write the code --install command again* </span>
@@ -48,7 +48,7 @@ Great! That's it.
 1) The first step is to create a *.descml* file
 
 2) The easy way to start using our tool is to use the *preloader data service*,  located at the top left of your editor, clicking at: <img
-  src="https://github.com/SOM-Research/DescribeML/blob/main/fileicons/cloud-computing.png"
+  src="https://github.com/SOM-Research/DescribeML/blob/main/fileicons/cloud-computing.png?raw=true"
   alt="preloader service"
   title="Optional title"
   style="display: inline-block; margin: 0 auto; width: 40px">
@@ -60,12 +60,12 @@ Great! That's it.
 
 <div align="center">
 
-![Autocompletion feature](https://github.com/SOM-Research/DescribeML/blob/main/fileicons/Autcomplete.gif)
+![Autocompletion feature](https://github.com/SOM-Research/DescribeML/blob/main/fileicons/Autcomplete.gif?raw=true)
 
 </div>
 
 6) Once you are happy with your documentation, you can generate HTML documentation by clicking the generator button next to the prealoder service: <img
-  src="https://github.com/SOM-Research/DescribeML/blob/main/fileicons/html.png"
+  src="https://github.com/SOM-Research/DescribeML/blob/main/fileicons/html.png?raw=true"
   alt="HTML generator"
   title="Optional title"
   style="display: inline-block; margin: 0 auto; width: 40px">
