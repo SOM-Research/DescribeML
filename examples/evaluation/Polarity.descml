@@ -3,13 +3,14 @@ Dataset: Polarity
         Title: "Movie Review Polarity" 
         Unique-identifier: Movie_Review_Polarity
         Version: v0001
-        Release Date: 13-12-2010
+        Dates:
+            Release Date: 13-12-2010
         Citation: 
-            doi: "10.5281/zenodo.569"
-            authors: "Bo Pang and Lillian Lee"
-            title: "A sentimental education: Sentiment analysis using subjectivity summarization based on minimum cuts"
-            publisher: "Springer, proceedings of the 42nd Annual Meeting of the Association for Computational Linguistics"
-            year: "2004"
+            Title: "A sentimental education: Sentiment analysis using subjectivity summarization based on minimum cuts"
+            Authors: "Bo Pang and Lillian Lee"
+            Year: 2004 
+            Journal: "Springer, proceedings of the 42nd Annual Meeting of the Association for Computational Linguistics"
+            DOI: "10.5281/zenodo.569"
         Description:  
             Purposes: 
                 "The dataset was created to enable research on predicting sentiment polarity—i.e., given a piece of English text, predict whether
@@ -17,6 +18,8 @@ Dataset: Polarity
                 focusing on movie reviews as a place where affect/sentiment is frequently expressed." 
             Tasks: [classification, sentiment-analysis,Evaluation of language models]
             Gaps: "Gender Reference"
+            Areas: Sentiment
+            Tags: Movie Review Sentiment Classification
         Applications: 
             Past Uses:
                "At the time of publication, only the original paper (http://xxx.lanl.
@@ -36,19 +39,18 @@ Dataset: Polarity
         Distribution: 
             Is public?: Yes
             Licences: CC BY 4.0 (Attribution 4.0 International)
-            How is distributed: 
+            Additional Conditions
                 "The dataset is distributed on Bo Pang’s webpage at Cornell: http:
                 //www.cs.cornell.edu/people/pabo/movie-review-data. The dataset does
-                not have a DOI and there is no redundant archive. The dataset was first released in 2002."
-            Distribution license: 
-                "The crawled data copyright belongs to the authors of the reviews
+                not have a DOI and there is no redundant archive. The dataset was first released in 2002.
+
+                The crawled data copyright belongs to the authors of the reviews
                 unless otherwise stated. There is no license, but there is a request
                 to cite the corresponding paper if the dataset is used: Thumbs up?
                 Sentiment classification using machine learning techniques. Bo
                 Pang, Lillian Lee, and Shivakumar Vaithyanathan. Proceedings
                 of EMNLP, 2002."
-        Area: Sentiment
-        Tags: Movie Review Sentiment Classification
+
         Authoring:
             Authors:
                 Name Bo_Pong email XXXX@mail.com
@@ -131,12 +133,6 @@ Dataset: Polarity
                 
                 Dependencies: 
                     Description: "The dataset is entirely self-contained."
-                Is sample: 
-                    "The sample of instances collected is English movie reviews from
-                    the rec.arts.movies.reviews newsgroup, from which a
-                    “number of stars” rating could be extracted. The sample is limited
-                    to forty reviews per unique author in order to achieve broader
-                    coverage by authorship. Beyond that, the sample is arbitrary."     
                 Data Splits: 
                     "The instances come with a “cross-validation tag” to enable replication of 
                     cross-validation experiments; results are measured in
@@ -238,6 +234,15 @@ Dataset: Polarity
             removed. (2) Some reviews had unexpected/unparsed ranges and
             these were fixed. (3) Sometimes the boilerplate removal removed
             too much of the text."
+            Type: Others
+        Preprocess: Samples
+            Description: 
+            "The sample of instances collected is English movie reviews from
+            the rec.arts.movies.reviews newsgroup, from which a
+            “number of stars” rating could be extracted. The sample is limited
+            to forty reviews per unique author in order to achieve broader
+            coverage by authorship. Beyond that, the sample is arbitrary."       
+            Type: Sampling      
 
      Social Concerns:
         Social Issue: privacyAware
@@ -249,11 +254,12 @@ Dataset: Polarity
         
         Social Issue: inappropiateContent
           IssueType: Social Impact
+          Description: 
+          "Some movie reviews might contain moderately inappropriate or
+          offensive language, but we do not expect this to be the norm" 
           Related Attributes: 
             attribute: text_body
-          Description: 
-            "Some movie reviews might contain moderately inappropriate or
-            offensive language, but we do not expect this to be the norm"  
+  
         Instance belongs to people:
             Are there protected groups? Yes
 

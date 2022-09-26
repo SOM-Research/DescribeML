@@ -8197,66 +8197,208 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
       "hiddenTokens": [],
       "type": "string",
       "alternatives": {
-        "$type": "Group",
+        "$type": "Alternatives",
         "elements": [
           {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Alternatives",
+                "elements": [
+                  {
+                    "$type": "RuleCall",
+                    "arguments": [],
+                    "rule": {
+                      "$refText": "NUMBER"
+                    },
+                    "elements": []
+                  },
+                  {
+                    "$type": "RuleCall",
+                    "arguments": [],
+                    "rule": {
+                      "$refText": "ID"
+                    },
+                    "elements": []
+                  }
+                ],
+                "cardinality": "+"
+              },
+              {
+                "$type": "Alternatives",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "/",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Keyword",
+                    "value": ".",
+                    "elements": []
+                  }
+                ],
+                "cardinality": "+"
+              },
+              {
+                "$type": "Alternatives",
+                "elements": [
+                  {
+                    "$type": "RuleCall",
+                    "arguments": [],
+                    "rule": {
+                      "$refText": "NUMBER"
+                    },
+                    "elements": []
+                  },
+                  {
+                    "$type": "RuleCall",
+                    "arguments": [],
+                    "rule": {
+                      "$refText": "ID"
+                    },
+                    "elements": []
+                  }
+                ],
+                "cardinality": "+"
+              },
+              {
+                "$type": "Alternatives",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "/",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Keyword",
+                    "value": ".",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Keyword",
+                    "value": "-",
+                    "elements": []
+                  }
+                ],
+                "cardinality": "+"
+              },
+              {
+                "$type": "Alternatives",
+                "elements": [
+                  {
+                    "$type": "RuleCall",
+                    "arguments": [],
+                    "rule": {
+                      "$refText": "NUMBER"
+                    },
+                    "elements": []
+                  },
+                  {
+                    "$type": "RuleCall",
+                    "arguments": [],
+                    "rule": {
+                      "$refText": "ID"
+                    },
+                    "elements": []
+                  }
+                ],
+                "cardinality": "+"
+              },
+              {
+                "$type": "Alternatives",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "/",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Keyword",
+                    "value": ".",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Keyword",
+                    "value": "-",
+                    "elements": []
+                  }
+                ],
+                "cardinality": "+"
+              },
+              {
+                "$type": "Alternatives",
+                "elements": [
+                  {
+                    "$type": "RuleCall",
+                    "arguments": [],
+                    "rule": {
+                      "$refText": "NUMBER"
+                    },
+                    "elements": []
+                  },
+                  {
+                    "$type": "RuleCall",
+                    "arguments": [],
+                    "rule": {
+                      "$refText": "ID"
+                    },
+                    "elements": []
+                  }
+                ],
+                "cardinality": "+"
+              },
+              {
+                "$type": "Alternatives",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "/",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Keyword",
+                    "value": ".",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Keyword",
+                    "value": "-",
+                    "elements": []
+                  }
+                ],
+                "cardinality": "+"
+              },
+              {
+                "$type": "Alternatives",
+                "elements": [
+                  {
+                    "$type": "RuleCall",
+                    "arguments": [],
+                    "rule": {
+                      "$refText": "NUMBER"
+                    },
+                    "elements": []
+                  },
+                  {
+                    "$type": "RuleCall",
+                    "arguments": [],
+                    "rule": {
+                      "$refText": "ID"
+                    },
+                    "elements": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
             "$type": "RuleCall",
             "arguments": [],
             "rule": {
-              "$refText": "NUMBER"
+              "$refText": "STRING"
             },
-            "cardinality": "+",
             "elements": []
-          },
-          {
-            "$type": "Keyword",
-            "value": "/",
-            "cardinality": "+"
-          },
-          {
-            "$type": "RuleCall",
-            "arguments": [],
-            "rule": {
-              "$refText": "ID"
-            },
-            "cardinality": "+"
-          },
-          {
-            "$type": "Keyword",
-            "value": "-"
-          },
-          {
-            "$type": "RuleCall",
-            "arguments": [],
-            "rule": {
-              "$refText": "NUMBER"
-            },
-            "cardinality": "+"
-          },
-          {
-            "$type": "Keyword",
-            "value": "-",
-            "cardinality": "+"
-          },
-          {
-            "$type": "RuleCall",
-            "arguments": [],
-            "rule": {
-              "$refText": "NUMBER"
-            },
-            "cardinality": "+"
-          },
-          {
-            "$type": "Keyword",
-            "value": "-",
-            "cardinality": "+"
-          },
-          {
-            "$type": "RuleCall",
-            "arguments": [],
-            "rule": {
-              "$refText": "ID"
-            }
           }
         ]
       }

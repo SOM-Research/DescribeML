@@ -506,11 +506,10 @@ hidden terminal SL_COMMENT: /\/\/[^\n\r]*/;
 
 // Date Logic
 Dash returns string: "-";
-//Day returns string: "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12" | "13" | "14" | "15" | "16" | "17" | "18" | "19" | "20" | "21" | "22" | "23" | "24" | "25" | "26" | "27" | "28" | "29" | "30" | "31";
-//Month returns string: "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11"| "12";
-//Year returns string: "1989" | "1990" | "1991"| "1992" | "1993" | "1994" | "1995" | "1996" | "1997" | "1998" | "1999" | "2000" | "2001" | "2002" | "2003" | "2004" | "2005" | "2006" | "2007" | "2008" | "2009" | "2010" | "2011" | "2012" | "2013" | "2014" | "2015" | "2016" | "2017" | "2018" | "2019" | "2020" | "2021" | "2022" | "2023" | "2024" | "2025";
 DateYear returns string: NUMBER+Dash+NUMBER+Dash+NUMBER;
-DOI returns string: NUMBER+"/"+ID+"-"NUMBER+"-"+NUMBER+"-"+ID;
+
+//
+DOI returns string: ((NUMBER|ID)+("/"|".")+(NUMBER|ID)+("/"|"."|"-")+(NUMBER|ID)+("/"|"."|"-")+(NUMBER|ID)+("/"|"."|"-")+(NUMBER|ID) | STRING);
 
 // Email
 EmailType returns string: ID+'@'+ID+'.'+ID;
