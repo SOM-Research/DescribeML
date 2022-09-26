@@ -26,7 +26,7 @@ The easiest way to install the plugin is by using the **Visual Studio Code Marke
 
 Instead, you can install it manually using the packaged release of the plugin in this [repository](https://github.com/SOM-Research/DescribeML) that can be found at the root of the project. 
 
-The file is **DescribeML-0.0.5.vsix**
+The file is **DescribeML-0.0.6.vsix**
 
 Open your terminal (or the terminal inside the VSCode) and write this:
 
@@ -34,35 +34,38 @@ Open your terminal (or the terminal inside the VSCode) and write this:
 
 git clone https://github.com/SOM-Research/DescribeML.git datasets
 cd datasets 
-code --install-extension DescribeML-0.0.5.vsix
+code --install-extension DescribeML-0.0.6.vsix
 ```
 
 <span style="font-size:0.7em;">*Troubles: If you cannot see the syntax highlight in the examples files (p.e. *Melanoma.descml*) as the image below. Please, reload the VSCode editor and write the code --install command again* </span>
 
 Great! That's it.
 
+
+
 ## Getting Started
 
 1) The first step is to create a *.descml* file
 
 2) The easy way to start using our tool is to use the *preloader data service*,  located at the top left of your editor, clicking at: <img
-  src="fileicons/cloud-computing.png"
+  src="https://github.com/SOM-Research/DescribeML/blob/main/fileicons/cloud-computing.png"
   alt="preloader service"
   title="Optional title"
   style="display: inline-block; margin: 0 auto; width: 40px">
 
-3) Select your dataset file (*.csv*), and the tool will generate a darft of your description file.
+3) Select your dataset file (*.csv*), and the tool will generate a draft of your description file.
 
-4) To help you, take a look to the [Language Reference Guide](/documentation/language-reference-guide.md) and follow the examples in the **examples/evaluation** [folders](https://github.com/SOM-Research/DescribeML) to get a sense of the tool's possibilities. Take a look at the *Melanoma.descml* file, for example.
+4) To help you, look to the [Language Reference Guide](https://github.com/SOM-Research/DescribeML/blob/main/documentation/language-reference-guide.md) and follow the examples in the **examples/evaluation** [folders](https://github.com/SOM-Research/DescribeML/tree/main/examples/evaluation) to get a sense of the tool's possibilities. Take a look at the *Melanoma.descml* file, for example.
 5) During the documentation process, hitting CTRL + Space (equivalent in other OS) gives you auto-completion help. In addition, the part marked with the points below gives you hints to complete the documentation, and the outline in the right part shows you the document structure.
+
 <div align="center">
 
-![Autocompletion feature](fileicons/Autcomplete.gif)
+![Autocompletion feature](https://github.com/SOM-Research/DescribeML/blob/main/fileicons/Autcomplete.gif)
 
 </div>
 
 6) Once you are happy with your documentation, you can generate HTML documentation by clicking the generator button next to the prealoder service: <img
-  src="fileicons/html.png"
+  src="https://github.com/SOM-Research/DescribeML/blob/main/fileicons/html.png"
   alt="HTML generator"
   title="Optional title"
   style="display: inline-block; margin: 0 auto; width: 40px">
@@ -74,8 +77,6 @@ Great! That's it.
 
 
 For more information, check out the **quick [presentation](https://www.youtube.com/watch?v=Bf3bhWB-UJY) video!**
-
-
 
 
 ## Research background

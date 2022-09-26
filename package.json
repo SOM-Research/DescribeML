@@ -2,18 +2,16 @@
     "name": "DescribeML",
     "displayName": "DescribeML",
     "description": "DescribeML is a language plug-in to describe machine-learning datasets in a standard format. Build better data describing the composition, provenance and social concerns of your dataset.",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "engines": {
         "vscode": "^1.56.0"
     },
     "publisher": "SOMResearchGroup",
-    "author":{
-        "name": "Joan Giner-Miguelez",
-        "name": "Abel Gómez",
+    "author": {
         "name": "Jordi Cabot"
     },
     "homepage": "https://github.com/SOM-Research/DescribeML",
-    "repository":{
+    "repository": {
         "type": "git",
         "url": "https://github.com/SOM-Research/DescribeML"
     },
@@ -145,7 +143,7 @@
         "mathjs": "^10.1.1",
         "pug": "^3.0.2",
         "twig": "^1.15.4",
-        "vsce": "^2.7.0",
+        "vsce": "^2.11.0",
         "vscode-languageclient": "^7.0.0",
         "vscode-languageserver": "^7.0.0"
     },
