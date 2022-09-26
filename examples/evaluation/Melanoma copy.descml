@@ -6,53 +6,21 @@ Dataset: Melanoma_Classification_Dataset
         Dates:
             Release Date: 10-08-20
         Citation: 
-            Title: "A patient-centric dataset of images and metadata for identifying melanomas using clinical context"
-            Authors: "Rotemberg, V., Kurtansky, N., Betz-Stablein, B., Caffery, L., Chousakos, E., Codella, N., Combalia, M., Dusza, S., Guitera, P., Gutman, D., Halpern, A., Helba, B., Kittler, H., Kose, K., Langer, S., Lioprys, K., Malvehy, J., Musthaq, S., Nanda, J., Reiter, O., Shih, G., Stratigos, A., Tschandl, P., Weber, J. & Soyer, P"
-            Year: 2021 
-            Journal: "Sci Data 8, 34"
-            DOI: 10.1038/s41597-021-00815-z
+            title: "SIIM-ISIC 2020 Challenge Dataset. International Skin Imaging Collaboration"
+            year: 2020
+            publisher: "International Skin Imaging Collaboration"
+            doi: "doi.org/10.34970/2020-ds01"
+            url: "https://www.kaggle.com/c/siim-isic-melanoma-classification"
         Description:
             Purposes: "The 2020 SIIM-ISIC Melanoma Classification challenge dataset..." 
-            Tasks:    [classification, image-classification]
+            Tasks:    [classification]
             Gaps:     "As the leading healthcare organization for informatics in medical imaging..."  
             Areas:    HealthCare
             Tags:     Images Melanoma diagnosis Skin Image
-        Applications:
-            Past Uses: "Yes. The 2020 SIIM-ISIC Melanoma Classification challenge dataset 
-            was created for the purpose of conducting a machine learning competition to 
-            identify melanoma in lesion images. The competition was launched on DATE on 
-            the Kaggle platform and ran through DATE. You can learn more about the competition
-            and results here: LINK"
-            Recommended: 
-                "Identify melanoma in lesion images" 
-                "Predict incidence of melanoma in a population"
-            Non-recommended: "Due to low population prevalence and challenges with access 
-            to care in different populations, the images gathered for large datasets such
-            as this for AI classification have a strong tendency to under-represent darker
-            skin types. This may lead to either overdiagnosis or underdiagnosis of melanomas
-            in darker skin types, both of which would have significant clinical implications
-            and will require prospective study. The ISIC Archive is actively pursuing methods
-            by which to increase the diversity of images obtained, but at this point
-            caution should be used when attempting to generalize algorithms trained on
-            images from specialized referral centers (such as the dataset described herein) 
-            to the global population at large. The dataset is also enriched for melanoma in 
-            general and does not represent true incidence of melanoma."
-            Benchmarking:
-                Task: Language-model
-                [
-                    Model: "ModelExample"
-                    Metrics:[
-                        F1: 81
-                        Acurracy: 81
-                        Precision: 81
-                        Recall: 81
-                    ]
-                    Reference: "https://www.kaggle.com/c/siim-isic-melanoma-classification/leaderboard"
-                ]
         Distribution:
             Licences: CC BY 3.0 (Attribution 3.0 Unported)
-            Rights(stand-alone): Access
-            Rights(with models): Benchmark
+            Rights to Data (stand-alone): Access
+            Rights to Data in conjuntion with models: Benchmark
             Additional Conditions "In addition to the CC-BY-NC license, the dataset is governed by the ISIC Terms of Use. Learn more about the terms of use here: https://datanutrition.org/labels/isic-2020/ "                          
     Authoring:
         Authors:
@@ -150,20 +118,14 @@ Dataset: Melanoma_Classification_Dataset
 
                     attribute: beningnant_malignant
                         description: 'Type of the melanoma'
-                        label: skinLabel
                         count: 33126
                         ofType: Categorical
                         Statistics:
-                            Missing Values: 0
-                            Completeness: 100
-                            Chi-Squared:
-                                p-value: 0
-                            Categoric Distribution:
-                                [
-                                    "beningnant": 80%,
-                                    "malignant": 20%
-                                ]
-                            
+                                Categoric Distribution:
+                                    [
+                                     "beningnant": 80%,
+                                     "malignant": 20%
+                                    ]
         Statistics: 
             Pair Correlation: 
                 between ImageId and diagnosis 
@@ -298,17 +260,15 @@ Dataset: Melanoma_Classification_Dataset
                 were not monitored, as that would not reflect clinical practice, but labels were verified visually by an expert in dermoscopy. 
                 Images of lesions were attributed to patients based on the clinical imaging database identification codes which are stored at the 
                 time of capture during each clinical photography session."
-                Type: Others
 
 
     Social Concerns: 
       Rationale: 'Dataset may not be representative of the real world data, and the cavenience sample is not representative of general incidence of melanoma'
       Social Issue: raceRepresentative
         IssueType: Bias
-        Description: "Dataset is not representative with respect to darker skin types"
         Related Attributes: 
             attribute: ImageId  
-       
+        Description: "Dataset is not representative with respect to darker skin types"
       Social Issue: generalIncidence
         IssueType: Social Impact        
         Description: "Dataset is a convenience sample and is not representative of general incidence of melanoma"

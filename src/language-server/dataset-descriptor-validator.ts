@@ -1,5 +1,5 @@
 import { ValidationAcceptor, ValidationCheck, ValidationRegistry } from 'langium';
-import { datasetDescriptorAstType, Metadata, Author, Funder, Composition, Authoring, Tasks } from './generated/ast';
+import { datasetDescriptorAstType, Author, Funder, Composition, Authoring, Tasks, Description } from './generated/ast';
 import { DatasetDescriptorServices } from './dataset-descriptor-module';
 
 /**
@@ -30,7 +30,7 @@ export class DatasetDescriptorValidationRegistry extends ValidationRegistry {
  */
 export class DatasetDescriptorValidator {
 
-    hintsOfDescription(type:Metadata, accept: ValidationAcceptor): void {
+    hintsOfDescription(type:Description, accept: ValidationAcceptor): void {
           //  accept('warning', 'Version should have the following form: V000', { node: type, property: 'version' });
             accept('hint', 'For what propose was the dataser created? \nPlease provide a description', { node: type, property: 'descriptionpurpose' });
             accept('hint', 'Was there specific gap that needed to be filled?\nPlease provide a description', { node: type, property: 'descriptionGaps'});

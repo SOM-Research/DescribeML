@@ -9,6 +9,7 @@ import { AstNode, AstReflection, Reference, isAstNode } from 'langium';
 
 export interface Applications extends AstNode {
     readonly $container: Metadata;
+    bachmarking: Benchmarking
     future: Array<string>
     name: 'Applications:'
     past: Array<string>
@@ -23,9 +24,8 @@ export function isApplications(item: unknown): item is Applications {
 }
 
 export interface Area extends AstNode {
-    readonly $container: Metadata;
-    area: Array<string>
-    name: 'Area:'
+    readonly $container: Areas;
+    name: string
 }
 
 export const Area = 'Area';
@@ -34,11 +34,24 @@ export function isArea(item: unknown): item is Area {
     return reflection.isInstance(item, Area);
 }
 
+export interface Areas extends AstNode {
+    readonly $container: Description;
+    areas: Array<Area>
+    name: 'Areas:'
+}
+
+export const Areas = 'Areas';
+
+export function isAreas(item: unknown): item is Areas {
+    return reflection.isInstance(item, Areas);
+}
+
 export interface Attribute extends AstNode {
     readonly $container: DataInstance;
     attdesc: string
     attType: Categor | Numeri
     count: number
+    label?: Reference<Labels>
     labelProces?: Reference<LabelingProcess>
     name: string
     unique: number
@@ -93,7 +106,7 @@ export function isAuthors(item: unknown): item is Authors {
 }
 
 export interface Benchmarking extends AstNode {
-    readonly $container: Metadata;
+    readonly $container: Applications;
     acurracy: number
     f1: number
     modelName: string
@@ -101,7 +114,7 @@ export interface Benchmarking extends AstNode {
     precision: number
     recall: number
     reference: string
-    taskName?: Reference<Tasks>
+    taskName: Task
 }
 
 export const Benchmarking = 'Benchmarking';
@@ -161,21 +174,43 @@ export function isChiSquare(item: unknown): item is ChiSquare {
 
 export interface Citation extends AstNode {
     readonly $container: Metadata;
-    authorsPaper: string
+    authorsPaper: Citeauthors
     citeText: string
-    doi: string
-    keywords: Array<string>
+    doi: DoiCite
+    keywords: Array<Keyword>
     name: 'Citation:'
-    publisher: string
-    title: string
-    url: string
-    year: string
+    publisher: Publisher
+    title: Title
+    url: CiteUrl
+    year: number
 }
 
 export const Citation = 'Citation';
 
 export function isCitation(item: unknown): item is Citation {
     return reflection.isInstance(item, Citation);
+}
+
+export interface Citeauthors extends AstNode {
+    readonly $container: Citation;
+    name: string
+}
+
+export const Citeauthors = 'Citeauthors';
+
+export function isCiteauthors(item: unknown): item is Citeauthors {
+    return reflection.isInstance(item, Citeauthors);
+}
+
+export interface CiteUrl extends AstNode {
+    readonly $container: Citation;
+    name: string
+}
+
+export const CiteUrl = 'CiteUrl';
+
+export function isCiteUrl(item: unknown): item is CiteUrl {
+    return reflection.isInstance(item, CiteUrl);
 }
 
 export interface Composition extends AstNode {
@@ -186,7 +221,7 @@ export interface Composition extends AstNode {
     name: 'Composition:'
     numberInst: number
     relation: RelationInstances
-    sample: string
+    sample: 'NO' | Sample
     splits: string
 }
 
@@ -255,6 +290,20 @@ export function isDataInstances(item: unknown): item is DataInstances {
     return reflection.isInstance(item, DataInstances);
 }
 
+export interface Dates extends AstNode {
+    readonly $container: Metadata;
+    datesP: PublishedDate
+    datesR: ReleaseDate
+    datesU: UpdateDate
+    name: 'Dates:'
+}
+
+export const Dates = 'Dates';
+
+export function isDates(item: unknown): item is Dates {
+    return reflection.isInstance(item, Dates);
+}
+
 export interface Declaration extends AstNode {
     readonly $container: DescriptionDataset;
     composition: Composition
@@ -272,12 +321,12 @@ export function isDeclaration(item: unknown): item is Declaration {
 
 export interface Demographics extends AstNode {
     readonly $container: GatheringProcess | Team;
-    age: string
+    age: number
     country: string
     disordered: string
     gender: string
     native: string
-    number: string
+    number: number
     race: string
     status: string
     training: string
@@ -303,6 +352,24 @@ export function isDependencies(item: unknown): item is Dependencies {
     return reflection.isInstance(item, Dependencies);
 }
 
+export interface Description extends AstNode {
+    readonly $container: Metadata;
+    area: Areas
+    desc: string
+    descriptionGaps: string
+    descriptionpurpose: string
+    descriptionTasks: Array<Task>
+    name: 'Description:'
+    tags: Tags
+    tasks: 'Tasks:'
+}
+
+export const Description = 'Description';
+
+export function isDescription(item: unknown): item is Description {
+    return reflection.isInstance(item, Description);
+}
+
 export interface DescriptionDataset extends AstNode {
     elements: Array<Declaration>
 }
@@ -315,17 +382,31 @@ export function isDescriptionDataset(item: unknown): item is DescriptionDataset 
 
 export interface Distribution extends AstNode {
     readonly $container: Metadata;
-    lic: string
+    addCond: string
+    attribution: string
     licence: CommonLicences
     name: 'Distribution:'
-    past: string
     public: BooleanAnswer
+    rights: RightsData
+    rightsModels: RightsModel
+    thirdParties: string
 }
 
 export const Distribution = 'Distribution';
 
 export function isDistribution(item: unknown): item is Distribution {
     return reflection.isInstance(item, Distribution);
+}
+
+export interface DoiCite extends AstNode {
+    readonly $container: Citation;
+    name: DOI
+}
+
+export const DoiCite = 'DoiCite';
+
+export function isDoiCite(item: unknown): item is DoiCite {
+    return reflection.isInstance(item, DoiCite);
 }
 
 export interface FirstRows extends AstNode {
@@ -397,14 +478,54 @@ export function isGatheringProcesses(item: unknown): item is GatheringProcesses 
     return reflection.isInstance(item, GatheringProcesses);
 }
 
+export interface GoldenQuestion extends AstNode {
+    readonly $container: Validation;
+    answer: number
+    question: string
+}
+
+export const GoldenQuestion = 'GoldenQuestion';
+
+export function isGoldenQuestion(item: unknown): item is GoldenQuestion {
+    return reflection.isInstance(item, GoldenQuestion);
+}
+
+export interface Infrastructure extends AstNode {
+    readonly $container: LabelingProcess;
+    language: string
+    other: string
+    platform: string
+    tool: string
+    version: string
+}
+
+export const Infrastructure = 'Infrastructure';
+
+export function isInfrastructure(item: unknown): item is Infrastructure {
+    return reflection.isInstance(item, Infrastructure);
+}
+
+export interface Keyword extends AstNode {
+    readonly $container: Citation;
+    name: string
+}
+
+export const Keyword = 'Keyword';
+
+export function isKeyword(item: unknown): item is Keyword {
+    return reflection.isInstance(item, Keyword);
+}
+
 export interface LabelingProcess extends AstNode {
     readonly $container: LabelingProcesses;
     desc: string
+    infra: Infrastructure
     labelingTeam: Team
     labelSocialIssues?: Reference<SocialIssue>
     name: string
     requeriments: Array<Requeriments>
     type: AnnotationType
+    validation: Validation
 }
 
 export const LabelingProcess = 'LabelingProcess';
@@ -423,6 +544,16 @@ export const LabelingProcesses = 'LabelingProcesses';
 
 export function isLabelingProcesses(item: unknown): item is LabelingProcesses {
     return reflection.isInstance(item, LabelingProcesses);
+}
+
+export interface LabelRequeriments extends AstNode {
+    requeriments: Array<Requeriments>
+}
+
+export const LabelRequeriments = 'LabelRequeriments';
+
+export function isLabelRequeriments(item: unknown): item is LabelRequeriments {
+    return reflection.isInstance(item, LabelRequeriments);
 }
 
 export interface Labels extends AstNode {
@@ -451,21 +582,13 @@ export function isMaintainer(item: unknown): item is Maintainer {
 
 export interface Metadata extends AstNode {
     readonly $container: Declaration;
-    area: Area
     authoring: Authoring
-    bachmarking: Benchmarking
     citation: Citation
-    datesP: DateYear
-    datesR: DateYear
-    datesU: DateYear
-    description: string
-    descriptionGaps: string
-    descriptionpurpose: string
-    descriptionTasks: Array<Tasks>
+    dates: Dates
+    desc: Description
     distribution: Distribution
     ident: string
     name: 'Metadata:'
-    tags: Tags
     title: string
     uses: Applications
     version: string
@@ -513,7 +636,9 @@ export function isPairCorrelation(item: unknown): item is PairCorrelation {
 export interface PreProcess extends AstNode {
     readonly $container: PreProcesses;
     desc: string
+    labelSocialIssues?: Reference<SocialIssue>
     name: string
+    type: DataProcess
 }
 
 export const PreProcess = 'PreProcess';
@@ -547,6 +672,29 @@ export const Provenance = 'Provenance';
 
 export function isProvenance(item: unknown): item is Provenance {
     return reflection.isInstance(item, Provenance);
+}
+
+export interface PublishedDate extends AstNode {
+    readonly $container: Dates;
+    datesP: DateYear
+    name: 'Published Date:'
+}
+
+export const PublishedDate = 'PublishedDate';
+
+export function isPublishedDate(item: unknown): item is PublishedDate {
+    return reflection.isInstance(item, PublishedDate);
+}
+
+export interface Publisher extends AstNode {
+    readonly $container: Citation;
+    name: string
+}
+
+export const Publisher = 'Publisher';
+
+export function isPublisher(item: unknown): item is Publisher {
+    return reflection.isInstance(item, Publisher);
 }
 
 export interface QualityMetric extends AstNode {
@@ -602,8 +750,20 @@ export function isRelationInstances(item: unknown): item is RelationInstances {
     return reflection.isInstance(item, RelationInstances);
 }
 
+export interface ReleaseDate extends AstNode {
+    readonly $container: Dates;
+    datesR: DateYear
+    name: 'Release Date:'
+}
+
+export const ReleaseDate = 'ReleaseDate';
+
+export function isReleaseDate(item: unknown): item is ReleaseDate {
+    return reflection.isInstance(item, ReleaseDate);
+}
+
 export interface Requeriments extends AstNode {
-    readonly $container: GatheringProcess | LabelingProcess;
+    readonly $container: GatheringProcess | LabelingProcess | Validation | LabelRequeriments;
     req: string
 }
 
@@ -611,6 +771,36 @@ export const Requeriments = 'Requeriments';
 
 export function isRequeriments(item: unknown): item is Requeriments {
     return reflection.isInstance(item, Requeriments);
+}
+
+export interface Sample extends AstNode {
+    readonly $container: Composition;
+    charact: Array<SamplingCharacteristics>
+    criteria: string
+    name: 'YES'
+    type: SampleType
+}
+
+export const Sample = 'Sample';
+
+export function isSample(item: unknown): item is Sample {
+    return reflection.isInstance(item, Sample);
+}
+
+export interface SamplingCharacteristics extends AstNode {
+    readonly $container: Sample;
+    distribution: number
+    mean: string
+    rate: number
+    std: number
+    total: number
+    variation: number
+}
+
+export const SamplingCharacteristics = 'SamplingCharacteristics';
+
+export function isSamplingCharacteristics(item: unknown): item is SamplingCharacteristics {
+    return reflection.isInstance(item, SamplingCharacteristics);
 }
 
 export interface SocialConcerns extends AstNode {
@@ -678,10 +868,21 @@ export function isStatistics(item: unknown): item is Statistics {
     return reflection.isInstance(item, Statistics);
 }
 
+export interface Tag extends AstNode {
+    readonly $container: Tags;
+    name: string
+}
+
+export const Tag = 'Tag';
+
+export function isTag(item: unknown): item is Tag {
+    return reflection.isInstance(item, Tag);
+}
+
 export interface Tags extends AstNode {
-    readonly $container: Metadata;
+    readonly $container: Description;
     name: 'Tags:'
-    tags: Array<string>
+    tags: Array<Tag>
 }
 
 export const Tags = 'Tags';
@@ -690,9 +891,20 @@ export function isTags(item: unknown): item is Tags {
     return reflection.isInstance(item, Tags);
 }
 
-export interface Tasks extends AstNode {
-    readonly $container: Metadata;
+export interface Task extends AstNode {
+    readonly $container: Description | Tasks | Benchmarking;
     name: MLTasks
+}
+
+export const Task = 'Task';
+
+export function isTask(item: unknown): item is Task {
+    return reflection.isInstance(item, Task);
+}
+
+export interface Tasks extends AstNode {
+    descriptionTasks: Array<Task>
+    name: 'Tasks:'
 }
 
 export const Tasks = 'Tasks';
@@ -714,7 +926,48 @@ export function isTeam(item: unknown): item is Team {
     return reflection.isInstance(item, Team);
 }
 
-export type CommonLicences = 'Creative Commons' | 'CC0: Public Domain' | 'CC BY-NC-SA 4.0' | 'CC BY-SA 4.0' | 'CC BY-SA 3.0' | 'CC BY 4.0 (Attribution 4.0 International)' | 'CC BY-NC 4.0 (Attribution-NonCommercial 4.0 International)' | 'CC BY 3.0 (Attribution 3.0 Unported)' | 'CC BY 3.0 IGO (Attribution 3.0 IGO)' | 'CC BY-NC-SA 3.0 IGO (Attribution-NonCommercial-ShareAlike 3.0 IGO)' | 'CC BY-ND 4.0 (Attribution-NoDerivatives 4.0 International)' | 'CC BY-NC-ND 4.0 (Attribution-NonCommercial-NoDerivatives 4.0 International)' | 'GPL' | 'GPL 2' | 'LGPL 3.0 (GNU Lesser General Public License 3.0)' | 'AGPL 3.0 (GNU Affero General Public License 3.0)' | 'FDL 1.3 (GNU Free Documentation License 1.3)' | 'Open Data Commons' | 'Database: Open Database, Contents: Database Contents' | 'Database: Open Database, Contents: © Original Authors' | 'PDDL (ODC Public Domain Dedication and Licence)' | 'ODC-BY 1.0 (ODC Attribution License)' | 'Community Data License' | 'Community Data License Agreement - Permissive - Version 1.0' | 'Community Data License Agreement - Sharing - Version 1.0' | 'Special' | 'World Bank Dataset Terms of Use' | 'Reddit API Terms' | 'U.S. Government Works' | 'EU ODP Legal Notice'
+export interface Title extends AstNode {
+    readonly $container: Citation;
+    name: string
+}
+
+export const Title = 'Title';
+
+export function isTitle(item: unknown): item is Title {
+    return reflection.isInstance(item, Title);
+}
+
+export interface UpdateDate extends AstNode {
+    readonly $container: Dates;
+    datesU: DateYear
+    name: 'Updated Date:'
+}
+
+export const UpdateDate = 'UpdateDate';
+
+export function isUpdateDate(item: unknown): item is UpdateDate {
+    return reflection.isInstance(item, UpdateDate);
+}
+
+export interface Validation extends AstNode {
+    readonly $container: LabelingProcess;
+    goldenquestions: GoldenQuestion
+    method: string
+    requeriments: Array<Requeriments>
+    validationDates: string
+}
+
+export const Validation = 'Validation';
+
+export function isValidation(item: unknown): item is Validation {
+    return reflection.isInstance(item, Validation);
+}
+
+export type CommonLicences = 'The Montreal data licence' | 'Creative Commons' | 'CC0: Public Domain' | 'CC BY-NC-SA 4.0' | 'CC BY-SA 4.0' | 'CC BY-SA 3.0' | 'CC BY 4.0 (Attribution 4.0 International)' | 'CC BY-NC 4.0 (Attribution-NonCommercial 4.0 International)' | 'CC BY 3.0 (Attribution 3.0 Unported)' | 'CC BY 3.0 IGO (Attribution 3.0 IGO)' | 'CC BY-NC-SA 3.0 IGO (Attribution-NonCommercial-ShareAlike 3.0 IGO)' | 'CC BY-ND 4.0 (Attribution-NoDerivatives 4.0 International)' | 'CC BY-NC-ND 4.0 (Attribution-NonCommercial-NoDerivatives 4.0 International)' | 'GPL' | 'GPL 2' | 'LGPL 3.0 (GNU Lesser General Public License 3.0)' | 'AGPL 3.0 (GNU Affero General Public License 3.0)' | 'FDL 1.3 (GNU Free Documentation License 1.3)' | 'Open Data Commons' | 'Database: Open Database, Contents: Database Contents' | 'Database: Open Database, Contents: © Original Authors' | 'PDDL (ODC Public Domain Dedication and Licence)' | 'ODC-BY 1.0 (ODC Attribution License)' | 'Community Data License' | 'Community Data License Agreement - Permissive - Version 1.0' | 'Community Data License Agreement - Sharing - Version 1.0' | 'Special' | 'World Bank Dataset Terms of Use' | 'Reddit API Terms' | 'U.S. Government Works' | 'EU ODP Legal Notice'
+
+export type RightsData = 'Access' | 'Tagging' | 'Distribute' | 'Re-Represent'
+
+export type RightsModel = 'Benchmark' | 'Research' | 'Publish' | 'Internal Use' | 'Output Commercialization' | 'Model Commercialization'
 
 export type MLTasks = 'text-classification' | 'question-answering' | 'text-generation' | 'token-classification' | 'translation' | 'fill-mask' | 'text-retrieval' | 'conditional-text-generation' | 'sequence-modeling' | 'summarization' | 'other' | 'structure-prediction' | 'information-retrieval' | 'text2text-generation' | 'zero-shot-retrieval' | 'zero-shot-information-retrieval' | 'automatic-speech-recognition' | 'image-classification' | 'speech-processing' | 'text-scoring' | 'audio-classification' | 'conversational' | 'question-generation' | 'image-to-text' | 'data-to-text' | 'classification' | 'object-detection' | 'multiple-choice' | 'text-mining' | 'image-segmentation' | 'dialog-response-generation' | 'named-entity-recognition' | 'sentiment-analysis' | 'machine-translation' | 'tabular-to-text' | 'table-to-text' | 'simplification' | 'sentence-similarity' | 'zero-shot-classification' | 'visual-question-answering' | 'text_classification' | 'time-series-forecasting' | 'computer-vision' | 'feature-extraction' | 'symbolic-regression' | 'topic modeling' | 'one liner summary' | 'email subject' | 'meeting title' | 'text-to-structured' | 'reasoning' | 'paraphrasing' | 'paraphrase' | 'code-generation' | 'tts' | 'image-retrieval' | 'image-captioning' | 'language-modelling' | 'video-captionning' | 'neural-machine-translation' | 'transkation' | 'text-generation-other-common-sense-inference' | 'text-generation-other-discourse-analysis' | 'text-to-tabular' | 'text-generation-other-code-modeling' | 'other-text-search' | 'Code Generation' | 'Translation' | 'Text2Text generation' | 'text-to-slide' | 'question-pairing' | 'Information Retrieval' | 'Semantic Search' | 'Evaluation of language models' | 'masked-language-modeling' | 'multi-class classification' | 'topic-classification' | 'patents' | 'paraphrase detection' | 'news-classification' | 'Summarization' | 'cross-language-transcription' | 'language-modeling' | 'other-test' | 'grammatical error correction' | 'named-entity-disambiguation' | 'textual-entailment' | 'natural-language-inference' | 'query-paraphrasing' | 'machine translation' | 'long-texts' | 'text-regression' | 'entity-extraction' | 'unpaired-image-to-image-translation' | 'image' | 'generative-modelling' | 'Token Classification' | 'caption-retrieval' | 'gpt-3' | 'crowdsourced' | 'sequence2sequence' | 'Inclusive Language' | 'Text Neutralization' | 'text-to-speech' | 'question_answering' | 'super-resolution' | 'image-enhancement' | 'speech-synthesis' | 'data-integration' | 'Language-model' | 'Automatic-Speech-Recognition' | 'influence-attribution' | 'question-answering-retrieval' | 'text' | 'linear-regression' | 'table-question-answering' | 'tabular-classification' | 'syntactic-evaluation' | 'deduplication' | 'sequence-modelling' | 'abstractive-qa' | 'closed-domain-abstrative-qa'
 
@@ -740,6 +993,10 @@ export type SpeechSyncrony = 'synchronous interaction' | 'asynchronous intercati
 
 export type BooleanAnswer = 'Yes' | 'No'
 
+export type SampleType = 'Cluster Sampling' | 'Haphazard Sampling' | 'Multi-stage Sampling' | 'Stratified Sampling' | 'Systematic Sampling' | 'Weighted Sampling' | 'Other'
+
+export type DataProcess = 'Missing Values' | 'Data Augmentation' | 'Outlier Filtering' | 'Remove Duplicates' | 'Data reduction' | 'Sampling' | 'Data Normalization' | 'Others'
+
 export type StringNumberType = string
 
 export type HistogramType = string
@@ -754,16 +1011,18 @@ export type Dash = string
 
 export type DateYear = string
 
+export type DOI = string
+
 export type EmailType = string
 
-export type datasetDescriptorAstType = 'Applications' | 'Area' | 'Attribute' | 'Author' | 'Authoring' | 'Authors' | 'Benchmarking' | 'Binary' | 'Categor' | 'ChiSquare' | 'Citation' | 'Composition' | 'ConsistencyRules' | 'Correlations' | 'DataInstance' | 'DataInstances' | 'Declaration' | 'Demographics' | 'Dependencies' | 'DescriptionDataset' | 'Distribution' | 'FirstRows' | 'Founders' | 'Funder' | 'GatheringProcess' | 'GatheringProcesses' | 'LabelingProcess' | 'LabelingProcesses' | 'Labels' | 'Maintainer' | 'Metadata' | 'Numeri' | 'PairCorrelation' | 'PreProcess' | 'PreProcesses' | 'Provenance' | 'QualityMetric' | 'Quartile' | 'Relation' | 'RelationInstances' | 'Requeriments' | 'SocialConcerns' | 'SocialIssue' | 'Source' | 'SpeechSitatuion' | 'Statistics' | 'Tags' | 'Tasks' | 'Team';
+export type datasetDescriptorAstType = 'Applications' | 'Area' | 'Areas' | 'Attribute' | 'Author' | 'Authoring' | 'Authors' | 'Benchmarking' | 'Binary' | 'Categor' | 'ChiSquare' | 'Citation' | 'Citeauthors' | 'CiteUrl' | 'Composition' | 'ConsistencyRules' | 'Correlations' | 'DataInstance' | 'DataInstances' | 'Dates' | 'Declaration' | 'Demographics' | 'Dependencies' | 'Description' | 'DescriptionDataset' | 'Distribution' | 'DoiCite' | 'FirstRows' | 'Founders' | 'Funder' | 'GatheringProcess' | 'GatheringProcesses' | 'GoldenQuestion' | 'Infrastructure' | 'Keyword' | 'LabelingProcess' | 'LabelingProcesses' | 'LabelRequeriments' | 'Labels' | 'Maintainer' | 'Metadata' | 'Numeri' | 'PairCorrelation' | 'PreProcess' | 'PreProcesses' | 'Provenance' | 'PublishedDate' | 'Publisher' | 'QualityMetric' | 'Quartile' | 'Relation' | 'RelationInstances' | 'ReleaseDate' | 'Requeriments' | 'Sample' | 'SamplingCharacteristics' | 'SocialConcerns' | 'SocialIssue' | 'Source' | 'SpeechSitatuion' | 'Statistics' | 'Tag' | 'Tags' | 'Task' | 'Tasks' | 'Team' | 'Title' | 'UpdateDate' | 'Validation';
 
-export type datasetDescriptorAstReference = 'Attribute:labelProces' | 'Benchmarking:taskName' | 'ConsistencyRules:attrule1' | 'ConsistencyRules:attrule2' | 'ConsistencyRules:instance1' | 'GatheringProcess:labelSocialIssues' | 'GatheringProcess:mapInstance' | 'LabelingProcess:labelSocialIssues' | 'Labels:map' | 'PairCorrelation:attr1' | 'PairCorrelation:attr2' | 'Relation:attRel' | 'Relation:attRelTarget' | 'Relation:insRel' | 'SocialIssue:senseAtt';
+export type datasetDescriptorAstReference = 'Attribute:label' | 'Attribute:labelProces' | 'ConsistencyRules:attrule1' | 'ConsistencyRules:attrule2' | 'ConsistencyRules:instance1' | 'GatheringProcess:labelSocialIssues' | 'GatheringProcess:mapInstance' | 'LabelingProcess:labelSocialIssues' | 'Labels:map' | 'PairCorrelation:attr1' | 'PairCorrelation:attr2' | 'PreProcess:labelSocialIssues' | 'Relation:attRel' | 'Relation:attRelTarget' | 'Relation:insRel' | 'SocialIssue:senseAtt';
 
 export class datasetDescriptorAstReflection implements AstReflection {
 
     getAllTypes(): string[] {
-        return ['Applications', 'Area', 'Attribute', 'Author', 'Authoring', 'Authors', 'Benchmarking', 'Binary', 'Categor', 'ChiSquare', 'Citation', 'Composition', 'ConsistencyRules', 'Correlations', 'DataInstance', 'DataInstances', 'Declaration', 'Demographics', 'Dependencies', 'DescriptionDataset', 'Distribution', 'FirstRows', 'Founders', 'Funder', 'GatheringProcess', 'GatheringProcesses', 'LabelingProcess', 'LabelingProcesses', 'Labels', 'Maintainer', 'Metadata', 'Numeri', 'PairCorrelation', 'PreProcess', 'PreProcesses', 'Provenance', 'QualityMetric', 'Quartile', 'Relation', 'RelationInstances', 'Requeriments', 'SocialConcerns', 'SocialIssue', 'Source', 'SpeechSitatuion', 'Statistics', 'Tags', 'Tasks', 'Team'];
+        return ['Applications', 'Area', 'Areas', 'Attribute', 'Author', 'Authoring', 'Authors', 'Benchmarking', 'Binary', 'Categor', 'ChiSquare', 'Citation', 'Citeauthors', 'CiteUrl', 'Composition', 'ConsistencyRules', 'Correlations', 'DataInstance', 'DataInstances', 'Dates', 'Declaration', 'Demographics', 'Dependencies', 'Description', 'DescriptionDataset', 'Distribution', 'DoiCite', 'FirstRows', 'Founders', 'Funder', 'GatheringProcess', 'GatheringProcesses', 'GoldenQuestion', 'Infrastructure', 'Keyword', 'LabelingProcess', 'LabelingProcesses', 'LabelRequeriments', 'Labels', 'Maintainer', 'Metadata', 'Numeri', 'PairCorrelation', 'PreProcess', 'PreProcesses', 'Provenance', 'PublishedDate', 'Publisher', 'QualityMetric', 'Quartile', 'Relation', 'RelationInstances', 'ReleaseDate', 'Requeriments', 'Sample', 'SamplingCharacteristics', 'SocialConcerns', 'SocialIssue', 'Source', 'SpeechSitatuion', 'Statistics', 'Tag', 'Tags', 'Task', 'Tasks', 'Team', 'Title', 'UpdateDate', 'Validation'];
     }
 
     isInstance(node: unknown, type: string): boolean {
@@ -783,11 +1042,11 @@ export class datasetDescriptorAstReflection implements AstReflection {
 
     getReferenceType(referenceId: datasetDescriptorAstReference): string {
         switch (referenceId) {
+            case 'Attribute:label': {
+                return Labels;
+            }
             case 'Attribute:labelProces': {
                 return LabelingProcess;
-            }
-            case 'Benchmarking:taskName': {
-                return Tasks;
             }
             case 'ConsistencyRules:attrule1': {
                 return Attribute;
@@ -815,6 +1074,9 @@ export class datasetDescriptorAstReflection implements AstReflection {
             }
             case 'PairCorrelation:attr2': {
                 return Attribute;
+            }
+            case 'PreProcess:labelSocialIssues': {
+                return SocialIssue;
             }
             case 'Relation:attRel': {
                 return Attribute;
