@@ -1,5 +1,5 @@
 import { ValidationAcceptor, ValidationCheck, ValidationRegistry } from 'langium';
-import { datasetDescriptorAstType, Author, Funder, Composition, Authoring, Tasks, Description } from './generated/ast';
+import { datasetDescriptorAstType, Author, Funder, Composition, Authoring, Tasks, Description, Areas, Tags } from './generated/ast';
 import { DatasetDescriptorServices } from './dataset-descriptor-module';
 
 /**
@@ -15,11 +15,13 @@ export class DatasetDescriptorValidationRegistry extends ValidationRegistry {
         super(services);
         const validator = services.validation.DatasetDescriptorValidator;
         const checks: DatasetDescriptorChecks = {
-            Metadata: validator.hintsOfDescription,
+            Description: validator.hintsOfDescription,
             Author: validator.authorValidator,
             Funder: validator.hintsOfFunder,
             Authoring: validator.hintsOfAuthoring,
             Composition:validator.hintOfComposition,
+            Areas: validator.hintsOfAreas,
+            Tags: validator.hintsofTags
         };
         this.register(checks, validator);
     }
@@ -30,11 +32,18 @@ export class DatasetDescriptorValidationRegistry extends ValidationRegistry {
  */
 export class DatasetDescriptorValidator {
 
+    hintsofTags(type: Tags, accept: ValidationAcceptor): void {
+        accept('hint', 'Set the tags separated by a whitespace', { node: type, property: 'tags'});
+    }
+    hintsOfAreas(type: Areas, accept: ValidationAcceptor): void {
+        accept('hint', 'Set the areas separated by a whitespace', { node: type, property: 'areas'});
+    }
+
     hintsOfDescription(type:Description, accept: ValidationAcceptor): void {
           //  accept('warning', 'Version should have the following form: V000', { node: type, property: 'version' });
             accept('hint', 'For what propose was the dataser created? \nPlease provide a description', { node: type, property: 'descriptionpurpose' });
+            accept('hint', 'For what tasks this dataset is inteded for', { node: type, property: 'tasks' });
             accept('hint', 'Was there specific gap that needed to be filled?\nPlease provide a description', { node: type, property: 'descriptionGaps'});
-           
     }
 
      
@@ -44,7 +53,7 @@ export class DatasetDescriptorValidator {
     }
     
     hintsOfFunder(type: Funder, accept: ValidationAcceptor): void {
-        accept('hint', '1 - Who founded the creation of the dataset?\n2 - If is there any associated grant, please provide the number and the name of the grantor and the gran name and number', { node: type, property:'name' });
+        accept('hint', '1 - Who founded the creation of the dataset?\n2 - If is there any associated grant, please provide the number and the name of the grantor and the gran name and number \n Set a `_` or a `-` as a white spaces in the name e.g: "John_Smith"? ', { node: type, property:'name' });
     }
     hintsOfAuthoring(type: Authoring, accept: ValidationAcceptor): void {
         
@@ -64,6 +73,8 @@ export class DatasetDescriptorValidator {
        
 
     authorValidator(type: Author, accept: ValidationAcceptor): void {
+
+        accept('hint', 'Please, set a `_` or a `-` as a white spaces in the name e.g: "John_Smith"?', { node: type, property:'name' });
         if (type.name) {
             const firstChar = type.name.substring(0, 1);
             if (firstChar.toUpperCase() !== firstChar) {

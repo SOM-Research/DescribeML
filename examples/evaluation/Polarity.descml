@@ -2,7 +2,7 @@ Dataset: Polarity
     Metadata:
         Title: "Movie Review Polarity" 
         Unique-identifier: Movie_Review_Polarity
-        Version: v0001
+        Version: v2
         Dates:
             Release Date: 13-12-2010
         Citation: 
@@ -14,10 +14,10 @@ Dataset: Polarity
         Description:  
             Purposes: 
                 "The dataset was created to enable research on predicting sentiment polarity—i.e., given a piece of English text, predict whether
-                it has a positive or negative affect—or stance—toward its topic.The dataset was created intentionally with that task in mind, 
-                focusing on movie reviews as a place where affect/sentiment is frequently expressed." 
-            Tasks: [classification, sentiment-analysis,Evaluation of language models]
-            Gaps: "Gender Reference"
+                it has a positive or negative affect—or stance—toward its topic." 
+            Tasks: [classification, sentiment-analysis]
+            Gaps: "The dataset was created intentionally with that task in mind, 
+            focusing on movie reviews as a place where affect/sentiment is frequently expressed."
             Areas: Sentiment
             Tags: Movie Review Sentiment Classification
         Applications: 
@@ -53,14 +53,14 @@ Dataset: Polarity
 
         Authoring:
             Authors:
-                Name Bo_Pong email XXXX@mail.com
-                Name Lillian_Lee email XXXX@mail.com
+                Name "Bo_Pong" email XXXX@mail.com
+                Name "Lillian_Lee" email XXXX@mail.com
             Funders:
-                Name National_Science_Fundations type mixed
-                Name Deparment_of_the_Interior type public 
-                Name National_Business_Center type mixed
-                Name Cornell_University type mixed
-                Name Sloan_Fundaiton type private
+                Name "National_Science_Fundations" type mixed
+                Name "Deparment_of_the_Interior" type public 
+                Name "National_Business_Center" type mixed
+                Name "Cornell_University" type mixed
+                Name "Sloan_Fundaiton" type private
             Erratum?: 
                     "Since its initial release (v0.9) there have been three later releases
                     (v1.0, v1.1, and v2.0). There is not an explicit erratum, but updates and
@@ -88,32 +88,40 @@ Dataset: Polarity
             together with a sentiment polarity rating for whether the text
             corresponds to a review with a rating that is either strongly positive (high number of stars)
             or strongly negative (low number of  stars). The sentiment polarity rating is binary {positive, negative}."
-         Total size: 64702
+         Total size: 2000
          Data Instances: 
                 Instance: MovieReviews 
-                     Description: "···"
+                     Description: "Each instance consists of the text associated with the review, with
+                     obvious ratings information removed from that text (some errors
+                     were found and later fixed). The text was down-cased and HTML
+                     tags were removed. Boilerplate newsgroup header/footer text was
+                     removed. Some additional unspecified automatic filtering was
+                     done. Each instance also has an associated target value: a positive
+                     (+1) or negative (-1) sentiment polarity rating based on the number of stars that that review gave (details on the mapping from
+                     number of stars to polarity is given below in “Data Preprocessing”).
+                     "
                      Type: Record-Data
                      Attribute number: 06
                      Attributes: 
                         attribute: fold_id
                             description: "Folder Id containing the text inside the dataset " 
-                            count: 64702
+                            count: 2000
                             ofType: Categorical
                         attribute: cv_tag
                             description: "Author file id containint the text inside the dataset " 
-                            count: 64702
+                            count: 2000
                             ofType: Categorical 
                         attribute: html_id
                         description: "Author file ID separated by pos and negative labels " 
-                          count: 64702 
+                          count: 2000
                           ofType: Categorical 
                         attribute: sent_id
                             description: "Sentence id inside every file " 
-                            count: 64702 
+                            count: 2000
                             ofType: Categorical 
                         attribute: text_body
                             description: "The text extracted from the revies of IMDB " 
-                            count: 64702
+                            count: 2000
                             ofType: Categorical 
                         attribute: tag
                           description: "The label annotated by the reviewrs " 
@@ -121,13 +129,12 @@ Dataset: Polarity
                           Statistics:
                             Categoric Distribution:
                             [
-                             "pos": 47%,
-                             "neg": 53%
+                             "pos": 50%,
+                             "neg": 50%
                             ]
 
                     Statistics:
                         Quality Metrics:
-                            Sparsity: 00
                             Completeness: 100
                             Class Balance: "attribute 'tag': 50% positive, 50% negative"
                 
@@ -259,7 +266,6 @@ Dataset: Polarity
           offensive language, but we do not expect this to be the norm" 
           Related Attributes: 
             attribute: text_body
-  
         Instance belongs to people:
             Are there protected groups? Yes
 
