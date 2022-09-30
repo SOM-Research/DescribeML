@@ -70,16 +70,18 @@ export class DocumentationGenerator implements Generator {
 
         // Add funders
         let funders = ""
-        description.metadata.authoring.founding[0].funders.forEach(function (funder: any) {
-                
-                funders = funders + 
-            `"funder":{
-                "@type":"Funder",
-                "name":"${funder.name}",
-                "sameAs":"${funder.type}"
-            },
-        `
-        })
+        if (description.metadata.authoring.founding.lenght > 0) {
+            description.metadata.authoring.founding[0].funders.forEach(function (funder: any) {
+                    
+                    funders = funders + 
+                `"funder":{
+                    "@type":"Funder",
+                    "name":"${funder.name}",
+                    "sameAs":"${funder.type}"
+                },
+            `
+            })
+        }
 
         let areas = ''
         let tags = ''

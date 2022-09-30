@@ -140,10 +140,8 @@ Data Provenance:
             Source: SourceID
                 Description: ""
                 Noise: ""
-            // Relation Instances: instanceIdReference
-            // Social Issues: SocialIssueIdReference
-            // How data is colleted:   // Choose an option from the list
-            // When data is collected: ""
+            // How data is collected:   // Choose an option from the list
+            // When data was collected: ""
             Gather Requirements: 
                 Requirement: ""
     LabelingProcesses:

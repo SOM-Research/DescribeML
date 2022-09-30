@@ -80,7 +80,9 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
               "rule": {
                 "$refText": "Composition"
               }
-            }
+            },
+            "elements": [],
+            "cardinality": "?"
           },
           {
             "$type": "Assignment",
@@ -92,7 +94,9 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
               "rule": {
                 "$refText": "Provenance"
               }
-            }
+            },
+            "elements": [],
+            "cardinality": "?"
           },
           {
             "$type": "Assignment",
@@ -104,7 +108,9 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
               "rule": {
                 "$refText": "SocialConcerns"
               }
-            }
+            },
+            "elements": [],
+            "cardinality": "?"
           }
         ]
       }
@@ -716,9 +722,30 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
               "rule": {
                 "$refText": "Area"
               }
-            }
+            },
+            "elements": [],
+            "cardinality": "*"
           }
         ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "Area",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Assignment",
+        "feature": "name",
+        "operator": "=",
+        "terminal": {
+          "$type": "RuleCall",
+          "arguments": [],
+          "rule": {
+            "$refText": "ID"
+          }
+        },
+        "elements": []
       }
     },
     {
@@ -754,25 +781,6 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "cardinality": "*"
           }
         ]
-      }
-    },
-    {
-      "$type": "ParserRule",
-      "parameters": [],
-      "name": "Area",
-      "hiddenTokens": [],
-      "alternatives": {
-        "$type": "Assignment",
-        "feature": "name",
-        "operator": "=",
-        "terminal": {
-          "$type": "RuleCall",
-          "arguments": [],
-          "rule": {
-            "$refText": "ID"
-          }
-        },
-        "elements": []
       }
     },
     {
@@ -1926,25 +1934,58 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
               "$type": "RuleCall",
               "arguments": [],
               "rule": {
-                "$refText": "ID"
+                "$refText": "STRING"
               }
             }
           },
           {
-            "$type": "Keyword",
-            "value": "email"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "email",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "EmailType"
+            "$type": "Alternatives",
+            "elements": [
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "email",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "email",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "EmailType"
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "contact",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "contact",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "STRING"
+                      }
+                    }
+                  }
+                ]
               }
-            }
+            ]
           }
         ]
       }
@@ -2005,7 +2046,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
               "$type": "RuleCall",
               "arguments": [],
               "rule": {
-                "$refText": "ID"
+                "$refText": "STRING"
               }
             }
           },
@@ -2083,7 +2124,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
               "$type": "RuleCall",
               "arguments": [],
               "rule": {
-                "$refText": "ID"
+                "$refText": "STRING"
               }
             }
           },
@@ -5082,22 +5123,29 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             }
           },
           {
-            "$type": "Keyword",
-            "value": "Noise:"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "noise",
-            "operator": "+=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "STRING"
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Noise:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "noise",
+                "operator": "+=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "STRING"
+                  }
+                },
+                "elements": [],
+                "cardinality": "*"
               }
-            },
-            "elements": [],
-            "cardinality": "*"
+            ],
+            "cardinality": "?"
           }
         ]
       }
@@ -6546,6 +6594,11 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
         "elements": [
           {
             "$type": "Keyword",
+            "value": "Non-declared",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
             "value": "The Montreal data licence",
             "elements": []
           },
@@ -7589,6 +7642,11 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
           },
           {
             "$type": "Keyword",
+            "value": "Scrapping",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
             "value": "Sensors",
             "elements": []
           },
@@ -8013,120 +8071,6 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
       }
     },
     {
-      "$type": "TerminalRule",
-      "hidden": true,
-      "name": "WS",
-      "terminal": {
-        "$type": "RegexToken",
-        "regex": "\\\\s+",
-        "elements": []
-      }
-    },
-    {
-      "$type": "TerminalRule",
-      "name": "ID",
-      "terminal": {
-        "$type": "TerminalGroup",
-        "elements": [
-          {
-            "$type": "CharacterRange",
-            "left": {
-              "$type": "Keyword",
-              "value": "^"
-            },
-            "cardinality": "?",
-            "elements": []
-          },
-          {
-            "$type": "TerminalAlternatives",
-            "elements": [
-              {
-                "$type": "RegexToken",
-                "regex": "[_a-zA-Z]",
-                "elements": []
-              },
-              {
-                "$type": "CharacterRange",
-                "left": {
-                  "$type": "Keyword",
-                  "value": "_"
-                },
-                "elements": []
-              }
-            ]
-          },
-          {
-            "$type": "TerminalAlternatives",
-            "elements": [
-              {
-                "$type": "TerminalAlternatives",
-                "elements": [
-                  {
-                    "$type": "RegexToken",
-                    "regex": "[_a-zA-Z]",
-                    "elements": []
-                  },
-                  {
-                    "$type": "CharacterRange",
-                    "left": {
-                      "$type": "Keyword",
-                      "value": "_"
-                    },
-                    "elements": []
-                  }
-                ]
-              },
-              {
-                "$type": "RegexToken",
-                "regex": "[0-9]",
-                "elements": []
-              }
-            ],
-            "cardinality": "*"
-          }
-        ]
-      }
-    },
-    {
-      "$type": "TerminalRule",
-      "name": "NUMBER",
-      "type": "number",
-      "terminal": {
-        "$type": "RegexToken",
-        "regex": "[0-9]+(\\\\.[0-9])?",
-        "elements": []
-      }
-    },
-    {
-      "$type": "TerminalRule",
-      "name": "STRING",
-      "terminal": {
-        "$type": "RegexToken",
-        "regex": "\\"[^\\"]*\\"|'[^']*'",
-        "elements": []
-      }
-    },
-    {
-      "$type": "TerminalRule",
-      "hidden": true,
-      "name": "ML_COMMENT",
-      "terminal": {
-        "$type": "RegexToken",
-        "regex": "\\\\/\\\\*[\\\\s\\\\S]*?\\\\*\\\\/",
-        "elements": []
-      }
-    },
-    {
-      "$type": "TerminalRule",
-      "hidden": true,
-      "name": "SL_COMMENT",
-      "terminal": {
-        "$type": "RegexToken",
-        "regex": "\\\\/\\\\/[^\\\\n\\\\r]*",
-        "elements": []
-      }
-    },
-    {
       "$type": "ParserRule",
       "parameters": [],
       "name": "Dash",
@@ -8197,208 +8141,66 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
       "hiddenTokens": [],
       "type": "string",
       "alternatives": {
-        "$type": "Alternatives",
+        "$type": "Group",
         "elements": [
           {
-            "$type": "Group",
+            "$type": "Alternatives",
             "elements": [
               {
-                "$type": "Alternatives",
-                "elements": [
-                  {
-                    "$type": "RuleCall",
-                    "arguments": [],
-                    "rule": {
-                      "$refText": "NUMBER"
-                    },
-                    "elements": []
-                  },
-                  {
-                    "$type": "RuleCall",
-                    "arguments": [],
-                    "rule": {
-                      "$refText": "ID"
-                    },
-                    "elements": []
-                  }
-                ],
-                "cardinality": "+"
+                "$type": "RuleCall",
+                "arguments": [],
+                "rule": {
+                  "$refText": "NUMBER"
+                },
+                "elements": []
               },
               {
-                "$type": "Alternatives",
-                "elements": [
-                  {
-                    "$type": "Keyword",
-                    "value": "/",
-                    "elements": []
-                  },
-                  {
-                    "$type": "Keyword",
-                    "value": ".",
-                    "elements": []
-                  }
-                ],
-                "cardinality": "+"
-              },
-              {
-                "$type": "Alternatives",
-                "elements": [
-                  {
-                    "$type": "RuleCall",
-                    "arguments": [],
-                    "rule": {
-                      "$refText": "NUMBER"
-                    },
-                    "elements": []
-                  },
-                  {
-                    "$type": "RuleCall",
-                    "arguments": [],
-                    "rule": {
-                      "$refText": "ID"
-                    },
-                    "elements": []
-                  }
-                ],
-                "cardinality": "+"
-              },
-              {
-                "$type": "Alternatives",
-                "elements": [
-                  {
-                    "$type": "Keyword",
-                    "value": "/",
-                    "elements": []
-                  },
-                  {
-                    "$type": "Keyword",
-                    "value": ".",
-                    "elements": []
-                  },
-                  {
-                    "$type": "Keyword",
-                    "value": "-",
-                    "elements": []
-                  }
-                ],
-                "cardinality": "+"
-              },
-              {
-                "$type": "Alternatives",
-                "elements": [
-                  {
-                    "$type": "RuleCall",
-                    "arguments": [],
-                    "rule": {
-                      "$refText": "NUMBER"
-                    },
-                    "elements": []
-                  },
-                  {
-                    "$type": "RuleCall",
-                    "arguments": [],
-                    "rule": {
-                      "$refText": "ID"
-                    },
-                    "elements": []
-                  }
-                ],
-                "cardinality": "+"
-              },
-              {
-                "$type": "Alternatives",
-                "elements": [
-                  {
-                    "$type": "Keyword",
-                    "value": "/",
-                    "elements": []
-                  },
-                  {
-                    "$type": "Keyword",
-                    "value": ".",
-                    "elements": []
-                  },
-                  {
-                    "$type": "Keyword",
-                    "value": "-",
-                    "elements": []
-                  }
-                ],
-                "cardinality": "+"
-              },
-              {
-                "$type": "Alternatives",
-                "elements": [
-                  {
-                    "$type": "RuleCall",
-                    "arguments": [],
-                    "rule": {
-                      "$refText": "NUMBER"
-                    },
-                    "elements": []
-                  },
-                  {
-                    "$type": "RuleCall",
-                    "arguments": [],
-                    "rule": {
-                      "$refText": "ID"
-                    },
-                    "elements": []
-                  }
-                ],
-                "cardinality": "+"
-              },
-              {
-                "$type": "Alternatives",
-                "elements": [
-                  {
-                    "$type": "Keyword",
-                    "value": "/",
-                    "elements": []
-                  },
-                  {
-                    "$type": "Keyword",
-                    "value": ".",
-                    "elements": []
-                  },
-                  {
-                    "$type": "Keyword",
-                    "value": "-",
-                    "elements": []
-                  }
-                ],
-                "cardinality": "+"
-              },
-              {
-                "$type": "Alternatives",
-                "elements": [
-                  {
-                    "$type": "RuleCall",
-                    "arguments": [],
-                    "rule": {
-                      "$refText": "NUMBER"
-                    },
-                    "elements": []
-                  },
-                  {
-                    "$type": "RuleCall",
-                    "arguments": [],
-                    "rule": {
-                      "$refText": "ID"
-                    },
-                    "elements": []
-                  }
-                ]
+                "$type": "RuleCall",
+                "arguments": [],
+                "rule": {
+                  "$refText": "ID"
+                },
+                "elements": []
               }
-            ]
+            ],
+            "cardinality": "+"
           },
           {
-            "$type": "RuleCall",
-            "arguments": [],
-            "rule": {
-              "$refText": "STRING"
-            },
-            "elements": []
+            "$type": "Alternatives",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "/",
+                "elements": []
+              },
+              {
+                "$type": "Keyword",
+                "value": ".",
+                "elements": []
+              }
+            ],
+            "cardinality": "+"
+          },
+          {
+            "$type": "Alternatives",
+            "elements": [
+              {
+                "$type": "RuleCall",
+                "arguments": [],
+                "rule": {
+                  "$refText": "NUMBER"
+                },
+                "elements": []
+              },
+              {
+                "$type": "RuleCall",
+                "arguments": [],
+                "rule": {
+                  "$refText": "ID"
+                },
+                "elements": []
+              }
+            ]
           }
         ]
       }
@@ -8447,6 +8249,133 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             }
           }
         ]
+      }
+    },
+    {
+      "$type": "TerminalRule",
+      "hidden": true,
+      "name": "WS",
+      "terminal": {
+        "$type": "RegexToken",
+        "regex": "\\\\s+",
+        "elements": []
+      }
+    },
+    {
+      "$type": "TerminalRule",
+      "name": "ID",
+      "terminal": {
+        "$type": "TerminalGroup",
+        "elements": [
+          {
+            "$type": "CharacterRange",
+            "left": {
+              "$type": "Keyword",
+              "value": "^"
+            },
+            "cardinality": "?",
+            "elements": []
+          },
+          {
+            "$type": "TerminalAlternatives",
+            "elements": [
+              {
+                "$type": "RegexToken",
+                "regex": "[_a-zA-Z]",
+                "elements": []
+              },
+              {
+                "$type": "CharacterRange",
+                "left": {
+                  "$type": "Keyword",
+                  "value": "_"
+                },
+                "elements": []
+              }
+            ]
+          },
+          {
+            "$type": "TerminalAlternatives",
+            "elements": [
+              {
+                "$type": "TerminalAlternatives",
+                "elements": [
+                  {
+                    "$type": "TerminalAlternatives",
+                    "elements": [
+                      {
+                        "$type": "RegexToken",
+                        "regex": "[_a-zA-Z]",
+                        "elements": []
+                      },
+                      {
+                        "$type": "CharacterRange",
+                        "left": {
+                          "$type": "Keyword",
+                          "value": "_"
+                        },
+                        "elements": []
+                      }
+                    ]
+                  },
+                  {
+                    "$type": "CharacterRange",
+                    "left": {
+                      "$type": "Keyword",
+                      "value": "-"
+                    },
+                    "elements": []
+                  }
+                ]
+              },
+              {
+                "$type": "RegexToken",
+                "regex": "[0-9]",
+                "elements": []
+              }
+            ],
+            "cardinality": "*"
+          }
+        ]
+      }
+    },
+    {
+      "$type": "TerminalRule",
+      "name": "NUMBER",
+      "type": "number",
+      "terminal": {
+        "$type": "RegexToken",
+        "regex": "[0-9]+(\\\\.[0-9])?",
+        "elements": []
+      }
+    },
+    {
+      "$type": "TerminalRule",
+      "name": "STRING",
+      "terminal": {
+        "$type": "RegexToken",
+        "regex": "\\"[^\\"]*\\"|'[^']*'",
+        "elements": []
+      }
+    },
+    {
+      "$type": "TerminalRule",
+      "hidden": true,
+      "name": "ML_COMMENT",
+      "terminal": {
+        "$type": "RegexToken",
+        "regex": "\\\\/\\\\*[\\\\s\\\\S]*?\\\\*\\\\/",
+        "elements": []
+      }
+    },
+    {
+      "$type": "TerminalRule",
+      "hidden": true,
+      "name": "SL_COMMENT",
+      "terminal": {
+        "$type": "RegexToken",
+        "regex": "\\\\/\\\\/[^\\\\n\\\\r]*",
+        "elements": []
       }
     }
   ],

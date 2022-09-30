@@ -3,16 +3,16 @@ grammar DatasetDescriptor
 entry DescriptionDataset:
     (elements+=Declaration)*;
 
+// General structure of the DSL
 Declaration:
  'Dataset:' name=ID 
   generalinfo=Metadata
-  composition=Composition 
-  provenance=Provenance
-  socialConcerns=SocialConcerns
-;
+  (composition=Composition)?
+  (provenance=Provenance)?
+  (socialConcerns=SocialConcerns)?;
 
 //
-// Metadata
+// Metadata of the dataset
 //
 Metadata:
      name= 'Metadata:'
@@ -35,11 +35,9 @@ Dates:
 ReleaseDate:
     name="Release Date:"
     datesR=DateYear;
-
 UpdateDate:
     name="Updated Date:"
     datesU=DateYear;
-
 PublishedDate:
     name="Published Date:"
     datesP=DateYear;
@@ -57,13 +55,10 @@ Tasks:
      name='Tasks:' '[' descriptionTasks+=Task ((','descriptionTasks+=Task)*)?']';
 Task:
     name=MLTasks;
-
-
-Areas: name='Areas:' areas+=Area;
-Tags: name='Tags:' (tags+=Tag)*;
-
+Areas: name='Areas:' (areas+=Area)*;
 Area:
     name=ID;
+Tags: name='Tags:' (tags+=Tag)*;
 Tag:
     name=ID;
 
@@ -79,7 +74,6 @@ Citation:
      (("DOI:" doi=DoiCite)? 
      ("Url:" url=CiteUrl)? 
     );
-
 Title:
     name=STRING;
 Citeauthors:
@@ -92,8 +86,6 @@ DoiCite:
     name=DOI;
 CiteUrl:
     name=STRING;
-
-
 
 // Distrubtion
 Distribution:
@@ -114,8 +106,6 @@ Applications:
     ("Non-recommended:" (future+=STRING)*)?
     ("Uses repository:" repo=STRING)?
     (bachmarking=Benchmarking)?;
-
-
 Benchmarking:
     name="Benchmarking:"
     (("Task:" taskName=Task)?
@@ -126,8 +116,6 @@ Benchmarking:
                 ("Precision:" (precision=NUMBER))?
                 ("Recall:" (recall=NUMBER))? ']'?)?
     ("Reference:" (reference=STRING))?']')*)*;
-
-
 // Authoring
 Authoring:
     name= 'Authoring:' 
@@ -141,16 +129,18 @@ Authoring:
 Authors: 
     name='Authors:'  (authors+=Author*);
 Author:
-    'Name' name=ID 'email' email=EmailType;
+    'Name' name=STRING ('email' email=EmailType | 'contact' contact=STRING);
 Founders: 
     name='Funders:'  (funders+=Funder)+;
 Funder:
-    'Name' name=ID 'type' type=FundersType ('grantor' grantor= STRING 'grantId:' ID)?;
+    'Name' name=STRING 'type' type=FundersType ('grantor' grantor= STRING 'grantId:' ID)?;
 Maintainer:
-    'Name' name=ID 'email' email=EmailType;
+    'Name' name=STRING 'email' email=EmailType;
+
+
 
 //
-// Dataset Composition 
+// Dataset Composition of the dataset
 //
  Composition:
      name='Composition:'
@@ -198,8 +188,6 @@ QualityMetric:
 ConsistencyRules:
     'inv:' instance1=[DataInstance] ": ("attrule1=[Attribute]  Operators (comparator = NUMBER | attrule2=[Attribute])? ")";
    
-   
-
 // Attributes
 Attribute:
     'attribute:' name=ID 
@@ -210,7 +198,7 @@ Attribute:
     ('count:' count=NUMBER)?
     ('ofType:' ((attType=Categor)|(attType=Numeri)))?;
    
-
+// Categoricla Attributes
 Categor:
     name='Categorical'
     (('Statistics:')
@@ -228,7 +216,6 @@ Categor:
     ('Mode:' mode=STRING)?
     ('Categoric Distribution:' '[' catdist=StringNumberType '%' (',' catdist+=StringNumberType '%')* ']')?)?
     ('Quality Metrics:' metrics+=QualityMetric)?;
-
 Binary:
     'Symmetry:' sym=AttributeSymmetry
     'Attribute Sparsity:' attspar=NUMBER;
@@ -240,19 +227,16 @@ FirstRows:
     '3:' rows+=STRING ','
     '4:' rows+=STRING ','
     '5:' rows+=STRING;
-
 ChiSquare:
     ('statistic:' statistic=NUMBER ',')?
     ('p-value:' pvalue=NUMBER)?;
-
 Correlations:
     ('Pearson:'  '[' pearson=StringNumberType (',' pearson+=StringNumberType)* ']')?
     ('Spearman:' '[' spearman=StringNumberType (',' spearman+=StringNumberType)* ']')?
     ('Kendall:' '[' kendall=StringNumberType (',' kendall+=StringNumberType)* ']')?
     ('Cramers:' '[' cramers=StringNumberType (',' cramers+=StringNumberType)* ']')?
     ('Phi-k:' '[' phik=StringNumberType (',' phik+=StringNumberType)* ']')?;
-
-
+// Numerical Attributes
 Numeri:
     name='Numerical' 
     (('Statistics:')
@@ -264,7 +248,6 @@ Numeri:
     ('Quartiles:' quartiles=Quartile)?
     ('IQR:' iqr=NUMBER)?)?
     ('Quality Metrics:' metrics+=QualityMetric*)?;
-
 Quartile:
     'Q1:' q1=NUMBER 
     'Q2:' q2=NUMBER 
@@ -285,15 +268,12 @@ Dependencies:
             'Restriction:' restriction=STRING
             'Rate Limit Usage:' limit=STRING)?;
 
-
 // Sampling
 Sample:
     name='YES' 
     ('Sampling Method:' type=SampleType)?
     ('Sampling criteria:' (criteria=STRING))?
-    ('Sampling Characteristics:' (charact+=SamplingCharacteristics)*)?
-
-    ;
+    ('Sampling Characteristics:' (charact+=SamplingCharacteristics)*)?;
 
 SamplingCharacteristics:
     'Total Data Sampled' total=NUMBER
@@ -306,7 +286,7 @@ SamplingCharacteristics:
 
 
 //
-// Provenance
+// Provenance of the dataset
 //
 Provenance:
     name='Data Provenance:'
@@ -318,7 +298,6 @@ Provenance:
 // Gathering
 GatheringProcesses:
     name='Gathering Processes:' (processes+=GatheringProcess)*;
-
 GatheringProcess:
     'Process:' name=ID
     'Description:' desc=STRING
@@ -332,32 +311,23 @@ GatheringProcess:
     ('Process Demographics:' processDemo = Demographics)?
     ('Gathering Team:' gatheringTeam = Team)?
     ('Gather Requirements:' (requeriments+=Requeriments)*)?;
-
 Source:
     'Source:' name=ID
     'Description:' sourcedesc=STRING
-    'Noise:' (noise+=STRING)*;
-
+    ('Noise:' (noise+=STRING)*)?;
 SpeechSitatuion:
     ('Time and place:' name=STRING)?
     ('Modality:' name=SpeechModality)?
     ('Type:' name=SpeechType)?
     ('Syncrony:' name=SpeechSyncrony)?
     ('Inteded Audience:' name=STRING)?;
-
-
 Team:
     'Who collects the data:' who=STRING
     'Type' gatherType=TeamType
     teamDemographics = Demographics;
-
-// Requeriments
 Requeriments:
     'Requirement:'
     req=STRING;
-
-
-
 
 // Labeling
 LabelingProcesses: 
@@ -376,26 +346,22 @@ Labels:
     'Label:' name=ID
     'Description:' desc=STRING
     'Mapping:' (map=[Attribute] (',')?)*;
-
 Infrastructure:
     ('Tool' tool=STRING)?
     ('Platform' platform=STRING)?
     ('Language' language=STRING)?
     ('Version' version=STRING)?
     ('Comments' other=STRING)?;
-
 Validation:
     ('Validation Method:' method=STRING)?
     ('Validation Dates:' validationDates=STRING)?
     ('Golden Questions:' '[' goldenquestions=GoldenQuestion (',' goldenquestions=GoldenQuestion)* ']')?
     ('Validation Requirements:' (requeriments+=Requeriments)*)?;
-
 GoldenQuestion:
     'Question:' question=STRING
     'Inter-annotation agreement:' answer=NUMBER;
 LabelRequeriments:
     ('Requirements:' (requeriments+=Requeriments)*)?;
-
 Demographics:
     ('Age:' age=NUMBER)?
     ('Gender:' gender=STRING)?
@@ -408,7 +374,7 @@ Demographics:
     ('Training in linguistics/other relevan disciplines:' training=STRING)?;
 
 
-// Data Preprocess
+// Data Preprocesses
 PreProcesses:
     name='Preprocesses:' (preprocesses+=PreProcess)*;
 PreProcess:
@@ -419,7 +385,7 @@ PreProcess:
 
 
 //
-//  SocialConcerns
+//  SocialConcerns of the dataset
 //
 SocialConcerns:
     name='Social Concerns:'
@@ -440,10 +406,11 @@ SocialIssue:
 
     
 
-
+//
 // Semantical Type Rules
+//
 
-CommonLicences returns string:    'The Montreal data licence' | 'Creative Commons' | 'CC0: Public Domain' | 'CC BY-NC-SA 4.0' | 'CC BY-SA 4.0' |'CC BY-SA 3.0' |'CC BY 4.0 (Attribution 4.0 International)' |'CC BY-NC 4.0 (Attribution-NonCommercial 4.0 International)' |'CC BY 3.0 (Attribution 3.0 Unported)' | 'CC BY 3.0 IGO (Attribution 3.0 IGO)'| 'CC BY-NC-SA 3.0 IGO (Attribution-NonCommercial-ShareAlike 3.0 IGO)' | 'CC BY-ND 4.0 (Attribution-NoDerivatives 4.0 International)'
+CommonLicences returns string:   'Non-declared'| 'The Montreal data licence' | 'Creative Commons' | 'CC0: Public Domain' | 'CC BY-NC-SA 4.0' | 'CC BY-SA 4.0' |'CC BY-SA 3.0' |'CC BY 4.0 (Attribution 4.0 International)' |'CC BY-NC 4.0 (Attribution-NonCommercial 4.0 International)' |'CC BY 3.0 (Attribution 3.0 Unported)' | 'CC BY 3.0 IGO (Attribution 3.0 IGO)'| 'CC BY-NC-SA 3.0 IGO (Attribution-NonCommercial-ShareAlike 3.0 IGO)' | 'CC BY-ND 4.0 (Attribution-NoDerivatives 4.0 International)'
                                 | 'CC BY-NC-ND 4.0 (Attribution-NonCommercial-NoDerivatives 4.0 International)' | 'GPL' | 'GPL 2' | 'LGPL 3.0 (GNU Lesser General Public License 3.0)' | 'AGPL 3.0 (GNU Affero General Public License 3.0)'
                                 | 'FDL 1.3 (GNU Free Documentation License 1.3)' | 'Open Data Commons' |'Database: Open Database, Contents: Database Contents' |'Database: Open Database, Contents: © Original Authors' | 'PDDL (ODC Public Domain Dedication and Licence)' | 'ODC-BY 1.0 (ODC Attribution License)'
                                 | 'Community Data License' | 'Community Data License Agreement - Permissive - Version 1.0' | 'Community Data License Agreement - Sharing - Version 1.0' | 'Special' | 'World Bank Dataset Terms of Use' | 'Reddit API Terms' | 'U.S. Government Works' | 'EU ODP Legal Notice';
@@ -477,7 +444,7 @@ AttributeSymmetry returns string: 'Symmetric' | 'Asymmetric';
 AnnotationType returns string: 'Bounding boxes' | 'Lines and splines' | 'Semantinc Segmentation' | '3D cuboids' | 'Polygonal segmentation' |
                                'Landmark and key-point' | 'Image and video annotations' | 'Entity annotation' | 'Content and textual categorization';
 SocialIssueType returns string: 'Privacy' | 'Bias' | 'Sensitive Data' | 'Social Impact'; // Expecting Fairness Ontology
-GatherType returns string: 'API' | 'Sensors' | 'Manual Human Curator' | 'Software' | 'Others';
+GatherType returns string: 'API' |'Scrapping'| 'Sensors' | 'Manual Human Curator' | 'Software' | 'Others' ;
 TeamType returns string: 'Internal' | 'External' | 'Contractors' | 'Crowdsourcing';
 SpeechModality returns string: 'spoken/signed' | 'written';
 SpeechType returns string: 'Scripted/edited' | 'spontaneous';
@@ -486,17 +453,24 @@ BooleanAnswer returns string: 'Yes' | 'No';
 SampleType returns string: 'Cluster Sampling' | 'Haphazard Sampling' | 'Multi-stage Sampling' | 'Stratified Sampling' | 'Systematic Sampling' | 'Weighted Sampling' | 'Other';
 DataProcess returns string: 'Missing Values' | 'Data Augmentation' | 'Outlier Filtering' | 'Remove Duplicates' | 'Data reduction' | 'Sampling' | 'Data Normalization' | 'Others'; 
 
+//
 // Logic Data Types
+//
 StringNumberType returns string: STRING + ':' + NUMBER;
 HistogramType returns string: NUMBER + ':' + NUMBER;
 DataTypes returns string: 'String' | 'Integer' | 'Boolean' | 'Other';
 QualifiedName returns string: ID ('.' ID)*;
 Operators returns string: '<'|'>'|'='|'!='|'+'|'-'|'>=';
+Dash returns string: "-";
+DateYear returns string: NUMBER+Dash+NUMBER+Dash+NUMBER;
+DOI returns string: ((NUMBER|ID)+("/"|".")+(NUMBER|ID));
+EmailType returns string: ID+'@'+ID+'.'+ID;
 
-
+//
 // Terminals
+//
 hidden terminal WS: /\s+/;
-terminal ID: '^'?(/[_a-zA-Z]/|'_')(/[_a-zA-Z]/|'_'|/[0-9]/)*;
+terminal ID: '^'?(/[_a-zA-Z]/|'_')(/[_a-zA-Z]/|'_'|'-'|/[0-9]/)*;
 terminal NUMBER returns number: /[0-9]+(\.[0-9])?/;
 terminal STRING: /"[^"]*"|'[^']*'/;
 
@@ -504,15 +478,9 @@ hidden terminal ML_COMMENT: /\/\*[\s\S]*?\*\//;
 hidden terminal SL_COMMENT: /\/\/[^\n\r]*/;
 
 
-// Date Logic
-Dash returns string: "-";
-DateYear returns string: NUMBER+Dash+NUMBER+Dash+NUMBER;
 
-//
-DOI returns string: ((NUMBER|ID)+("/"|".")+(NUMBER|ID)+("/"|"."|"-")+(NUMBER|ID)+("/"|"."|"-")+(NUMBER|ID)+("/"|"."|"-")+(NUMBER|ID) | STRING);
 
-// Email
-EmailType returns string: ID+'@'+ID+'.'+ID;
+
 
 
 

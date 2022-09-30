@@ -65,6 +65,7 @@ export function isAttribute(item: unknown): item is Attribute {
 
 export interface Author extends AstNode {
     readonly $container: Authors;
+    contact: string
     email: EmailType
     name: string
 }
@@ -963,7 +964,7 @@ export function isValidation(item: unknown): item is Validation {
     return reflection.isInstance(item, Validation);
 }
 
-export type CommonLicences = 'The Montreal data licence' | 'Creative Commons' | 'CC0: Public Domain' | 'CC BY-NC-SA 4.0' | 'CC BY-SA 4.0' | 'CC BY-SA 3.0' | 'CC BY 4.0 (Attribution 4.0 International)' | 'CC BY-NC 4.0 (Attribution-NonCommercial 4.0 International)' | 'CC BY 3.0 (Attribution 3.0 Unported)' | 'CC BY 3.0 IGO (Attribution 3.0 IGO)' | 'CC BY-NC-SA 3.0 IGO (Attribution-NonCommercial-ShareAlike 3.0 IGO)' | 'CC BY-ND 4.0 (Attribution-NoDerivatives 4.0 International)' | 'CC BY-NC-ND 4.0 (Attribution-NonCommercial-NoDerivatives 4.0 International)' | 'GPL' | 'GPL 2' | 'LGPL 3.0 (GNU Lesser General Public License 3.0)' | 'AGPL 3.0 (GNU Affero General Public License 3.0)' | 'FDL 1.3 (GNU Free Documentation License 1.3)' | 'Open Data Commons' | 'Database: Open Database, Contents: Database Contents' | 'Database: Open Database, Contents: © Original Authors' | 'PDDL (ODC Public Domain Dedication and Licence)' | 'ODC-BY 1.0 (ODC Attribution License)' | 'Community Data License' | 'Community Data License Agreement - Permissive - Version 1.0' | 'Community Data License Agreement - Sharing - Version 1.0' | 'Special' | 'World Bank Dataset Terms of Use' | 'Reddit API Terms' | 'U.S. Government Works' | 'EU ODP Legal Notice'
+export type CommonLicences = 'Non-declared' | 'The Montreal data licence' | 'Creative Commons' | 'CC0: Public Domain' | 'CC BY-NC-SA 4.0' | 'CC BY-SA 4.0' | 'CC BY-SA 3.0' | 'CC BY 4.0 (Attribution 4.0 International)' | 'CC BY-NC 4.0 (Attribution-NonCommercial 4.0 International)' | 'CC BY 3.0 (Attribution 3.0 Unported)' | 'CC BY 3.0 IGO (Attribution 3.0 IGO)' | 'CC BY-NC-SA 3.0 IGO (Attribution-NonCommercial-ShareAlike 3.0 IGO)' | 'CC BY-ND 4.0 (Attribution-NoDerivatives 4.0 International)' | 'CC BY-NC-ND 4.0 (Attribution-NonCommercial-NoDerivatives 4.0 International)' | 'GPL' | 'GPL 2' | 'LGPL 3.0 (GNU Lesser General Public License 3.0)' | 'AGPL 3.0 (GNU Affero General Public License 3.0)' | 'FDL 1.3 (GNU Free Documentation License 1.3)' | 'Open Data Commons' | 'Database: Open Database, Contents: Database Contents' | 'Database: Open Database, Contents: © Original Authors' | 'PDDL (ODC Public Domain Dedication and Licence)' | 'ODC-BY 1.0 (ODC Attribution License)' | 'Community Data License' | 'Community Data License Agreement - Permissive - Version 1.0' | 'Community Data License Agreement - Sharing - Version 1.0' | 'Special' | 'World Bank Dataset Terms of Use' | 'Reddit API Terms' | 'U.S. Government Works' | 'EU ODP Legal Notice'
 
 export type RightsData = 'Access' | 'Tagging' | 'Distribute' | 'Re-Represent'
 
@@ -981,7 +982,7 @@ export type AnnotationType = 'Bounding boxes' | 'Lines and splines' | 'Semantinc
 
 export type SocialIssueType = 'Privacy' | 'Bias' | 'Sensitive Data' | 'Social Impact'
 
-export type GatherType = 'API' | 'Sensors' | 'Manual Human Curator' | 'Software' | 'Others'
+export type GatherType = 'API' | 'Scrapping' | 'Sensors' | 'Manual Human Curator' | 'Software' | 'Others'
 
 export type TeamType = 'Internal' | 'External' | 'Contractors' | 'Crowdsourcing'
 
