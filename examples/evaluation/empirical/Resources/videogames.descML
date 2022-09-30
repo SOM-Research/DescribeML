@@ -1,0 +1,82 @@
+Dataset: videoGames
+    Metadata:
+        Title: "Video game ratings from imdb" 
+        Unique-identifier: videoGames 
+        Version: v0000
+        Dates:
+            Release Date: 00-0000-00
+        Description:  
+            Tasks:  [Automatic-Speech-Recognition,Code Generation,Evaluation of language models]
+            Areas: videoGames
+            Tags: games imbd
+        Applications: 
+            Past Uses:"Used in Kaggle libraries"
+        Distribution: 
+            Licences: Non-declared
+        Authoring: 
+            Authors:
+                Name "David Nyagam" contact "https://nyagami.disha.page/"
+    
+    Composition:
+        Rationale: "Data scrapped from Imbd of video games rating"
+        Total size: 12600
+        Data Instances:
+            Instance:  imdb_video_game_rating
+                Description: "A CSV with 8 attributes scrapped from IMDB"
+                Type: Record-Data
+                Attribute number: 8
+                Attributes:
+                        attribute: index   
+                            description: "Index of the data"
+                            count: 12635
+                            ofType: Numerical
+                        attribute:  title  
+                            description: "Name of the game"
+                            count: 12309
+                            ofType: Categorical
+                            Statistics: 
+                                Completeness: 90
+                        attribute:  year  
+                            description: "Year the game was launched"
+                            count: 63
+                            ofType: Categorical
+                        attribute:  genre  
+                            description: "XXXXXXXXXXXXX"
+                            count: 000
+                            ofType: Categorical
+                            Statistics:
+                                Mode: ""
+                        attribute:  rating  
+                            description: "Rating of the game on a scale of 1 to 10"
+                            count: 88
+                            ofType: Numerical
+                            Statistics: 
+                                Mean: 6.5
+                        attribute:  votes  
+                            description: "Numer of the votes"
+                            count: 1638
+                            ofType: Numerical
+                        attribute:  directors  
+                            description: "Name of the directors"
+                            count: 4160
+                            ofType: Categorical
+                            Statistics:
+                                Completeness: 48
+                        attribute:  plot  
+                            description: "Description of the game"
+                            count: 9016
+                            ofType: Categorical
+                            Statistics:
+                                Completeness: 72
+
+Data Provenance:
+    Curation Rationale: "..."
+    Gathering Processes:
+        Process: ProcessID
+            Description: "XXXXXXXXXXXXXXXXXXXXXX"
+            Source: SourceName
+                Description: "XXXXXXXXXXXXXXXXXXXXX"
+            How data is collected: Scrapping
+Social Concerns:
+
+
