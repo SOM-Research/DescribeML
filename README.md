@@ -26,7 +26,7 @@ The easiest way to install the plugin is by using the **Visual Studio Code Marke
 
 Instead, you can install it manually using the packaged release of the plugin in this [repository](https://github.com/SOM-Research/DescribeML) that can be found at the root of the project. 
 
-The file is **DescribeML-0.0.8.vsix**
+The file is **DescribeML-0.0.9.vsix**
 
 Open your terminal (or the terminal inside the VSCode) and write this:
 
@@ -34,7 +34,7 @@ Open your terminal (or the terminal inside the VSCode) and write this:
 
 git clone https://github.com/SOM-Research/DescribeML.git datasets
 cd datasets 
-code --install-extension DescribeML-0.0.8.vsix
+code --install-extension DescribeML-0.0.9.vsix
 ```
 
 <span style="font-size:0.7em;">*Troubles: If you cannot see the syntax highlight in the examples files (p.e. *Melanoma.descml*) as the image below. Please, reload the VSCode editor and write the code --install command again* </span>
