@@ -10,7 +10,6 @@ Dataset: Polarity
             Authors: "Bo Pang and Lillian Lee"
             Year: 2004 
             Journal: "Springer, proceedings of the 42nd Annual Meeting of the Association for Computational Linguistics"
-            DOI: "10.5281/zenodo.569"
         Description:  
             Purposes: 
                 "The dataset was created to enable research on predicting sentiment polarity—i.e., given a piece of English text, predict whether
