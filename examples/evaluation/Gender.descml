@@ -45,14 +45,14 @@ Dataset: Gender
        
         Authoring:
             Authors:
-                Name Yang_Trista_Cao email emailo@emailo.com
-                Name Hal_Daume_III	email emailo@emailo.com
+                Name "Yang_Trista_Cao" email emailo@emailo.com
+                Name "Hal_Daume_III"	email emailo@emailo.com
             Funders:
-                Name UMD_CS_department type mixed
-                Name MSR type private 
+                Name "UMD_CS_department" type mixed
+                Name "MSR" type private 
             Maintainer:
-                Name Yang_Trista_Cao email emailo@emailo.com
-                Name Hal_Daume_III email emailo@emailo.com
+                Name "Yang_Trista_Cao" email emailo@emailo.com
+                Name "Hal_Daume_III" email emailo@emailo.com
             Erratum?: 
                 "Currently, no. As errors are encountered, future versions of the dataset
                 may be released (but will be versioned). They will all be provided in the same github location."
@@ -84,8 +84,6 @@ Dataset: Gender
                             ofType: Categorical 
                 
                 Statistics:
-                    Categoric Distribution:
-                        ["": 0%]
                     Quality Metrics: 
                         Sparsity: 8.9 
                         Noisy labels: "Please considers some humans errors in the annotation process could be done"

@@ -16,7 +16,7 @@ Dataset: Melanoma_Classification_Dataset
             Tasks:    [classification, image-classification]
             Gaps:     "As the leading healthcare organization for informatics in medical imaging..."  
             Areas:    HealthCare
-            Tags:     Images Melanoma diagnosis Skin Image
+            Tags:     Images Melanoma 
         Applications:
             Past Uses: "Yes. The 2020 SIIM-ISIC Melanoma Classification challenge dataset 
             was created for the purpose of conducting a machine learning competition to 
@@ -56,25 +56,25 @@ Dataset: Melanoma_Classification_Dataset
             Additional Conditions "In addition to the CC-BY-NC license, the dataset is governed by the ISIC Terms of Use. Learn more about the terms of use here: https://datanutrition.org/labels/isic-2020/ "                          
     Authoring:
         Authors:
-            Name Skin_Imaging_Collaboration_ISIC  email emailo@emailo.com
-            Name International_Skin_Imaging_Collaboration  email emailo@emailo.com
-            Name Hospital_Clinic_de_Barcelona email emailo@emailo.com
-            Name Medical_University_of_Vienna email emailo@emailo.com
-            Name Memorial_Sloan_Kettering_Cancer_Center email emailo@emailo.com
-            Name Melanoma_Institute_Australiaa email emailo@emailo.com
-            Name University_of_Queensland email emailo@emailo.com
-            Name University_of_athens_medical_school email emailo@emailo.com
+            Name "Skin Imaging Collaboration ISIC"  email emailo@emailo.com
+            Name "International_Skin_Imaging_Collaboration"  email emailo@emailo.com
+            Name "Hospital_Clinic_de_Barcelona" email emailo@emailo.com
+            Name "Medical_University_of_Vienna" email emailo@emailo.com
+            Name "Memorial_Sloan_Kettering_Cancer_Center" email emailo@emailo.com
+            Name "Melanoma_Institute_Australiaa" email emailo@emailo.com
+            Name "University_of_Queensland" email emailo@emailo.com
+            Name "University_of_athens_medical_school" email emailo@emailo.com
         Funders:
-            Name The_University_of_Queensland  type mixed 
+            Name "The_University_of_Queensland"  type mixed 
                 grantor "National Health and Medical Research Council (NHMRC) – Centre of Research Excellence Scheme" 
                 grantId: APP1099021
-            Name HPS type private
+            Name "HPS" type private
                 grantor "NHMRC MRFF Next Generation Clinical Researchers Program Practitioner Fellowship"
                 grantId: APP1137127
-            Name Other_founding_sources_I type public
+            Name "Other_founding_sources_I" type public
                 grantor "Melanoma Research Alliance Young Investigator Award and NIH Core Grant"
                 grantId: A614197
-            Name Other_founding_sources_II type public
+            Name "Other_founding_sources_II" type public
                 grantor "NIH Core Grant"
                 grantId: P30_CA008748
             Erratum?: "There is no erratum known" 
@@ -168,8 +168,8 @@ Dataset: Melanoma_Classification_Dataset
             Pair Correlation: 
                 between ImageId and diagnosis 
                 between age and external source 
-                    From: "we" 
-                    Rationale: "dwe"
+                    From: "Nationa Statistical Institue of Nevada" 
+                    Rationale: "The age correlation is significant with the external source"
             Quality Metrics: 
                 Completeness: 100
         Consistency rules: 
@@ -206,7 +206,6 @@ Dataset: Melanoma_Classification_Dataset
                         and included in the dataset. The 2020 SIIM-ISIC Melanoma Classification competition 
                         page on Kaggle lists the redundant cases and deidentified patient labels 
                         (https://www.kaggle.com/c/siim- isic-melanoma- classification/discussion/161943)."
-
                 Related Instances: skinImages
                 How data is collected: Manual Human Curator
                 When data was collected: 
@@ -215,7 +214,7 @@ Dataset: Melanoma_Classification_Dataset
                 Process Demographics:
                     Country/Region: 'Australia'
                 Gathering Team:
-                    Who collects the data: ""
+                    Who collects the data: "Practicioners and interns from the health institutions"
                     Type Internal
                 Gather Requirements:
                   Requirement: "We queried clinical imaging databases across the six centers to generate a multicenter imaging dataset. 
