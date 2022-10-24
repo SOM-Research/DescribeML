@@ -88,7 +88,9 @@ The tool will be presented at the ACM/IEEE 25th International Conference on [Mod
 
 ## Contributing
 
-The complete grammar in Extended Backus-Naur form (EBNF) can be seen in **src/language-server/dataset-descriptor.langium**
+This project is being development as part of a research line of the [SOM Research Lab](https://som-research.github.io/), but we are open to contributions from the community. Any comment is welcome!
+
+The complete grammar declared using the [Langium Grammar language](https://github.com/langium/langium/blob/main/packages/langium/src/grammar/langium-grammar.langium) (similar to the Extended Backus-Naur form (EBNF)) can be seen in **src/language-server/dataset-descriptor.langium**
 
 You may need extra steps to contribute or dive into the plugin or the language. (to match with the exact version of the Langium, the base framework we used)
 
@@ -108,3 +110,24 @@ You may need extra steps to contribute or dive into the plugin or the language. 
 This repo comes with an already built-in config to debug. Just go to Debug in VSCode, and launch the Extension config. Please check your port 6009 is free.
   
 For more information about how the framework works and how the language can be extended, please refer to https://github.com/langium/langium or the VSCode extension API documentation https://code.visualstudio.com/api
+
+If you are interested in contributing to this project, please read the [CONTRIBUTING.md](CONTRIBUTING.md) file.
+
+# Code of Conduct
+
+At SOM Research Lab we are dedicated to creating and maintaining welcoming, inclusive, safe, and harassment-free development spaces. Anyone participating will be subject to and agrees to sign on to our [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## License
+
+Shield: [![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
+
+This work is licensed under a
+[Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa].
+
+The [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) license allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, so long as attribution is given to the creator. The license allows for commercial use. If you remix, adapt, or build upon the material, you must license the modified material under identical terms.
+
+[![CC BY-SA 4.0][cc-by-sa-image]][cc-by-sa]
+
+[cc-by-sa]: http://creativecommons.org/licenses/by-sa/4.0/
+[cc-by-sa-image]: https://licensebuttons.net/l/by-sa/4.0/88x31.png
+[cc-by-sa-shield]: https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg
