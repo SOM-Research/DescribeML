@@ -88,7 +88,9 @@ The tool will be presented at the ACM/IEEE 25th International Conference on [Mod
 
 ## Contributing
 
-This project is being development as part of a research line of the [SOM Research Lab](https://som-research.github.io/), but we are open to contributions from the community. Any comment is welcome!
+This project is being development as part of a research line of the [SOM Research Lab](https://som-research.github.io/), but we are open to contributions from the community. If you are interested in contributing to this project, please read the [CONTRIBUTING.md](CONTRIBUTING.md) file.
+
+Here are some tips to contribute: 
 
 The complete grammar declared using the [Langium Grammar language](https://github.com/langium/langium/blob/main/packages/langium/src/grammar/langium-grammar.langium) (similar to the Extended Backus-Naur form (EBNF)) can be seen in **src/language-server/dataset-descriptor.langium**
 
@@ -111,7 +113,6 @@ This repo comes with an already built-in config to debug. Just go to Debug in VS
   
 For more information about how the framework works and how the language can be extended, please refer to https://github.com/langium/langium or the VSCode extension API documentation https://code.visualstudio.com/api
 
-If you are interested in contributing to this project, please read the [CONTRIBUTING.md](CONTRIBUTING.md) file.
 
 # Code of Conduct
 
