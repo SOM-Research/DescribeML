@@ -120,15 +120,10 @@ At SOM Research Lab we are dedicated to creating and maintaining welcoming, incl
 
 ## License
 
-Shield: [![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
+Shield: [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This work is licensed under a
-[Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa].
 
-The [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) license allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, so long as attribution is given to the creator. The license allows for commercial use. If you remix, adapt, or build upon the material, you must license the modified material under identical terms.
+The source code for the site is licensed under the MIT license, which you can find in the MIT-LICENSE file.
 
-[![CC BY-SA 4.0][cc-by-sa-image]][cc-by-sa]
-
-[cc-by-sa]: http://creativecommons.org/licenses/by-sa/4.0/
-[cc-by-sa-image]: https://licensebuttons.net/l/by-sa/4.0/88x31.png
-[cc-by-sa-shield]: https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg
+All graphical assets are licensed under the
+[Creative Commons Attribution 3.0 Unported License](https://creativecommons.org/licenses/by/3.0/).
