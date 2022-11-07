@@ -12,7 +12,7 @@
     
 # DescribeML: 
 #### Language Reference Guide 
-(Version 0.0.6)
+(Version 0.1)
 
 
 DescribeML is a VSCode language plugin to describe machine-learning datasets. <br>

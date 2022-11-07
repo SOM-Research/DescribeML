@@ -46,11 +46,11 @@ PublishedDate:
 Description: 
     name="Description:"
     (desc=STRING | 
-        (('Purposes:' descriptionpurpose=STRING)? 
-         (tasks='Tasks:' '[' descriptionTasks+=Task ((','descriptionTasks+=Task)*']')?)? 
-         ('Gaps:' descriptionGaps=STRING)?)) 
-         (area=Areas)?
-         (tags=Tags)?;
+    (('Purposes:' descriptionpurpose=STRING)? 
+    (tasks='Tasks:' '[' descriptionTasks+=Task ((','descriptionTasks+=Task)*']')?)? 
+    ('Gaps:' descriptionGaps=STRING)?)) 
+    (area=Areas)?
+    (tags=Tags)?;
 Tasks:
      name='Tasks:' '[' descriptionTasks+=Task ((','descriptionTasks+=Task)*)?']';
 Task:

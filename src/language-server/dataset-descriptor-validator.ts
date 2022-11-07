@@ -1,5 +1,5 @@
 import { ValidationAcceptor, ValidationCheck, ValidationRegistry } from 'langium';
-import { datasetDescriptorAstType, Author, Funder, Composition, Authoring, Tasks, Description, Areas, Tags } from './generated/ast';
+import { datasetDescriptorAstType, Author, Funder, Composition, Authoring, Tasks, Description, Areas, Tags, Distribution } from './generated/ast';
 import { DatasetDescriptorServices } from './dataset-descriptor-module';
 
 /**
@@ -21,7 +21,8 @@ export class DatasetDescriptorValidationRegistry extends ValidationRegistry {
             Authoring: validator.hintsOfAuthoring,
             Composition:validator.hintOfComposition,
             Areas: validator.hintsOfAreas,
-            Tags: validator.hintsofTags
+            Tags: validator.hintsofTags,
+            Distribution:validator.hintsOfDistribution
         };
         this.register(checks, validator);
     }
@@ -37,6 +38,12 @@ export class DatasetDescriptorValidator {
     }
     hintsOfAreas(type: Areas, accept: ValidationAcceptor): void {
         accept('hint', 'Set the areas separated by a whitespace', { node: type, property: 'areas'});
+    }
+
+    hintsOfDistribution(type: Distribution, accept: ValidationAcceptor): void {
+        accept('hint', 'Set the licence of the dataset. Indicate in `others:` if any other policy is applied to the data', { node: type, property: 'name'});
+        accept('hint', 'Stand-alone: Choose the level of distribution of the stand-alone data.', { node: type, property: 'rights'});
+        accept('hint', 'Rights-model: Choose the level of distribution of the models trained with the data.', { node: type, property: 'rightsModels'});
     }
 
     hintsOfDescription(type:Description, accept: ValidationAcceptor): void {

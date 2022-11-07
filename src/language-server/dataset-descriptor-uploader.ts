@@ -75,9 +75,9 @@ export class DatasetUploader implements Uploader {
             Rights(with models): Benchmark
         Authoring:
             Authors:
-                Name authorName email XXXX@mail.com
+                Name "authorName" email XXXX@mail.com
             Funders:
-                Name founderName type mixed
+                Name "founderName" type mixed
             Erratum?: ""
             Version lifecycle:""
         Contribution guidelines: ""
