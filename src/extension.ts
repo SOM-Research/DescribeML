@@ -19,11 +19,22 @@ export function activate(context: vscode.ExtensionContext): void {
 
     context.subscriptions.push(vscode.commands.registerCommand('datadesc.loadDataset', async () => {
         //await vscode.window.showInformationMessage('Hello World!');
-       const fileUris = await vscode.window.showOpenDialog({ canSelectFolders: false, canSelectFiles: true, canSelectMany: true, openLabel: 'Select your data files' });
-       if (fileUris){
-         await loadCsv(context, fileUris[0]);
-       }
+        vscode.window.withProgress(
+            {
+                location: vscode.ProgressLocation.Notification,
+                title: "Loading your data... please wait"
+            },
+            async progress => {
+                const fileUris = await vscode.window.showOpenDialog({ canSelectFolders: false, canSelectFiles: true, canSelectMany: true, openLabel: 'Select your data files' });
+                if (fileUris){
+                    await loadCsv(context, fileUris[0]);
+                }
+            });
+      
     }));
+
+
+
 
     context.subscriptions.push(vscode.commands.registerCommand('datadesc.generateDocumentation', async () => {
        await initHtmlPreview(context);
@@ -35,6 +46,7 @@ export function activate(context: vscode.ExtensionContext): void {
 
 
 }
+
 
 // This function is called when the extension is deactivated.
 export function deactivate(): Thenable<void> | undefined {
@@ -85,12 +97,10 @@ function startLanguageClient(context: vscode.ExtensionContext): LanguageClient {
 
 async function loadCsv(context: vscode.ExtensionContext, filepath: vscode.Uri) {
     console.log('start');
-
     const text:string = await datasetServices.uploader.DatasetUploader.uploadDataset(filepath.fsPath);
     let snippet = new vscode.SnippetString();
     snippet.appendText(text);
     //createDatasetDescriptorServices().shared.workspace.LangiumDocuments.getOrCreateDocument()
-    
     const editor = vscode.window.activeTextEditor;
    // editor?.insertSnippet(snippet,editor.revealRange())
     if (editor) {
@@ -111,7 +121,7 @@ async function loadCsv(context: vscode.ExtensionContext, filepath: vscode.Uri) {
             editor.insertSnippet(snippet, snippetPosition);
         });
     }
-    await vscode.window.showInformationMessage('File Loaded');
+    vscode.window.showInformationMessage('File Loaded :=)    Start creating your documentation');
 }
 
 let previewPanel : vscode.WebviewPanel;
