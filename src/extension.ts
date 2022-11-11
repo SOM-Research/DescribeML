@@ -1,24 +1,30 @@
+/******************************************************************************
+ * Copyright 2022 SOM Research
+ * This program and the accompanying materials are made available under the
+ * terms of the MIT License, which is available in the project root.
+ ******************************************************************************/
 import * as vscode from 'vscode';
 import * as path from 'path';
 import fs from 'fs';
 import {
     LanguageClient, LanguageClientOptions, ServerOptions, TransportKind
 } from 'vscode-languageclient/node';
-
 import { createDatasetDescriptorServices, DatasetDescriptorServices} from './language-server/dataset-descriptor-module';
 
-
 let client: LanguageClient;
-
 let datasetServices : DatasetDescriptorServices;
+let previewPanel : vscode.WebviewPanel;
+
 
 // This function is called when the extension is activated.
 export function activate(context: vscode.ExtensionContext): void {
+
+    // Starting the Language services
     client = startLanguageClient(context);
     datasetServices = createDatasetDescriptorServices().datasetDescription;
 
+    // Here we register the upload service
     context.subscriptions.push(vscode.commands.registerCommand('datadesc.loadDataset', async () => {
-        //await vscode.window.showInformationMessage('Hello World!');
         vscode.window.withProgress(
             {
                 location: vscode.ProgressLocation.Notification,
@@ -27,24 +33,20 @@ export function activate(context: vscode.ExtensionContext): void {
             async progress => {
                 const fileUris = await vscode.window.showOpenDialog({ canSelectFolders: false, canSelectFiles: true, canSelectMany: true, openLabel: 'Select your data files' });
                 if (fileUris){
-                    await loadCsv(context, fileUris[0]);
+                    await uploaderService(context, fileUris[0]);
                 }
             });
-      
     }));
 
-
-
-
+    // Here we register the HTML generation service
     context.subscriptions.push(vscode.commands.registerCommand('datadesc.generateDocumentation', async () => {
-       await initHtmlPreview(context);
+       await generatorHTMLService(context);
     }));
 
+    // Here we register the HTML generation service (save action)
     context.subscriptions.push(vscode.commands.registerCommand('datadesc.saveDocumentHTML', async () => {
         await saveDocumentHTML(context);
      }));
-
-
 }
 
 
@@ -95,7 +97,7 @@ function startLanguageClient(context: vscode.ExtensionContext): LanguageClient {
     return client;
 }
 
-async function loadCsv(context: vscode.ExtensionContext, filepath: vscode.Uri) {
+async function uploaderService(context: vscode.ExtensionContext, filepath: vscode.Uri) {
     console.log('start');
     const text:string = await datasetServices.uploader.DatasetUploader.uploadDataset(filepath.fsPath);
     let snippet = new vscode.SnippetString();
@@ -124,9 +126,7 @@ async function loadCsv(context: vscode.ExtensionContext, filepath: vscode.Uri) {
     vscode.window.showInformationMessage('File Loaded! Start creating your documentation  :) ');
 }
 
-let previewPanel : vscode.WebviewPanel;
-
-async function initHtmlPreview(context: vscode.ExtensionContext) {
+async function generatorHTMLService(context: vscode.ExtensionContext) {
     let title:string = 'Dataset Documentation';
     previewPanel = vscode.window.createWebviewPanel(
         // Webview id
@@ -147,19 +147,14 @@ async function initHtmlPreview(context: vscode.ExtensionContext) {
     setPreviewActiveContext(true);
     const generator =  datasetServices.generation.DocumentationGenerator;
     const text = vscode.window.activeTextEditor?.document.getText();
-    
     if (text) {
-   
         const returner = generator.generate(text);
         updateHtmlPreview(returner);
         console.log(returner);
-       
     }
-
     previewPanel.onDidDispose(() => {
         setPreviewActiveContext(false);
     })
-    //updateHtmlPreview("<h1> hello world </h1>")
 }
 
 function updateHtmlPreview(html : string | void) {

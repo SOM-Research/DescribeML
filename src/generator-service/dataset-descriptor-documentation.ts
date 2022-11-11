@@ -1,17 +1,20 @@
+/******************************************************************************
+ * Copyright 2022 SOM Research
+ * This program and the accompanying materials are made available under the
+ * terms of the MIT License, which is available in the project root.
+ ******************************************************************************/
 import { AstNode, LangiumParser } from 'langium';
-import { DescriptionDataset, isDescriptionDataset } from './generated/ast';
-import { DatasetDescriptorServices } from './dataset-descriptor-module';
+import { DescriptionDataset, isDescriptionDataset } from '../language-server/generated/ast';
+import { DatasetDescriptorServices } from '../language-server/dataset-descriptor-module';
 
-
-//import { AnyRecord } from 'dns';
-//import { forEach } from 'mathjs';
 
 export interface Generator {
     generate(Declaration : string | AstNode) : string | undefined;
 }
 
 /**
- * Generator for HTML that implements Declaration.
+ * Generator HTML service main class
+ * To generate the HTML we parse the description and we use PUG as a engine teamplate to build the HTML
  */
 export class DocumentationGenerator implements Generator {
 
@@ -25,7 +28,8 @@ export class DocumentationGenerator implements Generator {
         const astNode = (typeof(DescriptionDataset) == 'string' ? this.parser.parse(DescriptionDataset).value : DescriptionDataset);
         return (isDescriptionDataset(astNode) ? this.Declaration2Html(astNode) : undefined);
     }
-    // Main function
+
+    // Generation of the HTML
     Declaration2Html(DescriptionDataset : DescriptionDataset) : string {
         const description = {
             title : DescriptionDataset.elements[0].name,
@@ -167,7 +171,7 @@ export class DocumentationGenerator implements Generator {
         const path = require('path')
         let sep = path.sep
         let dirname = __dirname;
-        // Compile the source code
+        // Compile the source code using PUG
         const compiledFunction = pug.compileFile(dirname+sep+'templates'+sep+'document.pug');
         // Compile the source code
         return compiledFunction({

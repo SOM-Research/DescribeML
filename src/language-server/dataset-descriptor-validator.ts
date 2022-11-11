@@ -1,9 +1,15 @@
+/******************************************************************************
+ * Copyright 2022 SOM Research
+ * This program and the accompanying materials are made available under the
+ * terms of the MIT License, which is available in the project root.
+ ******************************************************************************/
+
 import { ValidationAcceptor, ValidationCheck, ValidationRegistry } from 'langium';
 import { datasetDescriptorAstType, Author, Funder, Composition, Authoring, Tasks, Description, Areas, Tags, Distribution } from './generated/ast';
 import { DatasetDescriptorServices } from './dataset-descriptor-module';
 
 /**
- * Map AST node types to validation checks.
+ * In this class we implement the custom validation services for the tool
  */
 type DatasetDescriptorChecks = { [type in datasetDescriptorAstType]?: ValidationCheck | ValidationCheck[] }
 

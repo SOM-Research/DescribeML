@@ -1,3 +1,13 @@
+/******************************************************************************
+ * Copyright 2022 SOM Research
+ * This program and the accompanying materials are made available under the
+ * terms of the MIT License, which is available in the project root.
+ ******************************************************************************/
+ /*
+ * This is the main grammar file. Here a defined the different parts of the 
+ * grammar implementation. The semantic rules and the terminals are at the
+ * final part of the file
+ */
 grammar DatasetDescriptor
 
 entry DescriptionDataset:
@@ -140,7 +150,7 @@ Maintainer:
 
 
 //
-// Dataset Composition of the dataset
+// Dataset Composition 
 //
  Composition:
      name='Composition:'
@@ -409,7 +419,6 @@ SocialIssue:
 //
 // Semantical Type Rules
 //
-
 CommonLicences returns string:   'Non-declared'| 'The Montreal data licence' | 'Creative Commons' | 'CC0: Public Domain' | 'CC BY-NC-SA 4.0' | 'CC BY-SA 4.0' |'CC BY-SA 3.0' |'CC BY 4.0 (Attribution 4.0 International)' |'CC BY-NC 4.0 (Attribution-NonCommercial 4.0 International)' |'CC BY 3.0 (Attribution 3.0 Unported)' | 'CC BY 3.0 IGO (Attribution 3.0 IGO)'| 'CC BY-NC-SA 3.0 IGO (Attribution-NonCommercial-ShareAlike 3.0 IGO)' | 'CC BY-ND 4.0 (Attribution-NoDerivatives 4.0 International)'
                                 | 'CC BY-NC-ND 4.0 (Attribution-NonCommercial-NoDerivatives 4.0 International)' | 'GPL' | 'GPL 2' | 'LGPL 3.0 (GNU Lesser General Public License 3.0)' | 'AGPL 3.0 (GNU Affero General Public License 3.0)'
                                 | 'FDL 1.3 (GNU Free Documentation License 1.3)' | 'Open Data Commons' |'Database: Open Database, Contents: Database Contents' |'Database: Open Database, Contents: © Original Authors' | 'PDDL (ODC Public Domain Dedication and Licence)' | 'ODC-BY 1.0 (ODC Attribution License)'

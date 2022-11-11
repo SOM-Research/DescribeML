@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright 2021 TypeFox GmbH
+ * Copyright 2022 SOM Research
  * This program and the accompanying materials are made available under the
  * terms of the MIT License, which is available in the project root.
  ******************************************************************************/
@@ -8,7 +8,9 @@
  import { CancellationToken } from 'vscode-languageserver';
  import { isAttribute, DataInstance } from './generated/ast';
 
- 
+ /*
+ * This class provides custom index services to the LSP. In particular, we allow child classes of the AST to reference child of other parents.
+ */
  export class DatasetDescriptorDescriptionProvider extends DefaultAstNodeDescriptionProvider {
  
      constructor(services: LangiumServices) {

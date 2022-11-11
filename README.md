@@ -79,20 +79,48 @@ Great! That's it.
 For more information, check out the **quick [presentation](https://www.youtube.com/watch?v=Bf3bhWB-UJY) video!**
 
 
-## Research background
-
-DescribeML is part of an ongoing research project to improve dataset documentation for machine learning. The core of our proposal is a domain-specific language ([preprint here](https://www.researchgate.net/publication/361836238_A_domain-specific_language_for_describing_machine_learning_datasets)) that allows data creators to describe relevant aspects of their data for the machine learning field and beyond. The [Critical Dataset Studios](https://knowingmachines.org/reading-list#dataset_documentation_practices) of the [Knowing Machines](https://knowingmachines.org) project have compiled an excellent list of current documentation practices.
-
-The tool will be presented at the ACM/IEEE 25th International Conference on [Model Driven Engineering Languages and Systems](https://conf.researchr.org/home/models-2022) and a preprint of the tool publication can be seen [here](https://www.researchgate.net/publication/363256430_DescribeML_A_Tool_for_Describing_Machine_Learning_Datasets)
 
 
 ## Contributing
 
-This project is being development as part of a research line of the [SOM Research Lab](https://som-research.github.io/), but we are open to contributions from the community. If you are interested in contributing to this project, please read the [CONTRIBUTING.md](CONTRIBUTING.md) file.
+This project is being development as part of a research line of the [SOM Research Lab](https://som-research.github.io/), but we are open to contributions from the community. If you are interested in contributing to this project, please first read the [CONTRIBUTING.md](CONTRIBUTING.md) guidelines file.
 
 Here are some tips to contribute: 
 
-The complete grammar declared using the [Langium Grammar language](https://github.com/langium/langium/blob/main/packages/langium/src/grammar/langium-grammar.langium) (similar to the Extended Backus-Naur form (EBNF)) can be seen in **src/language-server/dataset-descriptor.langium**
+### Repository structure
+
+Please check the following tree for a list of the repository's relevant sections. For tool users, please refer to the *documentation* and *examples* folders for examples and the language reference guide.
+
+If you want to contribute or just dive into the code, this can be found under the *src* folder. The code referring to HTML generation is located in the *generator-service* folder, whereas the code regarding dataset uploader and draft creation is located in the *uploader-service* folder.
+
+Finally, the *language-server* folder contains the Grammar main file as well as several custom language features like validation and indexing. Each one is in the associated file.
+
+
+
+```
+├── documentation
+│   └── language-reference-guide.md         // The language reference guide
+├── examples
+│     ├── evaluation
+│       ├── Gender.descml                   // Gender dataset example
+|       ├── Melanoma.descml                 // Melanoma dataset example
+|       └── Polarity.descml                 // Polarity dataset example
+├── out                                     // The generated JS from the src folder
+└── src                                     // The source code of the project
+  ├── cli                                     // Langium framework utils
+  ├── generator-service                       // The tool's HTML generator service
+  ├── uploader-service                        // The tool's HTML uploader service
+  └── language-server                         // The tool's language features
+        ├── generated                           // Generated grammar and AST from Langium
+        ├── dataset-description-index.ts        // Custom index feature
+        ├── dataset-description-module.ts       // Declaration of the custom language features
+        ├── dataset-description-validator.ts    // Custom language features 
+        └── dataset-description.langium         // The main grammar file of the tool
+  
+```
+
+
+#### Tips to contribute
 
 You may need extra steps to contribute or dive into the plugin or the language. (to match with the exact version of the Langium, the base framework we used)
 
@@ -107,11 +135,18 @@ You may need extra steps to contribute or dive into the plugin or the language. 
 5 - Install the Langium plugin through the UI of VSCode
 
 
-### Testing the extensions under the hood
+#### Debugging the extensions
 
 This repo comes with an already built-in config to debug. Just go to Debug in VSCode, and launch the Extension config. Please check your port 6009 is free.
   
 For more information about how the framework works and how the language can be extended, please refer to https://github.com/langium/langium or the VSCode extension API documentation https://code.visualstudio.com/api
+
+## Research background
+
+DescribeML is part of an ongoing research project to improve dataset documentation for machine learning. The core of our proposal is a domain-specific language ([preprint here](https://www.researchgate.net/publication/361836238_A_domain-specific_language_for_describing_machine_learning_datasets)) that allows data creators to describe relevant aspects of their data for the machine learning field and beyond. The [Critical Dataset Studios](https://knowingmachines.org/reading-list#dataset_documentation_practices) of the [Knowing Machines](https://knowingmachines.org) project have compiled an excellent list of current documentation practices.
+
+The tool has been presented at the ACM/IEEE 25th International Conference on [Model Driven Engineering Languages and Systems](https://conf.researchr.org/home/models-2022) and a preprint of the tool publication can be seen [here](https://www.researchgate.net/publication/363256430_DescribeML_A_Tool_for_Describing_Machine_Learning_Datasets)
+
 
 
 # Code of Conduct
