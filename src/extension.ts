@@ -121,7 +121,7 @@ async function loadCsv(context: vscode.ExtensionContext, filepath: vscode.Uri) {
             editor.insertSnippet(snippet, snippetPosition);
         });
     }
-    vscode.window.showInformationMessage('File Loaded :=)    Start creating your documentation');
+    vscode.window.showInformationMessage('File Loaded! Start creating your documentation  :) ');
 }
 
 let previewPanel : vscode.WebviewPanel;

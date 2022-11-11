@@ -169,9 +169,7 @@ Composition:
         body = body + 
 `       Statistics:
             Quality Metrics:
-                Sparsity: 00
-                // Completeness: 100
-                // Class Balance ""
+                Sparsity: 00 // Not calculated, to be filled
     Dependencies:
         Description: ""
     Data Splits: ""\n`
@@ -189,22 +187,22 @@ Data Provenance:
             Source: SourceID
                 Description: ""
                 Noise: ""
-         // How data is collected:   // Choose an option from the list
+            How data is collected: Others   // Choose an option from the list
             Gather Requirements: 
                 Requirement: ""
     LabelingProcesses:
         Labeling process: labelProcesIDReference
         Description: ""
-     // Type: // Choose an option from the list
-     // Labels:
-        //  Label: labelIdReference
-        //  Description: ""
-        //  Mapping: ATTRIBUTE_ID
+        Type: 3D cuboids // Choose an option from the list
+        Labels:
+          Label: labelIdReference
+          Description: ""
+          Mapping: DECLARED_ATTRIBUTE_ID // Set the ID of the label attribute
         Label Requirements:
             Requirement: "" 
     Preprocesses:
         Preprocess: preprocessId
-        Description: ""\n
+        Description: ""
         Type: Others
 `
 
@@ -216,8 +214,8 @@ Social Concerns:
         Social Issue: issueId
             IssueType: Privacy // Choose one from the list
             Description: ""
-            // Related Attributes:
-            //   attribute: attributeIdReference
+            Related Attributes:
+               attribute: DECLARED_ATTRIBUTE_ID // Set the affected attribute
         
         
         `;
