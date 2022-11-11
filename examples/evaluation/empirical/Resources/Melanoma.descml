@@ -115,7 +115,7 @@ Dataset: Melanoma_Classification_Dataset
                                 Mode: "Femala"
                                 Categoric Distribution:
                                     [
-                                        "Male": 40%,
+                                        "Male": 45%,
                                         "Femala": 55%,
                                         "Non-binay": 5%
                                     ]

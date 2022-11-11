@@ -4,15 +4,16 @@ Dataset: videoGames
         Unique-identifier: videoGames 
         Version: v0000
         Dates:
-            Release Date: 00-0000-00
+            Release Date: 00-00-0000 // DD-MM-YYYY
         Description:  
             Tasks:  [Automatic-Speech-Recognition,Code Generation,Evaluation of language models]
             Areas: videoGames
             Tags: games imbd
         Applications: 
-            Past Uses:"Used in Kaggle libraries"
+            Past Uses:"Used in Kaggle libraries" 
+            Non-recommended: 
         Distribution: 
-            Licences: Non-declared
+            Licences: Community Data License
         Authoring: 
             Authors:
                 Name "David Nyagam" contact "https://nyagami.disha.page/"
@@ -77,6 +78,7 @@ Data Provenance:
             Source: SourceName
                 Description: "XXXXXXXXXXXXXXXXXXXXX"
             How data is collected: Scrapping
+    
 Social Concerns:
 
 

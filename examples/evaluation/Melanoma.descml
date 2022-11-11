@@ -57,13 +57,13 @@ Dataset: Melanoma_Classification_Dataset
     Authoring:
         Authors:
             Name "Skin Imaging Collaboration ISIC"  email emailo@emailo.com
-            Name "International_Skin_Imaging_Collaboration"  email emailo@emailo.com
-            Name "Hospital_Clinic_de_Barcelona" email emailo@emailo.com
-            Name "Medical_University_of_Vienna" email emailo@emailo.com
-            Name "Memorial_Sloan_Kettering_Cancer_Center" email emailo@emailo.com
-            Name "Melanoma_Institute_Australiaa" email emailo@emailo.com
-            Name "University_of_Queensland" email emailo@emailo.com
-            Name "University_of_athens_medical_school" email emailo@emailo.com
+            Name "International Skin Imaging Collaboration"  email emailo@emailo.com
+            Name "Hospital Clinic de Barcelona" email emailo@emailo.com
+            Name "Medical University of Vienna" email emailo@emailo.com
+            Name "Memorial Sloan Kettering Cancer Center" email emailo@emailo.com
+            Name "Melanoma Institute Australiaa" email emailo@emailo.com
+            Name "University of Queensland" email emailo@emailo.com
+            Name "University of Athens medical school" email emailo@emailo.com
         Funders:
             Name "The_University_of_Queensland"  type mixed 
                 grantor "National Health and Medical Research Council (NHMRC) – Centre of Research Excellence Scheme" 

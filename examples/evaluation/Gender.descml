@@ -68,21 +68,59 @@ Dataset: Gender
              Each mention is assigned a numeric identifier to group them into mentions that all refer to the same entity."
          Total size: 95
          Data Instances: 
-                Instance: AnnotatedDocuments
+                Instance: Wikipedia
                      Description: 
                         "Each instance consists of text that has been sentence separated, tokenized, and annotated with mentions and entity identifiers. It is in a CoNLL-style format with bracketing for entities"
                      Type: Record-Data
                      Attribute number: 2
+                     Size: 63
                      Attributes:
-                        attribute: document
-                            description: "The text workd analyzed " 
-                            count: 65440
+                        attribute: tokens
+                            description: "Tokens extracted from text" 
+                            count: 42259
                             ofType: Categorical
-                        attribute: Person_annotation
-                            description: "Word tagged as an people entity (note that a word could reference to more than one people) " 
-                            count: 65440
-                            ofType: Categorical 
-                
+                        attribute: mentions
+                            description: "Reference entity identifiers. (note that a word could reference to more than one people) " 
+                            count: 3161
+                            ofType: Categorical
+                            Statistics:
+                                Completeness: 7.5
+                    Quality Metrics:
+                        Sparsity: 7.5
+                Instance: Periodicals
+                    Description: 
+                        "Each instance consists of text that has been sentence separated, tokenized, and annotated with mentions and entity identifiers. It is in a CoNLL-style format with bracketing for entities"
+                    Type: Record-Data
+                    Attribute number: 2
+                    Size: 18
+                    Attributes:
+                        attribute: tokens
+                            description: "Tokens extracted from text" 
+                            count: 11210
+                            ofType: Categorical
+                        attribute: mentions
+                            description: "Reference entity identifiers. (note that a word could reference to more than one people) " 
+                            count: 753
+                            ofType: Categorical
+                            Statistics:
+                                Completeness: 6.7
+                Instance: AO3
+                    Description: 
+                        "Each instance consists of text that has been sentence separated, tokenized, and annotated with mentions and entity identifiers. It is in a CoNLL-style format with bracketing for entities"
+                    Type: Record-Data
+                    Attribute number: 2
+                    Size: 15
+                    Attributes:
+                        attribute: tokens
+                            description: "Tokens extracted from text" 
+                            count: 14881
+                            ofType: Categorical
+                        attribute: mentions
+                            description: "Reference entity identifiers. (note that a word could reference to more than one people) " 
+                            count: 2121
+                            ofType: Categorical
+                            Statistics:
+                                Completeness: 14.3
                 Statistics:
                     Quality Metrics: 
                         Sparsity: 8.9 
@@ -111,6 +149,7 @@ Dataset: Gender
             1000 tokens. Finally, there were three documents which we forgot to truncate, and so made their 
             way into the dataset at full length (these are all from AO3)."
         Gathering Processes:
+          // Wikipedia
           Process: Wikipedia
             Description:
                 "The first are articles on English Wikipedia, in particular drawn from Wikipedia's List of People
@@ -118,10 +157,10 @@ Dataset: Gender
             Source: Wikipedia
               Description: "a description"
               Noise: "Already defined"
-            Related Instances: AnnotatedDocuments
+            Related Instances: Wikipedia
             How data is collected: Manual Human Curator
             
-          
+           // Periodicals
           Process: PeriodicalsProcess
             Description: ""  
             Source: Periodicals
@@ -144,10 +183,11 @@ Dataset: Gender
                 found/included documents from The Advocate, The DailyXtra, DigitalTrans, GLReview,
                 LambdaLiterary and Lavender. These documents comprise about 1/6 of the dataset." 
                 Noise: "See potential impact in social section"
-            Related Instances: AnnotatedDocuments
+            Related Instances: Periodicals
             How data is collected: Manual Human Curator
-
-        Process: AO3Process
+            
+          // AO3
+          Process: AO3Process
             Description: ""
             Source: AO3
                 Description:
@@ -160,8 +200,12 @@ Dataset: Gender
                 stories by word count, and took the shortest ones that were actually stories (some were descriptions
                 of audiobooks). These documents comprise about 1/6 of the dataset." 
                 Noise: "See potential impact in social section" 
-            Related Instances: AnnotatedDocuments
+            Related Instances: AO3
             How data is collected: Manual Human Curator
+
+    //
+    // Labeling process
+    //
     LabelingProcesses:
         Labeling process: Labeling1
         Description: 
@@ -173,15 +217,21 @@ Dataset: Gender
         Labels:
             Label: Entity_Person_Annotation
             Description: 
-                "The labels are generated with the TagEditor software, and tag the workd referencing entity persons.
-                A numerical order has been used to identify other reference to the same entity. In case of word referencias more 
-                than one entity person code as 1(1), 1(0), 1(2) are provided "
-             Mapping: Person_annotation
+                "The labels tags the words referencing entity persons."
+             Mapping: mentions
         Labeling Team:
             Who collects the data: "The two authors"
-        Type External
+            Type Internal
+        Infrastructure:
+            Platform "TagEditor"
         Label Requirements:  
-            Requirement: "The annotation was performed by TagEditor software: https://github.com/d5555/TagEditor"              
+            Requirement: "The annotation was performed by TagEditor software: https://github.com/d5555/TagEditor"   
+            Requirement: "A numerical order has been used to identify other reference to the same entity. In case of word referencias more 
+            than one entity person code as 1(1), 1(0), 1(2) are provided"     
+
+     //
+     // Preprocess
+     //
      Preprocesses:
         Preprocess: Samples
         Description: 
@@ -190,7 +240,10 @@ Dataset: Gender
         to focus on documents that contains mentions of people whose gender in some way does 
         not fall within the gender binary."     
         Type: Sampling      
-        
+       
+     //
+     // Social Cocerns
+     // 
      Social Concerns:
         Social Issue: privacyIndividual
             IssueType: Privacy
@@ -198,7 +251,7 @@ Dataset: Gender
                 or online open fan-fiction). This is not explicitly identified, though many of the articles 
                 explicitly mention the gender of the people described/discussed.Their names could be given in running text."
             Related Attributes: 
-                attribute: document
+                attribute: tokens
            
 
         Social Issue: senstiveInfo
@@ -209,8 +262,8 @@ Dataset: Gender
             that in mind. Some of the articles, especially from fan-fiction, have explicit and intentional 
             misgendering of characters, and a few describe (or hint out) intimate relationships (though we 
             filtered for only stories that did not have 'adult themes')."
-            Related Attributes:
-                attribute: document
+            Related Attributes: 
+                attribute: tokens
            
             Instance belongs to people:
                 Are there protected groups? Yes
