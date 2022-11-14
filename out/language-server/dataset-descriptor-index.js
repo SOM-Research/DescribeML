@@ -1,6 +1,6 @@
 "use strict";
 /******************************************************************************
- * Copyright 2021 TypeFox GmbH
+ * Copyright 2022 SOM Research
  * This program and the accompanying materials are made available under the
  * terms of the MIT License, which is available in the project root.
  ******************************************************************************/
@@ -18,6 +18,9 @@ exports.DatasetDescriptorDescriptionProvider = void 0;
 const langium_1 = require("langium");
 const vscode_languageserver_1 = require("vscode-languageserver");
 const ast_1 = require("./generated/ast");
+/*
+* This class provides custom index services to the LSP. In particular, we allow child classes of the AST to reference child of other parents.
+*/
 class DatasetDescriptorDescriptionProvider extends langium_1.DefaultAstNodeDescriptionProvider {
     constructor(services) {
         super(services);

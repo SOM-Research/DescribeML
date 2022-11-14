@@ -27,27 +27,48 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deactivate = exports.activate = void 0;
+/******************************************************************************
+ * Copyright 2022 SOM Research
+ * This program and the accompanying materials are made available under the
+ * terms of the MIT License, which is available in the project root.
+ ******************************************************************************/
 const vscode = __importStar(require("vscode"));
 const path = __importStar(require("path"));
+const fs_1 = __importDefault(require("fs"));
 const node_1 = require("vscode-languageclient/node");
 const dataset_descriptor_module_1 = require("./language-server/dataset-descriptor-module");
 let client;
 let datasetServices;
+let previewPanel;
 // This function is called when the extension is activated.
 function activate(context) {
+    // Starting the Language services
     client = startLanguageClient(context);
     datasetServices = (0, dataset_descriptor_module_1.createDatasetDescriptorServices)().datasetDescription;
+    // Here we register the upload service
     context.subscriptions.push(vscode.commands.registerCommand('datadesc.loadDataset', () => __awaiter(this, void 0, void 0, function* () {
-        //await vscode.window.showInformationMessage('Hello World!');
-        const fileUris = yield vscode.window.showOpenDialog({ canSelectFolders: false, canSelectFiles: true, canSelectMany: true, openLabel: 'Select your data files' });
-        if (fileUris) {
-            yield loadCsv(context, fileUris[0]);
-        }
+        vscode.window.withProgress({
+            location: vscode.ProgressLocation.Notification,
+            title: "Loading your data... please wait"
+        }, (progress) => __awaiter(this, void 0, void 0, function* () {
+            const fileUris = yield vscode.window.showOpenDialog({ canSelectFolders: false, canSelectFiles: true, canSelectMany: true, openLabel: 'Select your data files' });
+            if (fileUris) {
+                yield uploaderService(context, fileUris[0]);
+            }
+        }));
     })));
+    // Here we register the HTML generation service
     context.subscriptions.push(vscode.commands.registerCommand('datadesc.generateDocumentation', () => __awaiter(this, void 0, void 0, function* () {
-        yield initHtmlPreview(context);
+        yield generatorHTMLService(context);
+    })));
+    // Here we register the HTML generation service (save action)
+    context.subscriptions.push(vscode.commands.registerCommand('datadesc.saveDocumentHTML', () => __awaiter(this, void 0, void 0, function* () {
+        yield saveDocumentHTML(context);
     })));
 }
 exports.activate = activate;
@@ -87,7 +108,7 @@ function startLanguageClient(context) {
     client.start();
     return client;
 }
-function loadCsv(context, filepath) {
+function uploaderService(context, filepath) {
     return __awaiter(this, void 0, void 0, function* () {
         console.log('start');
         const text = yield datasetServices.uploader.DatasetUploader.uploadDataset(filepath.fsPath);
@@ -113,40 +134,59 @@ function loadCsv(context, filepath) {
                 editor.insertSnippet(snippet, snippetPosition);
             });
         }
-        yield vscode.window.showInformationMessage('File Loaded');
+        vscode.window.showInformationMessage('File Loaded! Start creating your documentation  :) ');
     });
 }
-let previewPanel;
-function initHtmlPreview(context) {
+function generatorHTMLService(context) {
     var _a;
     return __awaiter(this, void 0, void 0, function* () {
-        if (!previewPanel) {
-            previewPanel = vscode.window.createWebviewPanel(
-            // Webview id
-            'liveHTMLPreviewer', 
-            // Webview title
-            'Dataset Documentation Preview', 
-            // This will open the second column for preview inside editor
-            2, {
-                // Enable scripts in the webview
-                enableScripts: true,
-                retainContextWhenHidden: true,
-                // And restrict the webview to only loading content from our extension's `assets` directory.
-                localResourceRoots: [vscode.Uri.file(path.join(context.extensionPath, 'assets'))]
-            });
-        }
+        let title = 'Dataset Documentation';
+        previewPanel = vscode.window.createWebviewPanel(
+        // Webview id
+        'liveHTMLPreviewer', 
+        // Webview title
+        title, 
+        // This will open the second column for preview inside editor
+        2, {
+            // Enable scripts in the webview
+            enableScripts: false,
+            retainContextWhenHidden: false,
+            // And restrict the webview to only loading content from our extension's `assets` directory.
+            localResourceRoots: [vscode.Uri.file(path.join(context.extensionPath, 'assets'))]
+        });
+        setPreviewActiveContext(true);
         const generator = datasetServices.generation.DocumentationGenerator;
         const text = (_a = vscode.window.activeTextEditor) === null || _a === void 0 ? void 0 : _a.document.getText();
         if (text) {
             const returner = generator.generate(text);
+            updateHtmlPreview(returner);
             console.log(returner);
-            updateHtmlPreview(generator.generate(text));
         }
+        previewPanel.onDidDispose(() => {
+            setPreviewActiveContext(false);
+        });
     });
 }
 function updateHtmlPreview(html) {
     if (previewPanel && html) {
         previewPanel.webview.html = html;
+    }
+}
+function setPreviewActiveContext(value) {
+    vscode.commands.executeCommand('setContext', 'liveHTMLPreviewer', value);
+}
+function saveDocumentHTML(context) {
+    var _a;
+    const text = previewPanel.webview.html;
+    const title = previewPanel.title;
+    if (text) {
+        // Save the file. TO DO: Ensure only in the  workspace is saved
+        (_a = vscode.workspace.workspaceFolders) === null || _a === void 0 ? void 0 : _a.forEach(workspace => {
+            const filePath = workspace.uri.fsPath + "/" + title + ".html";
+            fs_1.default.writeFileSync(filePath, text, 'utf8');
+            // Display a message box to the user
+            vscode.window.showInformationMessage('Congrats! Your file, ' + title + '.html, has been saved in your root folder of the workspace');
+        });
     }
 }
 //# sourceMappingURL=extension.js.map

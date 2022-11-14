@@ -1,4 +1,9 @@
 "use strict";
+/******************************************************************************
+ * Copyright 2022 SOM Research
+ * This program and the accompanying materials are made available under the
+ * terms of the MIT License, which is available in the project root.
+ ******************************************************************************/
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DatasetDescriptorValidator = exports.DatasetDescriptorValidationRegistry = void 0;
 const langium_1 = require("langium");
@@ -10,11 +15,14 @@ class DatasetDescriptorValidationRegistry extends langium_1.ValidationRegistry {
         super(services);
         const validator = services.validation.DatasetDescriptorValidator;
         const checks = {
-            Metadata: validator.hintsOfDescription,
+            Description: validator.hintsOfDescription,
             Author: validator.authorValidator,
             Funder: validator.hintsOfFunder,
             Authoring: validator.hintsOfAuthoring,
             Composition: validator.hintOfComposition,
+            Areas: validator.hintsOfAreas,
+            Tags: validator.hintsofTags,
+            Distribution: validator.hintsOfDistribution
         };
         this.register(checks, validator);
     }
@@ -24,14 +32,28 @@ exports.DatasetDescriptorValidationRegistry = DatasetDescriptorValidationRegistr
  * Implementation of custom validations.
  */
 class DatasetDescriptorValidator {
+    hintsofTags(type, accept) {
+        accept('hint', 'Set the tags separated by a whitespace', { node: type, property: 'tags' });
+    }
+    hintsOfAreas(type, accept) {
+        accept('hint', 'Set the areas separated by a whitespace', { node: type, property: 'areas' });
+    }
+    hintsOfDistribution(type, accept) {
+        accept('hint', 'Set the licence of the dataset. Indicate in `others:` if any other policy is applied to the data', { node: type, property: 'name' });
+        accept('hint', 'Stand-alone: Choose the level of distribution of the stand-alone data.', { node: type, property: 'rights' });
+        accept('hint', 'Rights-model: Choose the level of distribution of the models trained with the data.', { node: type, property: 'rightsModels' });
+    }
     hintsOfDescription(type, accept) {
         //  accept('warning', 'Version should have the following form: V000', { node: type, property: 'version' });
         accept('hint', 'For what propose was the dataser created? \nPlease provide a description', { node: type, property: 'descriptionpurpose' });
-        accept('hint', 'Was there a specific task in mind?\nPlease provide a description', { node: type, property: 'descriptionTasks' });
+        accept('hint', 'For what tasks this dataset is inteded for', { node: type, property: 'tasks' });
         accept('hint', 'Was there specific gap that needed to be filled?\nPlease provide a description', { node: type, property: 'descriptionGaps' });
     }
+    hintsOfTasks(type, accept) {
+        accept('hint', 'Was there a specific task in mind?\nPlease provide a description', { node: type, property: 'name' });
+    }
     hintsOfFunder(type, accept) {
-        accept('hint', '1 - Who founded the creation of the dataset?\n2 - If is there any associated grant, please provide the number and the name of the grantor and the gran name and number', { node: type, property: 'name' });
+        accept('hint', '1 - Who founded the creation of the dataset?\n2 - If is there any associated grant, please provide the number and the name of the grantor and the gran name and number \n Set a `_` or a `-` as a white spaces in the name e.g: "John_Smith"? ', { node: type, property: 'name' });
     }
     hintsOfAuthoring(type, accept) {
         accept('hint', 'Who is the author of the dataset?', { node: type, property: 'name' });
@@ -46,6 +68,7 @@ class DatasetDescriptorValidator {
         accept('hint', 'How many instances are there in total?', { node: type, property: 'numberInst' });
     }
     authorValidator(type, accept) {
+        accept('hint', 'Please, set a `_` or a `-` as a white spaces in the name e.g: "John_Smith"?', { node: type, property: 'name' });
         if (type.name) {
             const firstChar = type.name.substring(0, 1);
             if (firstChar.toUpperCase() !== firstChar) {

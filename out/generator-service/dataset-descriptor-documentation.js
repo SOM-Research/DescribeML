@@ -1,68 +1,47 @@
-/******************************************************************************
- * Copyright 2022 SOM Research
- * This program and the accompanying materials are made available under the
- * terms of the MIT License, which is available in the project root.
- ******************************************************************************/
-import { AstNode, LangiumParser } from 'langium';
-import { DescriptionDataset, isDescriptionDataset } from '../language-server/generated/ast';
-import { DatasetDescriptorServices } from '../language-server/dataset-descriptor-module';
-
-
-export interface Generator {
-    // Load the Abstract Syntax Tree of the .descML active file
-    generate(Declaration : string | AstNode) : string | undefined;
-    // Recieves the parsed AST, generates the HTML, and returns it
-    declaration2Html(DescriptionDataset : DescriptionDataset) : string;
-}
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DocumentationGenerator = void 0;
+const ast_1 = require("../language-server/generated/ast");
 /**
  * Generator HTML service main class
  * To generate the HTML we parse the description and we use PUG as a engine teamplate to build the HTML
  */
-export class DocumentationGenerator implements Generator {
-
-    private readonly parser: LangiumParser;
-
-    constructor(services: DatasetDescriptorServices) {
+class DocumentationGenerator {
+    constructor(services) {
         this.parser = services.parser.LangiumParser;
     }
-
-    generate(DescriptionDataset : string | AstNode) : string | undefined {
-        const astNode = (typeof(DescriptionDataset) == 'string' ? this.parser.parse(DescriptionDataset).value : DescriptionDataset);
-        return (isDescriptionDataset(astNode) ? this.declaration2Html(astNode) : undefined);
+    generate(DescriptionDataset) {
+        const astNode = (typeof (DescriptionDataset) == 'string' ? this.parser.parse(DescriptionDataset).value : DescriptionDataset);
+        return ((0, ast_1.isDescriptionDataset)(astNode) ? this.declaration2Html(astNode) : undefined);
     }
-
     // Generation of the HTML
-    declaration2Html(DescriptionDataset : DescriptionDataset) : string {
+    declaration2Html(DescriptionDataset) {
         const description = {
-            title : DescriptionDataset.elements[0].name,
-            metadata : DescriptionDataset.elements[0].generalinfo,
-            composition : DescriptionDataset.elements[0].composition,
-            provenance : DescriptionDataset.elements[0].provenance,
-            socialConcerns : DescriptionDataset.elements[0].socialConcerns,
-        }
+            title: DescriptionDataset.elements[0].name,
+            metadata: DescriptionDataset.elements[0].generalinfo,
+            composition: DescriptionDataset.elements[0].composition,
+            provenance: DescriptionDataset.elements[0].provenance,
+            socialConcerns: DescriptionDataset.elements[0].socialConcerns,
+        };
         let head = `
 <html>
         <head>
             <title>${description.title}</title>
             <meta charset="utf-8"/>`;
-        head = this.addSchemaOrg(description, head, description.title)
+        head = this.addSchemaOrg(description, head, description.title);
         head = this.addStyles(head);
         let body = this.buildBody(description);
-        head = head + 
-    `</head>` 
-        const html = head + body 
-        return html 
+        head = head +
+            `</head>`;
+        const html = head + body;
+        return html;
     }
-
-    addSchemaOrg(description: any, head: string, title: string) : string {
-
+    addSchemaOrg(description, head, title) {
         // Add Authors
-        let authors = ""
-        description.metadata.authoring.authors[0].authors.forEach(function (author: any) {
-
-            authors = authors + 
-        `"creator":{
+        let authors = "";
+        description.metadata.authoring.authors[0].authors.forEach(function (author) {
+            authors = authors +
+                `"creator":{
             "@type":"Author",
             "url": "",
             "name":"${author.name}",
@@ -72,32 +51,29 @@ export class DocumentationGenerator implements Generator {
                 "email":${author.email}
             }
         },
-    `
-        })
-
+    `;
+        });
         // Add funders
-        let funders = ""
+        let funders = "";
         if (description.metadata.authoring.founding.lenght > 0) {
-            description.metadata.authoring.founding[0].funders.forEach(function (funder: any) {                
-                    funders = funders + 
-                `"funder":{
+            description.metadata.authoring.founding[0].funders.forEach(function (funder) {
+                funders = funders +
+                    `"funder":{
                     "@type":"Funder",
                     "name":"${funder.name}",
                     "sameAs":"${funder.type}"
                 },
-            `
-            })
+            `;
+            });
         }
-
-        let areas = ''
-        let tags = ''
-        description.metadata.desc.tags.tags.forEach(function (tag: any) {
-            tags = tags + tag.name + ',' 
-        })
-        description.metadata.desc.area.areas.forEach(function (area: any) {
-            areas = areas + area.name + ',' 
-        })
-
+        let areas = '';
+        let tags = '';
+        description.metadata.desc.tags.tags.forEach(function (tag) {
+            tags = tags + tag.name + ',';
+        });
+        description.metadata.desc.area.areas.forEach(function (area) {
+            areas = areas + area.name + ',';
+        });
         head = head + `
         <script type="application/ld+json">
         {
@@ -138,14 +114,12 @@ export class DocumentationGenerator implements Generator {
         ],
         "temporalCoverage":"${description.metadata.dates.datesR}/${description.metadata.dates.datesU}",
      `;
-
         head = head + authors + funders + ` 
         }
-        </script>`
+        </script>`;
         return head;
     }
-
-    addStyles(head: string) : string {
+    addStyles(head) {
         return head + `        
     <style>
         table {
@@ -164,21 +138,22 @@ export class DocumentationGenerator implements Generator {
         tr:nth-child(even) {
         background-color: #dddddd;
         }
-    </style>`
+    </style>`;
     }
-
     // The PUG file is located inside the "out" folder. As needs to be released in the executable plugin
     // So, you may need to go to /out/templates/document.pug to customize the template.
-    buildBody(description: any) : any {
+    buildBody(description) {
         const pug = require('pug');
-        const path = require('path')
-        let sep = path.sep
+        const path = require('path');
+        let sep = path.sep;
         let dirname = __dirname;
         // Compile the source code using PUG
-        const compiledFunction = pug.compileFile(dirname+sep+'templates'+sep+'document.pug');
+        const compiledFunction = pug.compileFile(dirname + sep + 'templates' + sep + 'document.pug');
         // Compile the source code
         return compiledFunction({
             description: description
-          });
+        });
     }
 }
+exports.DocumentationGenerator = DocumentationGenerator;
+//# sourceMappingURL=dataset-descriptor-documentation.js.map

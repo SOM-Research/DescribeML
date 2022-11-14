@@ -81,7 +81,9 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
               "rule": {
                 "$refText": "Composition"
               }
-            }
+            },
+            "elements": [],
+            "cardinality": "?"
           },
           {
             "$type": "Assignment",
@@ -93,7 +95,9 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
               "rule": {
                 "$refText": "Provenance"
               }
-            }
+            },
+            "elements": [],
+            "cardinality": "?"
           },
           {
             "$type": "Assignment",
@@ -105,7 +109,9 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
               "rule": {
                 "$refText": "SocialConcerns"
               }
-            }
+            },
+            "elements": [],
+            "cardinality": "?"
           }
         ]
       }
@@ -177,61 +183,276 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             }
           },
           {
-            "$type": "Group",
-            "elements": [
-              {
-                "$type": "Keyword",
-                "value": "Release Date:",
-                "elements": []
-              },
-              {
-                "$type": "Assignment",
-                "feature": "dates",
-                "operator": "=",
-                "terminal": {
-                  "$type": "RuleCall",
-                  "arguments": [],
-                  "rule": {
-                    "$refText": "STRING"
-                  }
-                }
+            "$type": "Assignment",
+            "feature": "dates",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "Dates"
               }
-            ],
+            },
+            "elements": [],
             "cardinality": "?"
           },
           {
-            "$type": "Group",
-            "elements": [
-              {
-                "$type": "Keyword",
-                "value": "Citation:",
-                "elements": []
-              },
-              {
-                "$type": "Assignment",
-                "feature": "citation",
-                "operator": "=",
-                "terminal": {
-                  "$type": "RuleCall",
-                  "arguments": [],
-                  "rule": {
-                    "$refText": "STRING"
-                  }
-                }
+            "$type": "Assignment",
+            "feature": "citation",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "Citation"
               }
-            ],
+            },
+            "elements": [],
             "cardinality": "?"
           },
           {
-            "$type": "Keyword",
-            "value": "Description:"
+            "$type": "Assignment",
+            "feature": "desc",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "Description"
+              }
+            },
+            "elements": [],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "uses",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "Applications"
+              }
+            },
+            "elements": [],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "distribution",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "Distribution"
+              }
+            },
+            "elements": [],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "authoring",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "Authoring"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "Dates",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Assignment",
+            "feature": "name",
+            "operator": "=",
+            "terminal": {
+              "$type": "Keyword",
+              "value": "Dates:"
+            },
+            "elements": []
+          },
+          {
+            "$type": "Assignment",
+            "feature": "datesR",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "ReleaseDate"
+              }
+            },
+            "elements": [],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "datesU",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "UpdateDate"
+              }
+            },
+            "elements": [],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "datesP",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "PublishedDate"
+              }
+            },
+            "elements": [],
+            "cardinality": "?"
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "ReleaseDate",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Assignment",
+            "feature": "name",
+            "operator": "=",
+            "terminal": {
+              "$type": "Keyword",
+              "value": "Release Date:"
+            },
+            "elements": []
+          },
+          {
+            "$type": "Assignment",
+            "feature": "datesR",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "DateYear"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "UpdateDate",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Assignment",
+            "feature": "name",
+            "operator": "=",
+            "terminal": {
+              "$type": "Keyword",
+              "value": "Updated Date:"
+            },
+            "elements": []
+          },
+          {
+            "$type": "Assignment",
+            "feature": "datesU",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "DateYear"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "PublishedDate",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Assignment",
+            "feature": "name",
+            "operator": "=",
+            "terminal": {
+              "$type": "Keyword",
+              "value": "Published Date:"
+            },
+            "elements": []
+          },
+          {
+            "$type": "Assignment",
+            "feature": "datesP",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "DateYear"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "Description",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Assignment",
+            "feature": "name",
+            "operator": "=",
+            "terminal": {
+              "$type": "Keyword",
+              "value": "Description:"
+            },
+            "elements": []
           },
           {
             "$type": "Alternatives",
             "elements": [
               {
                 "$type": "Assignment",
-                "feature": "description",
+                "feature": "desc",
                 "operator": "=",
                 "terminal": {
                   "$type": "RuleCall",
@@ -272,21 +493,63 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                     "$type": "Group",
                     "elements": [
                       {
-                        "$type": "Keyword",
-                        "value": "Tasks:",
+                        "$type": "Assignment",
+                        "feature": "tasks",
+                        "operator": "=",
+                        "terminal": {
+                          "$type": "Keyword",
+                          "value": "Tasks:"
+                        },
                         "elements": []
+                      },
+                      {
+                        "$type": "Keyword",
+                        "value": "["
                       },
                       {
                         "$type": "Assignment",
                         "feature": "descriptionTasks",
-                        "operator": "=",
+                        "operator": "+=",
                         "terminal": {
                           "$type": "RuleCall",
                           "arguments": [],
                           "rule": {
-                            "$refText": "STRING"
+                            "$refText": "Task"
                           }
                         }
+                      },
+                      {
+                        "$type": "Group",
+                        "elements": [
+                          {
+                            "$type": "Group",
+                            "elements": [
+                              {
+                                "$type": "Keyword",
+                                "value": ",",
+                                "elements": []
+                              },
+                              {
+                                "$type": "Assignment",
+                                "feature": "descriptionTasks",
+                                "operator": "+=",
+                                "terminal": {
+                                  "$type": "RuleCall",
+                                  "arguments": [],
+                                  "rule": {
+                                    "$refText": "Task"
+                                  }
+                                }
+                              }
+                            ],
+                            "cardinality": "*"
+                          },
+                          {
+                            "$type": "Keyword",
+                            "value": "]"
+                          }
+                        ],
+                        "cardinality": "?"
                       }
                     ],
                     "cardinality": "?"
@@ -319,57 +582,6 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             ]
           },
           {
-            "$type": "Group",
-            "elements": [
-              {
-                "$type": "Keyword",
-                "value": "Licences:",
-                "elements": []
-              },
-              {
-                "$type": "Assignment",
-                "feature": "licence",
-                "operator": "=",
-                "terminal": {
-                  "$type": "RuleCall",
-                  "arguments": [],
-                  "rule": {
-                    "$refText": "CommonLicences"
-                  }
-                }
-              }
-            ],
-            "cardinality": "?"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "uses",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "Applications"
-              }
-            },
-            "elements": [],
-            "cardinality": "?"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "distribution",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "Distribution"
-              }
-            },
-            "elements": [],
-            "cardinality": "?"
-          },
-          {
             "$type": "Assignment",
             "feature": "area",
             "operator": "=",
@@ -377,7 +589,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
               "$type": "RuleCall",
               "arguments": [],
               "rule": {
-                "$refText": "Area"
+                "$refText": "Areas"
               }
             },
             "elements": [],
@@ -396,20 +608,542 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             },
             "elements": [],
             "cardinality": "?"
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "Tasks",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Assignment",
+            "feature": "name",
+            "operator": "=",
+            "terminal": {
+              "$type": "Keyword",
+              "value": "Tasks:"
+            },
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "["
           },
           {
             "$type": "Assignment",
-            "feature": "authoring",
-            "operator": "=",
+            "feature": "descriptionTasks",
+            "operator": "+=",
             "terminal": {
               "$type": "RuleCall",
               "arguments": [],
               "rule": {
-                "$refText": "Authoring"
+                "$refText": "Task"
               }
             }
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": ",",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "descriptionTasks",
+                "operator": "+=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "Task"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Keyword",
+            "value": "]"
           }
         ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "Task",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Assignment",
+        "feature": "name",
+        "operator": "=",
+        "terminal": {
+          "$type": "RuleCall",
+          "arguments": [],
+          "rule": {
+            "$refText": "MLTasks"
+          }
+        },
+        "elements": []
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "Areas",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Assignment",
+            "feature": "name",
+            "operator": "=",
+            "terminal": {
+              "$type": "Keyword",
+              "value": "Areas:"
+            },
+            "elements": []
+          },
+          {
+            "$type": "Assignment",
+            "feature": "areas",
+            "operator": "+=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "Area"
+              }
+            },
+            "elements": [],
+            "cardinality": "*"
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "Area",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Assignment",
+        "feature": "name",
+        "operator": "=",
+        "terminal": {
+          "$type": "RuleCall",
+          "arguments": [],
+          "rule": {
+            "$refText": "ID"
+          }
+        },
+        "elements": []
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "Tags",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Assignment",
+            "feature": "name",
+            "operator": "=",
+            "terminal": {
+              "$type": "Keyword",
+              "value": "Tags:"
+            },
+            "elements": []
+          },
+          {
+            "$type": "Assignment",
+            "feature": "tags",
+            "operator": "+=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "Tag"
+              }
+            },
+            "elements": [],
+            "cardinality": "*"
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "Tag",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Assignment",
+        "feature": "name",
+        "operator": "=",
+        "terminal": {
+          "$type": "RuleCall",
+          "arguments": [],
+          "rule": {
+            "$refText": "ID"
+          }
+        },
+        "elements": []
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "Citation",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Assignment",
+            "feature": "name",
+            "operator": "=",
+            "terminal": {
+              "$type": "Keyword",
+              "value": "Citation:"
+            },
+            "elements": []
+          },
+          {
+            "$type": "Alternatives",
+            "elements": [
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "Raw Citation:",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "citeText",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "STRING"
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Group",
+                    "elements": [
+                      {
+                        "$type": "Keyword",
+                        "value": "Title:",
+                        "elements": []
+                      },
+                      {
+                        "$type": "Assignment",
+                        "feature": "title",
+                        "operator": "=",
+                        "terminal": {
+                          "$type": "RuleCall",
+                          "arguments": [],
+                          "rule": {
+                            "$refText": "Title"
+                          }
+                        }
+                      }
+                    ],
+                    "cardinality": "?"
+                  },
+                  {
+                    "$type": "Group",
+                    "elements": [
+                      {
+                        "$type": "Keyword",
+                        "value": "Authors:",
+                        "elements": []
+                      },
+                      {
+                        "$type": "Assignment",
+                        "feature": "authorsPaper",
+                        "operator": "=",
+                        "terminal": {
+                          "$type": "RuleCall",
+                          "arguments": [],
+                          "rule": {
+                            "$refText": "Citeauthors"
+                          }
+                        }
+                      }
+                    ],
+                    "cardinality": "?"
+                  },
+                  {
+                    "$type": "Group",
+                    "elements": [
+                      {
+                        "$type": "Keyword",
+                        "value": "Year:",
+                        "elements": []
+                      },
+                      {
+                        "$type": "Assignment",
+                        "feature": "year",
+                        "operator": "=",
+                        "terminal": {
+                          "$type": "RuleCall",
+                          "arguments": [],
+                          "rule": {
+                            "$refText": "NUMBER"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Keywords:",
+                "elements": []
+              },
+              {
+                "$type": "Keyword",
+                "value": "["
+              },
+              {
+                "$type": "Assignment",
+                "feature": "keywords",
+                "operator": "+=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "Keyword"
+                  }
+                },
+                "elements": [],
+                "cardinality": "*"
+              },
+              {
+                "$type": "Keyword",
+                "value": "]"
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Journal:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "publisher",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "Publisher"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "DOI:",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "doi",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "DoiCite"
+                      }
+                    }
+                  }
+                ],
+                "cardinality": "?"
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "Url:",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "url",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "CiteUrl"
+                      }
+                    }
+                  }
+                ],
+                "cardinality": "?"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "Title",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Assignment",
+        "feature": "name",
+        "operator": "=",
+        "terminal": {
+          "$type": "RuleCall",
+          "arguments": [],
+          "rule": {
+            "$refText": "STRING"
+          }
+        },
+        "elements": []
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "Citeauthors",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Assignment",
+        "feature": "name",
+        "operator": "=",
+        "terminal": {
+          "$type": "RuleCall",
+          "arguments": [],
+          "rule": {
+            "$refText": "STRING"
+          }
+        },
+        "elements": []
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "Keyword",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Assignment",
+        "feature": "name",
+        "operator": "=",
+        "terminal": {
+          "$type": "RuleCall",
+          "arguments": [],
+          "rule": {
+            "$refText": "STRING"
+          }
+        },
+        "elements": []
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "Publisher",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Assignment",
+        "feature": "name",
+        "operator": "=",
+        "terminal": {
+          "$type": "RuleCall",
+          "arguments": [],
+          "rule": {
+            "$refText": "STRING"
+          }
+        },
+        "elements": []
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "DoiCite",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Assignment",
+        "feature": "name",
+        "operator": "=",
+        "terminal": {
+          "$type": "RuleCall",
+          "arguments": [],
+          "rule": {
+            "$refText": "DOI"
+          }
+        },
+        "elements": []
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "CiteUrl",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Assignment",
+        "feature": "name",
+        "operator": "=",
+        "terminal": {
+          "$type": "RuleCall",
+          "arguments": [],
+          "rule": {
+            "$refText": "STRING"
+          }
+        },
+        "elements": []
       }
     },
     {
@@ -446,7 +1180,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                   "$type": "RuleCall",
                   "arguments": [],
                   "rule": {
-                    "$refText": "ID"
+                    "$refText": "BooleanAnswer"
                   }
                 }
               }
@@ -458,12 +1192,81 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "How is distributed:",
+                "value": "Licences:",
                 "elements": []
               },
               {
                 "$type": "Assignment",
-                "feature": "past",
+                "feature": "licence",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "CommonLicences"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Rights(stand-alone):",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "rights",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "RightsData"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Rights(with models):",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "rightsModels",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "RightsModel"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Credit/Attribution Notice",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "attribution",
                 "operator": "=",
                 "terminal": {
                   "$type": "RuleCall",
@@ -481,12 +1284,35 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Distribution license:",
+                "value": "Designated Third Partes",
                 "elements": []
               },
               {
                 "$type": "Assignment",
-                "feature": "lic",
+                "feature": "thirdParties",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "STRING"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Additional Conditions",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "addCond",
                 "operator": "=",
                 "terminal": {
                   "$type": "RuleCall",
@@ -617,73 +1443,248 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
               }
             ],
             "cardinality": "?"
-          }
-        ]
-      }
-    },
-    {
-      "$type": "ParserRule",
-      "parameters": [],
-      "name": "Area",
-      "hiddenTokens": [],
-      "alternatives": {
-        "$type": "Group",
-        "elements": [
-          {
-            "$type": "Assignment",
-            "feature": "name",
-            "operator": "=",
-            "terminal": {
-              "$type": "Keyword",
-              "value": "Area:"
-            },
-            "elements": []
           },
           {
             "$type": "Assignment",
-            "feature": "area",
-            "operator": "+=",
+            "feature": "bachmarking",
+            "operator": "=",
             "terminal": {
               "$type": "RuleCall",
               "arguments": [],
               "rule": {
-                "$refText": "ID"
-              }
-            }
-          }
-        ]
-      }
-    },
-    {
-      "$type": "ParserRule",
-      "parameters": [],
-      "name": "Tags",
-      "hiddenTokens": [],
-      "alternatives": {
-        "$type": "Group",
-        "elements": [
-          {
-            "$type": "Assignment",
-            "feature": "name",
-            "operator": "=",
-            "terminal": {
-              "$type": "Keyword",
-              "value": "Tags:"
-            },
-            "elements": []
-          },
-          {
-            "$type": "Assignment",
-            "feature": "tags",
-            "operator": "+=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "ID"
+                "$refText": "Benchmarking"
               }
             },
             "elements": [],
+            "cardinality": "?"
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "Benchmarking",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Assignment",
+            "feature": "name",
+            "operator": "=",
+            "terminal": {
+              "$type": "Keyword",
+              "value": "Benchmarking:"
+            },
+            "elements": []
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "Task:",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "taskName",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "Task"
+                      }
+                    }
+                  }
+                ],
+                "cardinality": "?"
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "[",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Group",
+                    "elements": [
+                      {
+                        "$type": "Keyword",
+                        "value": "Model:",
+                        "elements": []
+                      },
+                      {
+                        "$type": "Assignment",
+                        "feature": "modelName",
+                        "operator": "=",
+                        "terminal": {
+                          "$type": "RuleCall",
+                          "arguments": [],
+                          "rule": {
+                            "$refText": "STRING"
+                          }
+                        },
+                        "elements": []
+                      }
+                    ],
+                    "cardinality": "?"
+                  },
+                  {
+                    "$type": "Group",
+                    "elements": [
+                      {
+                        "$type": "Keyword",
+                        "value": "Metrics:",
+                        "elements": []
+                      },
+                      {
+                        "$type": "Keyword",
+                        "value": "["
+                      },
+                      {
+                        "$type": "Group",
+                        "elements": [
+                          {
+                            "$type": "Keyword",
+                            "value": "F1:",
+                            "elements": []
+                          },
+                          {
+                            "$type": "Assignment",
+                            "feature": "f1",
+                            "operator": "=",
+                            "terminal": {
+                              "$type": "RuleCall",
+                              "arguments": [],
+                              "rule": {
+                                "$refText": "NUMBER"
+                              }
+                            },
+                            "elements": []
+                          }
+                        ],
+                        "cardinality": "?"
+                      },
+                      {
+                        "$type": "Group",
+                        "elements": [
+                          {
+                            "$type": "Keyword",
+                            "value": "Acurracy:",
+                            "elements": []
+                          },
+                          {
+                            "$type": "Assignment",
+                            "feature": "acurracy",
+                            "operator": "=",
+                            "terminal": {
+                              "$type": "RuleCall",
+                              "arguments": [],
+                              "rule": {
+                                "$refText": "NUMBER"
+                              }
+                            },
+                            "elements": []
+                          }
+                        ],
+                        "cardinality": "?"
+                      },
+                      {
+                        "$type": "Group",
+                        "elements": [
+                          {
+                            "$type": "Keyword",
+                            "value": "Precision:",
+                            "elements": []
+                          },
+                          {
+                            "$type": "Assignment",
+                            "feature": "precision",
+                            "operator": "=",
+                            "terminal": {
+                              "$type": "RuleCall",
+                              "arguments": [],
+                              "rule": {
+                                "$refText": "NUMBER"
+                              }
+                            },
+                            "elements": []
+                          }
+                        ],
+                        "cardinality": "?"
+                      },
+                      {
+                        "$type": "Group",
+                        "elements": [
+                          {
+                            "$type": "Keyword",
+                            "value": "Recall:",
+                            "elements": []
+                          },
+                          {
+                            "$type": "Assignment",
+                            "feature": "recall",
+                            "operator": "=",
+                            "terminal": {
+                              "$type": "RuleCall",
+                              "arguments": [],
+                              "rule": {
+                                "$refText": "NUMBER"
+                              }
+                            },
+                            "elements": []
+                          }
+                        ],
+                        "cardinality": "?"
+                      },
+                      {
+                        "$type": "Keyword",
+                        "value": "]",
+                        "cardinality": "?"
+                      }
+                    ],
+                    "cardinality": "?"
+                  },
+                  {
+                    "$type": "Group",
+                    "elements": [
+                      {
+                        "$type": "Keyword",
+                        "value": "Reference:",
+                        "elements": []
+                      },
+                      {
+                        "$type": "Assignment",
+                        "feature": "reference",
+                        "operator": "=",
+                        "terminal": {
+                          "$type": "RuleCall",
+                          "arguments": [],
+                          "rule": {
+                            "$refText": "STRING"
+                          }
+                        },
+                        "elements": []
+                      }
+                    ],
+                    "cardinality": "?"
+                  },
+                  {
+                    "$type": "Keyword",
+                    "value": "]"
+                  }
+                ],
+                "cardinality": "*"
+              }
+            ],
             "cardinality": "*"
           }
         ]
@@ -771,16 +1772,35 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                     "elements": []
                   },
                   {
-                    "$type": "Assignment",
-                    "feature": "erratum",
-                    "operator": "=",
-                    "terminal": {
-                      "$type": "RuleCall",
-                      "arguments": [],
-                      "rule": {
-                        "$refText": "STRING"
+                    "$type": "Alternatives",
+                    "elements": [
+                      {
+                        "$type": "Assignment",
+                        "feature": "erratum",
+                        "operator": "=",
+                        "terminal": {
+                          "$type": "RuleCall",
+                          "arguments": [],
+                          "rule": {
+                            "$refText": "STRING"
+                          }
+                        },
+                        "elements": []
+                      },
+                      {
+                        "$type": "Assignment",
+                        "feature": "erratum",
+                        "operator": "=",
+                        "terminal": {
+                          "$type": "RuleCall",
+                          "arguments": [],
+                          "rule": {
+                            "$refText": "BooleanAnswer"
+                          }
+                        },
+                        "elements": []
                       }
-                    }
+                    ]
                   }
                 ],
                 "cardinality": "?"
@@ -915,25 +1935,58 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
               "$type": "RuleCall",
               "arguments": [],
               "rule": {
-                "$refText": "ID"
-              }
-            }
-          },
-          {
-            "$type": "Keyword",
-            "value": "email"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "email",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
                 "$refText": "STRING"
               }
             }
+          },
+          {
+            "$type": "Alternatives",
+            "elements": [
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "email",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "email",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "EmailType"
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "contact",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "contact",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "STRING"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
@@ -994,7 +2047,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
               "$type": "RuleCall",
               "arguments": [],
               "rule": {
-                "$refText": "ID"
+                "$refText": "STRING"
               }
             }
           },
@@ -1072,7 +2125,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
               "$type": "RuleCall",
               "arguments": [],
               "rule": {
-                "$refText": "ID"
+                "$refText": "STRING"
               }
             }
           },
@@ -1088,7 +2141,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
               "$type": "RuleCall",
               "arguments": [],
               "rule": {
-                "$refText": "STRING"
+                "$refText": "EmailType"
               }
             }
           }
@@ -1212,16 +2265,32 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                 "elements": []
               },
               {
-                "$type": "Assignment",
-                "feature": "sample",
-                "operator": "=",
-                "terminal": {
-                  "$type": "RuleCall",
-                  "arguments": [],
-                  "rule": {
-                    "$refText": "STRING"
+                "$type": "Alternatives",
+                "elements": [
+                  {
+                    "$type": "Assignment",
+                    "feature": "sample",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "Keyword",
+                      "value": "NO"
+                    },
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "sample",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "Sample"
+                      }
+                    },
+                    "elements": []
                   }
-                }
+                ]
               }
             ],
             "cardinality": "?"
@@ -1472,6 +2541,29 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             "elements": [
               {
                 "$type": "Keyword",
+                "value": "Correlations:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "correlations",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "Correlations"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
                 "value": "Pair Correlation:",
                 "elements": []
               },
@@ -1668,7 +2760,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Class Balance",
+                "value": "Class Balance:",
                 "elements": []
               },
               {
@@ -1691,7 +2783,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Noisy labels",
+                "value": "Noisy labels:",
                 "elements": []
               },
               {
@@ -1842,6 +2934,28 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             "elements": [
               {
                 "$type": "Keyword",
+                "value": "label:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "label",
+                "operator": "=",
+                "terminal": {
+                  "$type": "CrossReference",
+                  "type": {
+                    "$refText": "Labels"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
                 "value": "labeling process:",
                 "elements": []
               },
@@ -1981,6 +3095,271 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                 "elements": [
                   {
                     "$type": "Keyword",
+                    "value": "Unique:",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "unique",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "NUMBER"
+                      }
+                    }
+                  }
+                ],
+                "cardinality": "?"
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "Unique percentage:",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "uniqueper",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "NUMBER"
+                      }
+                    }
+                  },
+                  {
+                    "$type": "Keyword",
+                    "value": "%"
+                  }
+                ],
+                "cardinality": "?"
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "Missing Values:",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "missingv",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "NUMBER"
+                      }
+                    }
+                  }
+                ],
+                "cardinality": "?"
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "Completeness:",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "complet",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "NUMBER"
+                      }
+                    }
+                  }
+                ],
+                "cardinality": "?"
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "First Rows:",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "firstrows",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "FirstRows"
+                      }
+                    }
+                  }
+                ],
+                "cardinality": "?"
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "Min-lenght:",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "minlenght",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "NUMBER"
+                      }
+                    }
+                  }
+                ],
+                "cardinality": "?"
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "Max-lenght:",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "maxlenght",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "NUMBER"
+                      }
+                    }
+                  }
+                ],
+                "cardinality": "?"
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "Median-lenght:",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "medianlenght",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "NUMBER"
+                      }
+                    }
+                  }
+                ],
+                "cardinality": "?"
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "Lenght-histogram:",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Keyword",
+                    "value": "["
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "lenghthistorgram",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "HistogramType"
+                      }
+                    }
+                  },
+                  {
+                    "$type": "Group",
+                    "elements": [
+                      {
+                        "$type": "Keyword",
+                        "value": ",",
+                        "elements": []
+                      },
+                      {
+                        "$type": "Assignment",
+                        "feature": "lenghthistorgram",
+                        "operator": "+=",
+                        "terminal": {
+                          "$type": "RuleCall",
+                          "arguments": [],
+                          "rule": {
+                            "$refText": "HistogramType"
+                          }
+                        }
+                      }
+                    ],
+                    "cardinality": "*"
+                  },
+                  {
+                    "$type": "Keyword",
+                    "value": "]"
+                  }
+                ],
+                "cardinality": "?"
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "Chi-Squared:",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "chisquared",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "ChiSquare"
+                      }
+                    }
+                  }
+                ],
+                "cardinality": "?"
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
                     "value": "Binary attribute:",
                     "elements": []
                   },
@@ -2027,8 +3406,12 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                 "elements": [
                   {
                     "$type": "Keyword",
-                    "value": "Categorical Distribution:",
+                    "value": "Categoric Distribution:",
                     "elements": []
+                  },
+                  {
+                    "$type": "Keyword",
+                    "value": "["
                   },
                   {
                     "$type": "Assignment",
@@ -2038,9 +3421,44 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                       "$type": "RuleCall",
                       "arguments": [],
                       "rule": {
-                        "$refText": "STRING"
+                        "$refText": "StringNumberType"
                       }
                     }
+                  },
+                  {
+                    "$type": "Keyword",
+                    "value": "%"
+                  },
+                  {
+                    "$type": "Group",
+                    "elements": [
+                      {
+                        "$type": "Keyword",
+                        "value": ",",
+                        "elements": []
+                      },
+                      {
+                        "$type": "Assignment",
+                        "feature": "catdist",
+                        "operator": "+=",
+                        "terminal": {
+                          "$type": "RuleCall",
+                          "arguments": [],
+                          "rule": {
+                            "$refText": "StringNumberType"
+                          }
+                        }
+                      },
+                      {
+                        "$type": "Keyword",
+                        "value": "%"
+                      }
+                    ],
+                    "cardinality": "*"
+                  },
+                  {
+                    "$type": "Keyword",
+                    "value": "]"
                   }
                 ],
                 "cardinality": "?"
@@ -2114,6 +3532,476 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                 "$refText": "NUMBER"
               }
             }
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "FirstRows",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Keyword",
+            "value": "0:",
+            "elements": []
+          },
+          {
+            "$type": "Assignment",
+            "feature": "rows",
+            "operator": "+=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "STRING"
+              }
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": ","
+          },
+          {
+            "$type": "Keyword",
+            "value": "1:"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "rows",
+            "operator": "+=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "STRING"
+              }
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": ","
+          },
+          {
+            "$type": "Keyword",
+            "value": "2:"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "rows",
+            "operator": "+=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "STRING"
+              }
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": ","
+          },
+          {
+            "$type": "Keyword",
+            "value": "3:"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "rows",
+            "operator": "+=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "STRING"
+              }
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": ","
+          },
+          {
+            "$type": "Keyword",
+            "value": "4:"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "rows",
+            "operator": "+=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "STRING"
+              }
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": ","
+          },
+          {
+            "$type": "Keyword",
+            "value": "5:"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "rows",
+            "operator": "+=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "STRING"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "ChiSquare",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "statistic:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "statistic",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "NUMBER"
+                  }
+                }
+              },
+              {
+                "$type": "Keyword",
+                "value": ","
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "p-value:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "pvalue",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "NUMBER"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "Correlations",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Pearson:",
+                "elements": []
+              },
+              {
+                "$type": "Keyword",
+                "value": "["
+              },
+              {
+                "$type": "Assignment",
+                "feature": "pearson",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "StringNumberType"
+                  }
+                }
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": ",",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "pearson",
+                    "operator": "+=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "StringNumberType"
+                      }
+                    }
+                  }
+                ],
+                "cardinality": "*"
+              },
+              {
+                "$type": "Keyword",
+                "value": "]"
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Spearman:",
+                "elements": []
+              },
+              {
+                "$type": "Keyword",
+                "value": "["
+              },
+              {
+                "$type": "Assignment",
+                "feature": "spearman",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "StringNumberType"
+                  }
+                }
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": ",",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "spearman",
+                    "operator": "+=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "StringNumberType"
+                      }
+                    }
+                  }
+                ],
+                "cardinality": "*"
+              },
+              {
+                "$type": "Keyword",
+                "value": "]"
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Kendall:",
+                "elements": []
+              },
+              {
+                "$type": "Keyword",
+                "value": "["
+              },
+              {
+                "$type": "Assignment",
+                "feature": "kendall",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "StringNumberType"
+                  }
+                }
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": ",",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "kendall",
+                    "operator": "+=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "StringNumberType"
+                      }
+                    }
+                  }
+                ],
+                "cardinality": "*"
+              },
+              {
+                "$type": "Keyword",
+                "value": "]"
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Cramers:",
+                "elements": []
+              },
+              {
+                "$type": "Keyword",
+                "value": "["
+              },
+              {
+                "$type": "Assignment",
+                "feature": "cramers",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "StringNumberType"
+                  }
+                }
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": ",",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "cramers",
+                    "operator": "+=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "StringNumberType"
+                      }
+                    }
+                  }
+                ],
+                "cardinality": "*"
+              },
+              {
+                "$type": "Keyword",
+                "value": "]"
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Phi-k:",
+                "elements": []
+              },
+              {
+                "$type": "Keyword",
+                "value": "["
+              },
+              {
+                "$type": "Assignment",
+                "feature": "phik",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "StringNumberType"
+                  }
+                }
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": ",",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "phik",
+                    "operator": "+=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "StringNumberType"
+                      }
+                    }
+                  }
+                ],
+                "cardinality": "*"
+              },
+              {
+                "$type": "Keyword",
+                "value": "]"
+              }
+            ],
+            "cardinality": "?"
           }
         ]
       }
@@ -2275,7 +4163,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                       "$type": "RuleCall",
                       "arguments": [],
                       "rule": {
-                        "$refText": "STRING"
+                        "$refText": "Quartile"
                       }
                     }
                   }
@@ -2338,6 +4226,82 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
     {
       "$type": "ParserRule",
       "parameters": [],
+      "name": "Quartile",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Keyword",
+            "value": "Q1:",
+            "elements": []
+          },
+          {
+            "$type": "Assignment",
+            "feature": "q1",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "NUMBER"
+              }
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": "Q2:"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "q2",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "NUMBER"
+              }
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": "Q3:"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "q3",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "NUMBER"
+              }
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": "Q4:"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "q4",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "NUMBER"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
       "name": "RelationInstances",
       "hiddenTokens": [],
       "alternatives": {
@@ -2345,7 +4309,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
         "elements": [
           {
             "$type": "Keyword",
-            "value": "Instaces relation:",
+            "value": "Instances relation:",
             "elements": []
           },
           {
@@ -2528,6 +4492,207 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
               }
             ],
             "cardinality": "?"
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "Sample",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Assignment",
+            "feature": "name",
+            "operator": "=",
+            "terminal": {
+              "$type": "Keyword",
+              "value": "YES"
+            },
+            "elements": []
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Sampling Method:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "type",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "SampleType"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Sampling criteria:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "criteria",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "STRING"
+                  }
+                },
+                "elements": []
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Sampling Characteristics:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "charact",
+                "operator": "+=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "SamplingCharacteristics"
+                  }
+                },
+                "elements": [],
+                "cardinality": "*"
+              }
+            ],
+            "cardinality": "?"
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "SamplingCharacteristics",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Keyword",
+            "value": "Total Data Sampled",
+            "elements": []
+          },
+          {
+            "$type": "Assignment",
+            "feature": "total",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "NUMBER"
+              }
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": "Sampling Rate"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "rate",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "NUMBER"
+              }
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": "Sampling Mean"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "mean",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "STRING"
+              }
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": "Sampling Standard Deviation"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "std",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "NUMBER"
+              }
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": "Sampling Distribution"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "distribution",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "NUMBER"
+              }
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": "Sampling Variation"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "variation",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "NUMBER"
+              }
+            }
           }
         ]
       }
@@ -2723,32 +4888,39 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             "cardinality": "?"
           },
           {
-            "$type": "Keyword",
-            "value": "Related Instances:"
-          },
-          {
             "$type": "Group",
             "elements": [
               {
-                "$type": "Assignment",
-                "feature": "mapInstance",
-                "operator": "=",
-                "terminal": {
-                  "$type": "CrossReference",
-                  "type": {
-                    "$refText": "DataInstance"
-                  }
-                },
+                "$type": "Keyword",
+                "value": "Related Instances:",
                 "elements": []
               },
               {
-                "$type": "Keyword",
-                "value": ",",
-                "elements": [],
-                "cardinality": "?"
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Assignment",
+                    "feature": "mapInstance",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "CrossReference",
+                      "type": {
+                        "$refText": "DataInstance"
+                      }
+                    },
+                    "elements": []
+                  },
+                  {
+                    "$type": "Keyword",
+                    "value": ",",
+                    "elements": [],
+                    "cardinality": "?"
+                  }
+                ],
+                "cardinality": "*"
               }
             ],
-            "cardinality": "*"
+            "cardinality": "?"
           },
           {
             "$type": "Group",
@@ -2952,22 +5124,29 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             }
           },
           {
-            "$type": "Keyword",
-            "value": "Noise:"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "noise",
-            "operator": "+=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "STRING"
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Noise:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "noise",
+                "operator": "+=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "STRING"
+                  }
+                },
+                "elements": [],
+                "cardinality": "*"
               }
-            },
-            "elements": [],
-            "cardinality": "*"
+            ],
+            "cardinality": "?"
           }
         ]
       }
@@ -3259,20 +5438,27 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             }
           },
           {
-            "$type": "Keyword",
-            "value": "Type:"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "type",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "AnnotationType"
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Type:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "type",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "AnnotationType"
+                  }
+                }
               }
-            }
+            ],
+            "cardinality": "?"
           },
           {
             "$type": "Group",
@@ -3311,6 +5497,52 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                   "arguments": [],
                   "rule": {
                     "$refText": "Team"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Infrastructure:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "infra",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "Infrastructure"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Validation:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "validation",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "Validation"
                   }
                 }
               }
@@ -3442,6 +5674,343 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
     {
       "$type": "ParserRule",
       "parameters": [],
+      "name": "Infrastructure",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Tool",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "tool",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "STRING"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Platform",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "platform",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "STRING"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Language",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "language",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "STRING"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Version",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "version",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "STRING"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Comments",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "other",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "STRING"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "Validation",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Validation Method:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "method",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "STRING"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Validation Dates:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "validationDates",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "STRING"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Golden Questions:",
+                "elements": []
+              },
+              {
+                "$type": "Keyword",
+                "value": "["
+              },
+              {
+                "$type": "Assignment",
+                "feature": "goldenquestions",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "GoldenQuestion"
+                  }
+                }
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": ",",
+                    "elements": []
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "goldenquestions",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "arguments": [],
+                      "rule": {
+                        "$refText": "GoldenQuestion"
+                      }
+                    }
+                  }
+                ],
+                "cardinality": "*"
+              },
+              {
+                "$type": "Keyword",
+                "value": "]"
+              }
+            ],
+            "cardinality": "?"
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Validation Requirements:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "requeriments",
+                "operator": "+=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "arguments": [],
+                  "rule": {
+                    "$refText": "Requeriments"
+                  }
+                },
+                "elements": [],
+                "cardinality": "*"
+              }
+            ],
+            "cardinality": "?"
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "GoldenQuestion",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Keyword",
+            "value": "Question:",
+            "elements": []
+          },
+          {
+            "$type": "Assignment",
+            "feature": "question",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "STRING"
+              }
+            }
+          },
+          {
+            "$type": "Keyword",
+            "value": "Inter-annotation agreement:"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "answer",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "NUMBER"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "LabelRequeriments",
+      "hiddenTokens": [],
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Keyword",
+            "value": "Requirements:",
+            "elements": []
+          },
+          {
+            "$type": "Assignment",
+            "feature": "requeriments",
+            "operator": "+=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "Requeriments"
+              }
+            },
+            "elements": [],
+            "cardinality": "*"
+          }
+        ],
+        "cardinality": "?"
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
       "name": "Demographics",
       "hiddenTokens": [],
       "alternatives": {
@@ -3463,7 +6032,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                   "$type": "RuleCall",
                   "arguments": [],
                   "rule": {
-                    "$refText": "STRING"
+                    "$refText": "NUMBER"
                   }
                 }
               }
@@ -3601,7 +6170,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                   "$type": "RuleCall",
                   "arguments": [],
                   "rule": {
-                    "$refText": "STRING"
+                    "$refText": "NUMBER"
                   }
                 }
               }
@@ -3732,6 +6301,44 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                 "$refText": "STRING"
               }
             }
+          },
+          {
+            "$type": "Keyword",
+            "value": "Type:"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "type",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "DataProcess"
+              }
+            }
+          },
+          {
+            "$type": "Group",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "Social Issues:",
+                "elements": []
+              },
+              {
+                "$type": "Assignment",
+                "feature": "labelSocialIssues",
+                "operator": "=",
+                "terminal": {
+                  "$type": "CrossReference",
+                  "type": {
+                    "$refText": "SocialIssue"
+                  }
+                }
+              }
+            ],
+            "cardinality": "?"
           }
         ]
       }
@@ -3836,6 +6443,22 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
             }
           },
           {
+            "$type": "Keyword",
+            "value": "Description:"
+          },
+          {
+            "$type": "Assignment",
+            "feature": "desc",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "arguments": [],
+              "rule": {
+                "$refText": "STRING"
+              }
+            }
+          },
+          {
             "$type": "Group",
             "elements": [
               {
@@ -3867,22 +6490,6 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
               }
             ],
             "cardinality": "?"
-          },
-          {
-            "$type": "Keyword",
-            "value": "Description:"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "desc",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "arguments": [],
-              "rule": {
-                "$refText": "STRING"
-              }
-            }
           },
           {
             "$type": "Group",
@@ -3941,7 +6548,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                       "$type": "RuleCall",
                       "arguments": [],
                       "rule": {
-                        "$refText": "STRING"
+                        "$refText": "BooleanAnswer"
                       }
                     }
                   }
@@ -3986,6 +6593,16 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
       "alternatives": {
         "$type": "Alternatives",
         "elements": [
+          {
+            "$type": "Keyword",
+            "value": "Non-declared",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "The Montreal data licence",
+            "elements": []
+          },
           {
             "$type": "Keyword",
             "value": "Creative Commons",
@@ -4142,6 +6759,702 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
     {
       "$type": "ParserRule",
       "parameters": [],
+      "name": "RightsData",
+      "hiddenTokens": [],
+      "type": "string",
+      "alternatives": {
+        "$type": "Alternatives",
+        "elements": [
+          {
+            "$type": "Keyword",
+            "value": "Access",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Tagging",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Distribute",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Re-Represent",
+            "elements": []
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "RightsModel",
+      "hiddenTokens": [],
+      "type": "string",
+      "alternatives": {
+        "$type": "Alternatives",
+        "elements": [
+          {
+            "$type": "Keyword",
+            "value": "Benchmark",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Research",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Publish",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Internal Use",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Output Commercialization",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Model Commercialization",
+            "elements": []
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "MLTasks",
+      "hiddenTokens": [],
+      "type": "string",
+      "alternatives": {
+        "$type": "Alternatives",
+        "elements": [
+          {
+            "$type": "Keyword",
+            "value": "text-classification",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "question-answering",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "text-generation",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "token-classification",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "translation",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "fill-mask",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "text-retrieval",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "conditional-text-generation",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "sequence-modeling",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "summarization",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "other",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "structure-prediction",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "information-retrieval",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "text2text-generation",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "zero-shot-retrieval",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "zero-shot-information-retrieval",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "automatic-speech-recognition",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "image-classification",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "speech-processing",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "text-scoring",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "audio-classification",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "conversational",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "question-generation",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "image-to-text",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "data-to-text",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "classification",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "object-detection",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "multiple-choice",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "text-mining",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "image-segmentation",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "dialog-response-generation",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "named-entity-recognition",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "sentiment-analysis",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "machine-translation",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "tabular-to-text",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "table-to-text",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "simplification",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "sentence-similarity",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "zero-shot-classification",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "visual-question-answering",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "text_classification",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "time-series-forecasting",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "computer-vision",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "feature-extraction",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "symbolic-regression",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "topic modeling",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "one liner summary",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "email subject",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "meeting title",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "text-to-structured",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "reasoning",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "paraphrasing",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "paraphrase",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "code-generation",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "tts",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "image-retrieval",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "image-captioning",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "language-modelling",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "video-captionning",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "neural-machine-translation",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "transkation",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "text-generation-other-common-sense-inference",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "text-generation-other-discourse-analysis",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "text-to-tabular",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "text-generation-other-code-modeling",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "other-text-search",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Code Generation",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Translation",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Text2Text generation",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "text-to-slide",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "question-pairing",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Information Retrieval",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Semantic Search",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Evaluation of language models",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "masked-language-modeling",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "multi-class classification",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "topic-classification",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "patents",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "paraphrase detection",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "news-classification",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Summarization",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "cross-language-transcription",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "language-modeling",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "other-test",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "grammatical error correction",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "named-entity-disambiguation",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "textual-entailment",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "natural-language-inference",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "query-paraphrasing",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "machine translation",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "long-texts",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "text-regression",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "entity-extraction",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "unpaired-image-to-image-translation",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "image",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "generative-modelling",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Token Classification",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "caption-retrieval",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "gpt-3",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "crowdsourced",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "sequence2sequence",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Inclusive Language",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Text Neutralization",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "text-to-speech",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "question_answering",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "super-resolution",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "image-enhancement",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "speech-synthesis",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "data-integration",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Language-model",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Automatic-Speech-Recognition",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "influence-attribution",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "question-answering-retrieval",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "text",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "linear-regression",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "table-question-answering",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "tabular-classification",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "syntactic-evaluation",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "deduplication",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "sequence-modelling",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "abstractive-qa",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "closed-domain-abstrative-qa",
+            "elements": []
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
       "name": "InstanceType",
       "hiddenTokens": [],
       "type": "string",
@@ -4276,7 +7589,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
           },
           {
             "$type": "Keyword",
-            "value": "Content and text categorization",
+            "value": "Content and textual categorization",
             "elements": []
           }
         ]
@@ -4326,6 +7639,11 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
           {
             "$type": "Keyword",
             "value": "API",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Scrapping",
             "elements": []
           },
           {
@@ -4452,6 +7770,193 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
     {
       "$type": "ParserRule",
       "parameters": [],
+      "name": "BooleanAnswer",
+      "hiddenTokens": [],
+      "type": "string",
+      "alternatives": {
+        "$type": "Alternatives",
+        "elements": [
+          {
+            "$type": "Keyword",
+            "value": "Yes",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "No",
+            "elements": []
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "SampleType",
+      "hiddenTokens": [],
+      "type": "string",
+      "alternatives": {
+        "$type": "Alternatives",
+        "elements": [
+          {
+            "$type": "Keyword",
+            "value": "Cluster Sampling",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Haphazard Sampling",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Multi-stage Sampling",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Stratified Sampling",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Systematic Sampling",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Weighted Sampling",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Other",
+            "elements": []
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "DataProcess",
+      "hiddenTokens": [],
+      "type": "string",
+      "alternatives": {
+        "$type": "Alternatives",
+        "elements": [
+          {
+            "$type": "Keyword",
+            "value": "Missing Values",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Data Augmentation",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Outlier Filtering",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Remove Duplicates",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Data reduction",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Sampling",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Data Normalization",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "Others",
+            "elements": []
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "StringNumberType",
+      "hiddenTokens": [],
+      "type": "string",
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "RuleCall",
+            "arguments": [],
+            "rule": {
+              "$refText": "STRING"
+            },
+            "cardinality": "+",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": ":",
+            "cardinality": "+"
+          },
+          {
+            "$type": "RuleCall",
+            "arguments": [],
+            "rule": {
+              "$refText": "NUMBER"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "HistogramType",
+      "hiddenTokens": [],
+      "type": "string",
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "RuleCall",
+            "arguments": [],
+            "rule": {
+              "$refText": "NUMBER"
+            },
+            "cardinality": "+",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": ":",
+            "cardinality": "+"
+          },
+          {
+            "$type": "RuleCall",
+            "arguments": [],
+            "rule": {
+              "$refText": "NUMBER"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
       "name": "DataTypes",
       "hiddenTokens": [],
       "type": "string",
@@ -4567,6 +8072,187 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
       }
     },
     {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "Dash",
+      "hiddenTokens": [],
+      "type": "string",
+      "alternatives": {
+        "$type": "Keyword",
+        "value": "-",
+        "elements": []
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "DateYear",
+      "hiddenTokens": [],
+      "type": "string",
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "RuleCall",
+            "arguments": [],
+            "rule": {
+              "$refText": "NUMBER"
+            },
+            "cardinality": "+",
+            "elements": []
+          },
+          {
+            "$type": "RuleCall",
+            "arguments": [],
+            "rule": {
+              "$refText": "Dash"
+            },
+            "cardinality": "+"
+          },
+          {
+            "$type": "RuleCall",
+            "arguments": [],
+            "rule": {
+              "$refText": "NUMBER"
+            },
+            "cardinality": "+"
+          },
+          {
+            "$type": "RuleCall",
+            "arguments": [],
+            "rule": {
+              "$refText": "Dash"
+            },
+            "cardinality": "+"
+          },
+          {
+            "$type": "RuleCall",
+            "arguments": [],
+            "rule": {
+              "$refText": "NUMBER"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "DOI",
+      "hiddenTokens": [],
+      "type": "string",
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "Alternatives",
+            "elements": [
+              {
+                "$type": "RuleCall",
+                "arguments": [],
+                "rule": {
+                  "$refText": "NUMBER"
+                },
+                "elements": []
+              },
+              {
+                "$type": "RuleCall",
+                "arguments": [],
+                "rule": {
+                  "$refText": "ID"
+                },
+                "elements": []
+              }
+            ],
+            "cardinality": "+"
+          },
+          {
+            "$type": "Alternatives",
+            "elements": [
+              {
+                "$type": "Keyword",
+                "value": "/",
+                "elements": []
+              },
+              {
+                "$type": "Keyword",
+                "value": ".",
+                "elements": []
+              }
+            ],
+            "cardinality": "+"
+          },
+          {
+            "$type": "Alternatives",
+            "elements": [
+              {
+                "$type": "RuleCall",
+                "arguments": [],
+                "rule": {
+                  "$refText": "NUMBER"
+                },
+                "elements": []
+              },
+              {
+                "$type": "RuleCall",
+                "arguments": [],
+                "rule": {
+                  "$refText": "ID"
+                },
+                "elements": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "$type": "ParserRule",
+      "parameters": [],
+      "name": "EmailType",
+      "hiddenTokens": [],
+      "type": "string",
+      "alternatives": {
+        "$type": "Group",
+        "elements": [
+          {
+            "$type": "RuleCall",
+            "arguments": [],
+            "rule": {
+              "$refText": "ID"
+            },
+            "cardinality": "+",
+            "elements": []
+          },
+          {
+            "$type": "Keyword",
+            "value": "@",
+            "cardinality": "+"
+          },
+          {
+            "$type": "RuleCall",
+            "arguments": [],
+            "rule": {
+              "$refText": "ID"
+            },
+            "cardinality": "+"
+          },
+          {
+            "$type": "Keyword",
+            "value": ".",
+            "cardinality": "+"
+          },
+          {
+            "$type": "RuleCall",
+            "arguments": [],
+            "rule": {
+              "$refText": "ID"
+            }
+          }
+        ]
+      }
+    },
+    {
       "$type": "TerminalRule",
       "hidden": true,
       "name": "WS",
@@ -4616,15 +8302,28 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar || (loaded
                 "$type": "TerminalAlternatives",
                 "elements": [
                   {
-                    "$type": "RegexToken",
-                    "regex": "[_a-zA-Z]",
-                    "elements": []
+                    "$type": "TerminalAlternatives",
+                    "elements": [
+                      {
+                        "$type": "RegexToken",
+                        "regex": "[_a-zA-Z]",
+                        "elements": []
+                      },
+                      {
+                        "$type": "CharacterRange",
+                        "left": {
+                          "$type": "Keyword",
+                          "value": "_"
+                        },
+                        "elements": []
+                      }
+                    ]
                   },
                   {
                     "$type": "CharacterRange",
                     "left": {
                       "$type": "Keyword",
-                      "value": "_"
+                      "value": "-"
                     },
                     "elements": []
                   }

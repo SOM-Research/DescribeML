@@ -4,8 +4,9 @@
  * DO NOT EDIT MANUALLY!
  ******************************************************************************/
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isMaintainer = exports.Maintainer = exports.isLabels = exports.Labels = exports.isLabelingProcesses = exports.LabelingProcesses = exports.isLabelingProcess = exports.LabelingProcess = exports.isGatheringProcesses = exports.GatheringProcesses = exports.isGatheringProcess = exports.GatheringProcess = exports.isFunder = exports.Funder = exports.isFounders = exports.Founders = exports.isDistribution = exports.Distribution = exports.isDescriptionDataset = exports.DescriptionDataset = exports.isDependencies = exports.Dependencies = exports.isDemographics = exports.Demographics = exports.isDeclaration = exports.Declaration = exports.isDataInstances = exports.DataInstances = exports.isDataInstance = exports.DataInstance = exports.isConsistencyRules = exports.ConsistencyRules = exports.isComposition = exports.Composition = exports.isCategor = exports.Categor = exports.isBinary = exports.Binary = exports.isAuthors = exports.Authors = exports.isAuthoring = exports.Authoring = exports.isAuthor = exports.Author = exports.isAttribute = exports.Attribute = exports.isArea = exports.Area = exports.isApplications = exports.Applications = void 0;
-exports.reflection = exports.datasetDescriptorAstReflection = exports.isTeam = exports.Team = exports.isTags = exports.Tags = exports.isStatistics = exports.Statistics = exports.isSpeechSitatuion = exports.SpeechSitatuion = exports.isSource = exports.Source = exports.isSocialIssue = exports.SocialIssue = exports.isSocialConcerns = exports.SocialConcerns = exports.isRequeriments = exports.Requeriments = exports.isRelationInstances = exports.RelationInstances = exports.isRelation = exports.Relation = exports.isQualityMetric = exports.QualityMetric = exports.isProvenance = exports.Provenance = exports.isPreProcesses = exports.PreProcesses = exports.isPreProcess = exports.PreProcess = exports.isPairCorrelation = exports.PairCorrelation = exports.isNumeri = exports.Numeri = exports.isMetadata = exports.Metadata = void 0;
+exports.isDescriptionDataset = exports.DescriptionDataset = exports.isDescription = exports.Description = exports.isDependencies = exports.Dependencies = exports.isDemographics = exports.Demographics = exports.isDeclaration = exports.Declaration = exports.isDates = exports.Dates = exports.isDataInstances = exports.DataInstances = exports.isDataInstance = exports.DataInstance = exports.isCorrelations = exports.Correlations = exports.isConsistencyRules = exports.ConsistencyRules = exports.isComposition = exports.Composition = exports.isCiteUrl = exports.CiteUrl = exports.isCiteauthors = exports.Citeauthors = exports.isCitation = exports.Citation = exports.isChiSquare = exports.ChiSquare = exports.isCategor = exports.Categor = exports.isBinary = exports.Binary = exports.isBenchmarking = exports.Benchmarking = exports.isAuthors = exports.Authors = exports.isAuthoring = exports.Authoring = exports.isAuthor = exports.Author = exports.isAttribute = exports.Attribute = exports.isAreas = exports.Areas = exports.isArea = exports.Area = exports.isApplications = exports.Applications = void 0;
+exports.isQuartile = exports.Quartile = exports.isQualityMetric = exports.QualityMetric = exports.isPublisher = exports.Publisher = exports.isPublishedDate = exports.PublishedDate = exports.isProvenance = exports.Provenance = exports.isPreProcesses = exports.PreProcesses = exports.isPreProcess = exports.PreProcess = exports.isPairCorrelation = exports.PairCorrelation = exports.isNumeri = exports.Numeri = exports.isMetadata = exports.Metadata = exports.isMaintainer = exports.Maintainer = exports.isLabels = exports.Labels = exports.isLabelRequeriments = exports.LabelRequeriments = exports.isLabelingProcesses = exports.LabelingProcesses = exports.isLabelingProcess = exports.LabelingProcess = exports.isKeyword = exports.Keyword = exports.isInfrastructure = exports.Infrastructure = exports.isGoldenQuestion = exports.GoldenQuestion = exports.isGatheringProcesses = exports.GatheringProcesses = exports.isGatheringProcess = exports.GatheringProcess = exports.isFunder = exports.Funder = exports.isFounders = exports.Founders = exports.isFirstRows = exports.FirstRows = exports.isDoiCite = exports.DoiCite = exports.isDistribution = exports.Distribution = void 0;
+exports.reflection = exports.datasetDescriptorAstReflection = exports.isValidation = exports.Validation = exports.isUpdateDate = exports.UpdateDate = exports.isTitle = exports.Title = exports.isTeam = exports.Team = exports.isTasks = exports.Tasks = exports.isTask = exports.Task = exports.isTags = exports.Tags = exports.isTag = exports.Tag = exports.isStatistics = exports.Statistics = exports.isSpeechSitatuion = exports.SpeechSitatuion = exports.isSource = exports.Source = exports.isSocialIssue = exports.SocialIssue = exports.isSocialConcerns = exports.SocialConcerns = exports.isSamplingCharacteristics = exports.SamplingCharacteristics = exports.isSample = exports.Sample = exports.isRequeriments = exports.Requeriments = exports.isReleaseDate = exports.ReleaseDate = exports.isRelationInstances = exports.RelationInstances = exports.isRelation = exports.Relation = void 0;
 /* eslint-disable @typescript-eslint/array-type */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 const langium_1 = require("langium");
@@ -19,6 +20,11 @@ function isArea(item) {
     return exports.reflection.isInstance(item, exports.Area);
 }
 exports.isArea = isArea;
+exports.Areas = 'Areas';
+function isAreas(item) {
+    return exports.reflection.isInstance(item, exports.Areas);
+}
+exports.isAreas = isAreas;
 exports.Attribute = 'Attribute';
 function isAttribute(item) {
     return exports.reflection.isInstance(item, exports.Attribute);
@@ -39,6 +45,11 @@ function isAuthors(item) {
     return exports.reflection.isInstance(item, exports.Authors);
 }
 exports.isAuthors = isAuthors;
+exports.Benchmarking = 'Benchmarking';
+function isBenchmarking(item) {
+    return exports.reflection.isInstance(item, exports.Benchmarking);
+}
+exports.isBenchmarking = isBenchmarking;
 exports.Binary = 'Binary';
 function isBinary(item) {
     return exports.reflection.isInstance(item, exports.Binary);
@@ -49,6 +60,26 @@ function isCategor(item) {
     return exports.reflection.isInstance(item, exports.Categor);
 }
 exports.isCategor = isCategor;
+exports.ChiSquare = 'ChiSquare';
+function isChiSquare(item) {
+    return exports.reflection.isInstance(item, exports.ChiSquare);
+}
+exports.isChiSquare = isChiSquare;
+exports.Citation = 'Citation';
+function isCitation(item) {
+    return exports.reflection.isInstance(item, exports.Citation);
+}
+exports.isCitation = isCitation;
+exports.Citeauthors = 'Citeauthors';
+function isCiteauthors(item) {
+    return exports.reflection.isInstance(item, exports.Citeauthors);
+}
+exports.isCiteauthors = isCiteauthors;
+exports.CiteUrl = 'CiteUrl';
+function isCiteUrl(item) {
+    return exports.reflection.isInstance(item, exports.CiteUrl);
+}
+exports.isCiteUrl = isCiteUrl;
 exports.Composition = 'Composition';
 function isComposition(item) {
     return exports.reflection.isInstance(item, exports.Composition);
@@ -59,6 +90,11 @@ function isConsistencyRules(item) {
     return exports.reflection.isInstance(item, exports.ConsistencyRules);
 }
 exports.isConsistencyRules = isConsistencyRules;
+exports.Correlations = 'Correlations';
+function isCorrelations(item) {
+    return exports.reflection.isInstance(item, exports.Correlations);
+}
+exports.isCorrelations = isCorrelations;
 exports.DataInstance = 'DataInstance';
 function isDataInstance(item) {
     return exports.reflection.isInstance(item, exports.DataInstance);
@@ -69,6 +105,11 @@ function isDataInstances(item) {
     return exports.reflection.isInstance(item, exports.DataInstances);
 }
 exports.isDataInstances = isDataInstances;
+exports.Dates = 'Dates';
+function isDates(item) {
+    return exports.reflection.isInstance(item, exports.Dates);
+}
+exports.isDates = isDates;
 exports.Declaration = 'Declaration';
 function isDeclaration(item) {
     return exports.reflection.isInstance(item, exports.Declaration);
@@ -84,6 +125,11 @@ function isDependencies(item) {
     return exports.reflection.isInstance(item, exports.Dependencies);
 }
 exports.isDependencies = isDependencies;
+exports.Description = 'Description';
+function isDescription(item) {
+    return exports.reflection.isInstance(item, exports.Description);
+}
+exports.isDescription = isDescription;
 exports.DescriptionDataset = 'DescriptionDataset';
 function isDescriptionDataset(item) {
     return exports.reflection.isInstance(item, exports.DescriptionDataset);
@@ -94,6 +140,16 @@ function isDistribution(item) {
     return exports.reflection.isInstance(item, exports.Distribution);
 }
 exports.isDistribution = isDistribution;
+exports.DoiCite = 'DoiCite';
+function isDoiCite(item) {
+    return exports.reflection.isInstance(item, exports.DoiCite);
+}
+exports.isDoiCite = isDoiCite;
+exports.FirstRows = 'FirstRows';
+function isFirstRows(item) {
+    return exports.reflection.isInstance(item, exports.FirstRows);
+}
+exports.isFirstRows = isFirstRows;
 exports.Founders = 'Founders';
 function isFounders(item) {
     return exports.reflection.isInstance(item, exports.Founders);
@@ -114,6 +170,21 @@ function isGatheringProcesses(item) {
     return exports.reflection.isInstance(item, exports.GatheringProcesses);
 }
 exports.isGatheringProcesses = isGatheringProcesses;
+exports.GoldenQuestion = 'GoldenQuestion';
+function isGoldenQuestion(item) {
+    return exports.reflection.isInstance(item, exports.GoldenQuestion);
+}
+exports.isGoldenQuestion = isGoldenQuestion;
+exports.Infrastructure = 'Infrastructure';
+function isInfrastructure(item) {
+    return exports.reflection.isInstance(item, exports.Infrastructure);
+}
+exports.isInfrastructure = isInfrastructure;
+exports.Keyword = 'Keyword';
+function isKeyword(item) {
+    return exports.reflection.isInstance(item, exports.Keyword);
+}
+exports.isKeyword = isKeyword;
 exports.LabelingProcess = 'LabelingProcess';
 function isLabelingProcess(item) {
     return exports.reflection.isInstance(item, exports.LabelingProcess);
@@ -124,6 +195,11 @@ function isLabelingProcesses(item) {
     return exports.reflection.isInstance(item, exports.LabelingProcesses);
 }
 exports.isLabelingProcesses = isLabelingProcesses;
+exports.LabelRequeriments = 'LabelRequeriments';
+function isLabelRequeriments(item) {
+    return exports.reflection.isInstance(item, exports.LabelRequeriments);
+}
+exports.isLabelRequeriments = isLabelRequeriments;
 exports.Labels = 'Labels';
 function isLabels(item) {
     return exports.reflection.isInstance(item, exports.Labels);
@@ -164,11 +240,26 @@ function isProvenance(item) {
     return exports.reflection.isInstance(item, exports.Provenance);
 }
 exports.isProvenance = isProvenance;
+exports.PublishedDate = 'PublishedDate';
+function isPublishedDate(item) {
+    return exports.reflection.isInstance(item, exports.PublishedDate);
+}
+exports.isPublishedDate = isPublishedDate;
+exports.Publisher = 'Publisher';
+function isPublisher(item) {
+    return exports.reflection.isInstance(item, exports.Publisher);
+}
+exports.isPublisher = isPublisher;
 exports.QualityMetric = 'QualityMetric';
 function isQualityMetric(item) {
     return exports.reflection.isInstance(item, exports.QualityMetric);
 }
 exports.isQualityMetric = isQualityMetric;
+exports.Quartile = 'Quartile';
+function isQuartile(item) {
+    return exports.reflection.isInstance(item, exports.Quartile);
+}
+exports.isQuartile = isQuartile;
 exports.Relation = 'Relation';
 function isRelation(item) {
     return exports.reflection.isInstance(item, exports.Relation);
@@ -179,11 +270,26 @@ function isRelationInstances(item) {
     return exports.reflection.isInstance(item, exports.RelationInstances);
 }
 exports.isRelationInstances = isRelationInstances;
+exports.ReleaseDate = 'ReleaseDate';
+function isReleaseDate(item) {
+    return exports.reflection.isInstance(item, exports.ReleaseDate);
+}
+exports.isReleaseDate = isReleaseDate;
 exports.Requeriments = 'Requeriments';
 function isRequeriments(item) {
     return exports.reflection.isInstance(item, exports.Requeriments);
 }
 exports.isRequeriments = isRequeriments;
+exports.Sample = 'Sample';
+function isSample(item) {
+    return exports.reflection.isInstance(item, exports.Sample);
+}
+exports.isSample = isSample;
+exports.SamplingCharacteristics = 'SamplingCharacteristics';
+function isSamplingCharacteristics(item) {
+    return exports.reflection.isInstance(item, exports.SamplingCharacteristics);
+}
+exports.isSamplingCharacteristics = isSamplingCharacteristics;
 exports.SocialConcerns = 'SocialConcerns';
 function isSocialConcerns(item) {
     return exports.reflection.isInstance(item, exports.SocialConcerns);
@@ -209,19 +315,49 @@ function isStatistics(item) {
     return exports.reflection.isInstance(item, exports.Statistics);
 }
 exports.isStatistics = isStatistics;
+exports.Tag = 'Tag';
+function isTag(item) {
+    return exports.reflection.isInstance(item, exports.Tag);
+}
+exports.isTag = isTag;
 exports.Tags = 'Tags';
 function isTags(item) {
     return exports.reflection.isInstance(item, exports.Tags);
 }
 exports.isTags = isTags;
+exports.Task = 'Task';
+function isTask(item) {
+    return exports.reflection.isInstance(item, exports.Task);
+}
+exports.isTask = isTask;
+exports.Tasks = 'Tasks';
+function isTasks(item) {
+    return exports.reflection.isInstance(item, exports.Tasks);
+}
+exports.isTasks = isTasks;
 exports.Team = 'Team';
 function isTeam(item) {
     return exports.reflection.isInstance(item, exports.Team);
 }
 exports.isTeam = isTeam;
+exports.Title = 'Title';
+function isTitle(item) {
+    return exports.reflection.isInstance(item, exports.Title);
+}
+exports.isTitle = isTitle;
+exports.UpdateDate = 'UpdateDate';
+function isUpdateDate(item) {
+    return exports.reflection.isInstance(item, exports.UpdateDate);
+}
+exports.isUpdateDate = isUpdateDate;
+exports.Validation = 'Validation';
+function isValidation(item) {
+    return exports.reflection.isInstance(item, exports.Validation);
+}
+exports.isValidation = isValidation;
 class datasetDescriptorAstReflection {
     getAllTypes() {
-        return ['Applications', 'Area', 'Attribute', 'Author', 'Authoring', 'Authors', 'Binary', 'Categor', 'Composition', 'ConsistencyRules', 'DataInstance', 'DataInstances', 'Declaration', 'Demographics', 'Dependencies', 'DescriptionDataset', 'Distribution', 'Founders', 'Funder', 'GatheringProcess', 'GatheringProcesses', 'LabelingProcess', 'LabelingProcesses', 'Labels', 'Maintainer', 'Metadata', 'Numeri', 'PairCorrelation', 'PreProcess', 'PreProcesses', 'Provenance', 'QualityMetric', 'Relation', 'RelationInstances', 'Requeriments', 'SocialConcerns', 'SocialIssue', 'Source', 'SpeechSitatuion', 'Statistics', 'Tags', 'Team'];
+        return ['Applications', 'Area', 'Areas', 'Attribute', 'Author', 'Authoring', 'Authors', 'Benchmarking', 'Binary', 'Categor', 'ChiSquare', 'Citation', 'Citeauthors', 'CiteUrl', 'Composition', 'ConsistencyRules', 'Correlations', 'DataInstance', 'DataInstances', 'Dates', 'Declaration', 'Demographics', 'Dependencies', 'Description', 'DescriptionDataset', 'Distribution', 'DoiCite', 'FirstRows', 'Founders', 'Funder', 'GatheringProcess', 'GatheringProcesses', 'GoldenQuestion', 'Infrastructure', 'Keyword', 'LabelingProcess', 'LabelingProcesses', 'LabelRequeriments', 'Labels', 'Maintainer', 'Metadata', 'Numeri', 'PairCorrelation', 'PreProcess', 'PreProcesses', 'Provenance', 'PublishedDate', 'Publisher', 'QualityMetric', 'Quartile', 'Relation', 'RelationInstances', 'ReleaseDate', 'Requeriments', 'Sample', 'SamplingCharacteristics', 'SocialConcerns', 'SocialIssue', 'Source', 'SpeechSitatuion', 'Statistics', 'Tag', 'Tags', 'Task', 'Tasks', 'Team', 'Title', 'UpdateDate', 'Validation'];
     }
     isInstance(node, type) {
         return (0, langium_1.isAstNode)(node) && this.isSubtype(node.$type, type);
@@ -238,6 +374,9 @@ class datasetDescriptorAstReflection {
     }
     getReferenceType(referenceId) {
         switch (referenceId) {
+            case 'Attribute:label': {
+                return exports.Labels;
+            }
             case 'Attribute:labelProces': {
                 return exports.LabelingProcess;
             }
@@ -267,6 +406,9 @@ class datasetDescriptorAstReflection {
             }
             case 'PairCorrelation:attr2': {
                 return exports.Attribute;
+            }
+            case 'PreProcess:labelSocialIssues': {
+                return exports.SocialIssue;
             }
             case 'Relation:attRel': {
                 return exports.Attribute;

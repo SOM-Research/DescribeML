@@ -4,9 +4,11 @@
  * terms of the MIT License, which is available in the project root.
  ******************************************************************************/
  /*
- * This is the main grammar file. Here a defined the different parts of the 
- * grammar implementation. The semantic rules and the terminals are at the
- * final part of the file
+ * 
+ * This is the main grammar file wher are defined the different parts of the 
+ * domain-specific langauge implementation (Metadata, Composition, Provenance and Social Concers). 
+ * The semantic rules and the terminals are at the final part of the file.
+ *
  */
 grammar DatasetDescriptor
 

@@ -48,10 +48,11 @@ body
                     tr
                         th Name
                         th email
-                    each author in description.metadata.authoring.authors[0].authors 
-                        tr
-                            td  #{author.name}
-                            td  #{author.email}
+                    if (description.metadata.authoring.authors.lenght)    
+                        each author in description.metadata.authoring.authors[0].authors 
+                            tr
+                                td  #{author.name}
+                                td  #{author.email}
             div
                 h3 Who funded the dataset? 
                 table
@@ -59,11 +60,12 @@ body
                         th Name
                         th type
                         th Grant
-                    each funder in description.metadata.authoring.founding[0].funders
-                        tr
-                            td #{funder.name}
-                            td #{funder.type}
-                            td #{funder.grantId}
+                    if (description.metadata.authoring.founding.lenght)    
+                        each funder in description.metadata.authoring.founding[0].funders
+                            tr
+                                td #{funder.name}
+                                td #{funder.type}
+                                td #{funder.grantId}
             div
                 if description.metadata.authoring.maintainers
                     h3 Who Maintains the dataset?
@@ -111,15 +113,16 @@ body
     h2 Provenance: 
     p Curation Rationale: #{description.provenance.curation}
 
-    h2 Social Concerns 
-    p Rationale: #{description.socialConcerns.desc}
-    each issue in description.socialConcerns.socialIssues
-        div 
-            p Issue: #{issue.name}
-            p Issue Type: #{issue.IssueType}
-            p Description: #{issue.desc}
-            if issue.senseAtt
-                p Related Attributes: #{issue.senseAtt}
+    if description.socialConcerns
+        h2 Social Concerns 
+        p Rationale: #{description.socialConcerns.desc}
+        each issue in description.socialConcerns.socialIssues
+            div 
+                p Issue: #{issue.name}
+                p Issue Type: #{issue.IssueType}
+                p Description: #{issue.desc}
+                if issue.senseAtt
+                    p Related Attributes: #{issue.senseAtt}
         
         
 

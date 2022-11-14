@@ -1,13 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createDatasetDescriptorServices = exports.DatasetDescriptorModule = void 0;
-// import { createDefaultModule, DefaultModuleContext, inject, LangiumServices, Module, PartialLangiumServices } from 'langium';
+/******************************************************************************
+ * Copyright 2022 SOM Research
+ * This program and the accompanying materials are made available under the
+ * terms of the MIT License, which is available in the project root.
+ ******************************************************************************/
 const langium_1 = require("langium");
 const module_1 = require("./generated/module");
 const dataset_descriptor_validator_1 = require("./dataset-descriptor-validator");
 const dataset_descriptor_index_1 = require("./dataset-descriptor-index");
-const dataset_descriptor_documentation_1 = require("./dataset-descriptor-documentation");
-const dataset_descriptor_uploader_1 = require("./dataset-descriptor-uploader");
+const dataset_descriptor_documentation_1 = require("../generator-service/dataset-descriptor-documentation");
+const dataset_descriptor_uploader_1 = require("../uploader-service/dataset-descriptor-uploader");
 /**
  * Dependency injection module that overrides Langium default services and contributes the
  * declared custom services. The Langium defaults can be partially specified to override only

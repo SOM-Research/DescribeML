@@ -1,43 +1,43 @@
-/******************************************************************************
- * Copyright 2022 SOM Research
- * This program and the accompanying materials are made available under the
- * terms of the MIT License, which is available in the project root.
- ******************************************************************************/
-import { DatasetDescriptorServices } from '../language-server/dataset-descriptor-module';
-import { parse } from 'csv-parse/sync';
-import fs from 'fs';
-import { DatasetMetrics } from './dataset-metrics';
-
-export interface Uploader {
-    // The main function, recieves a filepath of the selected .csv from the user and loads the content
-    uploadDataset(filepath: string): Promise<string>;
-    // Build the snippet and return it to the LSP
-    buildDescriptionDraft(data: Array<any>, filepath: string): string;
-}
-
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DatasetUploader = void 0;
+const sync_1 = require("csv-parse/sync");
+const fs_1 = __importDefault(require("fs"));
+const dataset_metrics_1 = require("./dataset-metrics");
 /**
- * Data uploader service main class 
+ * Data uploader service main class
 */
-export class DatasetUploader implements Uploader {
-
-    constructor(services: DatasetDescriptorServices) {
+class DatasetUploader {
+    constructor(services) {
     }
-
     // Get the dataset file, read it, parse it, and build the description draft
-    async uploadDataset(filepath: string): Promise<string> {
-        // Loading the .CSV
-        const fileContent = fs.readFileSync(filepath, { encoding: 'utf-8' });
-        // Parsing the .CSV
-        const parsed: Array<any> = parse(fileContent) as Array<any>;
-        // Building the snnipet
-        const descriptionDraft = this.buildDescriptionDraft(parsed, filepath);
-        return descriptionDraft;
+    uploadDataset(filepath) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // Loading the .CSV
+            const fileContent = fs_1.default.readFileSync(filepath, { encoding: 'utf-8' });
+            // Parsing the .CSV
+            const parsed = (0, sync_1.parse)(fileContent);
+            // Building the snnipet
+            const descriptionDraft = this.buildDescriptionDraft(parsed, filepath);
+            return descriptionDraft;
+        });
     }
-
     // Building the description draft 
-    buildDescriptionDraft(data: Array<any>, filepath: string) {
+    buildDescriptionDraft(data, filepath) {
         // Build the metadata snippet
-        let body: string = this.buildMetadataSnippet();
+        let body = this.buildMetadataSnippet();
         // Build Composition snippet
         body = body + this.buildCompositionSnippet(data, filepath);
         // Build Provenance ans social concerns snippet
@@ -83,19 +83,19 @@ export class DatasetUploader implements Uploader {
         \n`;
     }
     // Building Composition snippet
-    buildCompositionSnippet(data: Array<any>, filepath: string) {
-
-        const datasetMetrics = new DatasetMetrics;
+    buildCompositionSnippet(data, filepath) {
+        var _a;
+        const datasetMetrics = new dataset_metrics_1.DatasetMetrics;
         // Get Headers
-        const headers: Array<string> = data[0];
+        const headers = data[0];
         // Get number of rows
-        const numberofResults = data.length - 1
-        let body: string = `
+        const numberofResults = data.length - 1;
+        let body = `
 Composition:
     Rationale: ""
     Total size: ${numberofResults}
     Data Instances:
-        Instance:  ${filepath.split("\\").pop()?.split(".")[0]}
+        Instance:  ${(_a = filepath.split("\\").pop()) === null || _a === void 0 ? void 0 : _a.split(".")[0]}
             Description: \"Describe the instance\"
             Type: Record-Data
             Attribute number: ${headers.length}
@@ -105,7 +105,6 @@ Composition:
             let attrData = data.map(function (value, index2) { return value[index]; });
             const datHeaders = attrData.shift();
             // Calculate completness
-            
             const completness = datasetMetrics.attributeCompletness(attrData);
             // Calculate unique values
             const unique = datasetMetrics.attributeUnique(attrData);
@@ -117,7 +116,8 @@ Composition:
                 // Calculate Mode
                 const mode = datasetMetrics.attributeMode(attrData);
                 // Calculate Cateogrical Distribution
-                const catDist = datasetMetrics.attributeCatDist(attrData);;
+                const catDist = datasetMetrics.attributeCatDist(attrData);
+                ;
                 if (catDist === false) {
                     body = body +
                         `\t\t\t\tattribute:  ${datHeaders.replaceAll(' ', '_')}  
@@ -128,7 +128,8 @@ Composition:
                             Mode: "${mode}"
                             Quality Metrics:
                                 Completeness: ${completness} \n`;
-                } else {
+                }
+                else {
                     body = body +
                         `\t\t\t\tattribute:  ${datHeaders.replaceAll(' ', '_')}  
                         description: \"Describe the attribute\"
@@ -140,11 +141,11 @@ Composition:
                             Quality Metrics:
                                 Completeness: ${completness} \n`;
                 }
-
-            } else {
+            }
+            else {
                 // Numerical
                 // Parse to numbers
-                const attrNumerical: number[] = attrData.map(Number)
+                const attrNumerical = attrData.map(Number);
                 // Calculate mean  
                 const mean = Math.round((attrNumerical.reduce((a, b) => a + b) / attrNumerical.length) * 10) / 10;
                 // Calculate variance
@@ -152,7 +153,7 @@ Composition:
                 // Calculate covariance
                 const std = Math.round((Math.sqrt(variance)) * 10) / 10;
                 // Calculate maximmum
-                const max = Math.max(...attrNumerical.map(o => o))
+                const max = Math.max(...attrNumerical.map(o => o));
                 // Calculate minimmum
                 const min = Math.min(...attrNumerical.map(o => o));
                 body = body + `\t\t\t\tattribute:  ${datHeaders.replaceAll(' ', '_')}  
@@ -165,24 +166,18 @@ Composition:
                         Minimmum: ${min}
                         Maximmum: ${max}\n`;
             }
-
-
-
-
         });
-
         body = body +
             `       Statistics:
             Quality Metrics:
                 Sparsity: 00 // Not calculated, to be filled
     Dependencies:
         Description: ""
-    Data Splits: ""\n`
-
+    Data Splits: ""\n`;
         return body;
     }
     // Building the provenance part
-    buildProvenanceSnippet(data: Array<any>, filepath: string) {
+    buildProvenanceSnippet(data, filepath) {
         return `   
 Data Provenance:
     Curation Rationale: ""
@@ -209,11 +204,9 @@ Data Provenance:
         Preprocess: preprocessId
         Description: ""
         Type: Others
-`
-
+`;
     }
-
-    buildSocialConcernSnippet(data: Array<any>, filepath: string) {
+    buildSocialConcernSnippet(data, filepath) {
         return `  
 Social Concerns:
         Social Issue: issueId
@@ -225,5 +218,6 @@ Social Concerns:
         
         `;
     }
-
 }
+exports.DatasetUploader = DatasetUploader;
+//# sourceMappingURL=dataset-descriptor-uploader.js.map
