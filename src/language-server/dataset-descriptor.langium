@@ -41,7 +41,7 @@ Metadata:
 // Dates
 Dates:
     name="Dates:"
-     (datesR=ReleaseDate )?
+     (datesR=ReleaseDate )
      (datesU=UpdateDate )?
      (datesP=PublishedDate )?;
 ReleaseDate:
@@ -80,11 +80,11 @@ Citation:
     (("Raw Citation:") citeText=STRING |
      ("Title:" title=Title)?
      ("Authors:" authorsPaper=Citeauthors)?
-     ("Year:" year=NUMBER) )?
+     ("Year:" year=NUMBER)? 
      ("Keywords:" "["(keywords+=Keyword)*"]")?
      ("Journal:" publisher=Publisher)?
      (("DOI:" doi=DoiCite)? 
-     ("Url:" url=CiteUrl)? 
+     ("Url:" url=CiteUrl)? )?
     );
 Title:
     name=STRING;
@@ -185,8 +185,8 @@ Statistics:
 
 PairCorrelation:
     (
-        'between' attr1=[Attribute] 'and' 
-        (attr2=[Attribute] | 'external source'
+        'between' attr1=[Attribute:QualifiedName] 'and' 
+        (attr2=[Attribute:QualifiedName] | 'external source'
         'From:' from=STRING "Rationale:" rationale=STRING)
     )?;
 
@@ -198,14 +198,13 @@ QualityMetric:
 
 // Consistency Rules
 ConsistencyRules:
-    'inv:' instance1=[DataInstance] ": ("attrule1=[Attribute]  Operators (comparator = NUMBER | attrule2=[Attribute])? ")";
+    'inv:' instance1=[DataInstance:QualifiedName] ":(" attrule1=[Attribute:QualifiedName]  comparator=Operators ( attr2=[Attribute:QualifiedName] | value=NUMBER)? ")";
    
 // Attributes
 Attribute:
     'attribute:' name=ID 
     'description:' attdesc=STRING 
-    ('label:' label=[Labels])?
-    ('labeling process:' labelProces=[LabelingProcess])?
+    ('label:' label=[Labels:QualifiedName])?
     ('unique values:' unique=NUMBER)?
     ('count:' count=NUMBER)?
     ('ofType:' ((attType=Categor)|(attType=Numeri)))?;
@@ -270,7 +269,7 @@ Quartile:
 RelationInstances:
     'Instances relation:' (relation+=Relation)*;
 Relation:
-    ('Relation:' name=ID 'attribute:' attRel=[Attribute] "is related to:" insRel=[DataInstance] ('and attribute:' attRelTarget=[Attribute]))*;
+    ('Relation:' name=ID 'attribute:' attRel=[Attribute:QualifiedName] "is related to:" insRel=[DataInstance:QualifiedName] ('and attribute:' attRelTarget=[Attribute:QualifiedName]))*;
 
 // Instance Dependencies
 Dependencies:
@@ -315,7 +314,7 @@ GatheringProcess:
     'Description:' desc=STRING
      source=Source  
     ('Gathering dates range:' gatherDates=STRING)?
-    ('Related Instances:' (mapInstance=[DataInstance] (',')?)*)?
+    ('Related Instance:' mapInstance=[DataInstance])?
     ('Social Issues:' labelSocialIssues=[SocialIssue])?
     ('How data is collected:' how=GatherType)?
     ('Is language data?:' SpeechSitatuion)?
@@ -352,12 +351,12 @@ LabelingProcess:
     ('Labeling Team:'labelingTeam = Team)?
     ('Infrastructure:' infra=Infrastructure)?
     ('Validation:' validation=Validation)?
-    ('Social Issues:' labelSocialIssues=[SocialIssue])?
+    ('Social Issues:' labelSocialIssues=[SocialIssue:QualifiedName])?
     ('Label Requirements:' (requeriments+=Requeriments)*)?;
 Labels:
     'Label:' name=ID
     'Description:' desc=STRING
-    'Mapping:' (map=[Attribute] (',')?)*;
+    'Mapping:' (map=[Attribute:QualifiedName] (',')?)*;
 Infrastructure:
     ('Tool' tool=STRING)?
     ('Platform' platform=STRING)?
@@ -393,7 +392,7 @@ PreProcess:
     'Preprocess:' name=ID
     'Description:' desc=STRING
     'Type:' type=DataProcess
-    ('Social Issues:' labelSocialIssues=[SocialIssue])?;
+    ('Social Issues:' labelSocialIssues=[SocialIssue:QualifiedName])?;
 
 
 //
@@ -408,10 +407,10 @@ SocialIssue:
     'Social Issue:' name=ID
     'IssueType:' IssueType=SocialIssueType
         'Description:' desc=STRING
-    ('Related Attributes:' ('attribute:' senseAtt=[Attribute])*)?
+    ('Related Attributes:' ('attribute:' senseAtt=[Attribute:QualifiedName])*)?
 
     ('Instance belongs to people:' 
-        ('Have sensitive attributes?' ('attribute:' senseAtt=[Attribute])*)?
+        ('Have sensitive attributes?' ('attribute:' senseAtt=[Attribute:QualifiedName])*)?
         ('Are there protected groups?' procGroups=BooleanAnswer)?
         ('Might be offensive' offDiscussion=STRING)?)?
     ;
@@ -470,12 +469,14 @@ DataProcess returns string: 'Missing Values' | 'Data Augmentation' | 'Outlier Fi
 StringNumberType returns string: STRING + ':' + NUMBER;
 HistogramType returns string: NUMBER + ':' + NUMBER;
 DataTypes returns string: 'String' | 'Integer' | 'Boolean' | 'Other';
-QualifiedName returns string: ID ('.' ID)*;
-Operators returns string: '<'|'>'|'='|'!='|'+'|'-'|'>=';
+// QualifiedName returns string: ID ('.' ID)*;
+Operators returns string: 'bigger'|'litle'|'equal'|'diferent'|'more'|'minus'|'equal+bigger';
 Dash returns string: "-";
 DateYear returns string: NUMBER+Dash+NUMBER+Dash+NUMBER;
 DOI returns string: ((NUMBER|ID)+("/"|".")+(NUMBER|ID));
 EmailType returns string: ID+'@'+ID+'.'+ID;
+QualifiedName returns string:
+    ID ('.' ID)*;
 
 //
 // Terminals
@@ -487,13 +488,3 @@ terminal STRING: /"[^"]*"|'[^']*'/;
 
 hidden terminal ML_COMMENT: /\/\*[\s\S]*?\*\//;
 hidden terminal SL_COMMENT: /\/\/[^\n\r]*/;
-
-
-
-
-
-
-
-
-
-

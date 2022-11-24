@@ -157,7 +157,7 @@ Dataset: Gender
             Source: Wikipedia
               Description: "a description"
               Noise: "Already defined"
-            Related Instances: Wikipedia
+            Related Instance: Wikipedia
             How data is collected: Manual Human Curator
             
            // Periodicals
@@ -183,7 +183,7 @@ Dataset: Gender
                 found/included documents from The Advocate, The DailyXtra, DigitalTrans, GLReview,
                 LambdaLiterary and Lavender. These documents comprise about 1/6 of the dataset." 
                 Noise: "See potential impact in social section"
-            Related Instances: Periodicals
+            Related Instance: Periodicals
             How data is collected: Manual Human Curator
             
           // AO3
@@ -200,7 +200,7 @@ Dataset: Gender
                 stories by word count, and took the shortest ones that were actually stories (some were descriptions
                 of audiobooks). These documents comprise about 1/6 of the dataset." 
                 Noise: "See potential impact in social section" 
-            Related Instances: AO3
+            Related Instance: AO3
             How data is collected: Manual Human Curator
 
     //

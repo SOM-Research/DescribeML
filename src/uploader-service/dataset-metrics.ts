@@ -4,7 +4,7 @@
  * terms of the MIT License, which is available in the project root.
  ******************************************************************************/
 
-export interface Metrics {
+ export interface Metrics {
     // Calculate attribute unique values
     attributeUnique(attrData: Array<any>): any;
     // Calculate attribute completeness

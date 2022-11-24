@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -32,24 +36,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deactivate = exports.activate = void 0;
-/******************************************************************************
- * Copyright 2022 SOM Research
- * This program and the accompanying materials are made available under the
- * terms of the MIT License, which is available in the project root.
- ******************************************************************************/
 const vscode = __importStar(require("vscode"));
 const path = __importStar(require("path"));
 const fs_1 = __importDefault(require("fs"));
 const node_1 = require("vscode-languageclient/node");
-const dataset_descriptor_module_1 = require("./language-server/dataset-descriptor-module");
+const dataset_descriptor_documentation_1 = require("./generator-service/dataset-descriptor-documentation");
+const dataset_descriptor_uploader_1 = require("./uploader-service/dataset-descriptor-uploader");
 let client;
-let datasetServices;
 let previewPanel;
 // This function is called when the extension is activated.
 function activate(context) {
-    // Starting the Language services
     client = startLanguageClient(context);
-    datasetServices = (0, dataset_descriptor_module_1.createDatasetDescriptorServices)().datasetDescription;
     // Here we register the upload service
     context.subscriptions.push(vscode.commands.registerCommand('datadesc.loadDataset', () => __awaiter(this, void 0, void 0, function* () {
         vscode.window.withProgress({
@@ -92,7 +89,7 @@ function startLanguageClient(context) {
         run: { module: serverModule, transport: node_1.TransportKind.ipc },
         debug: { module: serverModule, transport: node_1.TransportKind.ipc, options: debugOptions }
     };
-    const fileSystemWatcher = vscode.workspace.createFileSystemWatcher('**/*.datadesc');
+    const fileSystemWatcher = vscode.workspace.createFileSystemWatcher('**/*.descml');
     context.subscriptions.push(fileSystemWatcher);
     // Options to control the language client
     const clientOptions = {
@@ -103,7 +100,7 @@ function startLanguageClient(context) {
         }
     };
     // Create the language client and start the client.
-    const client = new node_1.LanguageClient('dataset-descriptor', 'Dataset Descriptor', serverOptions, clientOptions);
+    const client = new node_1.LanguageClient('dataset-descriptor', 'dataset-descriptor', serverOptions, clientOptions);
     // Start the client. This will also launch the server
     client.start();
     return client;
@@ -111,7 +108,8 @@ function startLanguageClient(context) {
 function uploaderService(context, filepath) {
     return __awaiter(this, void 0, void 0, function* () {
         console.log('start');
-        const text = yield datasetServices.uploader.DatasetUploader.uploadDataset(filepath.fsPath);
+        let uploader = new dataset_descriptor_uploader_1.DatasetUploader();
+        const text = yield uploader.uploadDataset(filepath.fsPath);
         let snippet = new vscode.SnippetString();
         snippet.appendText(text);
         //createDatasetDescriptorServices().shared.workspace.LangiumDocuments.getOrCreateDocument()
@@ -155,7 +153,7 @@ function generatorHTMLService(context) {
             localResourceRoots: [vscode.Uri.file(path.join(context.extensionPath, 'assets'))]
         });
         setPreviewActiveContext(true);
-        const generator = datasetServices.generation.DocumentationGenerator;
+        const generator = new dataset_descriptor_documentation_1.DocumentationGenerator();
         const text = (_a = vscode.window.activeTextEditor) === null || _a === void 0 ? void 0 : _a.document.getText();
         if (text) {
             const returner = generator.generate(text);

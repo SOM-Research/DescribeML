@@ -1,14 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DocumentationGenerator = void 0;
+/******************************************************************************
+ * Copyright 2022 SOM Research
+ * This program and the accompanying materials are made available under the
+ * terms of the MIT License, which is available in the project root.
+ ******************************************************************************/
+const langium_1 = require("langium");
 const ast_1 = require("../language-server/generated/ast");
 /**
  * Generator HTML service main class
  * To generate the HTML we parse the description and we use PUG as a engine teamplate to build the HTML
  */
 class DocumentationGenerator {
-    constructor(services) {
-        this.parser = services.parser.LangiumParser;
+    constructor() {
+        this.parser = langium_1.LangiumParser.prototype;
     }
     generate(DescriptionDataset) {
         const astNode = (typeof (DescriptionDataset) == 'string' ? this.parser.parse(DescriptionDataset).value : DescriptionDataset);
@@ -24,10 +30,10 @@ class DocumentationGenerator {
             socialConcerns: DescriptionDataset.elements[0].socialConcerns,
         };
         let head = `
-<html>
-        <head>
-            <title>${description.title}</title>
-            <meta charset="utf-8"/>`;
+ <html>
+         <head>
+             <title>${description.title}</title>
+             <meta charset="utf-8"/>`;
         head = this.addSchemaOrg(description, head, description.title);
         head = this.addStyles(head);
         let body = this.buildBody(description);
@@ -42,16 +48,16 @@ class DocumentationGenerator {
         description.metadata.authoring.authors[0].authors.forEach(function (author) {
             authors = authors +
                 `"creator":{
-            "@type":"Author",
-            "url": "",
-            "name":"${author.name}",
-            "contactPoint":{
-                "@type":"ContactPoint",
-                "contactType": "email,
-                "email":${author.email}
-            }
-        },
-    `;
+             "@type":"Author",
+             "url": "",
+             "name":"${author.name}",
+             "contactPoint":{
+                 "@type":"ContactPoint",
+                 "contactType": "email,
+                 "email":${author.email}
+             }
+         },
+     `;
         });
         // Add funders
         let funders = "";
@@ -59,11 +65,11 @@ class DocumentationGenerator {
             description.metadata.authoring.founding[0].funders.forEach(function (funder) {
                 funders = funders +
                     `"funder":{
-                    "@type":"Funder",
-                    "name":"${funder.name}",
-                    "sameAs":"${funder.type}"
-                },
-            `;
+                     "@type":"Funder",
+                     "name":"${funder.name}",
+                     "sameAs":"${funder.type}"
+                 },
+             `;
             });
         }
         let areas = '';
@@ -75,70 +81,70 @@ class DocumentationGenerator {
             areas = areas + area.name + ',';
         });
         head = head + `
-        <script type="application/ld+json">
-        {
-        "@context":"https://schema.org/",
-        "@type":"Dataset",
-        "name":"${title}",
-        "description":${description.metadata.desc.descriptionpurpose},
-        "url":"",
-        "sameAs":"",
-        "identifier": [${description.metadata.ident}],
-        "keywords":[
-            "AREA > ${areas}",
-            "TAGS > ${tags}",
-        ],
-        "license" : ${description.metadata.distribution.licence},
-        "hasPart" : [
-            {
-            "@type": "Dataset",
-            "name": ${description.composition.instances[0].instances[0].name},
-            "description": ${description.composition.instances[0].instances[0].descript},
-            },
-        ],
-        "includedInDataCatalog":{
-            "@type":"DataCatalog",
-            "name":"data.gov"
-        },
-        "distribution":[
-            {
-                "@type":"DataDownload",
-                "encodingFormat":"CSV",
-                "contentUrl":"http://www.ncdc.noaa.gov/stormevents/ftp.jsp"
-            },
-            {
-                "@type":"DataDownload",
-                "encodingFormat":"XML",
-                "contentUrl":"http://gis.ncdc.noaa.gov/all-records/catalog/search/resource/details.page?id=gov.noaa.ncdc:C00510"
-            }
-        ],
-        "temporalCoverage":"${description.metadata.dates.datesR}/${description.metadata.dates.datesU}",
-     `;
+         <script type="application/ld+json">
+         {
+         "@context":"https://schema.org/",
+         "@type":"Dataset",
+         "name":"${title}",
+         "description":${description.metadata.desc.descriptionpurpose},
+         "url":"",
+         "sameAs":"",
+         "identifier": [${description.metadata.ident}],
+         "keywords":[
+             "AREA > ${areas}",
+             "TAGS > ${tags}",
+         ],
+         "license" : ${description.metadata.distribution.licence},
+         "hasPart" : [
+             {
+             "@type": "Dataset",
+             "name": ${description.composition.instances[0].instances[0].name},
+             "description": ${description.composition.instances[0].instances[0].descript},
+             },
+         ],
+         "includedInDataCatalog":{
+             "@type":"DataCatalog",
+             "name":"data.gov"
+         },
+         "distribution":[
+             {
+                 "@type":"DataDownload",
+                 "encodingFormat":"CSV",
+                 "contentUrl":"http://www.ncdc.noaa.gov/stormevents/ftp.jsp"
+             },
+             {
+                 "@type":"DataDownload",
+                 "encodingFormat":"XML",
+                 "contentUrl":"http://gis.ncdc.noaa.gov/all-records/catalog/search/resource/details.page?id=gov.noaa.ncdc:C00510"
+             }
+         ],
+         "temporalCoverage":"${description.metadata.dates.datesR}/${description.metadata.dates.datesU}",
+      `;
         head = head + authors + funders + ` 
-        }
-        </script>`;
+         }
+         </script>`;
         return head;
     }
     addStyles(head) {
         return head + `        
-    <style>
-        table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-        }
-
-        td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-        background-color:grey
-        }
-
-        tr:nth-child(even) {
-        background-color: #dddddd;
-        }
-    </style>`;
+     <style>
+         table {
+         font-family: arial, sans-serif;
+         border-collapse: collapse;
+         width: 100%;
+         }
+ 
+         td, th {
+         border: 1px solid #dddddd;
+         text-align: left;
+         padding: 8px;
+         background-color:grey
+         }
+ 
+         tr:nth-child(even) {
+         background-color: #dddddd;
+         }
+     </style>`;
     }
     // The PUG file is located inside the "out" folder. As needs to be released in the executable plugin
     // So, you may need to go to /out/templates/document.pug to customize the template.

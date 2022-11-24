@@ -133,6 +133,8 @@ Dataset: Polarity
                     Statistics:
                         Quality Metrics:
                             Completeness: 100
+                    Consistency rules:
+
                 
                 Dependencies: 
                     Description: "The dataset is entirely self-contained."
@@ -162,7 +164,7 @@ Dataset: Polarity
                         to forty reviews per unique author in order to achieve broader
                         coverage by authorship. Beyond that, the sample is arbitrar" 
                     Noise: "unknown"
-                Related Instances: MovieReviews
+                Related Instance: MovieReviews
                 Social Issues: privacyAware
                 How data is collected: Manual Human Curator
                 When data was collected: "There are 1,400 instances in total in the original (v1.x versions)
@@ -191,7 +193,7 @@ Dataset: Polarity
             Label: Tag
             Description: "The label is the positive/negative sentiment polarity rating derived
             from the star rating"
-            Mapping: tag
+            Mapping: MovieReviews.tag
         Label Requirements:
           Requirement:                     
             "- In order to obtain more accurate rating decisions, the maximum
@@ -261,7 +263,7 @@ Dataset: Polarity
           "Some movie reviews might contain moderately inappropriate or
           offensive language, but we do not expect this to be the norm" 
           Related Attributes: 
-            attribute: text_body
+            attribute: Wikipedia.tokens
         Instance belongs to people:
             Are there protected groups? Yes
 

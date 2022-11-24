@@ -1,28 +1,19 @@
-/******************************************************************************
- * Copyright 2022 SOM Research
- * This program and the accompanying materials are made available under the
- * terms of the MIT License, which is available in the project root.
- ******************************************************************************/
 import * as vscode from 'vscode';
 import * as path from 'path';
 import fs from 'fs';
 import {
     LanguageClient, LanguageClientOptions, ServerOptions, TransportKind
 } from 'vscode-languageclient/node';
-import { createDatasetDescriptorServices, DatasetDescriptorServices} from './language-server/dataset-descriptor-module';
+import { DocumentationGenerator } from './generator-service/dataset-descriptor-documentation';
+import { DatasetUploader } from './uploader-service/dataset-descriptor-uploader';
+
 
 let client: LanguageClient;
-let datasetServices : DatasetDescriptorServices;
 let previewPanel : vscode.WebviewPanel;
-
 
 // This function is called when the extension is activated.
 export function activate(context: vscode.ExtensionContext): void {
-
-    // Starting the Language services
     client = startLanguageClient(context);
-    datasetServices = createDatasetDescriptorServices().datasetDescription;
-
     // Here we register the upload service
     context.subscriptions.push(vscode.commands.registerCommand('datadesc.loadDataset', async () => {
         vscode.window.withProgress(
@@ -40,15 +31,14 @@ export function activate(context: vscode.ExtensionContext): void {
 
     // Here we register the HTML generation service
     context.subscriptions.push(vscode.commands.registerCommand('datadesc.generateDocumentation', async () => {
-       await generatorHTMLService(context);
-    }));
-
-    // Here we register the HTML generation service (save action)
-    context.subscriptions.push(vscode.commands.registerCommand('datadesc.saveDocumentHTML', async () => {
-        await saveDocumentHTML(context);
+        await generatorHTMLService(context);
      }));
+ 
+     // Here we register the HTML generation service (save action)
+     context.subscriptions.push(vscode.commands.registerCommand('datadesc.saveDocumentHTML', async () => {
+         await saveDocumentHTML(context);
+      }));
 }
-
 
 // This function is called when the extension is deactivated.
 export function deactivate(): Thenable<void> | undefined {
@@ -72,7 +62,7 @@ function startLanguageClient(context: vscode.ExtensionContext): LanguageClient {
         debug: { module: serverModule, transport: TransportKind.ipc, options: debugOptions }
     };
 
-    const fileSystemWatcher = vscode.workspace.createFileSystemWatcher('**/*.datadesc');
+    const fileSystemWatcher = vscode.workspace.createFileSystemWatcher('**/*.descml');
     context.subscriptions.push(fileSystemWatcher);
 
     // Options to control the language client
@@ -87,7 +77,7 @@ function startLanguageClient(context: vscode.ExtensionContext): LanguageClient {
     // Create the language client and start the client.
     const client = new LanguageClient(
         'dataset-descriptor',
-        'Dataset Descriptor',
+        'dataset-descriptor',
         serverOptions,
         clientOptions
     );
@@ -99,7 +89,8 @@ function startLanguageClient(context: vscode.ExtensionContext): LanguageClient {
 
 async function uploaderService(context: vscode.ExtensionContext, filepath: vscode.Uri) {
     console.log('start');
-    const text:string = await datasetServices.uploader.DatasetUploader.uploadDataset(filepath.fsPath);
+    let uploader = new DatasetUploader();
+    const text:string = await uploader.uploadDataset(filepath.fsPath);
     let snippet = new vscode.SnippetString();
     snippet.appendText(text);
     //createDatasetDescriptorServices().shared.workspace.LangiumDocuments.getOrCreateDocument()
@@ -143,9 +134,9 @@ async function generatorHTMLService(context: vscode.ExtensionContext) {
             localResourceRoots: [vscode.Uri.file(path.join(context.extensionPath, 'assets'))]
         
         }
-    );
+    )
     setPreviewActiveContext(true);
-    const generator =  datasetServices.generation.DocumentationGenerator;
+    const generator =  new DocumentationGenerator();
     const text = vscode.window.activeTextEditor?.document.getText();
     if (text) {
         const returner = generator.generate(text);
@@ -180,3 +171,4 @@ function saveDocumentHTML(context: vscode.ExtensionContext) {
         });
     }
 }
+

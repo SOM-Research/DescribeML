@@ -14,41 +14,35 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DatasetDescriptorDescriptionProvider = void 0;
+exports.DatasetDescriptorScopeComputation = void 0;
 const langium_1 = require("langium");
-const vscode_languageserver_1 = require("vscode-languageserver");
+const vscode_jsonrpc_1 = require("vscode-jsonrpc");
 const ast_1 = require("./generated/ast");
-/*
-* This class provides custom index services to the LSP. In particular, we allow child classes of the AST to reference child of other parents.
-*/
-class DatasetDescriptorDescriptionProvider extends langium_1.DefaultAstNodeDescriptionProvider {
+class DatasetDescriptorScopeComputation extends langium_1.DefaultScopeComputation {
     constructor(services) {
         super(services);
     }
-    createDescriptions(document, cancelToken = vscode_languageserver_1.CancellationToken.None) {
+    /**
+     * Exports only types (`DataType or `Entity`) with their qualified names.
+     */
+    computeExports(document, cancelToken = vscode_jsonrpc_1.CancellationToken.None) {
         return __awaiter(this, void 0, void 0, function* () {
             const descr = [];
-            const rootNode = document.parseResult.value;
-            const name = this.nameProvider.getName(rootNode);
-            if (name) {
-                descr.push(this.createDescription(rootNode, name, document));
-            }
-            for (const content of (0, langium_1.streamAllContents)(rootNode)) {
+            for (const modelNode of (0, langium_1.streamAllContents)(document.parseResult.value)) {
                 yield (0, langium_1.interruptAndCheck)(cancelToken);
-                const name = this.nameProvider.getName(content.node);
-                if ((0, ast_1.isAttribute)(content.node)) {
-                    let container = content.node.$container;
-                    if (name && (container.name)) {
-                        descr.push(this.createDescription(content.node, container.name + '.' + name, document));
-                    }
-                }
+                let name = this.nameProvider.getName(modelNode);
+                let container = modelNode.$container;
                 if (name) {
-                    descr.push(this.createDescription(content.node, name, document));
+                    if ((0, ast_1.isAttribute)(modelNode) || (0, ast_1.isDataInstance)(modelNode) || (0, ast_1.isLabels)(modelNode) || (0, ast_1.isLabelingProcess)(modelNode) || (0, ast_1.isSocialIssue)(modelNode)) {
+                        descr.push(this.descriptions.createDescription(modelNode, container.name + '.' + name, document));
+                        //name = (this.nameProvider as DomainModelNameProvider).getQualifiedName(modelNode.$container as PackageDeclaration, name);
+                    }
+                    descr.push(this.descriptions.createDescription(modelNode, name, document));
                 }
             }
             return descr;
         });
     }
 }
-exports.DatasetDescriptorDescriptionProvider = DatasetDescriptorDescriptionProvider;
-//# sourceMappingURL=dataset-descriptor-index.js.map
+exports.DatasetDescriptorScopeComputation = DatasetDescriptorScopeComputation;
+//# sourceMappingURL=dataset-descriptor-scope.js.map
