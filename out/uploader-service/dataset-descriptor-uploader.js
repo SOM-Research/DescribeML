@@ -20,6 +20,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DatasetUploader = void 0;
 const sync_1 = require("csv-parse/sync");
 const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
 const dataset_metrics_1 = require("./dataset-metrics");
 /**
  * Data uploader service main class
@@ -89,7 +90,6 @@ class DatasetUploader {
     }
     // Building Composition snippet
     buildCompositionSnippet(data, filepath) {
-        var _a;
         const datasetMetrics = new dataset_metrics_1.DatasetMetrics;
         // Get Headers
         const headers = data[0];
@@ -100,7 +100,7 @@ class DatasetUploader {
      Rationale: ""
      Total size: ${numberofResults}
      Data Instances:
-         Instance:  ${(_a = filepath.split("\\").pop()) === null || _a === void 0 ? void 0 : _a.split(".")[0]}
+         Instance:  ${path_1.default.basename(filepath).split('.')[0]}
              Description: \"Describe the instance\"
              Type: Record-Data
              Attribute number: ${headers.length}

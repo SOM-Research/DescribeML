@@ -6,6 +6,7 @@
 
  import { parse } from 'csv-parse/sync';
  import fs from 'fs';
+import path from 'path';
  import { DatasetMetrics } from './dataset-metrics';
  
  export interface Uploader {
@@ -27,6 +28,7 @@
      async uploadDataset(filepath: string): Promise<string> {
          // Loading the .CSV
          const fileContent = fs.readFileSync(filepath, { encoding: 'utf-8' });
+      
          // Parsing the .CSV
          const parsed: Array<any> = parse(fileContent) as Array<any>;
          // Building the snnipet
@@ -95,7 +97,7 @@
      Rationale: ""
      Total size: ${numberofResults}
      Data Instances:
-         Instance:  ${filepath.split("\\").pop()?.split(".")[0]}
+         Instance:  ${path.basename(filepath).split('.')[0]}
              Description: \"Describe the instance\"
              Type: Record-Data
              Attribute number: ${headers.length}

@@ -485,8 +485,7 @@ class DatasetDescriptorAstReflection {
                 return {
                     name: 'Composition',
                     mandatory: [
-                        { name: 'compodesc', type: 'array' },
-                        { name: 'instances', type: 'array' }
+                        { name: 'compodesc', type: 'array' }
                     ]
                 };
             }
@@ -605,16 +604,6 @@ class DatasetDescriptorAstReflection {
                     name: 'PreProcesses',
                     mandatory: [
                         { name: 'preprocesses', type: 'array' }
-                    ]
-                };
-            }
-            case 'Provenance': {
-                return {
-                    name: 'Provenance',
-                    mandatory: [
-                        { name: 'gathering', type: 'array' },
-                        { name: 'labeling', type: 'array' },
-                        { name: 'other', type: 'array' }
                     ]
                 };
             }

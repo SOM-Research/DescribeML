@@ -78,8 +78,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                 "$refText": "Composition"
               },
               "arguments": []
-            },
-            "cardinality": "?"
+            }
           },
           {
             "$type": "Assignment",
@@ -91,8 +90,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                 "$refText": "Provenance"
               },
               "arguments": []
-            },
-            "cardinality": "?"
+            }
           },
           {
             "$type": "Assignment",
@@ -104,8 +102,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                 "$refText": "SocialConcerns"
               },
               "arguments": []
-            },
-            "cardinality": "?"
+            }
           }
         ]
       },
@@ -2216,105 +2213,110 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
           {
             "$type": "Assignment",
             "feature": "instances",
-            "operator": "+=",
+            "operator": "=",
             "terminal": {
               "$type": "RuleCall",
               "rule": {
                 "$refText": "DataInstances"
               },
               "arguments": []
-            },
-            "cardinality": "*"
-          },
-          {
-            "$type": "Assignment",
-            "feature": "relation",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "rule": {
-                "$refText": "RelationInstances"
-              },
-              "arguments": []
-            },
-            "cardinality": "?"
+            }
           },
           {
             "$type": "Group",
             "elements": [
               {
-                "$type": "Keyword",
-                "value": "Dependencies:"
-              },
-              {
                 "$type": "Assignment",
-                "feature": "dependencies",
+                "feature": "relation",
                 "operator": "=",
                 "terminal": {
                   "$type": "RuleCall",
                   "rule": {
-                    "$refText": "Dependencies"
+                    "$refText": "RelationInstances"
                   },
                   "arguments": []
-                }
-              }
-            ],
-            "cardinality": "?"
-          },
-          {
-            "$type": "Group",
-            "elements": [
-              {
-                "$type": "Keyword",
-                "value": "Is sample:"
+                },
+                "cardinality": "?"
               },
               {
-                "$type": "Alternatives",
+                "$type": "Group",
                 "elements": [
                   {
-                    "$type": "Assignment",
-                    "feature": "sample",
-                    "operator": "=",
-                    "terminal": {
-                      "$type": "Keyword",
-                      "value": "NO"
-                    }
+                    "$type": "Keyword",
+                    "value": "Dependencies:"
                   },
                   {
                     "$type": "Assignment",
-                    "feature": "sample",
+                    "feature": "dependencies",
                     "operator": "=",
                     "terminal": {
                       "$type": "RuleCall",
                       "rule": {
-                        "$refText": "Sample"
+                        "$refText": "Dependencies"
                       },
                       "arguments": []
                     }
                   }
-                ]
-              }
-            ],
-            "cardinality": "?"
-          },
-          {
-            "$type": "Group",
-            "elements": [
-              {
-                "$type": "Keyword",
-                "value": "Data Splits:"
+                ],
+                "cardinality": "?"
               },
               {
-                "$type": "Assignment",
-                "feature": "splits",
-                "operator": "=",
-                "terminal": {
-                  "$type": "RuleCall",
-                  "rule": {
-                    "$refText": "STRING"
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "Is sample:"
                   },
-                  "arguments": []
-                }
+                  {
+                    "$type": "Alternatives",
+                    "elements": [
+                      {
+                        "$type": "Assignment",
+                        "feature": "sample",
+                        "operator": "=",
+                        "terminal": {
+                          "$type": "Keyword",
+                          "value": "NO"
+                        }
+                      },
+                      {
+                        "$type": "Assignment",
+                        "feature": "sample",
+                        "operator": "=",
+                        "terminal": {
+                          "$type": "RuleCall",
+                          "rule": {
+                            "$refText": "Sample"
+                          },
+                          "arguments": []
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "cardinality": "?"
+              },
+              {
+                "$type": "Group",
+                "elements": [
+                  {
+                    "$type": "Keyword",
+                    "value": "Data Splits:"
+                  },
+                  {
+                    "$type": "Assignment",
+                    "feature": "splits",
+                    "operator": "=",
+                    "terminal": {
+                      "$type": "RuleCall",
+                      "rule": {
+                        "$refText": "STRING"
+                      },
+                      "arguments": []
+                    }
+                  }
+                ],
+                "cardinality": "?"
               }
             ],
             "cardinality": "?"
@@ -4783,7 +4785,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
           {
             "$type": "Assignment",
             "feature": "gathering",
-            "operator": "+=",
+            "operator": "=",
             "terminal": {
               "$type": "RuleCall",
               "rule": {
@@ -4796,7 +4798,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
           {
             "$type": "Assignment",
             "feature": "labeling",
-            "operator": "+=",
+            "operator": "=",
             "terminal": {
               "$type": "RuleCall",
               "rule": {
@@ -4809,7 +4811,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
           {
             "$type": "Assignment",
             "feature": "other",
-            "operator": "+=",
+            "operator": "=",
             "terminal": {
               "$type": "RuleCall",
               "rule": {

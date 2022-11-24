@@ -269,7 +269,7 @@ export interface Composition extends AstNode {
     readonly $container: Declaration;
     compodesc: Array<string>
     dependencies?: Dependencies
-    instances: Array<DataInstances>
+    instances: DataInstances
     name: 'Composition:'
     numberInst?: number
     relation?: RelationInstances
@@ -359,11 +359,11 @@ export function isDates(item: unknown): item is Dates {
 
 export interface Declaration extends AstNode {
     readonly $container: DescriptionDataset;
-    composition?: Composition
+    composition: Composition
     generalinfo: Metadata
     name: string
-    provenance?: Provenance
-    socialConcerns?: SocialConcerns
+    provenance: Provenance
+    socialConcerns: SocialConcerns
 }
 
 export const Declaration = 'Declaration';
@@ -715,10 +715,10 @@ export function isPreProcesses(item: unknown): item is PreProcesses {
 export interface Provenance extends AstNode {
     readonly $container: Declaration;
     curation: string
-    gathering: Array<GatheringProcesses>
-    labeling: Array<LabelingProcesses>
+    gathering?: GatheringProcesses
+    labeling?: LabelingProcesses
     name: 'Data Provenance:'
-    other: Array<PreProcesses>
+    other?: PreProcesses
 }
 
 export const Provenance = 'Provenance';
@@ -1153,8 +1153,7 @@ export class DatasetDescriptorAstReflection implements AstReflection {
                 return {
                     name: 'Composition',
                     mandatory: [
-                        { name: 'compodesc', type: 'array' },
-                        { name: 'instances', type: 'array' }
+                        { name: 'compodesc', type: 'array' }
                     ]
                 };
             }
@@ -1273,16 +1272,6 @@ export class DatasetDescriptorAstReflection implements AstReflection {
                     name: 'PreProcesses',
                     mandatory: [
                         { name: 'preprocesses', type: 'array' }
-                    ]
-                };
-            }
-            case 'Provenance': {
-                return {
-                    name: 'Provenance',
-                    mandatory: [
-                        { name: 'gathering', type: 'array' },
-                        { name: 'labeling', type: 'array' },
-                        { name: 'other', type: 'array' }
                     ]
                 };
             }

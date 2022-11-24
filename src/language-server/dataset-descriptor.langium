@@ -19,9 +19,9 @@ entry DescriptionDataset:
 Declaration:
  'Dataset:' name=ID 
   generalinfo=Metadata
-  (composition=Composition)?
-  (provenance=Provenance)?
-  (socialConcerns=SocialConcerns)?;
+  (composition=Composition)
+  (provenance=Provenance)
+  (socialConcerns=SocialConcerns);
 
 //
 // Metadata of the dataset
@@ -158,11 +158,11 @@ Maintainer:
      name='Composition:'
      'Rationale:' compodesc+=STRING
      ('Total size:' numberInst=NUMBER)? 
-     (instances += DataInstances)*
-     (relation=RelationInstances)?
+     (instances = DataInstances)
+     ((relation=RelationInstances)?
      ('Dependencies:' dependencies=Dependencies)? 
      ('Is sample:' ((sample='NO')|(sample=Sample)))?
-     ('Data Splits:' splits=STRING)?;
+     ('Data Splits:' splits=STRING)?)?;
 
 // Data Instances
 DataInstances:
@@ -302,9 +302,9 @@ SamplingCharacteristics:
 Provenance:
     name='Data Provenance:'
     'Curation Rationale:' curation=STRING
-    ((gathering+=GatheringProcesses)*)?
-     ((labeling+=LabelingProcesses)*)?
-     ((other+=PreProcesses)*)?;
+     (gathering=GatheringProcesses)?
+     (labeling=LabelingProcesses)?
+     ((other=PreProcesses))?;
 
 // Gathering
 GatheringProcesses:
