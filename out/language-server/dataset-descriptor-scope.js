@@ -33,7 +33,7 @@ class DatasetDescriptorScopeComputation extends langium_1.DefaultScopeComputatio
                 let name = this.nameProvider.getName(modelNode);
                 let container = modelNode.$container;
                 if (name) {
-                    if ((0, ast_1.isAttribute)(modelNode) || (0, ast_1.isDataInstance)(modelNode) || (0, ast_1.isLabels)(modelNode) || (0, ast_1.isLabelingProcess)(modelNode) || (0, ast_1.isSocialIssue)(modelNode)) {
+                    if ((0, ast_1.isAttribute)(modelNode) || (0, ast_1.isDataInstance)(modelNode) || (0, ast_1.isLabels)(modelNode) || (0, ast_1.isSocialIssue)(modelNode)) {
                         descr.push(this.descriptions.createDescription(modelNode, container.name + '.' + name, document));
                         //name = (this.nameProvider as DomainModelNameProvider).getQualifiedName(modelNode.$container as PackageDeclaration, name);
                     }
