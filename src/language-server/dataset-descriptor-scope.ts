@@ -6,7 +6,7 @@
 
  import { AstNodeDescription, DefaultScopeComputation, interruptAndCheck, LangiumDocument, LangiumServices, streamAllContents } from 'langium';
  import { CancellationToken } from 'vscode-jsonrpc';
- import { isAttribute, DataInstance, isLabels, isLabelingProcess, isDataInstance, isSocialIssue} from './generated/ast';
+ import { isAttribute, DataInstance, isLabels, isDataInstance, isSocialIssue} from './generated/ast';
  
  export class DatasetDescriptorScopeComputation extends DefaultScopeComputation {
  
