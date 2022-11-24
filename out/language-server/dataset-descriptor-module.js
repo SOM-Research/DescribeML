@@ -6,6 +6,7 @@ const module_1 = require("./generated/module");
 const dataset_descriptor_validator_1 = require("./dataset-descriptor-validator");
 const dataset_descriptor_scope_1 = require("./dataset-descriptor-scope");
 const dataset_descriptor_naming_1 = require("./dataset-descriptor-naming");
+const dataset_descriptor_documentation_1 = require("../generator-service/dataset-descriptor-documentation");
 /**
  * Dependency injection module that overrides Langium default services and contributes the
  * declared custom services. The Langium defaults can be partially specified to override only
@@ -19,6 +20,9 @@ exports.DatasetDescriptorModule = {
     references: {
         ScopeComputation: (services) => new dataset_descriptor_scope_1.DatasetDescriptorScopeComputation(services),
         NameProvider: () => new dataset_descriptor_naming_1.DatasetDescriptorNameProvider()
+    },
+    generation: {
+        DocumentationGenerator: (services) => new dataset_descriptor_documentation_1.DocumentationGenerator()
     },
 };
 /**

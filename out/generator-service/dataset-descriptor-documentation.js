@@ -1,20 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DocumentationGenerator = void 0;
-/******************************************************************************
- * Copyright 2022 SOM Research
- * This program and the accompanying materials are made available under the
- * terms of the MIT License, which is available in the project root.
- ******************************************************************************/
-const langium_1 = require("langium");
+const dataset_descriptor_module_1 = require("../language-server/dataset-descriptor-module");
 const ast_1 = require("../language-server/generated/ast");
+const node_1 = require("langium/node");
 /**
  * Generator HTML service main class
  * To generate the HTML we parse the description and we use PUG as a engine teamplate to build the HTML
  */
 class DocumentationGenerator {
     constructor() {
-        this.parser = langium_1.LangiumParser.prototype;
+        let services = (0, dataset_descriptor_module_1.createDatasetDescriptorServices)(node_1.NodeFileSystem);
+        this.parser = services.DatasetDescriptor.parser.LangiumParser;
     }
     generate(DescriptionDataset) {
         const astNode = (typeof (DescriptionDataset) == 'string' ? this.parser.parse(DescriptionDataset).value : DescriptionDataset);
@@ -154,6 +151,7 @@ class DocumentationGenerator {
         let sep = path.sep;
         let dirname = __dirname;
         // Compile the source code using PUG
+        console.log(dirname + sep + 'templates' + sep + 'document.pug');
         const compiledFunction = pug.compileFile(dirname + sep + 'templates' + sep + 'document.pug');
         // Compile the source code
         return compiledFunction({

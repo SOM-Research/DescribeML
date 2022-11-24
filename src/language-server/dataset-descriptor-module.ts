@@ -6,6 +6,7 @@ import { DatasetDescriptorGeneratedModule, DatasetDescriptorGeneratedSharedModul
 import { DatasetDescriptorValidationRegistry, DatasetDescriptorValidator } from './dataset-descriptor-validator';
 import { DatasetDescriptorScopeComputation } from './dataset-descriptor-scope';
 import { DatasetDescriptorNameProvider } from './dataset-descriptor-naming';
+import { Generator, DocumentationGenerator } from '../generator-service/dataset-descriptor-documentation'
 
 /**
  * Declaration of custom services - add your own service classes here.
@@ -13,6 +14,9 @@ import { DatasetDescriptorNameProvider } from './dataset-descriptor-naming';
 export type DatasetDescriptorAddedServices = {
     validation: {
         DatasetDescriptorValidator: DatasetDescriptorValidator
+    },
+    generation: {
+        DocumentationGenerator: Generator
     }
 }
 
@@ -35,6 +39,9 @@ export const DatasetDescriptorModule: Module<DatasetDescriptorServices, PartialL
     references: {
         ScopeComputation: (services) => new DatasetDescriptorScopeComputation(services),
         NameProvider: () => new DatasetDescriptorNameProvider()
+    },
+    generation: {
+        DocumentationGenerator: (services) => new DocumentationGenerator()
     },
 };
 

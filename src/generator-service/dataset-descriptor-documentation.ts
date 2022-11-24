@@ -3,9 +3,12 @@
  * This program and the accompanying materials are made available under the
  * terms of the MIT License, which is available in the project root.
  ******************************************************************************/
- import { AstNode, LangiumParser } from 'langium';
+ import { AstNode, LangiumParser} from 'langium';
+import { createDatasetDescriptorServices } from '../language-server/dataset-descriptor-module';
  import { DescriptionDataset, isDescriptionDataset } from '../language-server/generated/ast';
- //import { DatasetDescriptorServices } from '../language-server/dataset-descriptor-module';
+ import { NodeFileSystem } from 'langium/node';
+
+
  
  
  export interface Generator {
@@ -24,8 +27,10 @@
      private readonly parser: LangiumParser;
  
      constructor() {
-         this.parser = LangiumParser.prototype;
-     }
+       
+        let services = createDatasetDescriptorServices(NodeFileSystem);
+        this.parser = services.DatasetDescriptor.parser.LangiumParser;
+    }
  
      generate(DescriptionDataset : string | AstNode) : string | undefined {
          const astNode = (typeof(DescriptionDataset) == 'string' ? this.parser.parse(DescriptionDataset).value : DescriptionDataset);
@@ -175,6 +180,7 @@
          let sep = path.sep
          let dirname = __dirname;
          // Compile the source code using PUG
+         console.log(dirname+sep+'templates'+sep+'document.pug');
          const compiledFunction = pug.compileFile(dirname+sep+'templates'+sep+'document.pug');
          // Compile the source code
          return compiledFunction({
