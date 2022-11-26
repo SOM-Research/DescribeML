@@ -496,12 +496,8 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                         "operator": "=",
                         "terminal": {
                           "$type": "Keyword",
-                          "value": "Tasks:"
+                          "value": "Tasks: ["
                         }
-                      },
-                      {
-                        "$type": "Keyword",
-                        "value": "["
                       },
                       {
                         "$type": "Assignment",
@@ -1553,11 +1549,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                     "elements": [
                       {
                         "$type": "Keyword",
-                        "value": "Metrics:"
-                      },
-                      {
-                        "$type": "Keyword",
-                        "value": "["
+                        "value": "Metrics: ["
                       },
                       {
                         "$type": "Group",
@@ -2860,7 +2852,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
           },
           {
             "$type": "Keyword",
-            "value": ":("
+            "value": ": ("
           },
           {
             "$type": "Assignment",
@@ -3309,11 +3301,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                 "elements": [
                   {
                     "$type": "Keyword",
-                    "value": "Lenght-histogram:"
-                  },
-                  {
-                    "$type": "Keyword",
-                    "value": "["
+                    "value": "Lenght-histogram: ["
                   },
                   {
                     "$type": "Assignment",
@@ -3427,11 +3415,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                 "elements": [
                   {
                     "$type": "Keyword",
-                    "value": "Categoric Distribution:"
-                  },
-                  {
-                    "$type": "Keyword",
-                    "value": "["
+                    "value": "Categoric Distribution: ["
                   },
                   {
                     "$type": "Assignment",
@@ -3768,11 +3752,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Pearson:"
-              },
-              {
-                "$type": "Keyword",
-                "value": "["
+                "value": "Pearson: ["
               },
               {
                 "$type": "Assignment",
@@ -3820,11 +3800,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Spearman:"
-              },
-              {
-                "$type": "Keyword",
-                "value": "["
+                "value": "Spearman: ["
               },
               {
                 "$type": "Assignment",
@@ -3872,11 +3848,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Kendall:"
-              },
-              {
-                "$type": "Keyword",
-                "value": "["
+                "value": "Kendall: ["
               },
               {
                 "$type": "Assignment",
@@ -3924,11 +3896,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Cramers:"
-              },
-              {
-                "$type": "Keyword",
-                "value": "["
+                "value": "Cramers: ["
               },
               {
                 "$type": "Assignment",
@@ -3976,11 +3944,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Phi-k:"
-              },
-              {
-                "$type": "Keyword",
-                "value": "["
+                "value": "Phi-k: ["
               },
               {
                 "$type": "Assignment",

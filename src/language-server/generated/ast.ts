@@ -414,7 +414,7 @@ export interface Description extends AstNode {
     descriptionTasks: Array<Task>
     name: 'Description:'
     tags?: Tags
-    tasks?: 'Tasks:'
+    tasks?: 'Tasks: ['
 }
 
 export const Description = 'Description';

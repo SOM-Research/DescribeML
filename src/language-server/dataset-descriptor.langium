@@ -59,7 +59,7 @@ Description:
     name="Description:"
     (desc=STRING | 
     (('Purposes:' descriptionpurpose=STRING)? 
-    (tasks='Tasks:' '[' descriptionTasks+=Task ((','descriptionTasks+=Task)*']')?)? 
+    (tasks='Tasks: [' descriptionTasks+=Task ((','descriptionTasks+=Task)*']')?)? 
     ('Gaps:' descriptionGaps=STRING)?)) 
     (area=Areas)?
     (tags=Tags)?;
@@ -122,7 +122,7 @@ Benchmarking:
     name="Benchmarking:"
     (("Task:" taskName=Task)?
     ('['("Model:" (modelName=STRING))?
-    ("Metrics:" '['     
+    ("Metrics: ["     
                 ("F1:" (f1=NUMBER))?
                 ("Acurracy:" (acurracy=NUMBER))?
                 ("Precision:" (precision=NUMBER))?
@@ -198,7 +198,7 @@ QualityMetric:
 
 // Consistency Rules
 ConsistencyRules:
-    'inv:' instance1=[DataInstance:QualifiedName] ":(" attrule1=[Attribute:QualifiedName]  comparator=Operators ( attr2=[Attribute:QualifiedName] | value=NUMBER)? ")";
+    'inv:' instance1=[DataInstance:QualifiedName] ": (" attrule1=[Attribute:QualifiedName]  comparator=Operators ( attr2=[Attribute:QualifiedName] | value=NUMBER)? ")";
    
 // Attributes
 Attribute:
@@ -221,11 +221,11 @@ Categor:
      ('Min-lenght:' minlenght=NUMBER)?
     ('Max-lenght:' maxlenght=NUMBER)?
     ('Median-lenght:' medianlenght=NUMBER )?
-    ('Lenght-histogram:' '[' lenghthistorgram=HistogramType (',' lenghthistorgram+=HistogramType)* ']')?
+    ('Lenght-histogram: [' lenghthistorgram=HistogramType (',' lenghthistorgram+=HistogramType)* ']')?
     ('Chi-Squared:' chisquared=ChiSquare )?
     ('Binary attribute:' binary=Binary)?
     ('Mode:' mode=STRING)?
-    ('Categoric Distribution:' '[' catdist=StringNumberType '%' (',' catdist+=StringNumberType '%')* ']')?)?
+    ('Categoric Distribution: [' catdist=StringNumberType '%' (',' catdist+=StringNumberType '%')* ']')?)?
     ('Quality Metrics:' metrics+=QualityMetric)?;
 Binary:
     'Symmetry:' sym=AttributeSymmetry
@@ -242,11 +242,11 @@ ChiSquare:
     ('statistic:' statistic=NUMBER ',')?
     ('p-value:' pvalue=NUMBER)?;
 Correlations:
-    ('Pearson:'  '[' pearson=StringNumberType (',' pearson+=StringNumberType)* ']')?
-    ('Spearman:' '[' spearman=StringNumberType (',' spearman+=StringNumberType)* ']')?
-    ('Kendall:' '[' kendall=StringNumberType (',' kendall+=StringNumberType)* ']')?
-    ('Cramers:' '[' cramers=StringNumberType (',' cramers+=StringNumberType)* ']')?
-    ('Phi-k:' '[' phik=StringNumberType (',' phik+=StringNumberType)* ']')?;
+    ('Pearson: [' pearson=StringNumberType (',' pearson+=StringNumberType)* ']')?
+    ('Spearman: [' spearman=StringNumberType (',' spearman+=StringNumberType)* ']')?
+    ('Kendall: [' kendall=StringNumberType (',' kendall+=StringNumberType)* ']')?
+    ('Cramers: [' cramers=StringNumberType (',' cramers+=StringNumberType)* ']')?
+    ('Phi-k: [' phik=StringNumberType (',' phik+=StringNumberType)* ']')?;
 // Numerical Attributes
 Numeri:
     name='Numerical' 
