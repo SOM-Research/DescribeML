@@ -91,7 +91,7 @@ The following tree shows the list of the repository's relevant sections:
 - The *src* folder contains the project's source code
   - The *extensions.ts* file contains the integration of the features with the IDE. (p.e: Relating a specific button to a custom action).
   - The *cli* folder is the generated grammar and AST from Langium. You may not want to dive in it as it is a generated asset
-  - The *generator-service* folder contains all the code of the tools generation service. Could be a good place to start if you want to improve the generation of the tool.
+  - The *generator-service* folder contains all the code of the generation service. Could be a good place to start if you want to improve the generation of the tool.
   - The *uploader-service* folder contains all the code of the uploader service. Could be a good place to contribute new statistical metrics, or ML techniques to do dataset reverse engineering
   - The *language-server* folder contains all the language features, and the grammar declaration. If you want to improve the grammar, or some of the features the plugin offers here is the place you may want to start
     - The *dataset-description.langium* file contains the main grammar declaration. This grammar is developed using the [Langium Grammar Language](https://langium.org/docs/grammar-language/). Please refer to the linked documentation to more insights on how to develop the grammar.
