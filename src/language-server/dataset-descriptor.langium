@@ -13,7 +13,7 @@
 grammar DatasetDescriptor
 
 entry DescriptionDataset:
-    (elements+=Declaration)*;
+    (elements+=Declaration);
 
 // General structure of the DSL
 Declaration:
@@ -56,7 +56,7 @@ PublishedDate:
 
 // Descriptions
 Description: 
-    name="Description:"
+    name="Main Description:"
     (desc=STRING | 
     (('Purposes:' descriptionpurpose=STRING)? 
     (tasks='Tasks: [' descriptionTasks+=Task ((','descriptionTasks+=Task)*']')?)? 
@@ -79,7 +79,7 @@ Citation:
     name="Citation:"
     (("Raw Citation:") citeText=STRING |
      ("Title:" title=Title)?
-     ("Authors:" authorsPaper=Citeauthors)?
+     ("Cite authors:" authorsPaper=Citeauthors)?
      ("Year:" year=NUMBER)? 
      ("Keywords:" "["(keywords+=Keyword)*"]")?
      ("Journal:" publisher=Publisher)?
@@ -106,9 +106,9 @@ Distribution:
     ('Licences:' licence=CommonLicences)?
     ('Rights(stand-alone):' rights=RightsData)?
     ('Rights(with models):' rightsModels=RightsModel)?
-    ('Credit/Attribution Notice' attribution=STRING)?
-    ('Designated Third Partes' thirdParties=STRING)?
-    ('Additional Conditions' addCond=STRING)?;
+    ('Credit/Attribution Notice:' attribution=STRING)?
+    ('Designated Third Partes:' thirdParties=STRING)?
+    ('Additional Conditions:' addCond=STRING)?;
 
 // Applications
 Applications:
@@ -198,16 +198,16 @@ QualityMetric:
 
 // Consistency Rules
 ConsistencyRules:
-    'inv:' instance1=[DataInstance:QualifiedName] ": (" attrule1=[Attribute:QualifiedName]  comparator=Operators ( attr2=[Attribute:QualifiedName] | value=NUMBER)? ")";
+    'inv:' instance1=[DataInstance:QualifiedName] "attribute:(" attrule1=[Attribute:QualifiedName]  comparator=Operators ( attr2=[Attribute:QualifiedName] | value=NUMBER)? ")";
    
 // Attributes
 Attribute:
-    'attribute:' name=ID 
-    'description:' attdesc=STRING 
-    ('label:' label=[Labels:QualifiedName])?
-    ('unique values:' unique=NUMBER)?
-    ('count:' count=NUMBER)?
-    ('ofType:' ((attType=Categor)|(attType=Numeri)))?;
+    'Attribute:' name=ID 
+    'Description:' attdesc=STRING 
+    ('Label:' label=[Labels:QualifiedName])?
+    ('Unique values:' unique=NUMBER)?
+    ('Count:' count=NUMBER)?
+    ('OfType:' ((attType=Categor)|(attType=Numeri)))?;
    
 // Categoricla Attributes
 Categor:
@@ -283,7 +283,7 @@ Dependencies:
 Sample:
     name='YES' 
     ('Sampling Method:' type=SampleType)?
-    ('Sampling criteria:' (criteria=STRING))?
+    ('Sampling Criteria:' (criteria=STRING))?
     ('Sampling Characteristics:' (charact+=SamplingCharacteristics)*)?;
 
 SamplingCharacteristics:
@@ -314,7 +314,7 @@ GatheringProcess:
     'Description:' desc=STRING
      source=Source  
     ('Gathering dates range:' gatherDates=STRING)?
-    ('Related Instance:' mapInstance=[DataInstance])?
+    ('Related-Instances:' mapInstance=[DataInstance])?
     ('Social Issues:' labelSocialIssues=[SocialIssue])?
     ('How data is collected:' how=GatherType)?
     ('Is language data?:' SpeechSitatuion)?
@@ -407,11 +407,11 @@ SocialIssue:
     'Social Issue:' name=ID
     'IssueType:' IssueType=SocialIssueType
         'Description:' desc=STRING
-    ('Related Attributes:' ('attribute:' senseAtt=[Attribute:QualifiedName])*)?
+    ('Related-Attributes:' ('attribute:' senseAtt=[Attribute:QualifiedName])*)?
 
     ('Instance belongs to people:' 
         ('Have sensitive attributes?' ('attribute:' senseAtt=[Attribute:QualifiedName])*)?
-        ('Are there protected groups?' procGroups=BooleanAnswer)?
+        ('Are there protected groups?:' procGroups=BooleanAnswer)?
         ('Might be offensive' offDiscussion=STRING)?)?
     ;
 

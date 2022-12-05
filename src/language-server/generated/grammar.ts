@@ -25,8 +25,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "$refText": "Declaration"
           },
           "arguments": []
-        },
-        "cardinality": "*"
+        }
       },
       "definesHiddenTokens": false,
       "fragment": false,
@@ -444,7 +443,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "operator": "=",
             "terminal": {
               "$type": "Keyword",
-              "value": "Description:"
+              "value": "Main Description:"
             }
           },
           {
@@ -882,7 +881,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                     "elements": [
                       {
                         "$type": "Keyword",
-                        "value": "Authors:"
+                        "value": "Cite authors:"
                       },
                       {
                         "$type": "Assignment",
@@ -1277,7 +1276,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Credit/Attribution Notice"
+                "value": "Credit/Attribution Notice:"
               },
               {
                 "$type": "Assignment",
@@ -1299,7 +1298,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Designated Third Partes"
+                "value": "Designated Third Partes:"
               },
               {
                 "$type": "Assignment",
@@ -1321,7 +1320,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Additional Conditions"
+                "value": "Additional Conditions:"
               },
               {
                 "$type": "Assignment",
@@ -2852,7 +2851,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
           },
           {
             "$type": "Keyword",
-            "value": ": ("
+            "value": "attribute:("
           },
           {
             "$type": "Assignment",
@@ -2943,7 +2942,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
         "elements": [
           {
             "$type": "Keyword",
-            "value": "attribute:"
+            "value": "Attribute:"
           },
           {
             "$type": "Assignment",
@@ -2959,7 +2958,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
           },
           {
             "$type": "Keyword",
-            "value": "description:"
+            "value": "Description:"
           },
           {
             "$type": "Assignment",
@@ -2978,7 +2977,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "label:"
+                "value": "Label:"
               },
               {
                 "$type": "Assignment",
@@ -3007,7 +3006,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "unique values:"
+                "value": "Unique values:"
               },
               {
                 "$type": "Assignment",
@@ -3029,7 +3028,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "count:"
+                "value": "Count:"
               },
               {
                 "$type": "Assignment",
@@ -3051,7 +3050,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "ofType:"
+                "value": "OfType:"
               },
               {
                 "$type": "Alternatives",
@@ -4555,7 +4554,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Sampling criteria:"
+                "value": "Sampling Criteria:"
               },
               {
                 "$type": "Assignment",
@@ -4908,7 +4907,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Related Instance:"
+                "value": "Related-Instances:"
               },
               {
                 "$type": "Assignment",
@@ -6491,7 +6490,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Related Attributes:"
+                "value": "Related-Attributes:"
               },
               {
                 "$type": "Group",
@@ -6576,7 +6575,7 @@ export const DatasetDescriptorGrammar = (): Grammar => loadedDatasetDescriptorGr
                 "elements": [
                   {
                     "$type": "Keyword",
-                    "value": "Are there protected groups?"
+                    "value": "Are there protected groups?:"
                   },
                   {
                     "$type": "Assignment",

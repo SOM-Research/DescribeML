@@ -7,10 +7,10 @@ Dataset: Polarity
             Release Date: 13-12-2010
         Citation: 
             Title: "A sentimental education: Sentiment analysis using subjectivity summarization based on minimum cuts"
-            Authors: "Bo Pang and Lillian Lee"
+            Cite authors: "Bo Pang and Lillian Lee"
             Year: 2004 
             Journal: "Springer, proceedings of the 42nd Annual Meeting of the Association for Computational Linguistics"
-        Description:  
+        Main Description:  
             Purposes: 
                 "The dataset was created to enable research on predicting sentiment polarity—i.e., given a piece of English text, predict whether
                 it has a positive or negative affect—or stance—toward its topic." 
@@ -38,7 +38,7 @@ Dataset: Polarity
         Distribution: 
             Is public?: Yes
             Licences: CC BY 4.0 (Attribution 4.0 International)
-            Additional Conditions
+            Additional Conditions:
                 "The dataset is distributed on Bo Pang’s webpage at Cornell: http:
                 //www.cs.cornell.edu/people/pabo/movie-review-data. The dataset does
                 not have a DOI and there is no redundant archive. The dataset was first released in 2002.
@@ -101,31 +101,31 @@ Dataset: Polarity
                      Type: Record-Data
                      Attribute number: 06
                      Attributes: 
-                        attribute: fold_id
-                            description: "Folder Id containing the text inside the dataset " 
-                            count: 2000
-                            ofType: Categorical
-                        attribute: cv_tag
-                            description: "Author file id containint the text inside the dataset " 
-                            count: 2000
-                            ofType: Categorical 
-                        attribute: html_id
-                        description: "Author file ID separated by pos and negative labels " 
-                          count: 2000
-                          ofType: Categorical 
-                        attribute: sent_id
-                            description: "Sentence id inside every file " 
-                            count: 2000
-                            ofType: Categorical 
-                        attribute: text_body
-                            description: "The text extracted from the revies of IMDB " 
-                            count: 2000
-                            ofType: Categorical 
-                        attribute: tag
-                          description: "The label annotated by the reviewrs " 
-                            count: 2000
-                            ofType: Categorical
-                            Statistics:
+                        Attribute: fold_id
+                            Description: "Folder Id containing the text inside the dataset " 
+                            Count: 2000
+                            OfType: Categorical
+                        Attribute: cv_tag
+                            Description: "Author file id containint the text inside the dataset " 
+                            Count: 2000
+                            OfType: Categorical 
+                        Attribute: html_id
+                        Description: "Author file ID separated by pos and negative labels " 
+                          Count: 2000
+                          OfType: Categorical 
+                        Attribute: sent_id
+                            Description: "Sentence id inside every file " 
+                            Count: 2000
+                            OfType: Categorical 
+                        Attribute: text_body
+                            Description: "The text extracted from the revies of IMDB " 
+                            Count: 2000
+                            OfType: Categorical 
+                        Attribute: tag
+                          Description: "The label annotated by the reviewrs " 
+                          Count: 2000
+                          OfType: Categorical
+                          Statistics:
                                 Categoric Distribution: [
                                     'Positive': 50%,
                                     'Negative': 50%
@@ -164,11 +164,9 @@ Dataset: Polarity
                         to forty reviews per unique author in order to achieve broader
                         coverage by authorship. Beyond that, the sample is arbitrar" 
                     Noise: "unknown"
-                Related Instance: MovieReviews
+                Related-Instances: MovieReviews
                 Social Issues: privacyAware
                 How data is collected: Manual Human Curator
-                When data was collected: "There are 1,400 instances in total in the original (v1.x versions)
-                and 2,000 instances in total in v2.0 (from 2014)."
     
     LabelingProcesses: 
         Labeling process: labelproces1
@@ -262,10 +260,10 @@ Dataset: Polarity
           Description: 
           "Some movie reviews might contain moderately inappropriate or
           offensive language, but we do not expect this to be the norm" 
-          Related Attributes: 
-            attribute: Wikipedia.tokens
+          Related-Attributes: 
+            attribute: MovieReviews.text_body
         Instance belongs to people:
-            Are there protected groups? Yes
+            Are there protected groups?: Yes
 
         Social Issue: personalInformation
           IssueType: Privacy

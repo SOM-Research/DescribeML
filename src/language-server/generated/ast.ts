@@ -412,7 +412,7 @@ export interface Description extends AstNode {
     descriptionGaps?: string
     descriptionpurpose?: string
     descriptionTasks: Array<Task>
-    name: 'Description:'
+    name: 'Main Description:'
     tags?: Tags
     tasks?: 'Tasks: ['
 }

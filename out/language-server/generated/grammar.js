@@ -26,8 +26,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
             "$refText": "Declaration"
           },
           "arguments": []
-        },
-        "cardinality": "*"
+        }
       },
       "definesHiddenTokens": false,
       "fragment": false,
@@ -445,7 +444,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
             "operator": "=",
             "terminal": {
               "$type": "Keyword",
-              "value": "Description:"
+              "value": "Main Description:"
             }
           },
           {
@@ -497,12 +496,8 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
                         "operator": "=",
                         "terminal": {
                           "$type": "Keyword",
-                          "value": "Tasks:"
+                          "value": "Tasks: ["
                         }
-                      },
-                      {
-                        "$type": "Keyword",
-                        "value": "["
                       },
                       {
                         "$type": "Assignment",
@@ -887,7 +882,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
                     "elements": [
                       {
                         "$type": "Keyword",
-                        "value": "Authors:"
+                        "value": "Cite authors:"
                       },
                       {
                         "$type": "Assignment",
@@ -1282,7 +1277,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Credit/Attribution Notice"
+                "value": "Credit/Attribution Notice:"
               },
               {
                 "$type": "Assignment",
@@ -1304,7 +1299,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Designated Third Partes"
+                "value": "Designated Third Partes:"
               },
               {
                 "$type": "Assignment",
@@ -1326,7 +1321,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Additional Conditions"
+                "value": "Additional Conditions:"
               },
               {
                 "$type": "Assignment",
@@ -1554,11 +1549,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
                     "elements": [
                       {
                         "$type": "Keyword",
-                        "value": "Metrics:"
-                      },
-                      {
-                        "$type": "Keyword",
-                        "value": "["
+                        "value": "Metrics: ["
                       },
                       {
                         "$type": "Group",
@@ -2861,7 +2852,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
           },
           {
             "$type": "Keyword",
-            "value": ":("
+            "value": "attribute:("
           },
           {
             "$type": "Assignment",
@@ -2952,7 +2943,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
         "elements": [
           {
             "$type": "Keyword",
-            "value": "attribute:"
+            "value": "Attribute:"
           },
           {
             "$type": "Assignment",
@@ -2968,7 +2959,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
           },
           {
             "$type": "Keyword",
-            "value": "description:"
+            "value": "Description:"
           },
           {
             "$type": "Assignment",
@@ -2987,7 +2978,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "label:"
+                "value": "Label:"
               },
               {
                 "$type": "Assignment",
@@ -3016,7 +3007,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "unique values:"
+                "value": "Unique values:"
               },
               {
                 "$type": "Assignment",
@@ -3038,7 +3029,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "count:"
+                "value": "Count:"
               },
               {
                 "$type": "Assignment",
@@ -3060,7 +3051,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "ofType:"
+                "value": "OfType:"
               },
               {
                 "$type": "Alternatives",
@@ -3310,11 +3301,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
                 "elements": [
                   {
                     "$type": "Keyword",
-                    "value": "Lenght-histogram:"
-                  },
-                  {
-                    "$type": "Keyword",
-                    "value": "["
+                    "value": "Lenght-histogram: ["
                   },
                   {
                     "$type": "Assignment",
@@ -3428,11 +3415,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
                 "elements": [
                   {
                     "$type": "Keyword",
-                    "value": "Categoric Distribution:"
-                  },
-                  {
-                    "$type": "Keyword",
-                    "value": "["
+                    "value": "Categoric Distribution: ["
                   },
                   {
                     "$type": "Assignment",
@@ -3769,11 +3752,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Pearson:"
-              },
-              {
-                "$type": "Keyword",
-                "value": "["
+                "value": "Pearson: ["
               },
               {
                 "$type": "Assignment",
@@ -3821,11 +3800,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Spearman:"
-              },
-              {
-                "$type": "Keyword",
-                "value": "["
+                "value": "Spearman: ["
               },
               {
                 "$type": "Assignment",
@@ -3873,11 +3848,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Kendall:"
-              },
-              {
-                "$type": "Keyword",
-                "value": "["
+                "value": "Kendall: ["
               },
               {
                 "$type": "Assignment",
@@ -3925,11 +3896,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Cramers:"
-              },
-              {
-                "$type": "Keyword",
-                "value": "["
+                "value": "Cramers: ["
               },
               {
                 "$type": "Assignment",
@@ -3977,11 +3944,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Phi-k:"
-              },
-              {
-                "$type": "Keyword",
-                "value": "["
+                "value": "Phi-k: ["
               },
               {
                 "$type": "Assignment",
@@ -4592,7 +4555,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Sampling criteria:"
+                "value": "Sampling Criteria:"
               },
               {
                 "$type": "Assignment",
@@ -4945,7 +4908,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Related Instance:"
+                "value": "Related-Instances:"
               },
               {
                 "$type": "Assignment",
@@ -6528,7 +6491,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
             "elements": [
               {
                 "$type": "Keyword",
-                "value": "Related Attributes:"
+                "value": "Related-Attributes:"
               },
               {
                 "$type": "Group",
@@ -6613,7 +6576,7 @@ const DatasetDescriptorGrammar = () => loadedDatasetDescriptorGrammar !== null &
                 "elements": [
                   {
                     "$type": "Keyword",
-                    "value": "Are there protected groups?"
+                    "value": "Are there protected groups?:"
                   },
                   {
                     "$type": "Assignment",
