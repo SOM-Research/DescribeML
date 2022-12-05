@@ -12,7 +12,7 @@
     
 # DescribeML: 
 #### Language Reference Guide 
-(Version 0.1)
+(Version 1.0)
 
 
 DescribeML is a VSCode language plugin to describe machine-learning datasets. <br>
@@ -91,7 +91,7 @@ Full examples of the language can be found in the public open repository [here](
                     Publisher: "International Skin Imaging Collaboration"
                     DOI: "doi.org/10.34970/2020-ds01"
                     Url: "https://www.kaggle.com/c/siim-isic-melanoma-classification" 
-+ **Description:** <a name="description"></a> The description of the dataset
++ **Main Description:** <a name="description"></a> The description of the dataset
    
     + **Description:** `STRING` Textual description of the dataset
     **OR:**
@@ -103,7 +103,7 @@ Full examples of the language can be found in the public open repository [here](
         <br>
         > Example:
         ```ruby
-        Description:    
+        Main Description:    
             Purposes:
                 Purposes: "The 2020 SIIM-ISIC Melanoma" 
                 Tasks:    [classification]
