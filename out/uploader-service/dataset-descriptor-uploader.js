@@ -63,7 +63,7 @@ class DatasetUploader {
              Release Date: 11-11-1989
          Citation: 
              Raw Citation: ""
-         Description:  
+         Main Description:  
              Purposes: "" 
              Tasks: [other]
              Gaps: ""
@@ -125,10 +125,10 @@ class DatasetUploader {
                 ;
                 if (catDist === false) {
                     body = body +
-                        `\t\t\t\tattribute:  ${datHeaders.replaceAll(' ', '_')}  
-                         description: \"Describe the attribute\"
-                         count: ${unique}
-                         ofType: Categorical
+                        `\t\t\t\tAttribute:  ${datHeaders.replaceAll(' ', '_')}  
+                         Description: \"Describe the attribute\"
+                         Count: ${unique}
+                         OfType: Categorical
                          Statistics: 
                              Mode: "${mode}"
                              Quality Metrics:
@@ -136,10 +136,10 @@ class DatasetUploader {
                 }
                 else {
                     body = body +
-                        `\t\t\t\tattribute:  ${datHeaders.replaceAll(' ', '_')}  
-                         description: \"Describe the attribute\"
-                         count: ${unique}
-                         ofType: Categorical
+                        `\t\t\t\tAttribute:  ${datHeaders.replaceAll(' ', '_')}  
+                         Description: \"Describe the attribute\"
+                         Count: ${unique}
+                         OfType: Categorical
                          Statistics: 
                              Mode: "${mode}"
                              Categoric Distribution: ${catDist}
@@ -161,10 +161,10 @@ class DatasetUploader {
                 const max = Math.max(...attrNumerical.map(o => o));
                 // Calculate minimmum
                 const min = Math.min(...attrNumerical.map(o => o));
-                body = body + `\t\t\t\tattribute:  ${datHeaders.replaceAll(' ', '_')}  
-                     description: \"Describe the attribute\"
-                     count: ${unique}
-                     ofType: Numerical
+                body = body + `\t\t\t\tAttribute:  ${datHeaders.replaceAll(' ', '_')}  
+                     Description: \"Describe the attribute\"
+                     Count: ${unique}
+                     OfType: Numerical
                      Statistics: 
                          Mean: ${mean}
                          Standard Desviation: ${std}
@@ -217,7 +217,7 @@ class DatasetUploader {
          Social Issue: issueId
              IssueType: Privacy // Choose one from the list
              Description: ""
-             Related Attributes:
+             Related-Attributes:
                 attribute: DECLARED_ATTRIBUTE_ID // Set the affected attribute
          
          
