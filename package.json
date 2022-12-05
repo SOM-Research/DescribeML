@@ -2,14 +2,12 @@
     "name": "DescribeML",
     "displayName": "DescribeML",
     "description": "DescribeML is a language plug-in to describe machine-learning datasets in a standard format. Build better data describing the composition, provenance and social concerns of your dataset.",
-    "version": "0.1.1",
+    "version": "1.0.0",
     "engines": {
         "vscode": "^1.56.0"
     },
     "publisher": "SOMResearchGroup",
     "author": {
-        "name": "Joan Giner",
-        "name": "Jordi Cabot",
         "name": "Abel Gomez"
     },
     "homepage": "https://github.com/SOM-Research/DescribeML",
@@ -27,15 +25,14 @@
     ],
     "license": "GPLv3",
     "categories": [
-        "Programming Languages",
-        "Snippets"
+        "Programming Languages"
     ],
     "contributes": {
         "languages": [
             {
                 "id": "dataset-descriptor",
                 "aliases": [
-                    "Dataset Descriptor",
+                    "dataset-descriptor",
                     "dataset-descriptor"
                 ],
                 "extensions": [
@@ -47,7 +44,7 @@
         "grammars": [
             {
                 "language": "dataset-descriptor",
-                "scopeName": "source.datasetdescriptor",
+                "scopeName": "source.dataset-descriptor",
                 "path": "./syntaxes/dataset-descriptor.tmLanguage.json"
             }
         ],
@@ -131,26 +128,23 @@
         "langium:watch": "langium generate --watch"
     },
     "dependencies": {
-        "colors": "1.4.0",
+        "chalk": "^4.1.2",
+        "chevrotain": "^9.1.0",
         "commander": "^8.0.0",
-        "csv-parse": "^5.0.4",
-        "csv-parser": "^3.0.0",
-        "langium": "^0.2.0",
-        "mathjs": "^10.1.1",
+        "csv-parse": "^5.3.2",
+        "langium": "^0.5.0",
         "pug": "^3.0.2",
-        "twig": "^1.15.4",
-        "vsce": "^2.11.0",
-        "vscode-languageclient": "^7.0.0",
-        "vscode-languageserver": "^7.0.0"
+        "vscode-languageclient": "^8.0.2",
+        "vscode-languageserver": "^8.0.2",
+        "vscode-uri": "^3.0.2"
     },
     "devDependencies": {
         "@types/node": "^14.17.3",
-        "@types/twig": "^1.12.9",
         "@types/vscode": "^1.56.0",
-        "@typescript-eslint/eslint-plugin": "^4.14.1",
-        "@typescript-eslint/parser": "^4.14.1",
-        "eslint": "^7.19.0",
-        "langium-cli": "^0.2.0",
-        "typescript": "^4.1.3"
+        "@typescript-eslint/eslint-plugin": "^5.28.0",
+        "@typescript-eslint/parser": "^5.28.0",
+        "eslint": "^8.17.0",
+        "langium-cli": "^0.5.0",
+        "typescript": "^4.7.4"
     }
 }

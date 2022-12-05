@@ -1,4 +1,9 @@
 "use strict";
+/******************************************************************************
+ * Copyright 2022 SOM Research
+ * This program and the accompanying materials are made available under the
+ * terms of the MIT License, which is available in the project root.
+ ******************************************************************************/
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -15,12 +20,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DatasetUploader = void 0;
 const sync_1 = require("csv-parse/sync");
 const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
 const dataset_metrics_1 = require("./dataset-metrics");
 /**
  * Data uploader service main class
 */
 class DatasetUploader {
-    constructor(services) {
+    constructor() {
     }
     // Get the dataset file, read it, parse it, and build the description draft
     uploadDataset(filepath) {
@@ -49,57 +55,56 @@ class DatasetUploader {
     // Building the metadata snippet
     buildMetadataSnippet() {
         return `Dataset: datasetName
-    Metadata:
-        Title: "" 
-        Unique-identifier: aUniqueId
-        Version: v0000
-        Dates:
-            Release Date: 11-11-1989
-        Citation: 
-            Raw Citation: ""
-        Description:  
-            Purposes: "" 
-            Tasks: [other]
-            Gaps: ""
-            Areas: datasetArea
-            Tags: datasetTags
-        Applications: 
-            Past Uses:""
-            Recommended:""
-            Non-recommended:""
-            Benchmarking: [  ]
-        Distribution: 
-            Licences: CC0: Public Domain
-            Rights(stand-alone): Access
-            Rights(with models): Benchmark
-        Authoring:
-            Authors:
-                Name "authorName" email XXXX@mail.com
-            Funders:
-                Name "founderName" type mixed
-            Erratum?: ""
-            Version lifecycle:""
-        Contribution guidelines: ""
-        \n`;
+     Metadata:
+         Title: "" 
+         Unique-identifier: aUniqueId
+         Version: v0000
+         Dates:
+             Release Date: 11-11-1989
+         Citation: 
+             Raw Citation: ""
+         Main Description:  
+             Purposes: "" 
+             Tasks: [other]
+             Gaps: ""
+             Areas: datasetArea
+             Tags: datasetTags
+         Applications: 
+             Past Uses:""
+             Recommended:""
+             Non-recommended:""
+             Benchmarking: [  ]
+         Distribution: 
+             Licences: CC0: Public Domain
+             Rights(stand-alone): Access
+             Rights(with models): Benchmark
+         Authoring:
+             Authors:
+                 Name "authorName" email XXXX@mail.com
+             Funders:
+                 Name "founderName" type mixed
+             Erratum?: ""
+             Version lifecycle:""
+         Contribution guidelines: ""
+         \n`;
     }
     // Building Composition snippet
     buildCompositionSnippet(data, filepath) {
-        var _a;
         const datasetMetrics = new dataset_metrics_1.DatasetMetrics;
         // Get Headers
         const headers = data[0];
         // Get number of rows
         const numberofResults = data.length - 1;
         let body = `
-Composition:
-    Rationale: ""
-    Total size: ${numberofResults}
-    Data Instances:
-        Instance:  ${(_a = filepath.split("\\").pop()) === null || _a === void 0 ? void 0 : _a.split(".")[0]}
-            Description: \"Describe the instance\"
-            Type: Record-Data
-            Attribute number: ${headers.length}
-            Attributes:\n`;
+ Composition:
+     Rationale: ""
+     Total size: ${numberofResults}
+     Data Instances:
+         Instance:  ${path_1.default.basename(filepath).split('.')[0]}
+             Description: \"Describe the instance\"
+             Type: Record-Data
+             Attribute number: ${headers.length}
+             Attributes:\n`;
         // For each attribute
         headers.forEach((attr, index) => {
             let attrData = data.map(function (value, index2) { return value[index]; });
@@ -120,26 +125,26 @@ Composition:
                 ;
                 if (catDist === false) {
                     body = body +
-                        `\t\t\t\tattribute:  ${datHeaders.replaceAll(' ', '_')}  
-                        description: \"Describe the attribute\"
-                        count: ${unique}
-                        ofType: Categorical
-                        Statistics: 
-                            Mode: "${mode}"
-                            Quality Metrics:
-                                Completeness: ${completness} \n`;
+                        `\t\t\t\tAttribute:  ${datHeaders.replaceAll(' ', '_')}  
+                         Description: \"Describe the attribute\"
+                         Count: ${unique}
+                         OfType: Categorical
+                         Statistics: 
+                             Mode: "${mode}"
+                             Quality Metrics:
+                                 Completeness: ${completness} \n`;
                 }
                 else {
                     body = body +
-                        `\t\t\t\tattribute:  ${datHeaders.replaceAll(' ', '_')}  
-                        description: \"Describe the attribute\"
-                        count: ${unique}
-                        ofType: Categorical
-                        Statistics: 
-                            Mode: "${mode}"
-                            Categoric Distribution: ${catDist}
-                            Quality Metrics:
-                                Completeness: ${completness} \n`;
+                        `\t\t\t\tAttribute:  ${datHeaders.replaceAll(' ', '_')}  
+                         Description: \"Describe the attribute\"
+                         Count: ${unique}
+                         OfType: Categorical
+                         Statistics: 
+                             Mode: "${mode}"
+                             Categoric Distribution: ${catDist}
+                             Quality Metrics:
+                                 Completeness: ${completness} \n`;
                 }
             }
             else {
@@ -156,67 +161,67 @@ Composition:
                 const max = Math.max(...attrNumerical.map(o => o));
                 // Calculate minimmum
                 const min = Math.min(...attrNumerical.map(o => o));
-                body = body + `\t\t\t\tattribute:  ${datHeaders.replaceAll(' ', '_')}  
-                    description: \"Describe the attribute\"
-                    count: ${unique}
-                    ofType: Numerical
-                    Statistics: 
-                        Mean: ${mean}
-                        Standard Desviation: ${std}
-                        Minimmum: ${min}
-                        Maximmum: ${max}\n`;
+                body = body + `\t\t\t\tAttribute:  ${datHeaders.replaceAll(' ', '_')}  
+                     Description: \"Describe the attribute\"
+                     Count: ${unique}
+                     OfType: Numerical
+                     Statistics: 
+                         Mean: ${mean}
+                         Standard Desviation: ${std}
+                         Minimmum: ${min}
+                         Maximmum: ${max}\n`;
             }
         });
         body = body +
             `       Statistics:
-            Quality Metrics:
-                Sparsity: 00 // Not calculated, to be filled
-    Dependencies:
-        Description: ""
-    Data Splits: ""\n`;
+             Quality Metrics:
+                 Sparsity: 00 // Not calculated, to be filled
+     Dependencies:
+         Description: ""
+     Data Splits: ""\n`;
         return body;
     }
     // Building the provenance part
     buildProvenanceSnippet(data, filepath) {
         return `   
-Data Provenance:
-    Curation Rationale: ""
-    Gathering Processes:
-        Process: gatherProcesId
-            Description: ""
-            Source: SourceID
-                Description: ""
-                Noise: ""
-            How data is collected: Others   // Choose an option from the list
-            Gather Requirements: 
-                Requirement: ""
-    LabelingProcesses:
-        Labeling process: labelProcesIDReference
-        Description: ""
-        Type: 3D cuboids // Choose an option from the list
-        Labels:
-          Label: labelIdReference
-          Description: ""
-          Mapping: DECLARED_ATTRIBUTE_ID // Set the ID of the label attribute
-        Label Requirements:
-            Requirement: "" 
-    Preprocesses:
-        Preprocess: preprocessId
-        Description: ""
-        Type: Others
-`;
+ Data Provenance:
+     Curation Rationale: ""
+     Gathering Processes:
+         Process: gatherProcesId
+             Description: ""
+             Source: SourceID
+                 Description: ""
+                 Noise: ""
+             How data is collected: Others   // Choose an option from the list
+             Gather Requirements: 
+                 Requirement: ""
+     LabelingProcesses:
+         Labeling process: labelProcesIDReference
+         Description: ""
+         Type: 3D cuboids // Choose an option from the list
+         Labels:
+           Label: labelIdReference
+           Description: ""
+           Mapping: DECLARED_ATTRIBUTE_ID // Set the ID of the label attribute
+         Label Requirements:
+             Requirement: "" 
+     Preprocesses:
+         Preprocess: preprocessId
+         Description: ""
+         Type: Others
+ `;
     }
     buildSocialConcernSnippet(data, filepath) {
         return `  
-Social Concerns:
-        Social Issue: issueId
-            IssueType: Privacy // Choose one from the list
-            Description: ""
-            Related Attributes:
-               attribute: DECLARED_ATTRIBUTE_ID // Set the affected attribute
-        
-        
-        `;
+ Social Concerns:
+         Social Issue: issueId
+             IssueType: Privacy // Choose one from the list
+             Description: ""
+             Related-Attributes:
+                attribute: DECLARED_ATTRIBUTE_ID // Set the affected attribute
+         
+         
+         `;
     }
 }
 exports.DatasetUploader = DatasetUploader;

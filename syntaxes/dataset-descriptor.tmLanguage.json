@@ -1,28 +1,28 @@
 {
-  "name": "datasetdescriptor",
-  "scopeName": "source.datasetdescriptor",
+  "name": "dataset-descriptor",
+  "scopeName": "source.dataset-descriptor",
   "fileTypes": [
-    ".datadesc"
+    ".descml"
   ],
   "patterns": [
     {
       "include": "#comments"
     },
     {
-      "name": "keyword.control.datasetdescriptor",
-      "match": "\\b(Social Issues:|Noise:|Process:|inv:|When data was collected:|Social Issues:|Country/Region:|Is sample:|rule:|From:|external source:| and |between |Completeness:|Total size:|Licences:|Label Requirements:|When data was collected:|3D cuboids|Asymmetric|Boolean|Bounding boxes|Categorical|Data_Provenance|email|Entity annotation|grantor|Graph|Image and video annotations|Integer|is from|Landmark and key-point|Lines and splines|Might be offensive|mixed|Name|Numerical|Ordenred|Other|Polygonal segmentation|private|Process Requirements|Is public?:|Record_Data|Semantinc Segmentation|Social_Concerns|String|Symmetric|Time-Series|to|Tuple Completness|type|Type|Version support )\\b|\\b(Are there protecte groups\\?|Associated Labels:|Attribute Sparsity:|attribute:|Attributes affected:|Bias discussion:|Binary attribute:|Categoric Distribution:|Class Balance:|Categoric:|Citation:|Raw Citation:|Complete archival version:|completness:|Completness:|Contribution guides:|count:|Curation Rationale:|Data Retention:|Data Splits:|Data Type:|Dependencies:|description:|Contribution guidelines:|Rationale:|Total size:|Completeness:|Class Blanace:|Is sample:|Erratum\\?:|Gaps:|grantId:|Have sensitive attributes\\?|How data is collected:|Instaces relation:|Instance belongs to people:|Data Instances:|Integrity rules:|IQR:|is from type:|is related to:|Label:|Labels:|Legal Issues:|License Information:|Links:|Maintainer:|Mandatory:|Mapping:|Maximmum:|Mean:|Median:|Minimmum:|Mode:|need to:|Noisy labels:|needs to be:|Noise Sources:|Attribute number:|Number of Records:|Numeric:|Privacy:|Purposes:|Quartiles:|Range:|Rate Limit Usage:|Relation:|reportedby:|Requirement:|Requirements:|Restriction:|Semantic:|Sintactic:|Social Impact:|Sparsity:|Standard Desviation:|Symetry:|Tasks:|than attribute:|Title:|Total number of instances:|Type:|Unique-identifier:|unique:|Version:|where attribute:|Who annotates the data:|Who collects the data:|Release Date:|Past Uses:|How is distributed:|Version lifecycle:|Non-recommended:|Recommended:|Distribution license:|Licences:|Rights(stand-alone):|Rights(with models):|Tags:|Areas:|Related Instances:|Related Attributes:|Social Issues:|IssueType:)\\B"
+      "name": "keyword.control.dataset-descriptor",
+      "match": "\\b(3D cuboids|abstractive-qa|Access|and|API|Asymmetric|asynchronous intercation|audio-classification|automatic-speech-recognition|Automatic-Speech-Recognition|Benchmark|between|Bias|bigger|Bounding boxes|caption-retrieval|Categorical|CC BY-NC-SA 4\\.0|CC BY-SA 3\\.0|CC BY-SA 4\\.0|CC0: Public Domain|classification|closed-domain-abstrative-qa|Cluster Sampling|Code Generation|code-generation|Comments|Community Data License|Community Data License Agreement - Permissive - Version 1\\.0|Community Data License Agreement - Sharing - Version 1\\.0|computer-vision|conditional-text-generation|contact|Content and textual categorization|Contractors|conversational|Creative Commons|cross-language-transcription|crowdsourced|Crowdsourcing|Data Augmentation|Data Normalization|Data reduction|data-integration|data-to-text|Database: Open Database, Contents: © Original Authors|Database: Open Database, Contents: Database Contents|deduplication|dialog-response-generation|diferent|Distribute|email|email subject|Entity annotation|entity-extraction|equal|equal\\+bigger|EU ODP Legal Notice|Evaluation of language models|External|external source|feature-extraction|fill-mask|generative-modelling|GPL|GPL 2|gpt-3|grammatical error correction|grantor|Graph|Haphazard Sampling|image|Image and video annotations|image-captioning|image-classification|image-enhancement|image-retrieval|image-segmentation|image-to-text|Inclusive Language|influence-attribution|Information Retrieval|information-retrieval|Internal|Internal Use|Landmark and key-point|Language|Language-model|language-modeling|language-modelling|linear-regression|Lines and splines|litle|long-texts|machine translation|machine-translation|Manual Human Curator|masked-language-modeling|meeting title|Might be offensive|minus|Missing Values|mixed|Model Commercialization|more|multi-class classification|Multi-stage Sampling|multiple-choice|Name|named-entity-disambiguation|named-entity-recognition|natural-language-inference|neural-machine-translation|news-classification|No|NO|Non-declared|Numerical|object-detection|one liner summary|Open Data Commons|Ordered|other|Other|other-test|other-text-search|Others|Outlier Filtering|Output Commercialization|paraphrase|paraphrase detection|paraphrasing|patents|Platform|Polygonal segmentation|Privacy|private|public|Publish|query-paraphrasing|question_answering|question-answering|question-answering-retrieval|question-generation|question-pairing|Re-Represent|reasoning|Record-Data|Reddit API Terms|Remove Duplicates|Research|Sampling|Sampling Distribution|Sampling Mean|Sampling Rate|Sampling Standard Deviation|Sampling Variation|Scrapping|Scripted/edited|Semantic Search|Semantinc Segmentation|Sensitive Data|Sensors|sentence-similarity|sentiment-analysis|sequence-modeling|sequence-modelling|sequence2sequence|simplification|Social Impact|Software|Special|speech-processing|speech-synthesis|spoken/signed|spontaneous|Stratified Sampling|structure-prediction|summarization|Summarization|super-resolution|symbolic-regression|Symmetric|synchronous interaction|syntactic-evaluation|Systematic Sampling|table-question-answering|table-to-text|tabular-classification|tabular-to-text|Tagging|text|Text Neutralization|text_classification|text-classification|text-generation|text-generation-other-code-modeling|text-generation-other-common-sense-inference|text-generation-other-discourse-analysis|text-mining|text-regression|text-retrieval|text-scoring|text-to-slide|text-to-speech|text-to-structured|text-to-tabular|Text2Text generation|text2text-generation|textual-entailment|The Montreal data licence|Time-Series|time-series-forecasting|Token Classification|token-classification|Tool|topic modeling|topic-classification|Total Data Sampled|transkation|translation|Translation|tts|type|Type|U\\.S\\. Government Works|unpaired-image-to-image-translation|Version|video-captionning|visual-question-answering|Weighted Sampling|World Bank Dataset Terms of Use|written|Yes|YES|zero-shot-classification|zero-shot-information-retrieval|zero-shot-retrieval)\\b|\\b(Acurracy:|Additional Conditions:|Age:|AGPL 3\\.0 \\(GNU Affero General Public License 3\\.0\\)|and attribute:|Are there protected groups\\?:|Areas:|Attribute number:|Attribute Sparsity:|attribute:|attribute:\\(|Binary attribute:|Categoric Distribution: \\[|CC BY 3\\.0 \\(Attribution 3\\.0 Unported\\)|CC BY 3\\.0 IGO \\(Attribution 3\\.0 IGO\\)|CC BY 4\\.0 \\(Attribution 4\\.0 International\\)|CC BY-NC 4\\.0 \\(Attribution-NonCommercial 4\\.0 International\\)|CC BY-NC-ND 4\\.0 \\(Attribution-NonCommercial-NoDerivatives 4\\.0 International\\)|CC BY-NC-SA 3\\.0 IGO \\(Attribution-NonCommercial-ShareAlike 3\\.0 IGO\\)|CC BY-ND 4\\.0 \\(Attribution-NoDerivatives 4\\.0 International\\)|Chi-Squared:|Cite authors:|Class Balance:|Complete archival version:|Contribution guidelines:|Correlations:|Count:|Country/Region:|Cramers: \\[|Credit/Attribution Notice:|Curation Rationale:|Data Instances:|Data Retention:|Data Splits:|Dependencies:|Designated Third Partes:|DOI:|Erratum\\?:|F1:|FDL 1\\.3 \\(GNU Free Documentation License 1\\.3\\)|First Rows:|Gaps:|Gathering dates range:|Gathering Processes:|Gender:|Golden Questions:|grantId:|Have sensitive attributes\\?|How data is collected:|Infrastructure:|Instance belongs to people:|Instances relation:|Inteded Audience:|Inter-annotation agreement:|inv:|IQR:|Is language data\\?:|Is public\\?:|is related to:|Is sample:|IssueType:|Journal:|Kendall: \\[|Keywords:|Label:|Labels:|Lenght-histogram: \\[|LGPL 3\\.0 \\(GNU Lesser General Public License 3\\.0\\)|Licences:|Links:|Maintainer:|Mapping:|Max-lenght:|Maximmum:|Mean:|Median-lenght:|Median:|Metrics: \\[|Min-lenght:|Minimmum:|Missing Values:|Modality:|Mode:|Model:|Native Language:|Noise:|Noisy labels:|Non-recommended:|Number of speakers represented:|ODC-BY 1\\.0 \\(ODC Attribution License\\)|OfType:|p-value:|Past Uses:|PDDL \\(ODC Public Domain Dedication and Licence\\)|Pearson: \\[|Phi-k: \\[|Precision:|Presence of disordered speech:|Process:|Published Date:|Purposes:|Q1:|Q2:|Q3:|Q4:|Quartiles:|Question:|Race/Ethnicity:|Rate Limit Usage:|Rationale:|Raw Citation:|Recall:|Recommended:|Reference:|Related-Attributes:|Related-Instances:|Relation:|Release Date:|Requirement:|Restriction:|Rights\\(stand-alone\\):|Rights\\(with models\\):|Sampling Characteristics:|Sampling Criteria:|Sampling Method:|Size:|Social Issues:|Socioeconomic status|Sparsity:|Spearman: \\[|Standard Desviation:|statistic:|Symmetry:|Syncrony:|Tags:|Task:|Tasks:|Time and place:|Title:|Total size:|Training in linguistics/other relevan disciplines:|Type:|Unique percentage:|Unique values:|Unique-identifier:|Unique:|Updated Date:|Url:|Uses repository:|Validation Dates:|Validation Method:|Validation Requirements:|Validation:|Version lifecycle:|Version:|When data was collected:|Who collects the data:|Year:|Completeness|From:|Description:)\\B"
     },
     {
-      "name": "entity.name.type.class",
-      "match": "\\b(Dates:|Distribution:|Applications:|Social Issue:|Preprocess:|Preprocesses:|Label Requirements:|Labeling Team:|Labeling process:|LabelingProcesses:|Gather Requirements:|Gathering Team:|Process Demographics:|Gathering Processes:|Consistency rules:|Pair Correlation:|Quality Metrics:|Statistics:|Attributes:|attribute:|Dataset:|Metadata:|Authoring:|Authors:|Funders:|Maintenance:|Composition:|Instance:|ofType:|Social Concerns:|Data Provenance:|Data Sources:|Source:|Annotation Processes:|Annotator process:|Description:)\\B"
+    "name": "entity.name.type.class",
+    "match": "\\b(Dates:|Distribution:|Applications:|Social Issue:|Preprocess:|Preprocesses:|Label Requirements:|Labeling Team:|Labeling process:|LabelingProcesses:|Gather Requirements:|Gathering Team:|Process Demographics:|Gathering Processes:|Consistency rules:|Pair Correlation:|Quality Metrics:|Statistics:|Attributes:|Dataset:|Metadata:|Authoring:|Authors:|Funders:|Composition:|Instance:|Social Concerns:|Data Provenance:|Source:|Benchmarking:|Infraestructure:|Attribute:|Citation:|Main Description:)\\B"
     },
     {
-      "name": "string.quoted.double.datasetdescriptor",
+      "name": "string.quoted.double.dataset-descriptor",
       "begin": "\"",
       "end": "\""
     },
     {
-      "name": "string.quoted.single.datasetdescriptor",
+      "name": "string.quoted.single.dataset-descriptor",
       "begin": "'",
       "end": "'"
     }
@@ -31,17 +31,17 @@
     "comments": {
       "patterns": [
         {
-          "name": "comment.block.datasetdescriptor",
+          "name": "comment.block.dataset-descriptor",
           "begin": "/\\*",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.comment.datasetdescriptor"
+              "name": "punctuation.definition.comment.dataset-descriptor"
             }
           },
           "end": "\\*/",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.comment.datasetdescriptor"
+              "name": "punctuation.definition.comment.dataset-descriptor"
             }
           }
         },
@@ -49,11 +49,11 @@
           "begin": "//",
           "beginCaptures": {
             "1": {
-              "name": "punctuation.whitespace.comment.leading.datasetdescriptor"
+              "name": "punctuation.whitespace.comment.leading.dataset-descriptor"
             }
           },
           "end": "(?=$)",
-          "name": "comment.line.datasetdescriptor"
+          "name": "comment.line.dataset-descriptor"
         }
       ]
     }

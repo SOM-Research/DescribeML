@@ -7,13 +7,13 @@ Dataset: Melanoma_Classification_Dataset
             Release Date: 10-08-20
         Citation: 
             Title: "A patient-centric dataset of images and metadata for identifying melanomas using clinical context"
-            Authors: "Rotemberg, V., Kurtansky, N., Betz-Stablein, B., Caffery, L., Chousakos, E., Codella, N., Combalia, M., Dusza, S., Guitera, P., Gutman, D., Halpern, A., Helba, B., Kittler, H., Kose, K., Langer, S., Lioprys, K., Malvehy, J., Musthaq, S., Nanda, J., Reiter, O., Shih, G., Stratigos, A., Tschandl, P., Weber, J. & Soyer, P"
+            Cite authors: "Rotemberg, V., Kurtansky, N., Betz-Stablein, B., Caffery, L., Chousakos, E., Codella, N., Combalia, M., Dusza, S., Guitera, P., Gutman, D., Halpern, A., Helba, B., Kittler, H., Kose, K., Langer, S., Lioprys, K., Malvehy, J., Musthaq, S., Nanda, J., Reiter, O., Shih, G., Stratigos, A., Tschandl, P., Weber, J. & Soyer, P"
             Year: 2021 
             Journal: "Sci Data 8, 34"
             DOI: 10.1038/s41597-021-00815-z
-        Description:
+        Main Description:
             Purposes: "The 2020 SIIM-ISIC Melanoma Classification challenge dataset..." 
-            Tasks:    [classification, image-classification]
+            Tasks: [classification, image-classification]
             Gaps:     "As the leading healthcare organization for informatics in medical imaging..."  
             Areas:    HealthCare
             Tags:     Images Melanoma 
@@ -41,7 +41,7 @@ Dataset: Melanoma_Classification_Dataset
                 Task: Language-model
                 [
                     Model: "ModelExample"
-                    Metrics:[
+                    Metrics: [
                         F1: 81
                         Acurracy: 81
                         Precision: 81
@@ -53,7 +53,7 @@ Dataset: Melanoma_Classification_Dataset
             Licences: CC BY 3.0 (Attribution 3.0 Unported)
             Rights(stand-alone): Access
             Rights(with models): Benchmark
-            Additional Conditions "In addition to the CC-BY-NC license, the dataset is governed by the ISIC Terms of Use. Learn more about the terms of use here: https://datanutrition.org/labels/isic-2020/ "                          
+            Additional Conditions: "In addition to the CC-BY-NC license, the dataset is governed by the ISIC Terms of Use. Learn more about the terms of use here: https://datanutrition.org/labels/isic-2020/ "                          
     Authoring:
         Authors:
             Name "Skin Imaging Collaboration ISIC"  email emailo@emailo.com
@@ -98,31 +98,30 @@ Dataset: Melanoma_Classification_Dataset
                 Type: Record-Data
                 Attribute number: 8
                 Attributes: 
-                    attribute: ImageId
-                        description: 'ID of the images'
-                        count: 33126
-                        ofType:  Categorical
-                    attribute: patientID
-                        description: 'ID of patients'
-                        count: 33126
-                        ofType: Categorical    
+                    Attribute: ImageId
+                        Description: 'ID of the images'
+                        Count: 33126
+                        OfType:  Categorical
+                    Attribute: patientID
+                        Description: 'ID of patients'
+                        Count: 33126
+                        OfType: Categorical    
 
-                    attribute: sex   
-                        description: 'sex of the patient'
-                        count: 33126
-                        ofType: Categorical
+                    Attribute: sex   
+                        Description: 'sex of the patient'
+                        Count: 33126
+                        OfType: Categorical
                         Statistics:
                                 Mode: "Femala"
-                                Categoric Distribution:
-                                    [
+                                Categoric Distribution: [
                                         "Male": 40%,
                                         "Femala": 55%,
                                         "Non-binay": 5%
                                     ]
-                    attribute: age  
-                        description: 'age of the patient'
-                        count: 33126
-                        ofType: Numerical
+                    Attribute: age  
+                        Description: 'age of the patient'
+                        Count: 33126
+                        OfType: Numerical
                         Statistics:
                                 Mean: 34
                                 Median: 32
@@ -133,33 +132,32 @@ Dataset: Melanoma_Classification_Dataset
                                 IQR: 1.2
 
           
-                    attribute: anatom_site_general_challenge
-                        description: 'description of body zone of the image'
-                        count: 33126
-                        ofType: Categorical
+                    Attribute: anatom_site_general_challenge
+                        Description: 'description of body zone of the image'
+                        Count: 33126
+                        OfType: Categorical
                         Statistics:
                                 Mode: "Chest"
 
-                    attribute: diagnosis
-                        description: 'previous diagnosis from medical hisotry'
-                        count: 33126
-                        ofType: Categorical
+                    Attribute: diagnosis
+                        Description: 'previous diagnosis from medical hisotry'
+                        Count: 33126
+                        OfType: Categorical
                         Statistics:
                             Mode: "unknowm"
 
 
-                    attribute: beningnant_malignant
-                        description: 'Type of the melanoma'
-                        label: skinLabel
-                        count: 33126
-                        ofType: Categorical
+                    Attribute: beningnant_malignant
+                        Description: 'Type of the melanoma'
+                        Label: skinLabel
+                        Count: 33126
+                        OfType: Categorical
                         Statistics:
                             Missing Values: 0
                             Completeness: 100
                             Chi-Squared:
                                 p-value: 0
-                            Categoric Distribution:
-                                [
+                            Categoric Distribution: [
                                     "beningnant": 80%,
                                     "malignant": 20%
                                 ]
@@ -172,11 +170,12 @@ Dataset: Melanoma_Classification_Dataset
                     Rationale: "The age correlation is significant with the external source"
             Quality Metrics: 
                 Completeness: 100
-        Consistency rules: 
-            inv: skinImages : (age >= 0)
+        Consistency rules:
+            inv: skinImages attribute:(skinImages.age bigger 0)
+
         Is sample: YES
             Sampling Method: Other
-            Sampling criteria:
+            Sampling Criteria:
                 "Yes, sample dataset used accurately reflects the intent or desired outcome and has been 
                 evaluated to ensure that it is fit for purpose. We queried clinical imaging databases containing 
                 images from 1998 to 2019 across the six centers to generate a multicenter imaging dataset. 
@@ -187,6 +186,7 @@ Dataset: Melanoma_Classification_Dataset
             "Yes. In order to test algorithm generalizability, a subset of images from six sites (five geographic locations)
              were allocated for the training dataset of the 2020 ISIC Grand Challenge. There is a separate test dataset available 
              without target information." 
+    
 
     Data Provenance:
         Curation Rationale:  "The curation process have been conducted by several health institutions... " 
@@ -206,7 +206,8 @@ Dataset: Melanoma_Classification_Dataset
                         and included in the dataset. The 2020 SIIM-ISIC Melanoma Classification competition 
                         page on Kaggle lists the redundant cases and deidentified patient labels 
                         (https://www.kaggle.com/c/siim- isic-melanoma- classification/discussion/161943)."
-                Related Instances: skinImages
+                Related-Instances: skinImages
+                Social Issues: raceRepresentative
                 How data is collected: Manual Human Curator
                 When data was collected: 
                     "Images were originally collected by imaging centers during 1998 - 2019; this dataset was curated from those image 
@@ -259,7 +260,7 @@ Dataset: Melanoma_Classification_Dataset
                     Type Internal
                     Country/Region: "Australia"
                 Label Requirements: 
-                    Requirement: "1) Images containing any potentially identifying features, such as jewelry or tattoos, or from patients without 
+                    Requirement: "1) ImaCan ges containing any potentially identifying features, such as jewelry or tattoos, or from patients without 
                         at least three qualifying images were excluded during quality assurance review."
                     
                     Requirement: "2) When multiple image types were available, the selected image was either the one of highest resolution or if Ç
@@ -305,7 +306,7 @@ Dataset: Melanoma_Classification_Dataset
       Social Issue: raceRepresentative
         IssueType: Bias
         Description: "Dataset is not representative with respect to darker skin types"
-        Related Attributes: 
+        Related-Attributes: 
             attribute: ImageId  
        
       Social Issue: generalIncidence

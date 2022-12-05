@@ -13,15 +13,15 @@
 grammar DatasetDescriptor
 
 entry DescriptionDataset:
-    (elements+=Declaration)*;
+    (elements+=Declaration);
 
 // General structure of the DSL
 Declaration:
  'Dataset:' name=ID 
   generalinfo=Metadata
-  (composition=Composition)?
-  (provenance=Provenance)?
-  (socialConcerns=SocialConcerns)?;
+  (composition=Composition)
+  (provenance=Provenance)
+  (socialConcerns=SocialConcerns);
 
 //
 // Metadata of the dataset
@@ -41,7 +41,7 @@ Metadata:
 // Dates
 Dates:
     name="Dates:"
-     (datesR=ReleaseDate )?
+     (datesR=ReleaseDate )
      (datesU=UpdateDate )?
      (datesP=PublishedDate )?;
 ReleaseDate:
@@ -56,10 +56,10 @@ PublishedDate:
 
 // Descriptions
 Description: 
-    name="Description:"
+    name="Main Description:"
     (desc=STRING | 
     (('Purposes:' descriptionpurpose=STRING)? 
-    (tasks='Tasks:' '[' descriptionTasks+=Task ((','descriptionTasks+=Task)*']')?)? 
+    (tasks='Tasks: [' descriptionTasks+=Task ((','descriptionTasks+=Task)*']')?)? 
     ('Gaps:' descriptionGaps=STRING)?)) 
     (area=Areas)?
     (tags=Tags)?;
@@ -79,12 +79,12 @@ Citation:
     name="Citation:"
     (("Raw Citation:") citeText=STRING |
      ("Title:" title=Title)?
-     ("Authors:" authorsPaper=Citeauthors)?
-     ("Year:" year=NUMBER) )?
+     ("Cite authors:" authorsPaper=Citeauthors)?
+     ("Year:" year=NUMBER)? 
      ("Keywords:" "["(keywords+=Keyword)*"]")?
      ("Journal:" publisher=Publisher)?
      (("DOI:" doi=DoiCite)? 
-     ("Url:" url=CiteUrl)? 
+     ("Url:" url=CiteUrl)? )?
     );
 Title:
     name=STRING;
@@ -106,9 +106,9 @@ Distribution:
     ('Licences:' licence=CommonLicences)?
     ('Rights(stand-alone):' rights=RightsData)?
     ('Rights(with models):' rightsModels=RightsModel)?
-    ('Credit/Attribution Notice' attribution=STRING)?
-    ('Designated Third Partes' thirdParties=STRING)?
-    ('Additional Conditions' addCond=STRING)?;
+    ('Credit/Attribution Notice:' attribution=STRING)?
+    ('Designated Third Partes:' thirdParties=STRING)?
+    ('Additional Conditions:' addCond=STRING)?;
 
 // Applications
 Applications:
@@ -122,7 +122,7 @@ Benchmarking:
     name="Benchmarking:"
     (("Task:" taskName=Task)?
     ('['("Model:" (modelName=STRING))?
-    ("Metrics:" '['     
+    ("Metrics: ["     
                 ("F1:" (f1=NUMBER))?
                 ("Acurracy:" (acurracy=NUMBER))?
                 ("Precision:" (precision=NUMBER))?
@@ -158,11 +158,11 @@ Maintainer:
      name='Composition:'
      'Rationale:' compodesc+=STRING
      ('Total size:' numberInst=NUMBER)? 
-     (instances += DataInstances)*
-     (relation=RelationInstances)?
+     (instances = DataInstances)
+     ((relation=RelationInstances)?
      ('Dependencies:' dependencies=Dependencies)? 
      ('Is sample:' ((sample='NO')|(sample=Sample)))?
-     ('Data Splits:' splits=STRING)?;
+     ('Data Splits:' splits=STRING)?)?;
 
 // Data Instances
 DataInstances:
@@ -185,8 +185,8 @@ Statistics:
 
 PairCorrelation:
     (
-        'between' attr1=[Attribute] 'and' 
-        (attr2=[Attribute] | 'external source'
+        'between' attr1=[Attribute:QualifiedName] 'and' 
+        (attr2=[Attribute:QualifiedName] | 'external source'
         'From:' from=STRING "Rationale:" rationale=STRING)
     )?;
 
@@ -198,17 +198,16 @@ QualityMetric:
 
 // Consistency Rules
 ConsistencyRules:
-    'inv:' instance1=[DataInstance] ": ("attrule1=[Attribute]  Operators (comparator = NUMBER | attrule2=[Attribute])? ")";
+    'inv:' instance1=[DataInstance:QualifiedName] "attribute:(" attrule1=[Attribute:QualifiedName]  comparator=Operators ( attr2=[Attribute:QualifiedName] | value=NUMBER)? ")";
    
 // Attributes
 Attribute:
-    'attribute:' name=ID 
-    'description:' attdesc=STRING 
-    ('label:' label=[Labels])?
-    ('labeling process:' labelProces=[LabelingProcess])?
-    ('unique values:' unique=NUMBER)?
-    ('count:' count=NUMBER)?
-    ('ofType:' ((attType=Categor)|(attType=Numeri)))?;
+    'Attribute:' name=ID 
+    'Description:' attdesc=STRING 
+    ('Label:' label=[Labels:QualifiedName])?
+    ('Unique values:' unique=NUMBER)?
+    ('Count:' count=NUMBER)?
+    ('OfType:' ((attType=Categor)|(attType=Numeri)))?;
    
 // Categoricla Attributes
 Categor:
@@ -222,11 +221,11 @@ Categor:
      ('Min-lenght:' minlenght=NUMBER)?
     ('Max-lenght:' maxlenght=NUMBER)?
     ('Median-lenght:' medianlenght=NUMBER )?
-    ('Lenght-histogram:' '[' lenghthistorgram=HistogramType (',' lenghthistorgram+=HistogramType)* ']')?
+    ('Lenght-histogram: [' lenghthistorgram=HistogramType (',' lenghthistorgram+=HistogramType)* ']')?
     ('Chi-Squared:' chisquared=ChiSquare )?
     ('Binary attribute:' binary=Binary)?
     ('Mode:' mode=STRING)?
-    ('Categoric Distribution:' '[' catdist=StringNumberType '%' (',' catdist+=StringNumberType '%')* ']')?)?
+    ('Categoric Distribution: [' catdist=StringNumberType '%' (',' catdist+=StringNumberType '%')* ']')?)?
     ('Quality Metrics:' metrics+=QualityMetric)?;
 Binary:
     'Symmetry:' sym=AttributeSymmetry
@@ -243,11 +242,11 @@ ChiSquare:
     ('statistic:' statistic=NUMBER ',')?
     ('p-value:' pvalue=NUMBER)?;
 Correlations:
-    ('Pearson:'  '[' pearson=StringNumberType (',' pearson+=StringNumberType)* ']')?
-    ('Spearman:' '[' spearman=StringNumberType (',' spearman+=StringNumberType)* ']')?
-    ('Kendall:' '[' kendall=StringNumberType (',' kendall+=StringNumberType)* ']')?
-    ('Cramers:' '[' cramers=StringNumberType (',' cramers+=StringNumberType)* ']')?
-    ('Phi-k:' '[' phik=StringNumberType (',' phik+=StringNumberType)* ']')?;
+    ('Pearson: [' pearson=StringNumberType (',' pearson+=StringNumberType)* ']')?
+    ('Spearman: [' spearman=StringNumberType (',' spearman+=StringNumberType)* ']')?
+    ('Kendall: [' kendall=StringNumberType (',' kendall+=StringNumberType)* ']')?
+    ('Cramers: [' cramers=StringNumberType (',' cramers+=StringNumberType)* ']')?
+    ('Phi-k: [' phik=StringNumberType (',' phik+=StringNumberType)* ']')?;
 // Numerical Attributes
 Numeri:
     name='Numerical' 
@@ -270,7 +269,7 @@ Quartile:
 RelationInstances:
     'Instances relation:' (relation+=Relation)*;
 Relation:
-    ('Relation:' name=ID 'attribute:' attRel=[Attribute] "is related to:" insRel=[DataInstance] ('and attribute:' attRelTarget=[Attribute]))*;
+    ('Relation:' name=ID 'attribute:' attRel=[Attribute:QualifiedName] "is related to:" insRel=[DataInstance:QualifiedName] ('and attribute:' attRelTarget=[Attribute:QualifiedName]))*;
 
 // Instance Dependencies
 Dependencies:
@@ -284,7 +283,7 @@ Dependencies:
 Sample:
     name='YES' 
     ('Sampling Method:' type=SampleType)?
-    ('Sampling criteria:' (criteria=STRING))?
+    ('Sampling Criteria:' (criteria=STRING))?
     ('Sampling Characteristics:' (charact+=SamplingCharacteristics)*)?;
 
 SamplingCharacteristics:
@@ -303,9 +302,9 @@ SamplingCharacteristics:
 Provenance:
     name='Data Provenance:'
     'Curation Rationale:' curation=STRING
-    ((gathering+=GatheringProcesses)*)?
-     ((labeling+=LabelingProcesses)*)?
-     ((other+=PreProcesses)*)?;
+     (gathering=GatheringProcesses)?
+     (labeling=LabelingProcesses)?
+     ((other=PreProcesses))?;
 
 // Gathering
 GatheringProcesses:
@@ -315,7 +314,7 @@ GatheringProcess:
     'Description:' desc=STRING
      source=Source  
     ('Gathering dates range:' gatherDates=STRING)?
-    ('Related Instances:' (mapInstance=[DataInstance] (',')?)*)?
+    ('Related-Instances:' mapInstance=[DataInstance])?
     ('Social Issues:' labelSocialIssues=[SocialIssue])?
     ('How data is collected:' how=GatherType)?
     ('Is language data?:' SpeechSitatuion)?
@@ -352,12 +351,12 @@ LabelingProcess:
     ('Labeling Team:'labelingTeam = Team)?
     ('Infrastructure:' infra=Infrastructure)?
     ('Validation:' validation=Validation)?
-    ('Social Issues:' labelSocialIssues=[SocialIssue])?
+    ('Social Issues:' labelSocialIssues=[SocialIssue:QualifiedName])?
     ('Label Requirements:' (requeriments+=Requeriments)*)?;
 Labels:
     'Label:' name=ID
     'Description:' desc=STRING
-    'Mapping:' (map=[Attribute] (',')?)*;
+    'Mapping:' (map=[Attribute:QualifiedName] (',')?)*;
 Infrastructure:
     ('Tool' tool=STRING)?
     ('Platform' platform=STRING)?
@@ -393,7 +392,7 @@ PreProcess:
     'Preprocess:' name=ID
     'Description:' desc=STRING
     'Type:' type=DataProcess
-    ('Social Issues:' labelSocialIssues=[SocialIssue])?;
+    ('Social Issues:' labelSocialIssues=[SocialIssue:QualifiedName])?;
 
 
 //
@@ -408,11 +407,11 @@ SocialIssue:
     'Social Issue:' name=ID
     'IssueType:' IssueType=SocialIssueType
         'Description:' desc=STRING
-    ('Related Attributes:' ('attribute:' senseAtt=[Attribute])*)?
+    ('Related-Attributes:' ('attribute:' senseAtt=[Attribute:QualifiedName])*)?
 
     ('Instance belongs to people:' 
-        ('Have sensitive attributes?' ('attribute:' senseAtt=[Attribute])*)?
-        ('Are there protected groups?' procGroups=BooleanAnswer)?
+        ('Have sensitive attributes?' ('attribute:' senseAtt=[Attribute:QualifiedName])*)?
+        ('Are there protected groups?:' procGroups=BooleanAnswer)?
         ('Might be offensive' offDiscussion=STRING)?)?
     ;
 
@@ -470,12 +469,14 @@ DataProcess returns string: 'Missing Values' | 'Data Augmentation' | 'Outlier Fi
 StringNumberType returns string: STRING + ':' + NUMBER;
 HistogramType returns string: NUMBER + ':' + NUMBER;
 DataTypes returns string: 'String' | 'Integer' | 'Boolean' | 'Other';
-QualifiedName returns string: ID ('.' ID)*;
-Operators returns string: '<'|'>'|'='|'!='|'+'|'-'|'>=';
+// QualifiedName returns string: ID ('.' ID)*;
+Operators returns string: 'bigger'|'litle'|'equal'|'diferent'|'more'|'minus'|'equal+bigger';
 Dash returns string: "-";
 DateYear returns string: NUMBER+Dash+NUMBER+Dash+NUMBER;
 DOI returns string: ((NUMBER|ID)+("/"|".")+(NUMBER|ID));
 EmailType returns string: ID+'@'+ID+'.'+ID;
+QualifiedName returns string:
+    ID ('.' ID)*;
 
 //
 // Terminals
@@ -487,13 +488,3 @@ terminal STRING: /"[^"]*"|'[^']*'/;
 
 hidden terminal ML_COMMENT: /\/\*[\s\S]*?\*\//;
 hidden terminal SL_COMMENT: /\/\/[^\n\r]*/;
-
-
-
-
-
-
-
-
-
-

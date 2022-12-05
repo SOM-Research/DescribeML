@@ -14,13 +14,13 @@ Dataset: Gender
                 year={2020},
                 note={abs/1910.13913}
               }"
-        Description:  
+        Main Description:  
             Purposes:
                 "This dataset was created to study coreference resolution in English on documents discussing people who are,
                  in some ways, gender-variant (and generally selected so that this variance shows up linguistically).
                  Previously coreference resolution datasets contain nearly no such examples, largely due to the ways in 
                  which those datasets were collected (see paper for details)." 
-            Tasks:[reasoning, text-classification]
+            Tasks: [reasoning, text-classification]
             Gaps: 
                 "As part of a study making coreference systems more gender inclusive, we collected and annotated a dataset
                 of documents by and about non-binary and binary trans people" 
@@ -75,14 +75,14 @@ Dataset: Gender
                      Attribute number: 2
                      Size: 63
                      Attributes:
-                        attribute: tokens
-                            description: "Tokens extracted from text" 
-                            count: 42259
-                            ofType: Categorical
-                        attribute: mentions
-                            description: "Reference entity identifiers. (note that a word could reference to more than one people) " 
-                            count: 3161
-                            ofType: Categorical
+                        Attribute: tokens
+                            Description: "Tokens extracted from text" 
+                            Count: 42259
+                            OfType: Categorical
+                        Attribute: mentions
+                            Description: "Reference entity identifiers. (note that a word could reference to more than one people) " 
+                            Count: 3161
+                            OfType: Categorical
                             Statistics:
                                 Completeness: 7.5
                     Quality Metrics:
@@ -94,14 +94,14 @@ Dataset: Gender
                     Attribute number: 2
                     Size: 18
                     Attributes:
-                        attribute: tokens
-                            description: "Tokens extracted from text" 
-                            count: 11210
-                            ofType: Categorical
-                        attribute: mentions
-                            description: "Reference entity identifiers. (note that a word could reference to more than one people) " 
-                            count: 753
-                            ofType: Categorical
+                        Attribute: tokens
+                            Description: "Tokens extracted from text" 
+                            Count: 11210
+                            OfType: Categorical
+                        Attribute: mentions
+                            Description: "Reference entity identifiers. (note that a word could reference to more than one people) " 
+                            Count: 753
+                            OfType: Categorical
                             Statistics:
                                 Completeness: 6.7
                 Instance: AO3
@@ -111,14 +111,14 @@ Dataset: Gender
                     Attribute number: 2
                     Size: 15
                     Attributes:
-                        attribute: tokens
-                            description: "Tokens extracted from text" 
-                            count: 14881
-                            ofType: Categorical
-                        attribute: mentions
-                            description: "Reference entity identifiers. (note that a word could reference to more than one people) " 
-                            count: 2121
-                            ofType: Categorical
+                        Attribute: tokens
+                            Description: "Tokens extracted from text" 
+                            Count: 14881
+                            OfType: Categorical
+                        Attribute: mentions
+                            Description: "Reference entity identifiers. (note that a word could reference to more than one people) " 
+                            Count: 2121
+                            OfType: Categorical
                             Statistics:
                                 Completeness: 14.3
                 Statistics:
@@ -157,7 +157,7 @@ Dataset: Gender
             Source: Wikipedia
               Description: "a description"
               Noise: "Already defined"
-            Related Instances: Wikipedia
+            Related-Instances: Wikipedia
             How data is collected: Manual Human Curator
             
            // Periodicals
@@ -183,7 +183,7 @@ Dataset: Gender
                 found/included documents from The Advocate, The DailyXtra, DigitalTrans, GLReview,
                 LambdaLiterary and Lavender. These documents comprise about 1/6 of the dataset." 
                 Noise: "See potential impact in social section"
-            Related Instances: Periodicals
+            Related-Instances: Periodicals
             How data is collected: Manual Human Curator
             
           // AO3
@@ -200,7 +200,7 @@ Dataset: Gender
                 stories by word count, and took the shortest ones that were actually stories (some were descriptions
                 of audiobooks). These documents comprise about 1/6 of the dataset." 
                 Noise: "See potential impact in social section" 
-            Related Instances: AO3
+            Related-Instances: AO3
             How data is collected: Manual Human Curator
 
     //
@@ -250,7 +250,7 @@ Dataset: Gender
             Description: "Data could identify individuals. All raw data in the dataset is from public sources (Wikipedia, online periodicals,
                 or online open fan-fiction). This is not explicitly identified, though many of the articles 
                 explicitly mention the gender of the people described/discussed.Their names could be given in running text."
-            Related Attributes: 
+            Related-Attributes: 
                 attribute: tokens
            
 
@@ -262,11 +262,11 @@ Dataset: Gender
             that in mind. Some of the articles, especially from fan-fiction, have explicit and intentional 
             misgendering of characters, and a few describe (or hint out) intimate relationships (though we 
             filtered for only stories that did not have 'adult themes')."
-            Related Attributes: 
+            Related-Attributes: 
                 attribute: tokens
            
             Instance belongs to people:
-                Are there protected groups? Yes
+                Are there protected groups?: Yes
                 Might be offensive "The gender information given may be sensitive in certain situations, at least for those 
                 articles dealing with real people. However, all these articles are from either Wikipedia or periodicles, 
                 and is therefore already public information."

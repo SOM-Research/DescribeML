@@ -8,21 +8,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateAction = void 0;
-const colors_1 = __importDefault(require("colors"));
+//import chalk from 'chalk';
 const commander_1 = require("commander");
+//import { Model } from '../language-server/generated/ast';
 const module_1 = require("../language-server/generated/module");
-const dataset_descriptor_module_1 = require("../language-server/dataset-descriptor-module");
-const cli_util_1 = require("./cli-util");
-const generator_1 = require("./generator");
+//import { createDatasetDescriptorServices } from '../language-server/dataset-descriptor-module';
+//import { extractAstNode } from './cli-util';
+//import { generateJavaScript } from './generator';
+//import { NodeFileSystem } from 'langium/node';
 const generateAction = (fileName, opts) => __awaiter(void 0, void 0, void 0, function* () {
-    const model = yield (0, cli_util_1.extractAstNode)(fileName, module_1.languageMetaData.fileExtensions, (0, dataset_descriptor_module_1.createDatasetDescriptorServices)());
-    const generatedFilePath = (0, generator_1.generateJavaScript)(model, fileName, opts.destination);
-    console.log(colors_1.default.green(`JavaScript code generated successfully: ${generatedFilePath}`));
+    // const services = createDatasetDescriptorServices(NodeFileSystem).DatasetDescriptor;
+    //const model = await extractAstNode<Model>(fileName, services);
+    //   const generatedFilePath = generateJavaScript(model, fileName, opts.destination);
+    //console.log(chalk.green(`JavaScript code generated successfully: ${generatedFilePath}`));
 });
 exports.generateAction = generateAction;
 function default_1() {
@@ -30,9 +30,10 @@ function default_1() {
     program
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         .version(require('../../package.json').version);
+    const fileExtensions = module_1.DatasetDescriptorLanguageMetaData.fileExtensions.join(', ');
     program
         .command('generate')
-        .argument('<file>', `possible file extensions: ${module_1.languageMetaData.fileExtensions.join(', ')}`)
+        .argument('<file>', `source file (possible file extensions: ${fileExtensions})`)
         .option('-d, --destination <dir>', 'destination directory of generating')
         .description('generates JavaScript code that prints "Hello, {name}!" for each greeting in a source file')
         .action(exports.generateAction);

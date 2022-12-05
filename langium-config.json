@@ -1,17 +1,12 @@
 {
-    "projectName": "datasetDescriptor",
+    "projectName": "DatasetDescriptor",
     "languages": [{
-        "id": "datasetdescriptor",
+        "id": "dataset-descriptor",
         "grammar": "src/language-server/dataset-descriptor.langium",
-        "fileExtensions": [".datadesc"],
+        "fileExtensions": [".descml"],
         "textMate": {
             "out": "syntaxes/dataset-descriptor.tmLanguage.json"
         }
     }],
-    "out": "src/language-server/generated",
-    "chevrotainParserConfig": {
-        "recoveryEnabled": true,
-        "nodeLocationTracking": "full",
-        "maxLookahead": 3
-    }
+    "out": "src/language-server/generated"
 }
