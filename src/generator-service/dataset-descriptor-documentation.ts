@@ -102,7 +102,7 @@ import { createDatasetDescriptorServices } from '../language-server/dataset-desc
          description.metadata.desc.area.areas.forEach(function (area: any) {
              areas = areas + area.name + ',' 
          })
- 
+
          head = head + `
          <script type="application/ld+json">
          {
@@ -121,8 +121,8 @@ import { createDatasetDescriptorServices } from '../language-server/dataset-desc
          "hasPart" : [
              {
              "@type": "Dataset",
-             "name": ${description.composition.instances[0].instances[0].name},
-             "description": ${description.composition.instances[0].instances[0].descript},
+             "name": ${description.composition.instances.instances[0].name},
+             "description": ${description.composition.instances.instances[0].descript},
              },
          ],
          "includedInDataCatalog":{
