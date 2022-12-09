@@ -2,7 +2,7 @@
     "name": "DescribeML",
     "displayName": "DescribeML",
     "description": "DescribeML is a language plug-in to describe machine-learning datasets in a standard format. Build better data describing the composition, provenance and social concerns of your dataset.",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "engines": {
         "vscode": "^1.56.0"
     },
