@@ -77,6 +77,7 @@ class DocumentationGenerator {
         description.metadata.desc.area.areas.forEach(function (area) {
             areas = areas + area.name + ',';
         });
+        console.log(description.composition.instances.instances[0].name);
         head = head + `
          <script type="application/ld+json">
          {
@@ -95,8 +96,8 @@ class DocumentationGenerator {
          "hasPart" : [
              {
              "@type": "Dataset",
-             "name": ${description.composition.instances[0].instances[0].name},
-             "description": ${description.composition.instances[0].instances[0].descript},
+             "name": ${description.composition.instances.instances[0].name},
+             "description": ${description.composition.instances.instances[0].descript},
              },
          ],
          "includedInDataCatalog":{

@@ -92,13 +92,13 @@ body
         p Rationale: #{description.composition.compodesc}
         p Total Size: #{description.composition.numberInst}
         div 
-            p Instance: #{description.composition.instances[0].instances[0].name}
-            p Description: #{description.composition.instances[0].instances[0].descrip}
-            p Size: #{description.composition.instances[0].instances[0].numIns}
-            p Number of attributes: #{description.composition.instances[0].instances[0].attrnum}
-            p Type: #{description.composition.instances[0].instances[0].type}
+            p Instance: #{description.composition.instances.instances[0].name}
+            p Description: #{description.composition.instances.instances[0].descrip}
+            p Size: #{description.composition.instances.instances[0].numIns}
+            p Number of attributes: #{description.composition.instances.instances[0].attrnum}
+            p Type: #{description.composition.instances.instances[0].type}
             h3 Attributes: 
-            each attribute in description.composition.instances[0].instances[0].attributes
+            each attribute in description.composition.instances.instances[0].attributes
                 div 
                     p Name: #{attribute.name}
                     if attribute.attdesc
