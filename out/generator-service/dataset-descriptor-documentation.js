@@ -77,7 +77,6 @@ class DocumentationGenerator {
         description.metadata.desc.area.areas.forEach(function (area) {
             areas = areas + area.name + ',';
         });
-        console.log(description.composition.instances.instances[0].name);
         head = head + `
          <script type="application/ld+json">
          {
