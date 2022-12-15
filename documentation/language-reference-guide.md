@@ -310,7 +310,18 @@ Full examples of the language can be found in the public open repository [here](
 + **Dependencies:** Dependencies of the rule
     + **Description:** `STRING` Description of the dependencies
     + **Links:** `URL` Link to the dependency artifact
-+ **Instances relation:** `Relation: ID attribute: [ATTRIBUTE] is related to [INSTANCE]` Relation between instances
++ **Data Splits:** `STRING`The inteded data splits test/validation
++ **Is sample**  `YES`
+    + **Sampling Method:** `ENUMERATE` `'Cluster Sampling' | 'Haphazard Sampling' | 'Multi-stage Sampling' | 'Stratified Sampling' | 'Systematic Sampling' | 'Weighted Sampling' | 'Other'`
+    + **Sampling Criteria:** `STRING`
+    + **Sampling Characteristics:** 
+        + **Total Data Sampled:** `NUMBER`
+        + **Sampling Rate:** `NUMBER`
+        + **Sampling Mean:** `STRING`
+        + **Sampling Standard Deviation:** `NUMBER`
+        + **Sampling Distribution:** `NUMBER`
+        + **Sampling Variation:** `NUMBER`
++ **Instances relation:** `Relation: ID attribute: [ATTRIBUTE] is related to [INSTANCE]` 
 
 ***
 ***
