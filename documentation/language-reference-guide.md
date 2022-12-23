@@ -332,7 +332,7 @@ Full examples of the language can be found in the public open repository [here](
     + **Process:** `ID` Machine-readable name of the process
     + **Description:** `STRING` Description of the process
     + **When data was collected:** `STRING` Date where data the process was performed
-    + **How data was collected** `STRING` How data was collected
+    + **How data was collected** `ENUMERATE` `'API' |'Scrapping'| 'Sensors' | 'Manual Human Curator' | 'Software' | 'Others'`
     + **Is language data:**  Set the speech situation
         + **Language:** `STRING` Language of the data
         + **Time and place:** `STRING`
