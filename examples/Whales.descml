@@ -1,0 +1,574 @@
+Dataset: Whales
+    Metadata:
+        Title: "Whales from space dataset, an annotated satellite image dataset
+        of whales for training machine learning models"
+        Unique-identifier: whales
+        Version: v1
+        Dates:
+            Release Date: 27-05-2022
+        Citation: 
+            Raw Citation: "Cubaynes, H.C., Fretwell, P.T. Whales from space dataset, an annotated satellite image dataset of whales for training machine learning models. Sci Data 9, 245 (2022). https://doi.org/10.1038/s41597-022-01377-4"
+        Main Description: 
+            Purposes: "A dataset of 633 annotated whale objects, created by surveying 6,300 km2 of satellite imagery captured by various very high-resolution satellites (i.e. WorldView-3, WorldView-2, GeoEye-1 and Quickbird-2) in various regions across the globe (e.g. Argentina, New Zealand, South Africa, United States, Mexico). The dataset covers four different species: southern right whale (Eubalaena australis), humpback whale (Megaptera novaeangliae), fin whale (Balaenoptera physalus), and grey whale (Eschrichtius robustus)."
+            Tasks: [ image-classification ]
+            Areas: Wildlife
+            Tags: Whales satellite detection
+        Distribution:
+            Licences: CC BY 4.0 (Attribution 4.0 International)
+            Credit/Attribution Notice: "https://doi.org/10.5285/C1AFE32C-493C-4DC7-AF9F-649593B97B2C"
+            Additional Conditions: "To fulfil the End User Licence Agreement with Maxar Technologies18, these image chips are shared in a png format, and access to the dataset is available upon request from the NERC UK Polar Data Centre that can be contacted at PDCServiceDesk@bas.ac.uk. Data access requires user name and email address, which will be shared with Maxar Technologies. Anyone using any of the image chips is also required to attribute the images
+            properly (See Usage Notes)."
+
+        Authoring: 
+            Authors: 
+                Name "Hannah C. Cubayanes" email example@example.com
+                Name "Peter T. Fretwell" email example@example.com
+            Version lifecycle: "As we acquire and analyse more satellite imagery, we aim to annually
+            update the Whales from Space dataset. The updates will be available under the Whales from Space dataset deposited
+            on the NERC Polar Data Centre repository16,17 to ensure consistency and long-term public availability of the
+            data."
+    Composition:
+        Rationale: "The “Whales from space dataset” is separated in two sub-datasets: a dataset that contains the whale annotations (box and point shapefiles with associated csv files) named “Whales from space dataset: Box and point shapefiles”16; and a dataset with the image chips named
+            “Whales from space dataset: Image chips”17. The “Whales from space dataset: Box and point shapefiles” dataset can be accessed on the NERC UK Polar Data Centre directly using the DOI link (https://doi.org/10.5285/
+            C1AFE32C-493C-4DC7-AF9F-649593B97B2C). This dataset contains nine shapefiles with boxes centered on each whale and nine point shapefiles marking each individual detected whales (Table 2) totalling 633 annotated whale objects (Table 3 and Fig. 4). This dataset also includes four csv files: 1) a csv file joining all the attribute tables linked to every box and point shapefiles for whale objects (WhaleFromSpaceDB_Whales.csv); 2) a second
+            csv file explaining each column of the first csv file (WhaleFromSpace_Guidance.csv); and 3) two other csv files describe the naming of each box (WhaleFromSpaceDB_BoxNaming.csv) and each point (WhaleFromSpaceDB_ PointNaming.csv).                                      Each box and point has metadata associated to it, which is included in the attribute table associated to the specific shapefile. It contains information about the detected whale: certainty level (i.e. “definite”, “probable”, “possible”) derived from the classification score assessed based on various criteria (i.e. body length, body width, body shape, body colour, flukeprint, blow, contour, wake, after-breach, defecation, other disturbance, fluke, flipper, head callosities and mudtrail) following Cubaynes et al.1 method, most likely species, and potential
+            other species. For each annotated whale, we also provide information about the imagery analysed: the location, latitude and longitude (in decimal degrees and recorded using the same geographic coordinate system and projection as the satellite imagery), imagery ID, imagery date, type of satellite, spatial resolution, number of
+            multispectral bands, product level and type (e.g. Standard2A). The size of each boxes was also specified in terms
+            of pixels."
+        Data Instances:
+        Instance:  WhaleFromSpaceDB_Whales
+            Description: "Describe the instance"
+            Type: Record-Data
+            Attribute number: 34
+            Attributes:
+               Attribute:  MstLklSp  
+                        Description: "Describe the attribute"
+                        Count: 4
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "Eubalaena australis"
+                            Categoric Distribution: ["Eubalaena australis":73.1%, "Eschrichtius robustus":12.6%, "Megaptera novaeangliae":8.8%, "Balaenoptera physalus":5.4%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  SpAbbr  
+                        Description: "Describe the attribute"
+                        Count: 4
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "SRW"
+                            Categoric Distribution: ["SRW":73.1%, "GW":12.6%, "HB":8.8%, "FW":5.4%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  PtlOtrSp  
+                        Description: "Describe the attribute"
+                        Count: 2
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "None"
+                            Categoric Distribution: ["None":99.8%, "Physeter macrocephalus":0.2%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  BoL  
+                        Description: "Describe the attribute"
+                        Count: 3
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "2"
+                            Categoric Distribution: ["2":60.3%, "1":21.6%, "0":18%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  BoW  
+                        Description: "Describe the attribute"
+                        Count: 3
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "2"
+                            Categoric Distribution: ["1":38.4%, "0":18.5%, "2":43.1%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  BoS  
+                        Description: "Describe the attribute"
+                        Count: 3
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "2"
+                            Categoric Distribution: ["1":35.7%, "0":15.5%, "2":48.8%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  BoC  
+                        Description: "Describe the attribute"
+                        Count: 3
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "2"
+                            Categoric Distribution: ["2":56.1%, "1":30.3%, "0":13.6%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  FlukeP  
+                        Description: "Describe the attribute"
+                        Count: 3
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "0"
+                            Categoric Distribution: ["0":90.8%, "1":3.9%, "2":5.2%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  Blow  
+                        Description: "Describe the attribute"
+                        Count: 3
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "0"
+                            Categoric Distribution: ["0":96.1%, "1":2.8%, "2":1.1%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  Contour  
+                        Description: "Describe the attribute"
+                        Count: 3
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "0"
+                            Categoric Distribution: ["0":86.7%, "2":7.6%, "1":5.7%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  Wake  
+                        Description: "Describe the attribute"
+                        Count: 3
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "0"
+                            Categoric Distribution: ["0":95.6%, "2":2.5%, "1":1.9%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  AfterB  
+                        Description: "Describe the attribute"
+                        Count: 3
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "0"
+                            Categoric Distribution: ["0":97.8%, "1":1.1%, "2":1.1%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  Defecation  
+                        Description: "Describe the attribute"
+                        Count: 2
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "0"
+                            Categoric Distribution: ["0":99.7%, "2":0.3%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  MudTrail  
+                        Description: "Describe the attribute"
+                        Count: 3
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "0"
+                            Categoric Distribution: ["0":92.7%, "1":2.4%, "2":4.9%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  OtherDistu  
+                        Description: "Describe the attribute"
+                        Count: 3
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "0"
+                            Categoric Distribution: ["2":30.3%, "1":22%, "0":47.7%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  Fluke  
+                        Description: "Describe the attribute"
+                        Count: 3
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "0"
+                            Categoric Distribution: ["0":92.7%, "1":3.9%, "2":3.3%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  Flipper  
+                        Description: "Describe the attribute"
+                        Count: 3
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "0"
+                            Categoric Distribution: ["0":97.3%, "1":2.2%, "2":0.5%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  HeadCalosi  
+                        Description: "Describe the attribute"
+                        Count: 3
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "0"
+                            Categoric Distribution: ["0":58.9%, "2":8.8%, "1":32.2%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  Movement  
+                        Description: "Describe the attribute"
+                        Count: 2
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "0"
+                            Categoric Distribution: ["0":99.1%, "2":0.9%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  Certainty2  
+                        Description: "Describe the attribute"
+                        Count: 3
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "Possible"
+                            Categoric Distribution: ["Probable":24.3%, "Possible":39.7%, "Definite":36%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  ClassScore  
+                        Description: "Describe the attribute"
+                        Count: 30
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "6"
+                            Categoric Distribution: ["6":8.1%, "5":7.1%, "2.5":1.4%, "5.5":5.8%, "7":5.4%, "7.5":6%, "6.5":3.9%, "10":4.4%, "8.5":4.9%, "1":5.5%, "4.5":4.7%, "4":6.2%, "8":7.7%, "3.5":2.2%, "0.5":1.9%, "3":2.1%, "1.5":1.4%, "12":3.8%, "11.5":0.9%, "9.5":1.9%, "2":3.3%, "9":4.6%, "14":0.6%, "13":1.4%, "11":1.7%, "16":0.6%, "17":0.2%, "15":0.3%, "12.5":1.1%, "10.5":0.6%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  Location  
+                        Description: "Describe the attribute"
+                        Count: 9
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "Valdes"
+                            Categoric Distribution: ["Auckland":16.3%, "Ignacio":12.6%, "Maui":8.8%, "PelagosIm2":2.2%, "PelagosIm3":1.7%, "PelagosIm4":1.1%, "PelagosIm5":0.3%, "Valdes":43%, "Witsand":13.9%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  GCS  
+                        Description: "Describe the attribute"
+                        Count: 1
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "GCS_WGS_1984"
+                            Categoric Distribution: ["GCS_WGS_1984":100%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  Lat  
+                    Description: "Describe the attribute"
+                    Count: 629
+                    OfType: Numerical
+                    Statistics: 
+                        Mean: 23.8
+                        Standard Desviation: 804.7
+               Attribute:  Long  
+                    Description: "Describe the attribute"
+                    Count: 630
+                    OfType: Numerical
+                    Statistics: 
+                        Standard Desviation: 2451.1
+                        Maximmum: 166.3
+               Attribute:  ImageID  
+                        Description: "Describe the attribute"
+                        Count: 12
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "103001005CBC0A00"
+                            Categoric Distribution: ["1.01E+15":10.9%, "103001000D6D1000":5.4%, "104001002959ED00":12.6%, "1040010006C2B700":8.8%, "104001001E19F000":2.2%, "104001001E7B8900":1.7%, "104001001E020000":1.1%, "104001001F96D900":0.3%, "103001001C8C0300":13.3%, "10400100032A3700":9.3%, "103001005CBC0A00":20.4%, "1050410001D94500":13.9%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  ImageFile  
+                        Description: "Describe the attribute"
+                        Count: 13
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "23SEP16WV021000016SEP23140108-M1BS_R1C1-500909293010_01_P002____GA__0AAAAAAIAAG01"
+                            Categoric Distribution: ["06AUG12231250-P2AS-052609152010_01_P001+M2AS":10.9%, "11AUG27225915-M2AS/P2AS-052609152020_01_P001":5.4%, "17FEB20182715-P2AS-056170912010_01_P001":9.8%, "17FEB20182714-P2AS-057078371010_01_P001":2.8%, "15JAN09211315-P2AS-054678232030_01_P001":8.8%, "16JUN19103613-P2AS-055667793010_01_P002":2.2%, "16JUN19103643-P2AS-055667793010_01_P003":1.7%, "16JUN19103650-P2AS-055667793010_01_P004":1.1%, "16JUN26104819-P2AS-055667793010_01_P005":0.3%, "12SEP19142108-M2AS/P2AS-052851214010_01_P001":13.3%, "14OCT16141859-P2AS-056066187020_01_P001":9.3%, "23SEP16WV021000016SEP23140108-M1BS_R1C1-500909293010_01_P002____GA__0AAAAAAIAAG01":20.4%, "09AUG09085026-P2AS-058687242010_01_P001":13.9%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  ImageDate  
+                        Description: "Describe the attribute"
+                        Count: 10
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "20160923"
+                            Categoric Distribution: ["20060812":10.9%, "20110827":5.4%, "20170220":12.6%, "20150109":8.8%, "20160619":5.1%, "20160626":0.3%, "20120919":13.3%, "20141016":9.3%, "20160923":20.4%, "20090809":13.9%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  Satellite  
+                        Description: "Describe the attribute"
+                        Count: 4
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "WV2"
+                            Categoric Distribution: ["QB2":10.9%, "WV2":39%, "WV3":36.2%, "GE1":13.9%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  NumWhale  
+                        Description: "Describe the attribute"
+                        Count: 2
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "1"
+                            Categoric Distribution: ["1":79.8%, "2":20.2%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  BoxSize  
+                        Description: "Describe the attribute"
+                        Count: 1
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "128x128pixels"
+                            Categoric Distribution: ["128x128pixels":100%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  SpatialRes  
+                        Description: "Describe the attribute"
+                        Count: 5
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "0.3m"
+                            Categoric Distribution: ["0.54m":10.9%, "0.46m":5.4%, "0.3m":36.2%, "0.45m":13.3%, "0.5m":34.3%]
+                            Quality Metrics:
+                                Completeness: 100 
+               Attribute:  BoxID-ImageChip  
+                        Description: "Describe the attribute"
+                        Count: 633
+                        OfType: Categorical
+                        Statistics: 
+                            Mode: "Auckland_SRW_QB2_PS_20060812_B0"
+                            Quality Metrics:
+                                Completeness: 100 
+            Instance:  WhaleFromSpaceDB_PointNaming
+                Description: "Describe the instance"
+                Type: Record-Data
+                Attribute number: 3
+                Attributes:
+                    Attribute:  How_to_name_a_point 
+                            Description: "Describe the attribute"
+                            Count: 10
+                            OfType: Categorical
+                            Statistics: 
+                                Mode: ""
+                                Categoric Distribution: ["Example for the frist point with one fin whale on a WV3 image of Pelagos taken on 25th June 2016":3.8%, "":65.4%, "Box name:":3.8%, "Criteria":3.8%, "Location":3.8%, "Species":3.8%, "Satellite":3.8%, "Processing":3.8%, "Date":3.8%, "Point number":3.8%]
+                                Quality Metrics:
+                                    Completeness: 35 
+                    Attribute:    NoName4
+                            Description: "Describe the attribute"
+                            Count: 21
+                            OfType: Categorical
+                            Statistics: 
+                                Mode: ""
+                                Categoric Distribution: ["":23.1%, "PelagosIm4_FW_WV3_PS_20160619_P1":3.8%, "Explanation":3.8%, "Location of where the imagery was acquired, which can be:":3.8%, "Auckland Islands, NZ":3.8%, "Laguna San Ignacio, Mexico":3.8%, "Maui Nui, US":3.8%, "Pelagos Sanctuary. For the Pelagos, the location name also includes the number of the image (e.g. PelagosIm2 for Image 2), as several images were taken the same year and month.":3.8%, "Peninsula Valdes, Argentina":3.8%, "Witsand, South Africa":3.8%, "Each imagery targeted a location when only one great whale species as expected to be detected. The surveyed species include:":3.8%, "Fin whale (Balaenoptera physalus)":3.8%, "Grey whale (Eschrichtius robustus)":3.8%, "Humpback whale (Megaptera novaeangliae)":3.8%, "Southern right whale (Eubalaena australis)":3.8%, "GE1 (GeoEye-1)":3.8%, "WV2 (WorldView-2)":3.8%, "WV3 (WorldView-3)":3.8%, "Pansharpening":3.8%, "YYYYMMDD":3.8%, "Indicates the numerical ordering of the whales points for a given image":3.8%]
+                                Quality Metrics:
+                                    Completeness: 77 
+                    Attribute:   NoName3  
+                            Description: "Describe the attribute"
+                            Count: 19
+                            OfType: Categorical
+                            Statistics: 
+                                Mode: ""
+                                Categoric Distribution: ["":30.8%, "Example":3.8%, "PelagosIm4":3.8%, "Auckland":3.8%, "Ignacio":3.8%, "Maui":3.8%, "PelagosIm2, PelagosIm3, PelagosIm4, PelagosIm5 ":3.8%, "Valdes":3.8%, "Witsand":3.8%, "FW":3.8%, "GW":3.8%, "HB":3.8%, "SRW":3.8%, "GE1":3.8%, "WV2":3.8%, "WV3":3.8%, "PS":3.8%, "YYYYMMDD":3.8%, "P1 (if it is the first point of the image)":3.8%]
+                                Quality Metrics:
+                                    Completeness: 69 
+            Instance:  WhaleFromSpace_Coverage
+                Description: "Describe the instance"
+                Type: Record-Data
+                Attribute number: 5
+                Attributes:
+                   Attribute:  File_Name  
+                            Description: "Describe the attribute"
+                            Count: 23
+                            OfType: Categorical
+                            Statistics: 
+                                Mode: ""
+                                Categoric Distribution: ["Box_Auckland2006_Whales_PS":1.3%, "":71.1%, "Point_Auckland2006_Whales_PS":1.3%, "Box_Witsand2009_Whales_PS":1.3%, "Point_Witsand2009_Whales_PS":1.3%, "Box_Auckland2011_Whales_PS":1.3%, "Point_Auckland2011_Whales_PS":1.3%, "Box_Valdes2012_Whales_PS":1.3%, "Point_Valdes2012_Whales_PS":1.3%, "Box_Valdes2014_Whales_PS":1.3%, "Point_Valdes2014_Whales_PS":1.3%, "Box_Maui2015_Whales_PS":1.3%, "Point_Maui2015_Whales_PS":1.3%, "Box_Pelagos2016_Whales_PS":1.3%, "Point_Pelagos2016_Whales_PS":1.3%, "Box_Valdes2016_Whales_PS":1.3%, "Point_Valdes2016_Whales_PS":1.3%, "Box_Ignacio2017_Whales_PS":1.3%, "Point_Ignacio2017_Whales_PS":1.3%, "WhaleFromSpaceDB_Whales":1.3%, "WhaleFromSpaceDB_Guidance":1.3%, "WhaleFromSpaceDB_BoxNaming":1.3%, "WhaleFromSpaceDB_PointNaming":1.3%]
+                                Quality Metrics:
+                                    Completeness: 29 
+                   Attribute:  Format  
+                            Description: "Describe the attribute"
+                            Count: 3
+                            OfType: Categorical
+                            Statistics: 
+                                Mode: ""
+                                Categoric Distribution: [".shp":23.7%, "":71.1%, ".csv":5.3%]
+                                Quality Metrics:
+                                    Completeness: 29 
+                   Attribute:  Resolution  
+                            Description: "Describe the attribute"
+                            Count: 3
+                            OfType: Categorical
+                            Statistics: 
+                                Mode: ""
+                                Categoric Distribution: ["128x128 PS pixels":11.8%, "":71.1%, "NA":17.1%]
+                                Quality Metrics:
+                                    Completeness: 29 
+                   Attribute:  Temporal_coverage  
+                            Description: "Describe the attribute"
+                            Count: 12
+                            OfType: Categorical
+                            Statistics: 
+                                Mode: ""
+                                Categoric Distribution: ["12-Aug-06":2.6%, "":71.1%, "08-Sep-09":2.6%, "27-Aug-11":2.6%, "19-Sep-12":2.6%, "16-Oct-14":2.6%, "09-Jan-15":2.6%, "19-Jun-2016 to 26-Jun-2016":2.6%, "23-Sep-16":2.6%, "20-Feb-17":2.6%, "19-Sep-2006 to 20-Feb-2017":1.3%, "NA":3.9%]
+                                Quality Metrics:
+                                    Completeness: 29 
+                   Attribute:  Spatial_coverage_decimal_degrees  
+                            Description: "Describe the attribute"
+                            Count: 37
+                            OfType: Categorical
+                            Statistics: 
+                                Mode: "NA"
+                                Categoric Distribution: ["North: -50.501753":2.6%, "South: -50.559809":2.6%, "East: 166.335184":2.6%, "West: 166.188196":2.6%, "North: -34.368292":2.6%, "South: -34.393695":2.6%, "East: 20.994814":2.6%, "West: 20.872903":2.6%, "North: -50.502271":2.6%, "South: -50.558350":2.6%, "East: 166.338570":2.6%, "West: 166.184520":2.6%, "North: -42.507337":2.6%, "South: -42.590621":2.6%, "East: -64.385687":2.6%, "West: -64.524313":2.6%, "North: -42.508229":2.6%, "South: -42.790613":2.6%, "East: -64.640556":2.6%, "West: -64.822877":2.6%, "North: 21.033441":2.6%, "South: 20.778109":2.6%, "East: -156.713073":2.6%, "West: -156.860509":2.6%, "North: 43.183092":2.6%, "South: 42.711805":2.6%, "East: 7.689523":2.6%, "West: 7.107266":2.6%, "North: -42.503150":2.6%, "South: -42.607123":2.6%, "East: -64.298191":2.6%, "West: -64.535347":2.6%, "North: 26.873062":2.6%, "South: 26.752722":2.6%, "East: -113.158328":2.6%, "West: -113.264013":2.6%, "NA":5.3%]
+                                Quality Metrics:
+                                    Completeness: 100
+            Instance:  WhaleFromSpace_Guidance
+                Description: "Describe the instance"
+                Type: Record-Data
+                Attribute number: 3
+                Attributes:
+                    Attribute:  Column_name  
+                            Description: "Describe the attribute"
+                            Count: 32
+                            OfType: Categorical
+                            Statistics: 
+                                Mode: "BoL"
+                                Categoric Distribution: ["BoL":3.1%, "BoW":3.1%, "BoS":3.1%, "BoC":3.1%, "FlukeP":3.1%, "Blow":3.1%, "Contour":3.1%, "Wake":3.1%, "AfterB":3.1%, "Defecation":3.1%, "MudTrail":3.1%, "OtherDistu":3.1%, "Fluke":3.1%, "Flipper":3.1%, "HeadCalosi":3.1%, "Movement":3.1%, "Certainty2":3.1%, "ClassScore":3.1%, "MstLklSp":3.1%, "SpAbbr":3.1%, "PtlOtrSp":3.1%, "Location":3.1%, "GCS":3.1%, "Lat":3.1%, "Long":3.1%, "ImageID":3.1%, "ImageryDat":3.1%, "Satellite":3.1%, "NumWhale":3.1%, "BoxSize":3.1%, "SpatialRes":3.1%, "BoxID/ImageChip":3.1%]
+                                Quality Metrics:
+                                    Completeness: 100 
+                    Attribute:  Column_full_name  
+                            Description: "Describe the attribute"
+                            Count: 32
+                            OfType: Categorical
+                            Statistics: 
+                                Mode: "Body Length"
+                                Categoric Distribution: ["Body Length":3.1%, "Body Width":3.1%, "Body shape":3.1%, "Body colouration":3.1%, "Flukeprint":3.1%, "Blow":3.1%, "Contour":3.1%, "Wake":3.1%, "After-breach":3.1%, "Defecation":3.1%, "Mud trail":3.1%, "Other disturbdances":3.1%, "Fluke":3.1%, "Flipper":3.1%, "Head callosities":3.1%, "Movement":3.1%, "Certainty":3.1%, "Classification score":3.1%, "Most likely species":3.1%, "Species abbreviation":3.1%, "Potential other species":3.1%, "Location":3.1%, "Geographic coordinate system":3.1%, "Latitude":3.1%, "Longitude":3.1%, "Image ID":3.1%, "Image Date":3.1%, "Satellite":3.1%, "Number of whales":3.1%, "Box size":3.1%, "Spatial resolution":3.1%, "Box ID/ Image chip":3.1%]
+                                Quality Metrics:
+                                    Completeness: 100 
+                    Attribute:  Column_descriptiom  
+                            Description: "Describe the attribute"
+                            Count: 15
+                            OfType: Categorical
+                            Statistics: 
+                                Mode: "See Cubaynes et al. 2019"
+                                Categoric Distribution: ["See Cubaynes et al. 2019":53.1%, "Additional behaviour not observed in the imagery analysed in Cubaynes et al. 2019":3.1%, "Scientific name of the most likely species (see Cubaynes et al. 2019 for more details on how the decision was made).":3.1%, "Abbreviation of the common name. SRW for southern right whale (Eubalaena australis); FW for fin whale (Balaenoptera physalus); HB for humpback whale (Megaptera novaeangliae); GW for grey whale (Eschrichtius robustus)":3.1%, "Scientific name of the potential other species (see Cubaynes et al. 2019 for more details on how the decision was made).":3.1%, "Name of the area where the image was taken.":3.1%, "GCS_WGS_1984":3.1%, "Measured in decimal degrees (WGS 1984)":6.3%, "The unique identification of each image given by the satellite provider":3.1%, "Date when the imagery was captured in the format YYYYMMDD":3.1%, "The name of the satellite. GE1 for GeoEye-1; QB2 for Quickbird-2; WV2 for WorldView-2; WV3 for WorldView-3":3.1%, "Number of full whales present within the box (e.g. if half of a whale was within a bounding box, it was not accounted for)":3.1%, "Width and height of the box measured in number of pixels":3.1%, "Size of a pixel measured in meter":3.1%, "The unique identification of each box, which is the same for the image chips":3.1%]
+                                Quality Metrics:
+                                    Completeness: 100                  
+            Instance:  WhaleFromSpaceDB_BoxNaming
+                Description: "Describe the instance"
+                Type: Record-Data
+                Attribute number: 3
+                Attributes:
+                    Attribute:  How_to_name_a_bouding_box  
+                            Description: "Describe the attribute"
+                            Count: 10
+                            OfType: Categorical
+                            Statistics: 
+                                Mode: ""
+                                Categoric Distribution: ["Example for the frist bounding box with one fin whale on a WV3 image of Pelagos taken on 25th June 2016":3.8%, "":65.4%, "Box name:":3.8%, "Criteria":3.8%, "Location":3.8%, "Species":3.8%, "Satellite":3.8%, "Processing":3.8%, "Date":3.8%, "Box number":3.8%]
+                                Quality Metrics:
+                                    Completeness: 35 
+                    Attribute:   NoName
+                            Description: "Describe the attribute"
+                            Count: 21
+                            OfType: Categorical
+                            Statistics: 
+                                Mode: ""
+                                Categoric Distribution: ["":23.1%, "PelagosIm4_FW_WV3_PS_20160619_B1":3.8%, "Explanation":3.8%, "Location of where the imagery was acquired, which can be:":3.8%, "Auckland Islands, NZ":3.8%, "Laguna San Ignacio, Mexico":3.8%, "Maui Nui, US":3.8%, "Pelagos Sanctuary. For the Pelagos, the location name also includes the number of the image (e.g. PelagosIm2 for Image 2), as several images were taken the same year and month.":3.8%, "Peninsula Valdes, Argentina":3.8%, "Witsand, South Africa":3.8%, "Each imagery targeted a location when only one great whale species as expected to be detected. The surveyed species include:":3.8%, "Fin whale (Balaenoptera physalus)":3.8%, "Grey whale (Eschrichtius robustus)":3.8%, "Humpback whale (Megaptera novaeangliae)":3.8%, "Southern right whale (Eubalaena australis)":3.8%, "GE1 (GeoEye-1)":3.8%, "WV2 (WorldView-2)":3.8%, "WV3 (WorldView-3)":3.8%, "Pansharpening":3.8%, "YYYYMMDD":3.8%, "Indicates the numerical ordering of the whales boxes for a given image":3.8%]
+                                Quality Metrics:
+                                    Completeness: 77 
+                    Attribute:    NoName2
+                            Description: "Describe the attribute"
+                            Count: 19
+                            OfType: Categorical
+                            Statistics: 
+                                Mode: ""
+                                Categoric Distribution: ["":30.8%, "Example":3.8%, "PelagosIm4":3.8%, "Auckland":3.8%, "Ignacio":3.8%, "Maui":3.8%, "PelagosIm2, PelagosIm3, PelagosIm4, PelagosIm5 ":3.8%, "Valdes":3.8%, "Witsand":3.8%, "FW":3.8%, "GW":3.8%, "HB":3.8%, "SRW":3.8%, "GE1":3.8%, "WV2":3.8%, "WV3":3.8%, "PS":3.8%, "YYYYMMDD":3.8%, "B1 (if it is the first box of the image)":3.8%]
+                                Quality Metrics:
+                                    Completeness: 69 
+Data Provenance:
+    Curation Rationale:""
+    Gathering Processes:
+        Process: SatellitImages
+        Description: "Twelve satellite images were used to build the database. They were acquired by different
+        very high-resolution satellites owned by Maxar Technologies, formerly known as DigitalGlobe (Table 1). The
+        choice of imagery was linked to other projects1,3,7,8 or specifically acquired to enlarge the database. Some images
+        were selected from Maxar Technologies’ archives15 and others were requested to be captured during a specific
+        time window"
+        Source: Maxar_Technologies_satellites
+            Description: "Satellite company"
+        How data is collected: Sensors
+        Process Demographics: 
+            Country/Region: "Auckland Islands New Zealand;
+                             Laguna San Ignacio, Mexico;
+                             Maui Nui, US;  
+                             Pelagos, Ligurian Sea;
+                             Península Valdés, 
+                             Argetina; Witsand, 
+                             Sout Africa"
+        Gather Requirements:
+                Requirement: "As it is currently unknown whether species could be differentiated
+                in VHR satellite images, we selected well studied locations to ensure the presence in the imagery of only
+                one great whale species"
+                Requirement: "We visually assessed the sea state for
+                the presence of white caps and the level of swell"
+                Requirement: "Criteria to select the imagery were: 1) less 20% cloud cover, 2) calm sea state (i.e. no white caps and low
+                swell), and 3) where it was known that only one species would be present at the time of image acquisition. The
+                percentage of cloud coverage was assessed by the satellite imagery provider"
+        
+        LabelingProcesses:
+            Labeling process: WahlesAnnotation
+            Description: "For each detected whale, a point was placed on it with associated metadata (see Data description).
+            Boxes were created around each point indicating a whale object using ArcGIS 10.4 ESRI 2017, and following the workflow
+            illustrated in Fig. 2. We created square boxes with a power of 2 (i.e. 128 × 128 pixels) to facilitate its use for machine learning approaches,
+            particularly deep learning algorithms. Each whale object was represented by a point and a box (delimiting the pixels in the pansharpened image).
+            The boxes created around the whale object were saved as one shapefile (a georeferenced file) per satellite image, as the coordinate system varied 
+            from one image to the next (Table 2), similarly for points. With the exception of the four satellite images of the Pelagos Sanctuary, for which one
+            box and one point shapefile were created for the four images."
+            Type: Bounding boxes
+            Labeling Team: 
+                Who collects the data: "Authors"
+                Type Internal
+                Country/Region: "non informed"
+            Infrastructure: 
+                Tool "ArcGis 10.4 ESRI 2017"
+                Version "v10.4"
+            Validation:
+                    Validation Method: "Recognising that some whale
+                    objects will be easier to detect than others, we created three levels of confidence (i.e. definite, probable, and possible)."
+            Label Requirements:
+                    Requirement: "1) we analysed images of well surveyed areas, where only one species was recorded at a specific time1;"
+                    Requirement: "2) we have established a certainty level reflecting our confidence in the detection."
+                    Requirement: "For each detected whale, a point was placed on it with associated metadata (see Data description)."
+        
+            Preprocesses:
+                    Preprocess: ManScanned
+                    Description: "The satellite images were manually scanned for the presence of whales using ArcGIS 10.4 ESRI 2017, following Cubaynes et al.1 systematic method, which involved overlaying a grid on top of the imagery
+                    and scanning one cell after the other at a scale of 1:1,500 m."
+                    Type: Others
+                    
+                    Preprocess: pansharpened
+                    Description: "Prior to scanning a process of joining the high spatial resolution of the panchromatic image (grey scale image) to the high spectral
+                    resolution of the multispectral image (colour image) to get one image of high spatial and spectral resolutions. We
+                    used the ESRI pansharpening algorithm."
+                    Type: Others
+
+                    Preprocess: ImageChips
+                    Description: "Image chips were created using the box created in the above section, following the
+                    workflow presented in Fig. 3"
+                    Type: Others
+    
+    Social Concerns:
+                    Social Issue: SpeciesDifferentitation
+                    IssueType: Bias
+                    Description: "As species differentiation has not been tested when analysing satellite images, we reference the most likely species in this database. The most likely species was assigned based on the scientific
+                    literature, hence our decision to acquire images of specific areas when only one large whale species was expected
+                    to be present"
+                    Related-Attributes:
+                        attribute: ClassScore
+                    
+                    Social Issue: AnnotationConfidence
+                    IssueType: Bias
+                    Description: "We recommend that only the whales
+                    with a “definite” certainty level be used to train automated detection systems."
+                    Related-Attributes:
+                        attribute: Certainty2
+
+                
+
+
+
+        

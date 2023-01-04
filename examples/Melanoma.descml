@@ -1,0 +1,315 @@
+Dataset: Melanoma_Classification_Dataset 
+    Metadata: 
+        Title: "2020 SIIM-ISIC Melanoma Classification Challenge Dataset" 
+        Unique-identifier: SIC_Melanoma_Classification_Challenge_Dataset
+        Version: v0001 
+        Dates:
+            Release Date: 10-08-20
+        Citation: 
+            Title: "A patient-centric dataset of images and metadata for identifying melanomas using clinical context"
+            Cite authors: "Rotemberg, V., Kurtansky, N., Betz-Stablein, B., Caffery, L., Chousakos, E., Codella, N., Combalia, M., Dusza, S., Guitera, P., Gutman, D., Halpern, A., Helba, B., Kittler, H., Kose, K., Langer, S., Lioprys, K., Malvehy, J., Musthaq, S., Nanda, J., Reiter, O., Shih, G., Stratigos, A., Tschandl, P., Weber, J. & Soyer, P"
+            Year: 2021 
+            Journal: "Sci Data 8, 34"
+            DOI: 10.1038/s41597-021-00815-z
+        Main Description:
+            Purposes: "The 2020 SIIM-ISIC Melanoma Classification challenge dataset..." 
+            Tasks: [classification, image-classification]
+            Gaps:     "As the leading healthcare organization for informatics in medical imaging..."  
+            Areas:    HealthCare
+            Tags:     Images Melanoma 
+        Applications:
+            Past Uses: "Yes. The 2020 SIIM-ISIC Melanoma Classification challenge dataset 
+            was created for the purpose of conducting a machine learning competition to 
+            identify melanoma in lesion images. The competition was launched on DATE on 
+            the Kaggle platform and ran through DATE. You can learn more about the competition
+            and results here: LINK"
+            Recommended: 
+                "Identify melanoma in lesion images" 
+                "Predict incidence of melanoma in a population"
+            Non-recommended: "Due to low population prevalence and challenges with access 
+            to care in different populations, the images gathered for large datasets such
+            as this for AI classification have a strong tendency to under-represent darker
+            skin types. This may lead to either overdiagnosis or underdiagnosis of melanomas
+            in darker skin types, both of which would have significant clinical implications
+            and will require prospective study. The ISIC Archive is actively pursuing methods
+            by which to increase the diversity of images obtained, but at this point
+            caution should be used when attempting to generalize algorithms trained on
+            images from specialized referral centers (such as the dataset described herein) 
+            to the global population at large. The dataset is also enriched for melanoma in 
+            general and does not represent true incidence of melanoma."
+            Benchmarking:
+                Task: Language-model
+                [
+                    Model: "ModelExample"
+                    Metrics: [
+                        F1: 81
+                        Acurracy: 81
+                        Precision: 81
+                        Recall: 81
+                    ]
+                    Reference: "https://www.kaggle.com/c/siim-isic-melanoma-classification/leaderboard"
+                ]
+        Distribution:
+            Licences: CC BY 3.0 (Attribution 3.0 Unported)
+            Rights(stand-alone): Access
+            Rights(with models): Benchmark
+            Additional Conditions: "In addition to the CC-BY-NC license, the dataset is governed by the ISIC Terms of Use. Learn more about the terms of use here: https://datanutrition.org/labels/isic-2020/ "                          
+    Authoring:
+        Authors:
+            Name "Skin Imaging Collaboration ISIC"  email emailo@emailo.com
+            Name "International Skin Imaging Collaboration"  email emailo@emailo.com
+            Name "Hospital Clinic de Barcelona" email emailo@emailo.com
+            Name "Medical University of Vienna" email emailo@emailo.com
+            Name "Memorial Sloan Kettering Cancer Center" email emailo@emailo.com
+            Name "Melanoma Institute Australiaa" email emailo@emailo.com
+            Name "University of Queensland" email emailo@emailo.com
+            Name "University of Athens medical school" email emailo@emailo.com
+        Funders:
+            Name "The_University_of_Queensland"  type mixed 
+                grantor "National Health and Medical Research Council (NHMRC) – Centre of Research Excellence Scheme" 
+                grantId: APP1099021
+            Name "HPS" type private
+                grantor "NHMRC MRFF Next Generation Clinical Researchers Program Practitioner Fellowship"
+                grantId: APP1137127
+            Name "Other_founding_sources_I" type public
+                grantor "Melanoma Research Alliance Young Investigator Award and NIH Core Grant"
+                grantId: A614197
+            Name "Other_founding_sources_II" type public
+                grantor "NIH Core Grant"
+                grantId: P30_CA008748
+            Erratum?: "There is no erratum known" 
+            Contribution guidelines: "No contribution guidelines provided"
+
+    Composition:
+        Rationale: 
+            "There is one instance that represent images from skin of patatients in coalition with some labels identifyng the patient.
+
+            Metadata for each image included approximate patient age at time of image capture, biological sex, general anatomic site 
+            of the lesion, anonymized patient identification number, benign/malignant category, and the specific diagnosis if one was 
+            available based on an acceptable ground truth confirmation method.
+
+            Images from the same patient are indicated through a unique patient identifier (field name patient_id). The dataset represents 
+            2,056 patients from three continents with an average of 16 lesions per patient, consisting of 33,126 dermoscopic images and 584 
+            histopathologically confirmed melanomas compared with benign melanoma mimickers. This example has been sammpled to 12023 dermoscopis samples"
+        Total size: 33126
+        Data Instances:
+              Instance:  skinImages
+                Description: "Skin images"
+                Type: Record-Data
+                Attribute number: 8
+                Attributes: 
+                    Attribute: ImageId
+                        Description: 'ID of the images'
+                        Count: 33126
+                        OfType:  Categorical
+                    Attribute: patientID
+                        Description: 'ID of patients'
+                        Count: 33126
+                        OfType: Categorical    
+
+                    Attribute: sex   
+                        Description: 'sex of the patient'
+                        Count: 33126
+                        OfType: Categorical
+                        Statistics:
+                                Mode: "Femala"
+                                Categoric Distribution: [
+                                        "Male": 40%,
+                                        "Femala": 55%,
+                                        "Non-binay": 5%
+                                    ]
+                    Attribute: age  
+                        Description: 'age of the patient'
+                        Count: 33126
+                        OfType: Numerical
+                        Statistics:
+                                Mean: 34
+                                Median: 32
+                                Standard Desviation: 0.2
+                                Minimmum: 5
+                                Maximmum: 87
+                                Quartiles:  Q1:17 Q2:27 Q3:30 Q4:30
+                                IQR: 1.2
+
+          
+                    Attribute: anatom_site_general_challenge
+                        Description: 'description of body zone of the image'
+                        Count: 33126
+                        OfType: Categorical
+                        Statistics:
+                                Mode: "Chest"
+
+                    Attribute: diagnosis
+                        Description: 'previous diagnosis from medical hisotry'
+                        Count: 33126
+                        OfType: Categorical
+                        Statistics:
+                            Mode: "unknowm"
+
+
+                    Attribute: beningnant_malignant
+                        Description: 'Type of the melanoma'
+                        Label: skinLabel
+                        Count: 33126
+                        OfType: Categorical
+                        Statistics:
+                            Missing Values: 0
+                            Completeness: 100
+                            Chi-Squared:
+                                p-value: 0
+                            Categoric Distribution: [
+                                    "beningnant": 80%,
+                                    "malignant": 20%
+                                ]
+                            
+        Statistics: 
+            Pair Correlation: 
+                between ImageId and diagnosis 
+                between age and external source 
+                    From: "Nationa Statistical Institue of Nevada" 
+                    Rationale: "The age correlation is significant with the external source"
+            Quality Metrics: 
+                Completeness: 100
+        Consistency rules:
+            inv: skinImages attribute:(skinImages.age bigger 0)
+
+        Is sample: YES
+            Sampling Method: Other
+            Sampling Criteria:
+                "Yes, sample dataset used accurately reflects the intent or desired outcome and has been 
+                evaluated to ensure that it is fit for purpose. We queried clinical imaging databases containing 
+                images from 1998 to 2019 across the six centers to generate a multicenter imaging dataset. 
+                Images that met the selection criteria were added to the imaging dataset and underwent a quality 
+                assurance review to validate their inclusion in the dataset." 
+
+        Data Splits:
+            "Yes. In order to test algorithm generalizability, a subset of images from six sites (five geographic locations)
+             were allocated for the training dataset of the 2020 ISIC Grand Challenge. There is a separate test dataset available 
+             without target information." 
+    
+
+    Data Provenance:
+        Curation Rationale:  "The curation process have been conducted by several health institutions... " 
+        Gathering Processes:
+            Process: Gather1
+                Description: 
+                    "The sources are: Memorial Sloan Kettering Cancer Center, New York; the Melanoma Institute Australia and the Melanoma 
+                    Diagnosis Centre, Sydney; the University of Queensland, Brisbane; the Medical University of Vienna, Vienna; and 
+                    Hospital Clínic de Barcelona, Barcelona."
+                Source: GeneralHospital1
+                    Description: 'Source Description'
+                    Noise:  
+                        "Inconsistent lighting in images may alter skin type"
+        
+                        "Duplicates: Due to a clerical error during the data ingestion process 
+                        to the ISIC Archive, 425 pixel wise identical duplicate images were ingested
+                        and included in the dataset. The 2020 SIIM-ISIC Melanoma Classification competition 
+                        page on Kaggle lists the redundant cases and deidentified patient labels 
+                        (https://www.kaggle.com/c/siim- isic-melanoma- classification/discussion/161943)."
+                Related-Instances: skinImages
+                Social Issues: raceRepresentative
+                How data is collected: Manual Human Curator
+                When data was collected: 
+                    "Images were originally collected by imaging centers during 1998 - 2019; this dataset was curated from those image 
+                    databases in 2019 - 2020."
+                Process Demographics:
+                    Country/Region: 'Australia'
+                Gathering Team:
+                    Who collects the data: "Practicioners and interns from the health institutions"
+                    Type Internal
+                Gather Requirements:
+                  Requirement: "We queried clinical imaging databases across the six centers to generate a multicenter imaging dataset. 
+                    Images consisted of 12,743,090 pixels on average but ranged from 307,200 to 24,000,000. Among patients with 
+                    dermoscopy imaging from 1998 to 2019, those with multiple skin lesions were identified."
+
+                  Requirement: "Memorial Sloan Kettering: Images were acquired using a dermoscopic attachment to either a digital single reflex 
+                    lens (SLR) camera or to a smartphone. Each lesion was imaged with polarized and/or nonpolarized dermoscopy. 
+                    For each lesion, 3- 5 images are collected during each patient visit and stored in a specialized image database 
+                    called VectraTM (Canfield Scientific Inc., Parsippany, NJ, USA)."
+                 
+                  Requirement: "Hospital Clinic Barcelona: The dermatology department is equipped with the digital dermatoscopy system 
+                    MoleMaxTM HD (Derma Medical Systems, Vienna, Austria) and corresponding image database to store the collected images. 
+                    Each lesion was photographed using polarized dermoscopy."
+                 
+                  Requirement: "University of Queensland: All images used for the studies were extracted from the VectraTM image database 
+                    (Canfield Scientific Inc., Parsippany, NJ, USA)."
+                 
+                  Requirement: "Medical University Vienna: We extracted polarized dermoscopic images from 2015-2019 which were stored in the 
+                    MoleMax HD System (Derma Medical Systems, Vienna, Austria)."
+                 
+                  Requirement: "Melanoma Institute Australia and the Sydney Melanoma Diagnosis Centre: Images are acquired using a dermoscopic 
+                    attachment to either a digital single reflex lens (SLR) camera or to a smartphone and stored in DermEngineTM 
+                    (Metaoptima, Vancouver, British Columbia, Canada)."
+                 
+                  Requirement: "Once the images had been collected from all the various centers, a software annotation tool, called ‘Tagger,’
+                    was developed internally to review diagnostic labeling of grouped images."
+                 
+                  Requirement: "Additional metadata including demographics of the patients was collected at each imaging center at the time 
+                   the images were taken, method unclear."
+
+        LabelingProcesses: 
+            Labeling process: skinLabeling
+                Description: "Medical staff looking at the data and images and annotiating the diagnosis"
+                Type: Image and video annotations
+                Labels: 
+                    Label: skinLabel
+                        Description: "marked as beningnant or malignant"
+                        Mapping: beningnant_malignant
+                Labeling Team:
+                    Who collects the data: "Internal Medical staff"
+                    Type Internal
+                    Country/Region: "Australia"
+                Label Requirements: 
+                    Requirement: "1) ImaCan ges containing any potentially identifying features, such as jewelry or tattoos, or from patients without 
+                        at least three qualifying images were excluded during quality assurance review."
+                    
+                    Requirement: "2) When multiple image types were available, the selected image was either the one of highest resolution or if Ç
+                        multiple images at the same resolution were available, one was chosen randomly."
+
+                    Requirement: "3) A software annotation tool, called ‘Tagger,’ was developed internally to review diagnostic labeling of grouped 
+                        images. Using this tool, dermoscopy expert reviewers (EC, OR) were presented sets of 30 images with a shared diagnosis
+                        in order to identify the ones with erroneous labeling. Reviewers invested 22 hours over three weeks of quality assurance
+                        in ‘Tagger’ and spent an average of 4 seconds per set when flagging a single image, and 11 seconds per set when flagging 
+                        several images. Out of all images reviewed in Tagger, 2.7% were removed, out of concern for erroneous labels."
+
+                    Requirement: "4)There were selection criteria followed at each image source Center; see information in corresponding paper for details: 
+                        link to paper"
+                    
+                    Requirement: "5) Due to the retrospective nature of image acquisition and potential surveillance bias in different patient populations, 
+                        the number of lesions per patient was not distributed identically between the class of patients with a melanoma image and 
+                        the class without a melanoma image. Lesions in both classes were subsampled through patient matching, which led to a loss 
+                        of 4.1% of images."
+        Preprocesses:
+             Preprocess: QualityAssesment
+                Description: 
+                "A software annotation tool, called ‘Tagger,’ was developed internally to review diagnostic labeling of grouped images 13. 
+                Using this tool, dermoscopy expert reviewers (EC, OR) were presented sets of 30 images with a shared diagnosis in order to 
+                identify the ones with erroneous labeling. Reviewers invested 22 hours over three weeks of quality assurance in ‘Tagger’ and 
+                spent an average of 4 seconds per set when flagging a single image, and 11 seconds per set when flagging several images. Out 
+                of all images reviewed in Tagger, 2.7% were removed, out of concern for erroneous labels.
+
+                The ground truth labels for all malignant lesions in the dataset were confirmed via retrospective review of histopathology 
+                reports, and diagnosis plausibility was visually confirmed by visual confirmation of a dermoscopy expert. Histopathology reports 
+                were double checked if the label was suspicious. Melanoma in situ and invasive melanoma were both coded as melanoma. All other 
+                qualifying images were coded as benign, including those diagnosed as severely dysplastic nevi 23, 24.
+                
+                Non-biopsied lesions with expert consensus agreement and lesions followed for six months or more without malignant changes were 
+                labelled benign without a more specific diagnosis by most contributors. Dermatofibromas, seborrheic keratosis, or vascular lesions 
+                were not monitored, as that would not reflect clinical practice, but labels were verified visually by an expert in dermoscopy. 
+                Images of lesions were attributed to patients based on the clinical imaging database identification codes which are stored at the 
+                time of capture during each clinical photography session."
+                Type: Others
+
+
+    Social Concerns: 
+      Rationale: 'Dataset may not be representative of the real world data, and the cavenience sample is not representative of general incidence of melanoma'
+      Social Issue: raceRepresentative
+        IssueType: Bias
+        Description: "Dataset is not representative with respect to darker skin types"
+        Related-Attributes: 
+            attribute: ImageId  
+       
+      Social Issue: generalIncidence
+        IssueType: Social Impact        
+        Description: "Dataset is a convenience sample and is not representative of general incidence of melanoma"
+
