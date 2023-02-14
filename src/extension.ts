@@ -6,6 +6,8 @@ import {
 } from 'vscode-languageclient/node';
 import { DocumentationGenerator } from './generator-service/dataset-descriptor-documentation';
 import { DatasetUploader } from './uploader-service/dataset-descriptor-uploader';
+import { HintsService } from './hints-service/hints-service';
+
 
 
 let client: LanguageClient;
@@ -28,6 +30,18 @@ export function activate(context: vscode.ExtensionContext): void {
                 }
             });
     }));
+
+    context.subscriptions.push(
+        vscode.languages.registerHoverProvider(
+            'dataset-descriptor', {
+                provideHover(document, position, token) {
+                    let hints = new HintsService();
+                    let content = hints.populateHints(document, position);
+                
+                    if (content != "empty") return new vscode.Hover(new vscode.MarkdownString(content));
+                    return null;
+            }
+      }));
 
     // Here we register the HTML generation service
     context.subscriptions.push(vscode.commands.registerCommand('datadesc.generateDocumentation', async () => {
