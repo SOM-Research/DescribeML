@@ -26,12 +26,19 @@ body
             p #{ description.metadata.desc.descriptionGaps}
         div
             h3 Distribution, licences and applications 
-            p Licence: #{ description.metadata.distribution.licence}
-            p Is public? #{ description.metadata.distribution.public}
-            p Additional Conditions? #{ description.metadata.distribution.addConds}
-            p Past applications: #{ description.metadata.uses.past}
-            p Recommended applications: #{ description.metadata.uses.recommend}
-            p Non-recommended: #{ description.metadata.uses.future}
+            if description.metadata.distribution.licence
+                p Licence: #{ description.metadata.distribution.licence}
+            if description.metadata.distribution.public
+                p Is public? #{ description.metadata.distribution.public}
+            if description.metadata.distribution.addCond
+                p Additional Conditions? #{ description.metadata.distribution.addCond}
+            if description.metadata.uses
+                if description.metadata.uses.past
+                    p Past applications: #{ description.metadata.uses.past}
+                if description.metadata.uses.recommend
+                    p Recommended applications: #{ description.metadata.uses.recommend}
+                if description.metadata.uses.future
+                    p Non-recommended: #{ description.metadata.uses.future}
         div
             h3 Keywords
             p Area:  
@@ -43,31 +50,36 @@ body
         div
             h2 Authoring: 
             div 
+            if (description.metadata.authoring.authors[0].authors.length > 0)    
                 h3 Who created the dataset? 
                 table
                     tr
                         th Name
                         th email
-                    if (description.metadata.authoring.authors.lenght)    
-                        each author in description.metadata.authoring.authors[0].authors 
+                 
+                        each author in description.metadata.authoring.authors[0].authors
                             tr
                                 td  #{author.name}
                                 td  #{author.email}
             div
+             if (description.metadata.authoring.founding.length > 0) 
                 h3 Who funded the dataset? 
                 table
                     tr
                         th Name
                         th type
                         th Grant
-                    if (description.metadata.authoring.founding.lenght)    
+                      
                         each funder in description.metadata.authoring.founding[0].funders
                             tr
                                 td #{funder.name}
                                 td #{funder.type}
-                                td #{funder.grantId}
+                                if funder.grantId
+                                    td #{funder.grantId}
+                                else    
+                                    td Not Provided
             div
-                if description.metadata.authoring.maintainers
+                if (description.metadata.authoring.maintainers.length > 0)
                     h3 Who Maintains the dataset?
                     table
                         tr
@@ -76,7 +88,7 @@ body
                         each mantainer in description.metadata.authoring.maintainers
                             tr
                                 td #{mantainer.name}
-                                td #{mantainer.type}
+                                td #{mantainer.email}
                 if description.metadata.erratum
                     p Erratum: #{ description.metadata.erratum}
                 if description.metadata.dataRetention
@@ -108,7 +120,7 @@ body
                     if attribute.count
                         p Count: #{attribute.count}
                     if attribute.attType
-                        p Type: #{attribute.attType}
+                        p Type: #{attribute.attType.name}
   
     h2 Provenance: 
     p Curation Rationale: #{description.provenance.curation}
@@ -122,7 +134,7 @@ body
                 p Issue Type: #{issue.IssueType}
                 p Description: #{issue.desc}
                 if issue.senseAtt
-                    p Related Attributes: #{issue.senseAtt}
+                    p Related Attributes: #{issue.senseAtt.$refText}
         
         
 
