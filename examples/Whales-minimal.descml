@@ -1,0 +1,46 @@
+Dataset: Whales
+    Metadata:
+        Title: "Whales from space dataset, an annotated satellite image dataset of whales for training machine learning models"
+        Unique-identifier: whales
+        Version: v1
+        Dates:
+            Release Date: 27-05-2022
+        Citation: 
+            Raw Citation: "Cubaynes, H.C., Fretwell, P.T. Whales from space dataset, an annotated satellite image dataset of whales for training machine learning models. Sci Data 9, 245 (2022). https://doi.org/10.1038/s41597-022-01377-4"
+        Main Description: 
+            Purposes: "A dataset of 633 annotated whale objects, created by surveying 6,300 km2 of satellite imagery captured by various very high-resolution satellites (i.e. WorldView-3, WorldView-2, GeoEye-1 and Quickbird-2) in various regions across the globe (e.g. Argentina, New Zealand, South Africa, United States, Mexico). The dataset covers four different species: southern right whale (Eubalaena australis), humpback whale (Megaptera novaeangliae), fin whale (Balaenoptera physalus), and grey whale (Eschrichtius robustus)."
+            Tasks: [ image-classification ]
+            Areas: Wildlife
+            Tags: Whales satellite detection
+        Distribution:
+            Licences: CC BY 4.0 (Attribution 4.0 International)
+            Credit/Attribution Notice: "https://doi.org/10.5285/C1AFE32C-493C-4DC7-AF9F-649593B97B2C"
+            Additional Conditions: "To fulfil the End User Licence Agreement with Maxar Technologies18, these image chips are shared in a png format, and access to the dataset is available upon request from the NERC UK Polar Data Centre that can be contacted at PDCServiceDesk@bas.ac.uk. Data access requires user name and email address, which will be shared with Maxar Technologies. Anyone using any of the image chips is also required to attribute the images properly (See Usage Notes)."
+        Authoring: 
+            Authors: 
+                Name "Hannah C. Cubayanes" email example@example.com
+                Name "Peter T. Fretwell" email example@example.com
+    Composition:
+        Rationale: "The “Whales from space dataset” is separated in two sub-datasets: a dataset that contains the whale annotations (box and point shapefiles with associated csv files) named “Whales from space dataset: Box and point shapefiles”16; and a dataset with the image chips named “Whales from space dataset: Image chips”17. "
+        
+    Data Provenance:
+        Gathering Processes:
+            Process: SatellitImages
+            Source: Maxar_Technologies_satellites
+                Description: "Satellite company"
+            How data is collected: Sensors
+
+        LabelingProcesses:
+            Labeling process: WahlesAnnotation
+            Type: Bounding boxes
+            Infrastructure: 
+                Tool "ArcGis 10.4 ESRI 2017"
+                Version "v10.4"
+    
+    Social Concerns:
+        Social Issue: SpeciesDifferentitation
+            IssueType: Bias
+            Description: "As species differentiation has not been tested when analysing satellite images, we reference the most likely species in this database. The most likely species was assigned based on the scientific literature, hence our decision to acquire images of specific areas when only one large whale species was expected to be present"
+        Social Issue: AnnotationConfidence
+            IssueType: Bias
+            Description: "We recommend that only the whales with a “definite” certainty level be used to train automated detection systems."
