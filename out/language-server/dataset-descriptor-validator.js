@@ -8,6 +8,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DatasetDescriptorValidator = exports.DatasetDescriptorValidationRegistry = void 0;
 const langium_1 = require("langium");
 /**
+ * In this class we implement the custom validation services for the tool
+ */
+//type DatasetDescriptorChecks = { [type in DatasetDescriptorAstType ]: ValidationCheck | ValidationCheck[] }
+/**
  * Registry for validation checks.
  */
 class DatasetDescriptorValidationRegistry extends langium_1.ValidationRegistry {
@@ -44,7 +48,7 @@ class DatasetDescriptorValidator {
         accept('hint', 'Rights-model: Choose the level of distribution of the models trained with the data.', { node: type, property: 'rightsModels' });
     }
     hintsOfDescription(type, accept) {
-        //  accept('warning', 'Version should have the following form: V000', { node: type, property: 'version' });
+        //new MultilineCommentHoverProvider(services: DatasetDescriptorServices).getHoverContent(type, params);
         accept('hint', 'For what propose was the dataser created? \nPlease provide a description', { node: type, property: 'descriptionpurpose' });
         accept('hint', 'For what tasks this dataset is inteded for', { node: type, property: 'tasks' });
         accept('hint', 'Was there specific gap that needed to be filled?\nPlease provide a description', { node: type, property: 'descriptionGaps' });

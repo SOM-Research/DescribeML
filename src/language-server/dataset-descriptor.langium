@@ -31,12 +31,14 @@ Metadata:
      'Title:' title=STRING 
      'Unique-identifier:' ident=ID
      'Version:' version=ID 
+     ('Description version' descver=ID)?
      (dates=Dates)?
      (citation=Citation)?
      (desc=Description)?
      (uses=Applications)?
      (distribution=Distribution)?
       authoring=Authoring;
+
 
 // Dates
 Dates:
@@ -103,7 +105,7 @@ CiteUrl:
 Distribution:
     name="Distribution:"
     ("Is public?:" public=BooleanAnswer)?
-    ('Licences:' licence=CommonLicences)?
+    ('Licences:' (licence=CommonLicences | licence=Other))?
     ('Rights(stand-alone):' rights=RightsData)?
     ('Rights(with models):' rightsModels=RightsModel)?
     ('Credit/Attribution Notice:' attribution=STRING)?
@@ -122,11 +124,11 @@ Benchmarking:
     name="Benchmarking:"
     (("Task:" taskName=Task)?
     ('['("Model:" (modelName=STRING))?
-    ("Metrics: ["     
+    ("Metrics: "     
                 ("F1:" (f1=NUMBER))?
                 ("Acurracy:" (acurracy=NUMBER))?
                 ("Precision:" (precision=NUMBER))?
-                ("Recall:" (recall=NUMBER))? ']'?)?
+                ("Recall:" (recall=NUMBER))?)?
     ("Reference:" (reference=STRING))?']')*)*;
 // Authoring
 Authoring:
@@ -158,7 +160,7 @@ Maintainer:
      name='Composition:'
      'Rationale:' compodesc+=STRING
      ('Total size:' numberInst=NUMBER)? 
-     (instances = DataInstances)
+     (instances = DataInstances)?
      ((relation=RelationInstances)?
      ('Dependencies:' dependencies=Dependencies)? 
      ('Is sample:' ((sample='NO')|(sample=Sample)))?
@@ -316,7 +318,7 @@ GatheringProcess:
     ('Gathering dates range:' gatherDates=STRING)?
     ('Related-Instances:' mapInstance=[DataInstance])?
     ('Social Issues:' labelSocialIssues=[SocialIssue])?
-    ('How data is collected:' how=GatherType)?
+    ('How data is collected:' (how=GatherType | how=Other))?
     ('Is language data?:' SpeechSitatuion)?
     ('When data was collected:' when=STRING)?
     ('Process Demographics:' processDemo = Demographics)?
@@ -346,7 +348,7 @@ LabelingProcesses:
 LabelingProcess:
     'Labeling process:' name=ID
     'Description:' desc=STRING
-    ('Type:' type=AnnotationType)?
+    ('Type:' (type=AnnotationType | type=Other))?
     ('Labels:' (Labels)*)?
     ('Labeling Team:'labelingTeam = Team)?
     ('Infrastructure:' infra=Infrastructure)?
@@ -391,7 +393,7 @@ PreProcesses:
 PreProcess:
     'Preprocess:' name=ID
     'Description:' desc=STRING
-    'Type:' type=DataProcess
+    'Type:' (type=DataProcess | type=Other)
     ('Social Issues:' labelSocialIssues=[SocialIssue:QualifiedName])?;
 
 
@@ -405,7 +407,7 @@ SocialConcerns:
 
 SocialIssue:
     'Social Issue:' name=ID
-    'IssueType:' IssueType=SocialIssueType
+    'IssueType:' (IssueType=SocialIssueType| IssueType=Other)
         'Description:' desc=STRING
     ('Related-Attributes:' ('attribute:' senseAtt=[Attribute:QualifiedName])*)?
 
@@ -417,6 +419,8 @@ SocialIssue:
 
     
 
+Other:
+    "Other" name=STRING;
 //
 // Semantical Type Rules
 //

@@ -540,7 +540,7 @@ Data Provenance:
                     and scanning one cell after the other at a scale of 1:1,500 m."
                     Type: Others
                     
-                    Preprocess: Pansharpened
+                    Preprocess: pansharpened
                     Description: "Prior to scanning a process of joining the high spatial resolution of the panchromatic image (grey scale image) to the high spectral
                     resolution of the multispectral image (colour image) to get one image of high spatial and spectral resolutions. We
                     used the ESRI pansharpening algorithm."

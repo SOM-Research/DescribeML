@@ -4,14 +4,14 @@
  * terms of the MIT License, which is available in the project root.
  ******************************************************************************/
 
- import { ValidationAcceptor, ValidationCheck, ValidationRegistry } from 'langium';
+ import { ValidationAcceptor, ValidationChecks, ValidationRegistry } from 'langium';
  import { DatasetDescriptorAstType, Author, Funder, Composition, Authoring, Tasks, Description, Areas, Tags, Distribution } from './generated/ast';
  import { DatasetDescriptorServices } from './dataset-descriptor-module';
  
  /**
   * In this class we implement the custom validation services for the tool
   */
- type DatasetDescriptorChecks = { [type in DatasetDescriptorAstType]?: ValidationCheck | ValidationCheck[] }
+ //type DatasetDescriptorChecks = { [type in DatasetDescriptorAstType ]: ValidationCheck | ValidationCheck[] }
  
  /**
   * Registry for validation checks.
@@ -20,7 +20,7 @@
      constructor(services: DatasetDescriptorServices) {
          super(services);
          const validator = services.validation.DatasetDescriptorValidator;
-         const checks: DatasetDescriptorChecks = {
+         const checks: ValidationChecks<DatasetDescriptorAstType> = {
              Description: validator.hintsOfDescription,
              Author: validator.authorValidator,
              Funder: validator.hintsOfFunder,
@@ -53,7 +53,7 @@
      }
  
      hintsOfDescription(type:Description, accept: ValidationAcceptor): void {
-           //  accept('warning', 'Version should have the following form: V000', { node: type, property: 'version' });
+             //new MultilineCommentHoverProvider(services: DatasetDescriptorServices).getHoverContent(type, params);
              accept('hint', 'For what propose was the dataser created? \nPlease provide a description', { node: type, property: 'descriptionpurpose' });
              accept('hint', 'For what tasks this dataset is inteded for', { node: type, property: 'tasks' });
              accept('hint', 'Was there specific gap that needed to be filled?\nPlease provide a description', { node: type, property: 'descriptionGaps'});

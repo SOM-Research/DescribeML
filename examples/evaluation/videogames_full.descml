@@ -1,0 +1,128 @@
+Dataset: videoGames
+    Metadata:
+        Title: "Video game ratings from imdb" 
+        Unique-identifier: videoGames 
+        Version: v0000
+        Dates:
+            Release Date: 00-00-0000 // DD-MM-YYYY Applications:
+        Main Description:
+            Tasks: [Automatic-Speech-Recognition,Code Generation,Evaluation of language models]
+            Areas: videoGames
+            Tags: games imbd
+        Applications: 
+            Past Uses:"Used in Kaggle libraries" 
+            Non-recommended: 
+        Distribution: 
+            Licences: Community Data License
+        Authoring: 
+            Authors:
+                Name "David Nyagam" contact "https://nyagami.disha.page/"
+         
+
+ Composition:
+     Rationale: "Data scrapped from Imbd of video games rating"
+     Total size: 12635
+     Data Instances:
+         Instance:  imdb_video_game_rating
+             Description: "A CSV with 8 attributes scrapped from IMDB"
+             Type: Record-Data
+             Attribute number: 8
+             Attributes:
+                Attribute:  index  
+                     Description: "Index of the data"
+                     Count: 12635
+                     OfType: Numerical
+                     Statistics: 
+                         Mean: 6317.3
+                         Standard Desviation: 410041.2
+                         Minimmum: 0
+                         Maximmum: 12637
+                Attribute:  title  
+                         Description: "Name of the game"
+                         Count: 12309
+                         OfType: Categorical
+                         Statistics: 
+                             Mode: "Donkey Kong"
+                             Quality Metrics:
+                                 Completeness: 100 
+                Attribute:  year  
+                         Description: "Year the game was launched"
+                         Count: 63
+                         OfType: Categorical
+                         Statistics: 
+                             Mode: "2017"
+                             Categoric Distribution: ["2022":1%, "2018":3.3%, "2016":3.4%, "2015":3.4%, "2013":3.4%, "2021":2.1%, "2019":3.2%, "1998":2.3%, "2017":3.6%, "2010":2.9%, "2020":2.7%, "2005":3.3%, "2004":3%, "2003":3.2%, "1995":2.1%, "1997":2.1%, "2011":2.8%, "2009":2.9%, "2008":2.7%, "2001":2.9%, "2000":2.9%, "1999":2.8%, "2007":2.8%, "2014":3%, "1991":1.8%, "1990":1.7%, "1994":2.4%, "2012":3.1%, "2002":3.1%, "1988":1.1%, "2006":3%, "1996":2.3%, "1993":2.1%, "1992":1.9%, "1989":1.4%, "1985":0.8%, "I)":0.5%, "1986":0.9%, "II)":0.3%, "1987":1.2%, "1984":0.9%, "1983":0.8%, "1982":0.8%, "1981":0.5%, "1980":0.5%, "1972":0.1%, "1978":0.2%, "1976":0.1%, "1979":0.2%, "1977":0.1%]
+                             Quality Metrics:
+                                 Completeness: 100 
+                Attribute:  genre  
+                         Description: "XXXXXXXX"
+                         Count: 391
+                         OfType: Categorical
+                         Statistics: 
+                             Mode: "Action"
+                             Categoric Distribution: ["Action, Adventure, Drama":1.6%, "Action, Adventure, Crime":1.3%, "Action, Adventure, Sci-Fi":4.2%, "Action, Adventure, Fantasy":10.5%, "Action, Crime, Drama":0.6%, "Action, Adventure, Horror":1%, "Adventure, Comedy, Sci-Fi":0.2%, "Adventure":5.5%, "Action, Crime":0.4%, "Drama, Horror, Mystery":0.2%, "Adventure, Drama, Fantasy":0.3%, "Action, Adventure, Family":3.4%, "Action, Adventure, Comedy":3.5%, "Horror, Mystery":0.2%, "Adventure, Comedy, Fantasy":0.5%, "Action, Comedy, Fantasy":0.1%, "Action":11.1%, "Adventure, Comedy, Drama":0.1%, "Action, Adventure, Mystery":0.6%, "Action, Sci-Fi, Thriller":0.3%, "Adventure, Comedy, Crime":0.1%, "Sci-Fi":1.6%, "Action, Horror, Sci-Fi":0.5%, "Animation, Action, Adventure":1.5%, "Action, Horror, Thriller":0.2%, "Action, War":0.8%, "Action, Horror, Mystery":0.3%, "Action, Adventure, Thriller":0.3%, "Adventure, Drama, Horror":0.1%, "Adventure, Fantasy":1.6%, "Comedy":0.5%, "Adventure, Horror, Mystery":0.3%, "Adventure, Family, Fantasy":0.6%, "Mystery":0.5%, "Adventure, Mystery":0.6%, "Action, Thriller":0.2%, "Sport":6.2%, "Action, Fantasy, Sci-Fi":0.9%, "Drama":0.2%, "Fantasy":1.9%, "Action, Comedy, Family":0.3%, "Action, Adventure":3%, "History":0.3%, "Adventure, Mystery, Sci-Fi":0.2%, "Action, Crime, Thriller":0.4%, "Adventure, Fantasy, Horror":0.3%, "Horror":1.3%, "Horror, Mystery, Thriller":0.2%, "Action, Sport":1.3%, "Adventure, Horror":0.3%, "Adventure, Sci-Fi":0.6%, "Animation":0.4%, "Adventure, Fantasy, Sci-Fi":0.2%, "Crime":0.1%, "Action, History, War":0.2%, "Action, Crime, Mystery":0.1%, "Action, Adventure, History":0.3%, "Action, Sci-Fi":4.2%, "Action, Mystery, Sci-Fi":0.2%, "Horror, Sci-Fi, Thriller":0.1%, "Family":2.5%, "Music":0.5%, "Action, Comedy, Crime":0.2%, "Action, Sci-Fi, War":0.3%, "Action, Fantasy":1.6%, "Animation, Adventure, Comedy":0.2%, "War":0.3%, "Adventure, Comedy, Family":0.4%, "Action, Crime, Sport":0.1%, "Action, Crime, Fantasy":0.1%, "Action, Family, Sport":0.2%, "Adventure, Fantasy, Mystery":0.3%, "Adventure, Comedy":0.3%, "Action, Fantasy, Mystery":0.1%, "Horror, Thriller":0.1%, "Romance":0.3%, "Family, Sport":0.7%, "Action, Adventure, War":0.6%, "Action, Crime, Sci-Fi":0.2%, "Adventure, Crime, Mystery":0.3%, "Action, Family, Fantasy":0.5%, "History, War":0.1%, "Action, Comedy":0.3%, "Action, Fantasy, Horror":0.2%, "Animation, Action, Comedy":0.1%, "Action, Family":0.7%, "Family, Fantasy":0.2%, "Action, Horror":0.2%, "Comedy, Family":0.1%, "Family, Music":0.2%, "Action, Sci-Fi, Sport":0.2%, "Action, Thriller, War":0.2%, "Adventure, Family":0.6%, "Action, Adventure, Sport":0.3%, "Animation, Adventure":0.1%, "Action, Comedy, Sci-Fi":0.1%, "Adventure, Family, Sci-Fi":0.2%, "Game-Show":0.3%, "Action, Western":0.2%, "Action, Family, Sci-Fi":0.1%]
+                             Quality Metrics:
+                                 Completeness: 100 
+                Attribute:  rating  
+                         Description: "Rating of the game on a scale of 1 to 10"
+                         Count: 88
+                         OfType: Categorical
+                         Statistics: 
+                             Mode: "7.4"
+                             Categoric Distribution: ["9.5":0.1%, "9.4":0.1%, "9.3":0.1%, "9.2":0.3%, "9.1":0.3%, "9.0":0.5%, "8.9":0.5%, "8.8":0.9%, "8.7":1%, "8.6":1.3%, "8.5":1.9%, "8.4":2%, "8.3":2.6%, "8.2":2.9%, "8.1":2.7%, "8.0":3.4%, "7.9":3.2%, "7.8":3.9%, "7.7":3.7%, "7.6":3.7%, "7.5":3.9%, "7.4":4.1%, "7.3":3.7%, "7.2":3.9%, "7.1":3.5%, "7.0":3.6%, "6.9":3.1%, "6.8":3.3%, "6.7":2.6%, "6.6":2.7%, "6.5":2.4%, "6.4":2.6%, "6.3":2%, "6.2":2.3%, "6.1":2%, "6.0":1.9%, "5.9":1.5%, "5.8":1.5%, "5.7":1.1%, "5.6":1.3%, "5.5":1.1%, "5.4":1.1%, "5.3":0.8%, "5.2":0.9%, "5.1":0.7%, "5.0":0.5%, "4.9":0.4%, "4.8":0.5%, "4.7":0.3%, "4.6":0.5%, "4.5":0.5%, "4.4":0.4%, "4.3":0.3%, "4.2":0.5%, "4.1":0.3%, "4.0":0.5%, "3.9":0.2%, "3.8":0.2%, "3.7":0.1%, "3.6":0.2%, "3.5":0.1%, "3.4":0.2%, "3.3":0.2%, "3.2":0.1%, "3.1":0.2%, "3.0":0.2%, "2.8":0.1%, "2.5":0.1%]
+                             Quality Metrics:
+                                 Completeness: 100 
+                Attribute:  votes  
+                         Description: "Numer of the votes"
+                         Count: 1638
+                         OfType: Categorical
+                         Statistics: 
+                             Mode: "7"
+                             Categoric Distribution: ["148":0.1%, "5":1.2%, "7":3.2%, "6":2.4%, "14":2%, "137":0.2%, "15":1.9%, "72":0.2%, "19":1.7%, "100":0.2%, "16":1.7%, "34":0.8%, "66":0.3%, "50":0.4%, "11":2.5%, "82":0.3%, "58":0.3%, "41":0.6%, "107":0.1%, "85":0.2%, "17":1.6%, "69":0.3%, "79":0.2%, "55":0.4%, "23":1.2%, "31":0.9%, "63":0.4%, "121":0.1%, "9":3.1%, "116":0.1%, "8":3%, "152":0.1%, "13":2.1%, "21":1.3%, "110":0.2%, "20":1.5%, "43":0.5%, "35":0.6%, "53":0.3%, "106":0.2%, "12":2.5%, "40":0.7%, "132":0.1%, "18":1.5%, "44":0.5%, "90":0.2%, "172":0.1%, "145":0.1%, "83":0.2%, "98":0.2%, "73":0.2%, "54":0.5%, "37":0.6%, "92":0.2%, "48":0.5%, "26":0.9%, "80":0.3%, "22":1.3%, "29":0.9%, "49":0.6%, "38":0.7%, "57":0.4%, "10":2.7%, "105":0.2%, "33":0.7%, "91":0.2%, "122":0.1%, "165":0.1%, "139":0.2%, "24":1.1%, "87":0.2%, "27":0.8%, "30":0.7%, "65":0.3%, "70":0.3%, "104":0.2%, "36":0.6%, "120":0.1%, "127":0.1%, "75":0.3%, "59":0.4%, "68":0.3%, "51":0.5%, "118":0.1%, "42":0.5%, "47":0.5%, "61":0.3%, "88":0.3%, "109":0.1%, "46":0.4%, "74":0.3%, "28":0.9%, "126":0.1%, "89":0.2%, "67":0.3%, "32":0.7%, "119":0.2%, "86":0.3%, "150":0.1%, "60":0.2%, "81":0.2%, "78":0.4%, "101":0.2%, "25":1.1%, "71":0.3%, "64":0.3%, "113":0.1%, "95":0.2%, "93":0.2%, "62":0.3%, "115":0.2%, "129":0.2%, "97":0.1%, "94":0.2%, "52":0.4%, "76":0.3%, "39":0.5%, "108":0.2%, "99":0.2%, "84":0.2%, "128":0.1%, "56":0.4%, "125":0.2%, "45":0.5%, "158":0.1%, "111":0.1%, "117":0.2%, "112":0.2%, "134":0.1%, "170":0.1%, "131":0.1%, "77":0.2%, "102":0.1%, "96":0.2%, "114":0.1%, "133":0.2%, "130":0.1%, "103":0.1%]
+                             Quality Metrics:
+                                 Completeness: 100 
+                Attribute:  directors  
+                         Description: "Name of the directors"
+                         Count: 4160
+                         OfType: Categorical
+                         Statistics: 
+                             Mode: "Missing"
+                             Categoric Distribution: ["Missing":51.4%, "Hideo Kojima":0.1%, "Casey Hudson":0.1%, "Todd Howard":0.2%, "Jon Burton":0.2%, "Keith Arem":0.2%, "Mo Davoudian":0.1%, "Lani Minella":0.3%, "Douglas Carrigan":0.3%, "Will Wright":0.1%, "Tim Burke":0.1%, "Maarten Looise, Robin Ras":0.1%, "Hiroshi Matsuyama":0.1%]
+                             Quality Metrics:
+                                 Completeness: 100 
+                Attribute:  plot  
+                         Description: "Description of the game"
+                         Count: 9016
+                         OfType: Categorical
+                         Statistics: 
+                             Mode: "Missing"
+                             Categoric Distribution: ["Missing":28.4%]
+                             Quality Metrics:
+                                 Completeness: 100 
+   
+ Data Provenance:
+     Curation Rationale: "Data scrapped from the web IMDB"
+     Gathering Processes:
+         Process: ScrapIMDB
+             Description: "Scrapping process from IMDB"
+             Source: IMDB
+                 Description: "A website about movie reviews"
+                 Noise: "Content are not fairly moderated"
+             How data is collected: Scrapping  // Choose an option from the list
+             Gather Requirements: 
+                 Requirement: "Not provided"
+   
+ Social Concerns:
+         Social Issue: PersonalData
+             IssueType: Privacy // Choose one from the list
+             Description: "Personal data can be leaked due to the content of IMDB has not been checked"
+             Related-Attributes:
+                attribute: directors // Set the affected attribute
+        Social Issue: GenreBias
+            IssueType: Bias
+            Description: "Potential genre bias in directors"
+            Related-Attributes:
+                attribute: directors
+         
+         
+         

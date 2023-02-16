@@ -38,19 +38,17 @@ Dataset: Melanoma_Classification_Dataset
             to the global population at large. The dataset is also enriched for melanoma in 
             general and does not represent true incidence of melanoma."
             Benchmarking:
-                Task: Language-model
+                Task: image-classification
                 [
-                    Model: "ModelExample"
-                    Metrics: [
-                        F1: 81
-                        Acurracy: 81
-                        Precision: 81
-                        Recall: 81
-                    ]
-                    Reference: "https://www.kaggle.com/c/siim-isic-melanoma-classification/leaderboard"
-                ]
+                    Metrics: 
+                        Acurracy: 23 
+                        Precision: 23 
+                        Recall: 23  
+                    Reference: "https://www.kaggle.com/c/siim-isic-melanoma-classification/leaderboard" 
+                ] 
+
         Distribution:
-            Licences: CC BY 3.0 (Attribution 3.0 Unported)
+            Licences: CC BY 4.0 (Attribution 4.0 International)
             Rights(stand-alone): Access
             Rights(with models): Benchmark
             Additional Conditions: "In addition to the CC-BY-NC license, the dataset is governed by the ISIC Terms of Use. Learn more about the terms of use here: https://datanutrition.org/labels/isic-2020/ "                          

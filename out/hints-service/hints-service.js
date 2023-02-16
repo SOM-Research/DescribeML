@@ -1,40 +1,24 @@
-/******************************************************************************
- * Copyright 2022 SOM Research
- * This program and the accompanying materials are made available under the
- * terms of the MIT License, which is available in the project root.
- ******************************************************************************/
-import { TextDocument } from 'vscode';
-
-
- 
- 
- export interface Hints {
-     // Load the Abstract Syntax Tree of the .descML active file
-     populateHints(Declaration : string | TextDocument, position: any) : string | undefined;
- }
- 
- /**
-  */
- export class HintsService implements Hints {
- 
- 
-     constructor() {
-       
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.HintsService = void 0;
+/**
+ */
+class HintsService {
+    constructor() {
     }
- 
-     populateHints(document : TextDocument, position: any) : string {
+    populateHints(document, position) {
         const wordRange = document.getWordRangeAtPosition(position);
         const word = document.getText(wordRange);
         switch (word) {
             case "Metadata":
                 return `## Metadata
 In this section authors are expected to provide the metadata of the dataset
-                `
+                `;
             case "Dates":
                 return "Set the release, published and last updated date in DD-MM-YYYY format";
             case "Citation":
                 return "Set the citations of the dataset";
-                // Description
+            // Description
             case "Description":
                 return `### Description
 In this section authors are expected to provide a description of the dataset
@@ -48,17 +32,17 @@ For what tasks this dataset is inteded for
 #### Gaps:
 Was there specific gap that needed to be filled? Please provide a description
                             `;
-                            case "Purposes":
-                                return "For what propose was the dataser created?";
-                            case "Tasks":
-                                return "For what tasks this dataset is inteded for";
-                            case "Gaps":
-                                return "Was there specific gap that needed to be filled?\nPlease provide a description";
+            case "Purposes":
+                return "For what propose was the dataser created?";
+            case "Tasks":
+                return "For what tasks this dataset is inteded for";
+            case "Gaps":
+                return "Was there specific gap that needed to be filled?\nPlease provide a description";
             case "Tags":
                 return "Set the tags separated by a whitespace";
             case "Areas":
                 return "Set the areas separated by a whitespace";
-        // Distribution
+            // Distribution
             case "Distribution":
                 return `## Distribution
 In this section authors are expected to indicate the distribution of the dataset
@@ -74,7 +58,7 @@ Choose the level of distribution of the models trained with the data.
                         `;
             case "Licences":
                 return "If any listed license fill your use-case, please provide a STRING with the description of the license";
-        // Applications
+            // Applications
             case "Applications":
                 return `## Applications 
 In this section authors are expected to indicate the recommneded and non-recommneded uses of the dataset
@@ -83,9 +67,9 @@ In this section authors are expected to indicate the recommneded and non-recommn
 If the dataset have been used in the past, authors are expected to indicate the benchmarking results
 Models names, and results should be provided (accuracy, precision, recall, F1-score)
                 `;
-        // Authoring
-        case "Authoring":
-            return `## Authoring 
+            // Authoring
+            case "Authoring":
+                return `## Authoring 
 In this section authors are expected to indicate who created the dataset and who funded the dataset
 Please provide information about the organization grating the work
 
@@ -98,9 +82,9 @@ Who maintains the dataset, but also the contribution policies, if theere is any 
                 return "Who is the author of the dataset?";
             case "Maintainers":
                 return "Who maintan the dataset? How can be contacted?";
-        // Composition
+            // Composition
             case "Composition":
-            return `## Composition 
+                return `## Composition 
 Please provide information about the composition of the dataset. The type of files (data instances), it's number, and information regarding attributes 
 
 ### Statistics 
@@ -110,9 +94,9 @@ A set of statistics can be provided for each attribute and at a data instance le
 The Consistency rules can be expressed following OCL. OCL is a language for expressing constraints on models. It is based on the Object Constraint Language (OCL) defined by OMG. OCL is a language for expressing constraints on models. It is based on the Object Constraint Language (OCL) defined by OMG. \n
             
             `;
-         // Provenance
-         case "Provenance":
-            return `## Provenance 
+            // Provenance
+            case "Provenance":
+                return `## Provenance 
 In this section authors are expected to fill information about the process applied to create the dataset 
 
 ### Curation Rationale 
@@ -128,9 +112,9 @@ How the dataset has been annotated? Who annotated the dataset? Which are the inf
 Indicate the process done to prepare the data, and it's type
             
             `;
-        // Social Concers
-        case "Concerns":
-        return `
+            // Social Concers
+            case "Concerns":
+                return `
 ## Social Concerns
 In this section authors are expected to fill information about the social concerns of the data. Is expected to inform 4 types of social concerns \n
 
@@ -147,9 +131,10 @@ Does the dataset contains data that can offend a social group?
 Is there any privacy concerns on the data?
         
         `;
-           default:
-            return "empty"
+            default:
+                return "empty";
         }
-     }
- }
- 
+    }
+}
+exports.HintsService = HintsService;
+//# sourceMappingURL=hints-service.js.map

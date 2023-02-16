@@ -41,12 +41,11 @@ Dataset: Melanoma_Classification_Dataset
                 Task: Language-model
                 [
                     Model: "ModelExample"
-                    Metrics: [
+                    Metrics: 
                         F1: 81
                         Acurracy: 81
                         Precision: 81
                         Recall: 81
-                    ]
                     Reference: "https://www.kaggle.com/c/siim-isic-melanoma-classification/leaderboard"
                 ]
         Distribution:

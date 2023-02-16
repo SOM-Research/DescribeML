@@ -42,6 +42,7 @@ const fs_1 = __importDefault(require("fs"));
 const node_1 = require("vscode-languageclient/node");
 const dataset_descriptor_documentation_1 = require("./generator-service/dataset-descriptor-documentation");
 const dataset_descriptor_uploader_1 = require("./uploader-service/dataset-descriptor-uploader");
+const hints_service_1 = require("./hints-service/hints-service");
 let client;
 let previewPanel;
 // This function is called when the extension is activated.
@@ -59,6 +60,15 @@ function activate(context) {
             }
         }));
     })));
+    context.subscriptions.push(vscode.languages.registerHoverProvider('dataset-descriptor', {
+        provideHover(document, position, token) {
+            let hints = new hints_service_1.HintsService();
+            let content = hints.populateHints(document, position);
+            if (content != "empty")
+                return new vscode.Hover(new vscode.MarkdownString(content));
+            return null;
+        }
+    }));
     // Here we register the HTML generation service
     context.subscriptions.push(vscode.commands.registerCommand('datadesc.generateDocumentation', () => __awaiter(this, void 0, void 0, function* () {
         yield generatorHTMLService(context);
