@@ -121,8 +121,8 @@ import { createDatasetDescriptorServices } from '../language-server/dataset-desc
          "hasPart" : [
              {
              "@type": "Dataset",
-             "name": ${description.composition.instances.instances[0].name},
-             "description": ${description.composition.instances.instances[0].descript},
+             "name": ${('instances' in description.composition)? description.composition.instances.instances[0].name:""},
+             "description": ${('instances' in description.composition)?description.composition.instances.instances[0].descript:""},
              },
          ],
          "includedInDataCatalog":{
