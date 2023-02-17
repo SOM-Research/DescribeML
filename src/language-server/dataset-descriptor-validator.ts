@@ -5,7 +5,7 @@
  ******************************************************************************/
 
  import { ValidationAcceptor, ValidationChecks, ValidationRegistry } from 'langium';
- import { DatasetDescriptorAstType, Author, Funder, Composition, Authoring, Tasks, Description, Areas, Tags, Distribution } from './generated/ast';
+ import { DatasetDescriptorAstType, Author, Funder, Authoring, Tasks, Description, Areas, Tags, Distribution, Categor } from './generated/ast';
  import { DatasetDescriptorServices } from './dataset-descriptor-module';
  
  /**
@@ -25,7 +25,7 @@
              Author: validator.authorValidator,
              Funder: validator.hintsOfFunder,
              Authoring: validator.hintsOfAuthoring,
-             Composition:validator.hintOfComposition,
+             Categor:validator.statVerification,
              Areas: validator.hintsOfAreas,
              Tags: validator.hintsofTags,
              Distribution:validator.hintsOfDistribution
@@ -79,9 +79,14 @@
       }
      
  
-     hintOfComposition(type: Composition, accept: ValidationAcceptor): void {
-         accept('hint', 'What do the instances that comprise the dataset represent(for example, documents, photos, people, countries)', { node: type, property: 'compodesc' });
-         accept('hint', 'How many instances are there in total?', { node: type, property: 'numberInst' });
+      statVerification(type: Categor, accept: ValidationAcceptor): void {
+        if (type.complet) {
+            if (type.complet > 100) {
+                accept('error', 'Completeness should be between 0 and 100', { node: type, property: 'complet' });
+            }
+         }
+        // accept('hint', 'What do the instances that comprise the dataset represent(for example, documents, photos, people, countries)', { node: type, property: 'compodesc' });
+       //  accept('hint', 'How many instances are there in total?', { node: type, property: 'numberInst' });
      }
         
  
