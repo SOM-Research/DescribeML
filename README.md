@@ -133,7 +133,17 @@ For more information about how the framework works and how the language can be e
 
 DescribeML is part of an ongoing research project to improve dataset documentation for machine learning. The core of our proposal is a domain-specific language published in the [Journal of Computer Languages](https://www.sciencedirect.com/science/article/pii/S2590118423000199) that allows data creators to describe relevant aspects of their data for the machine learning field and beyond. The [Critical Dataset Studios](https://knowingmachines.org/reading-list#dataset_documentation_practices) of the [Knowing Machines](https://knowingmachines.org) project have compiled an excellent list of current documentation practices.
 
-The tool has been presented at the ACM/IEEE 25th International Conference on [Model Driven Engineering Languages and Systems](https://conf.researchr.org/home/models-2022) and the accompanying manuscript of the publication can be seen [here](https://www.researchgate.net/publication/363256430_DescribeML_A_Tool_for_Describing_Machine_Learning_Datasets)
+To cite the domain-specific language:
+```
+Giner-Miguelez, J., Gómez, A., & Cabot, J. (2023). A domain-specific language for describing machine learning datasets. Journal of Computer Languages, 76, 101209.
+```
+
+The tool has been presented at the [ACM/IEEE 25th International Conference on Model Driven Engineering Languages and Systems](https://conf.researchr.org/details/models-2022/models-2022-tools---demonstrations/5/DescribeML-a-tool-for-describing-machine-learning-datasets) and published as an Original Software Publication in the [Science of Computer Programming](https://www.sciencedirect.com/science/article/pii/S0167642323001120) journal. 
+
+To cite the tool:
+```
+Giner-Miguelez, J., Gómez, A., & Cabot, J. (2023). DescribeML: A dataset description tool for machine learning. Science of Computer Programming, 2023, 103030, ISSN 0167-6423, https://doi.org/10.1016/j.scico.2023.103030.
+```
 
 
 
